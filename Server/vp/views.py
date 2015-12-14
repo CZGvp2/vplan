@@ -30,11 +30,11 @@ def login(request):
 
 @view_config(route_name='schedule', permission='read')
 def schedule(request):
-	return HTTPFound(location='/schedule', headers=headers)
+	return Response('ge-schedult.')
 
 @view_config(route_name='edit', permission='edit')
 def edit(request):
-	return Response('edittet.')
+	return Response('ge-edittet.')
 
 @notfound_view_config()
 def notfound(request):
