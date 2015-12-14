@@ -1,0 +1,39 @@
+# alle git-commands zum updaten des verzeichnisses
+
+
+0. 
+
+git clone https://github.com/CZGvp2/vplan.git 
+
+Zum erstmaligem Klonen des Verzeichnisses (erstellt Ordner vplan mit aktuellem Master-branch und .git).
+
+git config --global user.email "<email>"
+git config --global user.name "<name>"
+
+
+1.
+cd <verzeichnis>
+git status
+
+Zeigt alle Dateien und deren Zustand an (Änderungen, Neuerstellungen etc).
+
+2.
+cd <verzeichnis>
+git add <Dateien/Ordner>
+
+Fügt Dateien zum nächsten commit hinzu.
+
+3.
+cd <verzeichnis>
+git commit -m <message>
+
+Erstellt eine neue Version des Arbeitsverzeichnisses.
+Alle veränderten und mit add hinzugefügten Dateien werden eingebunden.
+Diese haben nun den Tag <message>.
+
+4
+cd <verzeichnis>
+git push
+
+Schiebt die mit commit erzeugte lokale Version auf den github-Server. 
+Erwartet Email und Passwort.
