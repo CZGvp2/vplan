@@ -1,0 +1,62 @@
+\documentclass[11pt, oneside, halfparskip, smallheadings, automark]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{palatino}
+
+% Weiter Pakete können hinzugefügt werden
+\usepackage{
+  booktabs,
+  graphicx,
+  xcolor
+}
+
+\input{texte/praeambel}
+
+%   ********************************************************************************
+%
+%        Anpassen, oder entwerfen einer eigenen Titelseite
+
+\title{Vorlage zum Erstellen einer Dokumentation}
+\author{Max Mustermann \\ Moritz Mustermann}
+
+\subject{\infoprojekt}
+\publishers{\emph{betreut durch:} \\ Betreuer A \\ Betreuer B}
+
+%
+%   ********************************************************************************
+
+
+\usepackage{blindtext}
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\input{texte/abkuerzungen}
+\input{texte/einleitung.tex}
+\input{texte/grundlagen.tex}
+\input{texte/programmdoku.tex}
+\input{texte/ablaufprotokolle.tex}
+\input{texte/zusammenfassung.tex}
+\input{texte/glossar.tex}
+\input{texte/literatur.tex}
+
+\listoffigures
+\listoftables
+
+\chapter*{Nutzungserklärung}
+Hiermit erklären wir uns einverstanden, dass die Dokumentation und das Projekt für
+schulische Zwecke verwendet werden dürfen.
+Wir gestatten, die Dokumentation und das Projekt auf der Website der Schule und zum
+Tag der offenen Tür zu veröffentlichen.
+
+\chapter*{Erklärung der eigenständigen Erstellung des Projektes}
+Hiermit versichern wir, dass wir die Dokumentation und Projekt selbstständig verfasst und
+keine anderen als die angegebenen Quellen und Hilfsmittel benutzt haben sowie das alle
+Ausführungen, die den Quellen wörtlich oder sinngemäß entnommen wurden, als solche
+gekennzeichnet wurden.
+
+\end{document}
