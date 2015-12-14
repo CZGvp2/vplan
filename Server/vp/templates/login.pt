@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+  <head>
+	<meta charset="utf-8">
+<body>
+
+	<form action="${url}" method="post">
+		<label for="password">Password</label>
+		<input type="password" id="password" name="password" value="${password}"/><br/>
+		<input type="submit" name="form.submitted" value="Log In"/>
+	</form>
+	<span>${message}</span>
+</body>
+</html>
