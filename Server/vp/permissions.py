@@ -4,7 +4,8 @@ class RootFactory:
 	__acl__ = [
 		(Allow, 'group:students', 'read'),
 		(Allow, 'group:teachers', 'read'),
-		(Allow, 'group:operator', 'edit')
+		(Allow, 'group:editors', 'read'),
+		(Allow, 'group:editors', 'edit')
 	]
 
 	def __init__(self, request):
