@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+  <head>
+	<meta charset="utf-8">
+<body>
+
+	<form action="edit/upload" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+		<label for="file">Datei</label>
+		<input id="file" type="file" name="file" value="" />
+		<input type="submit" name="form.submitted" value="Hochladen" />
+	</form>
+</body>
+</html>

@@ -5,7 +5,12 @@ from pyramid.httpexceptions import HTTPFound
 
 from pyramid.view import view_config, view_defaults, notfound_view_config
 
+import shutil
+import os.path
+
 from .login import PASSWD
+
+upload_dir = 'C:/Users/Kamal/Desktop/vplan/Server/vp/uploads'
 
 @view_config(route_name='login', renderer='templates/login.pt')
 def login(request):
@@ -32,10 +37,25 @@ def login(request):
 def schedule(request):
 	return Response('ge-schedult.')
 
-@view_config(route_name='edit', permission='edit')
-def edit(request):
-	return Response('ge-edittet.')
+@view_defaults(permission='edit')
+class EditView:
+	def __init__(self, request):
+		self.request = request
+
+	@view_config(route_name='edit', renderer='templates/edit.pt')
+	def edit(self):
+		return {}
+
+	@view_config(route_name='upload')
+	def upload(self):
+		dest = os.path.normcase( os.path.join(upload_dir, 'test.txt') ) #TODO Timestamps
+		with open(dest, 'wb') as dest_file:
+			upload_file = self.request.POST['file'].file
+			shutil.copyfileobj(upload_file, dest_file)
+
+		return Response('ge-Uploaded.')
+		
 
 @notfound_view_config()
 def notfound(request):
-    return Response('<center style="margin-top:10em;"><b style="text-transform:uppercase;font-family:monospace;letter-spacing:1em;"><h2>404:</h2> Der Fehler 404 konnte nicht gefunden werden.</b></center>', status='404 Not Found')
+	return Response('Forbidden', status='404 Not Found')
