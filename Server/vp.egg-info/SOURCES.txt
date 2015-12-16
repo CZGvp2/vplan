@@ -20,4 +20,6 @@ vp/static/pyramid-16x16.png
 vp/static/pyramid.png
 vp/static/theme.css
 vp/static/theme.min.css
+vp/templates/edit.pt
 vp/templates/login.pt
+vp/uploads/test.txt
