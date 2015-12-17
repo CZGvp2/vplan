@@ -9,14 +9,30 @@ def read_via_tmp(input_file):
 	with open(tmp_file, 'wb') as dest:
 		shutil.copyfileobj(input_file, dest)
 
-	with open(tmp_file, 'r') as fobj:
-		content = fobj.read()
+	try:
+		with open(tmp_file, 'r') as fobj:
+			content = fobj.read()
 
-	os.remove(tmp_file)
+	except UnicodeDecodeError:
+		return None
+
+	finally:
+		os.remove(tmp_file)
+
 	return content
 
-def process_file(input_file):
+def process_file(file_post):
+	if not hasattr(file_post, 'file'):
+		return False
+
+	input_file = file_post.file
+
 	content = read_via_tmp(input_file)
 
-	with open(xml_file, 'w') as fobj:
-		fobj.write(content)
+	if content is not None:
+		with open(xml_file, 'w') as fobj:
+			fobj.write(content)
+
+		return True
+
+	return False

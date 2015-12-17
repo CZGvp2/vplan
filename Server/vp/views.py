@@ -51,8 +51,7 @@ class EditView:
 	def upload(self):
 		file_post = self.request.POST['file']
 
-		if hasattr(file_post, 'file'):
-			process_file(file_post.file)
+		process_file(file_post)
 
 		return {'action':self.request.path}
 
