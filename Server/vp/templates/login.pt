@@ -5,11 +5,10 @@
 </head>
 <body>
 
-	<form action="${url}" method="post">
+	<form action="${action}" method="post">
 		<label for="password">Password</label>
-		<input type="password" id="password" name="password" value="${password}"/><br/>
+		<input type="password" id="password" name="password" value=""/><br/>
 		<input type="submit" name="form.submitted" value="Log In"/>
 	</form>
-	<span>${message}</span>
 </body>
 </html>

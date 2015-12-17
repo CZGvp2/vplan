@@ -20,7 +20,6 @@ def main(global_config, **settings):
 	
 	config.add_route('login', '/')
 	config.add_route('edit', '/edit')
-	config.add_route('upload', '/edit/upload')
 	config.add_route('schedule', '/schedule')
 
 	config.add_static_view('static', 'static', cache_max_age=3600)

@@ -8,48 +8,58 @@ from pyramid.view import view_config, view_defaults, notfound_view_config, forbi
 from .parser import process_file
 from .group_finder import PASSWD
 
-@view_config(route_name='login', renderer='templates/login.pt')
-def login(request):
-	message = ''
-	if 'form.submitted' in request.params:
-		password = request.params['password']
+
+@view_defaults(route_name='login', renderer='templates/login.pt')
+class LoginView:
+	def __init__(self, request):
+		self.request = request
+
+	@view_config(request_method='GET')
+	def view_login(self):
+		return {'action':self.request.path}
+
+	@view_config(request_method='POST')
+	def answer_post(self):
+		password = self.request.params['password']
+		headers = None
+
 		if password == PASSWD:
-			headers = remember(request, password)
-			return HTTPFound(location='/schedule', headers=headers)
+			headers = remember(self.request, password)
+			location = '/schedule'
 
 		elif password == 'omg':
-			headers = remember(request, password)
-			return HTTPFound(location='/edit', headers=headers)
+			headers = remember(self.request, password)
+			location = '/edit'
 
-		message = 'Falsch!'
+		else:
+			location = '/'
+			headers = None
 
-	return dict(
-		url=request.path,
-		password='',
-		message=message
-	)
+		return HTTPFound(location=location, headers=headers)
 
-@view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')
-def schedule(request):
-	return {}
 
-@view_defaults(permission='edit')
+@view_defaults(route_name='edit', permission='edit', renderer='templates/edit.pt')
 class EditView:
 	def __init__(self, request):
 		self.request = request
 
-	@view_config(route_name='edit', renderer='templates/edit.pt')
+	@view_config(request_method='GET')
 	def edit(self):
-		return {}
+		return {'action':self.request.path}
 
-	@view_config(route_name='upload')
+	@view_config(request_method='POST')
 	def upload(self):
-		upload_file = self.request.POST['file'].file
+		file_post = self.request.POST['file']
 
-		process_file(upload_file)
+		if hasattr(file_post, 'file'):
+			process_file(file_post.file)
 
-		return Response('ge-Uploaded.')
-		
+		return {'action':self.request.path}
+
+
+@view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')
+def schedule(request):
+	return {}
 
 @notfound_view_config()
 def notfound(request):
