@@ -10,7 +10,7 @@ var update = function()
 {
 	for(i = 0; i < 3; i++)
 		tabs[i].style.width = "0";
-	tabs[currentTab].style.width="100%";
+	tabs[currentTab].style.width = "100%";
 }
 
 var onSwipe = function(dir)

@@ -74,3 +74,52 @@ body{
 	padding-top: .5em;
 	border: 0px solid black;
 }
+
+#wrapper header .tabs{
+	display: none;
+}
+
+#wrapper header:hover .tabs {
+	display: block;
+	position: fixed;
+
+	z-index: 5;
+
+	left: 0;
+	top: 10%;
+
+	height: 5%;
+	width: 100%;
+
+	background-color: white;
+}
+
+#wrapper header .tabs a{
+	display: block;
+	position: absolute;
+
+	top: 0;
+
+	height: 100%;
+	width: 34%;
+
+	text-align: center;
+
+	color: black;
+	font-family: sans-serif;
+	font-weight: bolder;
+	text-decoration: none;
+
+}
+a#left{
+	left: 0;
+}
+a#mid{
+	left: 33%;
+}
+a#right{
+	left: 66%;
+}
+a.tab:hover{
+	background-color: gray;
+}
