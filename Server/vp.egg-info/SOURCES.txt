@@ -5,7 +5,8 @@ development.ini
 production.ini
 setup.py
 vp/__init__.py
-vp/login.py
+vp/group_finder.py
+vp/parser.py
 vp/permissions.py
 vp/tests.py
 vp/views.py
@@ -22,4 +23,5 @@ vp/static/theme.css
 vp/static/theme.min.css
 vp/templates/edit.pt
 vp/templates/login.pt
-vp/uploads/test.txt
+vp/templates/schedule.pt
+vp/xml/schedule.xml
