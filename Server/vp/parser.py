@@ -1,9 +1,10 @@
 import os
 import shutil
+import json
 
-xml_dir = os.path.join( os.path.dirname(__file__), 'xml' )
-xml_file = os.path.join( xml_dir, 'schedule.xml')
-tmp_file = os.path.join( xml_dir, 'tmp.xml')
+data_dir = os.path.join( os.path.dirname(__file__), 'data' )
+json_file = os.path.join( data_dir, 'schedule.json')
+tmp_file = os.path.join( data_dir, 'tmp.xml')
 
 def read_via_tmp(input_file):
 	with open(tmp_file, 'wb') as dest:
@@ -30,9 +31,18 @@ def process_file(file_post):
 	content = read_via_tmp(input_file)
 
 	if content is not None:
-		with open(xml_file, 'w') as fobj:
+		with open(json_file, 'w') as fobj:
 			fobj.write(content)
 
 		return True
 
 	return False
+
+def get_schedule():
+	try:
+		with open(json_file, 'r') as json_fobj:
+			return json.load(json_fobj)
+
+	except ValueError as err:
+		raise err
+		return None

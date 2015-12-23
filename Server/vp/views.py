@@ -5,8 +5,8 @@ from pyramid.httpexceptions import HTTPFound
 
 from pyramid.view import view_config, view_defaults, notfound_view_config, forbidden_view_config
 
-from .parser import process_file
-from .group_finder import PASSWD
+from .parser import process_file, get_schedule
+from .group_finder import PASSWD_STD, PASSWD_EDIT
 
 
 @view_defaults(route_name='login', renderer='templates/login.pt')
@@ -23,11 +23,11 @@ class LoginView:
 		password = self.request.params['password']
 		headers = None
 
-		if password == PASSWD:
+		if password == PASSWD_STD:
 			headers = remember(self.request, password)
 			location = '/schedule'
 
-		elif password == 'omg':
+		elif password == PASSWD_EDIT:
 			headers = remember(self.request, password)
 			location = '/edit'
 
@@ -58,7 +58,7 @@ class EditView:
 
 @view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')
 def schedule(request):
-	return {}
+	return get_schedule()
 
 @notfound_view_config()
 def notfound(request):

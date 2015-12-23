@@ -1,0 +1,16 @@
+{
+    "events": [
+        {
+            "action":"cancelling",
+            "lesson": {
+                "class":"9c",
+                "subject":"De",
+                "teacher":"Halbstädt",
+                "room":"D114",
+                "time":"8",
+                "full":"Mi 16. 12. 2015 8. Stunde"
+            },
+            "info":"Deutsch Mittelstädt fällt aus."
+        }
+    ]
+}

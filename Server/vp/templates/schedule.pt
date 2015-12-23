@@ -4,6 +4,16 @@
 	<meta charset="utf-8">
 </head>
 <body>
-Alles f&auml;llt aus.
+<table>
+  <tr tal:repeat="event events">
+    <!-- Tal ist eine Art Parser für Templates. Link zu den Docs: 
+  	http://chameleon.readthedocs.org/en/latest/reference.html 
+	Damit kannst du das JSON aus der schedule.json in HTML übertragen.
+    -->
+    	<td tal:content="event.lesson['class']"/> <!-- event.lesson.class funktioniert nicht. Das hier macht genau das gleiche. :P ?? -->
+		<td tal:content="event.action"/>
+		<td tal:content="event.info"/>
+  </tr>
+</table>
 </body>
 </html>
