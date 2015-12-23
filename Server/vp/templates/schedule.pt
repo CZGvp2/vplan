@@ -2,18 +2,32 @@
 <html lang="${request.locale_name}">
 <head>
 	<meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			/*
+			Der Template-Parser escaped zwar die & zu &amp;, aber nicht die Umlaute. Doch er laeuft ueber
+			utf-8, womit die Umlaute nicht richtig codiert werden. Deshalb escape ich die Umlaute schon im
+			json, zb &auml;, der Parser macht es zu &amp;auml; , und dann gehe ich wieder zurueck.
+			Nicht schoen, aber funktioniert.
+			*/
+			$('p').each(function () {
+				$(this).html( $(this).html().replace(/&amp;auml;/g, '&auml;')
+											.replace(/&amp;ouml;/g, '&ouml;')
+											.replace(/&amp;uuml;/g, '&uuml;'));
+			})
+		});
+	</script>
 </head>
 <body>
-<table>
-  <tr tal:repeat="event events">
-    <!-- Tal ist eine Art Parser für Templates. Link zu den Docs: 
-  	http://chameleon.readthedocs.org/en/latest/reference.html 
-	Damit kannst du das JSON aus der schedule.json in HTML übertragen.
-    -->
-    	<td tal:content="event.lesson['class']"/> <!-- event.lesson.class funktioniert nicht. Das hier macht genau das gleiche. :P ?? -->
-		<td tal:content="event.action"/>
-		<td tal:content="event.info"/>
-  </tr>
-</table>
+<div tal:repeat="event events">
+<!-- Tal ist eine Art Parser für Templates. Link zu den Docs: 
+	http://chameleon.readthedocs.org/en/latest/reference.html 
+Damit kannst du das JSON aus der schedule.json in HTML übertragen.
+-->
+	<p tal:content="event.lesson['class']"></p> <!-- event.lesson.class funktioniert nicht. Das hier macht genau das gleiche. :P ?? -->
+	<p tal:content="event.action"></p>
+	<p tal:content="event.info"></p>
+</div>
 </body>
 </html>

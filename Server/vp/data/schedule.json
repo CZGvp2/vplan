@@ -5,12 +5,32 @@
             "lesson": {
                 "class":"9c",
                 "subject":"De",
-                "teacher":"Halbstädt",
+                "teacher":"Halbst&auml;dt",
                 "room":"D114",
                 "time":"8",
                 "full":"Mi 16. 12. 2015 8. Stunde"
             },
-            "info":"Deutsch Mittelstädt fällt aus."
+            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+        },
+        {
+            "action":"lesson_change",
+            "lesson_old": {
+                "class":"9c",
+                "subject":"Ge",
+                "teacher":"Gunter",
+                "room":"D209",
+                "time":"9",
+                "full":"Mi 16. 12. 2015 9. Stunde"
+            },
+            "lesson": {
+                "class":"9c",
+                "subject":"Frz",
+                "teacher":"Thomas",
+                "room":"D209",
+                "time":"9",
+                "full":"Mi 16. 12. 2015 9. Stunde"
+            },
+            "info":"Franz&ouml;sisch Thomas f&uuml;r Geschichte Gunter"
         }
     ]
 }
