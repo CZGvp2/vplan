@@ -16,6 +16,12 @@ class LoginView:
 
 	@view_config(request_method='GET')
 	def view_login(self):
+		if self.request.has_permission('read'):
+			return HTTPFound(location='/schedule')
+
+		if self.request.has_permission('edit'):
+			return HTTPFound(location='/edit')
+
 		return {'action':self.request.path}
 
 	@view_config(request_method='POST')
@@ -64,6 +70,11 @@ def schedule(request):
 def notfound(request):
 	return Response('Gibts nich.', status='404 Not Found')
 
-@forbidden_view_config(renderer='templates/403.pt')
+@forbidden_view_config(renderer='templates/error.pt')
 def forbidden(request):
-	return {'url':request.url}
+	return {
+		'title':'403 - kein Zugriff',
+		'err_code':'403',
+		'err_message':'Zugriff verweigert',
+		'img_src':request.static_url('vp:static/img/403.png')
+	}
