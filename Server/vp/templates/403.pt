@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>403 - Zugriff verweigert</title>
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+	<style type="text/css">
+	#center {
+		margin-left: auto;
+		margin-right: auto;
+    	width: 700px;
+	}
+	img {
+		margin-left: 100px;
+		margin-right: 100px;
+	}
+	p {
+		text-align: center;
+		font-family: 'Open Sans', sans-serif;
+	}
+	p#num {
+		font-size: 10em;
+		margin-top: 0px;
+		margin-bottom: 50px;
+	}
+	p#denied {
+		font-size: 5em;
+		margin: 0px;
+	}
+	p#url {
+		font-size: 1.5em;
+		margin: 0px;
+		color: #B1B1B1;
+	}
+	</style>
+</head>
+<body>
+<div id="center">
+	<p id="num">403</p>
+	<img src="${request.static_url('vp:static/img/403.png')}" width="500">
+	<p id="denied">Zugriff verweigert</p><br/>
+	<p id="url">${url}</p>
+</div>
+</body>
+</html>

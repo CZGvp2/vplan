@@ -64,6 +64,6 @@ def schedule(request):
 def notfound(request):
 	return Response('Gibts nich.', status='404 Not Found')
 
-@forbidden_view_config()
+@forbidden_view_config(renderer='templates/403.pt')
 def forbidden(request):
-	return Response('Darfst du nich.', status='403 Forbidden')
+	return {'url':request.url}
