@@ -13,6 +13,42 @@
             "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
         },
         {
+            "action":"cancelling",
+            "lesson": {
+                "class":"9c",
+                "subject":"De",
+                "teacher":"Halbst&auml;dt",
+                "room":"D114",
+                "time":"8",
+                "full":"Mi 16. 12. 2015 8. Stunde"
+            },
+            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+        },
+        {
+            "action":"cancelling",
+            "lesson": {
+                "class":"9c",
+                "subject":"De",
+                "teacher":"Halbst&auml;dt",
+                "room":"D114",
+                "time":"8",
+                "full":"Mi 16. 12. 2015 8. Stunde"
+            },
+            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+        },
+        {
+            "action":"cancelling",
+            "lesson": {
+                "class":"9c",
+                "subject":"De",
+                "teacher":"Halbst&auml;dt",
+                "room":"D114",
+                "time":"8",
+                "full":"Mi 16. 12. 2015 8. Stunde"
+            },
+            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+        },
+        {
             "action":"lesson_change",
             "lesson_old": {
                 "class":"9c",

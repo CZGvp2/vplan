@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="${request.locale_name}">
 <head>
-	<meta charset="iso-8859-1">
+	<meta charset="utf-8">
 </head>
 <body>
 
