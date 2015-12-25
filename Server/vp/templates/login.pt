@@ -4,11 +4,39 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
 	<link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/login.css')}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript">
+	function change(evt) {
+		if (evt.keyCode == 13 && !$('#password').val()) {
+			evt.preventDefault(); // Abfangen falls leer
+			return false;
+		}
+
+		if ($('#password').val() || (evt.keyCode != 8 && evt.keyCode != 46)) { // backspace und delete
+			$('a#submit').css('background-color', '#88A6FF');
+		}
+		else {
+			$('a#submit').css('background-color', '#DCDCDC');
+		}
+		$('#password').css('border-bottom-color', '#88A6FF');
+
+	}
+	$(document).ready(function () {
+		$('#password').on('keyup keypress paste', change)
+	})
+	</script>
 </head>
 <body>
-	<form class="center" action="${action}" method="post">
-		<input type="password" id="password" name="password" value=""/><br/>
-		<input type="submit" name="form.submitted" value="Log In"/>
+	<form class="center" action="${request.path}" method="post">
+		<input type="password" id="password" name="password" value="" autofocus/>
+		<p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
+		<div id="submit">
+			<a id="submit">Anmelden</a>
+		</div>
+		<script type="text/javascript" tal:condition="wrong_pwd">
+			$('#password').css('border-bottom-color', '#FF5555');
+			$('div#submit').css('margin-top', '40px');
+		</script>
 	</form>
 </body>
 </html>

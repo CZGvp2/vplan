@@ -26,7 +26,7 @@ class LoginView:
 #		if self.request.has_permission('edit'):
 #			return HTTPFound(location='/edit')
 
-		return {'action':self.request.path}
+		return {'wrong_pwd':False}
 
 	@view_config(request_method='POST')
 	def answer_post(self):
@@ -35,17 +35,13 @@ class LoginView:
 
 		if password == PASSWD_STD:
 			headers = remember(self.request, password)
-			location = '/schedule'
+			return HTTPFound(location='/schedule', headers=headers)
 
-		elif password == PASSWD_EDIT:
+		if password == PASSWD_EDIT:
 			headers = remember(self.request, password)
-			location = '/edit'
+			return HTTPFound(location='/edit', headers=headers)
 
-		else:
-			location = '/'
-			headers = None
-
-		return HTTPFound(location=location, headers=headers)
+		return {'wrong_pwd':True}
 
 
 @view_defaults(route_name='edit', permission='edit', renderer='templates/edit.pt')
