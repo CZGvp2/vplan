@@ -16,11 +16,15 @@ class LoginView:
 
 	@view_config(request_method='GET')
 	def view_login(self):
-		if self.request.has_permission('read'):
-			return HTTPFound(location='/schedule')
+		# wenn man angemeldet ist, sollte man auf der homepage direkt auf den plan weitergeleitet
+		# werden. Aber dann kann man sich nicht nochmal anmelden, um zu editieren. Also kommt man
+		# nicht um ein logout drumrum.
+		
+#		if self.request.has_permission('read'):
+#			return HTTPFound(location='/schedule')
 
-		if self.request.has_permission('edit'):
-			return HTTPFound(location='/edit')
+#		if self.request.has_permission('edit'):
+#			return HTTPFound(location='/edit')
 
 		return {'action':self.request.path}
 
@@ -66,9 +70,15 @@ class EditView:
 def schedule(request):
 	return get_schedule()
 
-@notfound_view_config()
+@notfound_view_config(renderer='templates/error.pt')
 def notfound(request):
-	return Response('Gibts nich.', status='404 Not Found')
+	return {
+		'title':'404 - nicht gefunden',
+		'err_code':'404',
+		'err_message':'Seite konnte nicht gefunden werden',
+		'img_src':request.static_url('vp:static/img/404.png')
+	}
+
 
 @forbidden_view_config(renderer='templates/error.pt')
 def forbidden(request):
