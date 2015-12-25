@@ -11,13 +11,10 @@
 			evt.preventDefault(); // Abfangen falls leer
 			return false;
 		}
-
-		if ($('#password').val() || (evt.keyCode != 8 && evt.keyCode != 46)) { // backspace und delete
-			$('a#submit').css('background-color', '#88A6FF');
-		}
-		else {
-			$('a#submit').css('background-color', '#DCDCDC');
-		}
+		if ($('#password').val() || evt.charCode) // falls es eine Taste ist die einen Character macht
+			$('a#submit').css({'background-color':'#88A6FF', 'cursor':'pointer'});
+		else
+			$('a#submit').css({'background-color':'#DCDCDC', 'cursor':'auto'});
 		$('#password').css('border-bottom-color', '#88A6FF');
 
 	}
