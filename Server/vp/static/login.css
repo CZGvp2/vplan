@@ -12,14 +12,14 @@
 	text-align: center;
 	border: none;
 	outline: none;
-	border-bottom: solid 2px #DCDCDC;
+	border-bottom: solid 2px #88A6FF;
 	width: 360px;
-	margin: 30px;
+	margin: 20px;
 	margin-bottom: 5px;
 }
 
-#password:focus {
-	border-bottom-color: #88A6FF;
+.nofocus {
+	border-bottom-color: #DCDCDC !important;
 }
 
 a#submit {
@@ -30,7 +30,6 @@ a#submit {
 	padding-right: 10px;
 	border-style: none;
 	border-radius: 2px;
-	cursor: pointer;
 	background-color: #DCDCDC;
 	color: white;
 }

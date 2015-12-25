@@ -6,26 +6,32 @@
 	<link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/login.css')}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript">
-	function change(evt) {
-		if (evt.keyCode == 13 && !$('#password').val()) {
-			evt.preventDefault(); // Abfangen falls leer
-			return false;
+		function change(evt) {
+			if (evt.keyCode == 13 && !$('#password').val()) {
+				evt.preventDefault(); // Abfangen falls leer
+				return false;
+			}
+			if ($('#password').val() || evt.charCode) // falls es eine Taste ist die einen Character macht
+				$('a#submit').css({'background-color':'#88A6FF', 'cursor':'pointer'})
+				  .click(function () {
+				  	$('form').submit();
+				  });
+			else
+				$('a#submit').css({'background-color':'#DCDCDC', 'cursor':'auto'})
+				  .click(function () {});
+			$('#password').css('border-bottom-color', '#88A6FF');
 		}
-		if ($('#password').val() || evt.charCode) // falls es eine Taste ist die einen Character macht
-			$('a#submit').css({'background-color':'#88A6FF', 'cursor':'pointer'});
-		else
-			$('a#submit').css({'background-color':'#DCDCDC', 'cursor':'auto'});
-		$('#password').css('border-bottom-color', '#88A6FF');
-
-	}
-	$(document).ready(function () {
-		$('#password').on('keyup keypress paste', change)
-	})
+		$(document).ready(function () {
+			$('#password').on('keyup keypress paste', change)
+			  .on('focusout focus', function () {
+				$(this).toggleClass('nofocus');
+			})
+		})
 	</script>
 </head>
 <body>
 	<form class="center" action="${request.path}" method="post">
-		<input type="password" id="password" name="password" value="" autofocus/>
+		<input type="password" id="password" name="password" value="" class="nofocus" autofocus/>
 		<p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
 		<div id="submit">
 			<a id="submit">Anmelden</a>
