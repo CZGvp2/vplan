@@ -1,2 +1,2 @@
-C:\Python\3.2\Scripts\pserve C:\Users\Kamal\Desktop\vplan\Server\development.ini
-set /p DUMMY=Hit ENTER to continue...
+C:\Python34\Scripts\pserve %cd%\Server\development.ini
+set /p DUMMY="Hit ENTER to continue..."

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
-	<link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/login.css')}">
+	<link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/login.css')}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script type="text/javascript">
 		function change(evt) {
