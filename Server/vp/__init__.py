@@ -5,7 +5,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from .group_finder import get_group
 from .permissions import RootFactory
 
-timeout = 600
+timeout = 6
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.

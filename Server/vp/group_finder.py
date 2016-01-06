@@ -13,3 +13,9 @@ def get_group(passwd, request):
 		return ['group:editors']
 
 	return []
+
+def can_read(passwd):
+	return passwd in (PASSWD_STD, PASSWD_TCH)
+
+def can_edit(passwd):
+	return passwd == PASSWD_EDIT
