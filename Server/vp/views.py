@@ -6,7 +6,7 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.view import view_config, view_defaults, notfound_view_config, forbidden_view_config
 
 from .parser import process_file, get_schedule
-from .group_finder import PASSWD_STD, PASSWD_EDIT
+from .group_finder import can_read, can_edit
 
 
 @view_defaults(route_name='login', renderer='templates/login.pt')
@@ -33,13 +33,13 @@ class LoginView:
 		password = self.request.params['password']
 		headers = None
 
-		if password == PASSWD_STD:
+		if can_read(password):
 			headers = remember(self.request, password)
 			return HTTPFound(location='/schedule', headers=headers)
 
-		if password == PASSWD_EDIT:
+		if can_edit(password):
 			headers = remember(self.request, password)
-			return HTTPFound(location='/edit', headers=headers)
+			return HTTPFound(location='/edit', headers=headers) # TODO 	request.path('edit') oder so
 
 		return {'wrong_pwd':True}
 
