@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 </head>
 <body>
-
-	<form action="${action}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+	<a href="${request.route_path('start', _query='logout')}">Ausmelden</a>
+	<form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
 		<label for="file">Datei</label>
 		<input id="file" type="file" name="file" value="" />
 		<input type="submit" name="form.submitted" value="Hochladen" />

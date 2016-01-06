@@ -21,17 +21,16 @@
 	</script>
 </head>
 <body>
-
-<div tal:repeat="event events" tal:switch="event.action">
-	<div class="event" tal:case="'cancelling'">
-		<img class="event_tag" src="${request.static_url('vp:static/img/cancelling.png')}" height="15">
-		<span class="event_tag" tal:content="event.lesson['class']"></span>
-		<!-- event.lesson.class funktioniert nicht. Das hier macht genau das gleiche. :P ?? -->
-		<span class="event_tag" tal:content="event.lesson['time']"></span>
-		<span class="event_tag" tal:content="event.info"></span>
+	<a href="${request.route_path('start', _query='logout')}">Ausmelden</a>
+	<div tal:repeat="event events" tal:switch="event.action">
+		<div class="event" tal:case="'cancelling'">
+			<img class="event_tag" src="${request.static_url('vp:static/img/cancelling.png')}" height="15">
+			<span class="event_tag" tal:content="event.lesson['class']"></span>
+			<!-- event.lesson.class funktioniert nicht. Das hier macht genau das gleiche. :P ?? -->
+			<span class="event_tag" tal:content="event.lesson['time']"></span>
+			<span class="event_tag" tal:content="event.info"></span>
+		</div>
+		<br>
 	</div>
-	<br>
-</div>
-
 </body>
 </html>

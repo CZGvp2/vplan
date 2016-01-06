@@ -9,22 +9,29 @@ from .parser import process_file, get_schedule
 from .group_finder import can_read, can_edit
 
 
-@view_defaults(route_name='login', renderer='templates/login.pt')
+@view_defaults(route_name='start', renderer='templates/login.pt')
 class LoginView:
 	def __init__(self, request):
 		self.request = request
+
+	def redirect(self, route_name, headers=None):
+		return HTTPFound(location=self.request.route_path(route_name), headers=headers)
 
 	@view_config(request_method='GET')
 	def view_login(self):
 		# wenn man angemeldet ist, sollte man auf der homepage direkt auf den plan weitergeleitet
 		# werden. Aber dann kann man sich nicht nochmal anmelden, um zu editieren. Also kommt man
 		# nicht um ein logout drumrum.
-		
-#		if self.request.has_permission('read'):
-#			return HTTPFound(location='/schedule')
 
-#		if self.request.has_permission('edit'):
-#			return HTTPFound(location='/edit')
+		if 'logout' in self.request.params:
+			headers = forget(self.request)
+			return self.redirect('start', headers)
+		
+		if self.request.has_permission('read'):
+			return self.redirect('schedule')
+		
+		if self.request.has_permission('edit'):
+			return self.redirect('edit')
 
 		return {'wrong_pwd':False}
 
@@ -35,11 +42,11 @@ class LoginView:
 
 		if can_read(password):
 			headers = remember(self.request, password)
-			return HTTPFound(location='/schedule', headers=headers)
+			return self.redirect('schedule', headers)
 
 		if can_edit(password):
 			headers = remember(self.request, password)
-			return HTTPFound(location='/edit', headers=headers) # TODO 	request.path('edit') oder so
+			return self.redirect('edit', headers)
 
 		return {'wrong_pwd':True}
 
@@ -51,7 +58,7 @@ class EditView:
 
 	@view_config(request_method='GET')
 	def edit(self):
-		return {'action':self.request.path}
+		return {} # wird fuer response wichtig
 
 	@view_config(request_method='POST')
 	def upload(self):
@@ -59,7 +66,7 @@ class EditView:
 
 		process_file(file_post)
 
-		return {'action':self.request.path}
+		return {}
 
 
 @view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')
@@ -74,7 +81,6 @@ def notfound(request):
 		'err_message':'Seite konnte nicht gefunden werden',
 		'img_src':request.static_url('vp:static/img/404.png')
 	}
-
 
 @forbidden_view_config(renderer='templates/error.pt')
 def forbidden(request):

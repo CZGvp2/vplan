@@ -5,7 +5,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from .group_finder import get_group
 from .permissions import RootFactory
 
-timeout = 6
+timeout = 60
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.
@@ -18,7 +18,7 @@ def main(global_config, **settings):
 	config.set_authentication_policy(authn_policy)
 	config.set_authorization_policy(authz_policy)
 	
-	config.add_route('login', '/')
+	config.add_route('start', '/')
 	config.add_route('edit', '/edit')
 	config.add_route('schedule', '/schedule')
 
