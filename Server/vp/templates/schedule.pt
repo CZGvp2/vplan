@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="${request.locale_name}">
 <head>
-	<meta charset="utf-8">
+	<!-- <meta charset="utf-8"> *experimentell rauskommentiert* -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/schedule.css')}">
 	<script>
+		"
 		$(document).ready(function () {
 			/*
-			Der Template-Parser escaped zwar die & zu &amp;, aber nicht die Umlaute. Doch er laeuft ueber
-			utf-8, womit die Umlaute nicht richtig codiert werden. Deshalb escape ich die Umlaute schon im
-			json, zb &auml;, der Parser macht es zu &amp;auml; , und dann gehe ich wieder zurueck.
-			Nicht schoen, aber funktioniert.
+			Das zeug ist bald überfällig.
 			*/
 			$('span').each(function () {
 				$(this).html( $(this).html().replace(/&amp;auml;/g, '&auml;')
@@ -18,17 +16,31 @@
 											.replace(/&amp;uuml;/g, '&uuml;'));
 			})
 		});
+		"
 	</script>
 </head>
 <body>
-	<a href="${request.route_path('start', _query='logout')}">Ausmelden</a>
+	<a href="${request.route_path('start', _query='logout')}">Ausmelden</a> <!-- Der Logout-Link -->
+
+	<!-- folgende Division ist nur ein Wrapper fuer das HTML, welches sich je Event wiederholt. Daher
+	ist im gerenderten HTML ein Event keine <div>, sondern eine Div in einer Div, wobei die innere die
+	typspeziefische darstellt. -->
 	<div tal:repeat="event events" tal:switch="event.action">
 		<div class="event" tal:case="'cancelling'">
+			<!--
+				tal:case="'cancelling'", bezieht sich auf die jeweilige action des Events im JSON. Jede Action wird
+				ueber switch/case einer typspeziefischen div zugeordnet (kann aber jeder beliebige Tag sein).
+
+				Hier kommt das Innere des jeweiligen Event-Typs hin.
+				Folgendes nur experimentell.
+			-->
 			<img class="event_tag" src="${request.static_url('vp:static/img/cancelling.png')}" height="15">
 			<span class="event_tag" tal:content="event.lesson['class']"></span>
-			<!-- event.lesson.class funktioniert nicht. Das hier macht genau das gleiche. :P ?? -->
 			<span class="event_tag" tal:content="event.lesson['time']"></span>
 			<span class="event_tag" tal:content="event.info"></span>
+		</div>
+		<div class="event" tal:case="'lesson_switch'">
+			<!-- ein anderer Typ -->
 		</div>
 		<br>
 	</div>

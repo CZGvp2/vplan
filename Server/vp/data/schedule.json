@@ -5,48 +5,48 @@
             "lesson": {
                 "class":"9c",
                 "subject":"De",
-                "teacher":"Halbst&auml;dt",
+                "teacher":"Halbstädt",
                 "room":"D114",
                 "time":"8",
                 "full":"Mi 16. 12. 2015 8. Stunde"
             },
-            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+            "info":"Deutsch Mittelstädt fällt aus."
         },
         {
             "action":"cancelling",
             "lesson": {
                 "class":"9c",
                 "subject":"De",
-                "teacher":"Halbst&auml;dt",
+                "teacher":"Halbstädt",
                 "room":"D114",
                 "time":"8",
                 "full":"Mi 16. 12. 2015 8. Stunde"
             },
-            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+            "info":"Deutsch Mittelstädt fällt aus."
         },
         {
             "action":"cancelling",
             "lesson": {
                 "class":"9c",
                 "subject":"De",
-                "teacher":"Halbst&auml;dt",
+                "teacher":"Halbstädt",
                 "room":"D114",
                 "time":"8",
                 "full":"Mi 16. 12. 2015 8. Stunde"
             },
-            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+            "info":"Deutsch Mittelstädt fällt aus."
         },
         {
             "action":"cancelling",
             "lesson": {
                 "class":"9c",
                 "subject":"De",
-                "teacher":"Halbst&auml;dt",
+                "teacher":"Halbstädt",
                 "room":"D114",
                 "time":"8",
                 "full":"Mi 16. 12. 2015 8. Stunde"
             },
-            "info":"Deutsch Mittelst&auml;dt f&auml;llt aus."
+            "info":"Deutsch Mittelstädt fällt aus."
         },
         {
             "action":"lesson_change",
@@ -66,7 +66,7 @@
                 "time":"9",
                 "full":"Mi 16. 12. 2015 9. Stunde"
             },
-            "info":"Franz&ouml;sisch Thomas f&uuml;r Geschichte Gunter"
+            "info":"Französisch Thomas üär Geschichte Gunter"
         }
     ]
 }

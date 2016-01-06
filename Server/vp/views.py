@@ -10,29 +10,34 @@ from .group_finder import can_read, can_edit
 
 
 @view_defaults(route_name='start', renderer='templates/login.pt')
-class LoginView:
+class StartView:
+	""" Startadresse "/". (Eigentlich Login) """ # <- Tim, das ist ein Python-Funktions-Docstring ;)
 	def __init__(self, request):
 		self.request = request
 
 	def redirect(self, route_name, headers=None):
+		# erspart Tipparbeit
 		return HTTPFound(location=self.request.route_path(route_name), headers=headers)
 
 	@view_config(request_method='GET')
-	def view_login(self):
-		# wenn man angemeldet ist, sollte man auf der homepage direkt auf den plan weitergeleitet
-		# werden. Aber dann kann man sich nicht nochmal anmelden, um zu editieren. Also kommt man
-		# nicht um ein logout drumrum.
+	def view_start(self):
+		"""Handelt einen GET-Request, wie z. B. Redirects"""
 
+		# Falls in der URL der Query ?logout war, wird der User über forget abgemeldet, 
+		# und zur Start(Anmelde)-Seite umgeleitet
 		if 'logout' in self.request.params:
 			headers = forget(self.request)
 			return self.redirect('start', headers)
 		
+		# Redirects von der Startseite von schon angemeldeten Schülern
 		if self.request.has_permission('read'):
 			return self.redirect('schedule')
 		
 		if self.request.has_permission('edit'):
 			return self.redirect('edit')
 
+		# Falls keine der obigen Bedingungen erfüllt, kann es sich nur um eine
+		# erstmalige Anmeldung handeln. Also noch nichts falsch angezeigt.
 		return {'wrong_pwd':False}
 
 	@view_config(request_method='POST')
@@ -48,6 +53,8 @@ class LoginView:
 			headers = remember(self.request, password)
 			return self.redirect('edit', headers)
 
+		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort
+		# falsch gewesen sein.
 		return {'wrong_pwd':True}
 
 
@@ -79,7 +86,7 @@ def notfound(request):
 		'title':'404 - nicht gefunden',
 		'err_code':'404',
 		'err_message':'Seite konnte nicht gefunden werden',
-		'img_src':request.static_url('vp:static/img/404.png')
+		'img_src':request.static_url('vp:static/img/404.jpg')
 	}
 
 @forbidden_view_config(renderer='templates/error.pt')
@@ -88,5 +95,5 @@ def forbidden(request):
 		'title':'403 - kein Zugriff',
 		'err_code':'403',
 		'err_message':'Zugriff verweigert',
-		'img_src':request.static_url('vp:static/img/403.png')
+		'img_src':request.static_url('vp:static/img/403.jpg')
 	}
