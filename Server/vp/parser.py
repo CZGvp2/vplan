@@ -27,7 +27,6 @@ def process_file(file_post):
 		return False
 
 	input_file = file_post.file
-
 	content = read_via_tmp(input_file)
 
 	if content is not None:
@@ -45,7 +44,3 @@ def get_schedule():
 	except ValueError as err:
 		raise err
 		return None
-
-if __name__ == '__main__':
-	print(json.dumps(get_schedule(), indent=4, separators=(',', ': ')))
-	input()
