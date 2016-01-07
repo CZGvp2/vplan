@@ -33,16 +33,19 @@ def process_file(file_post):
 	if content is not None:
 		with open(json_file, 'w') as fobj:
 			fobj.write(content)
-
-		return True
+			return True
 
 	return False
 
 def get_schedule():
 	try:
-		with open(json_file, 'r') as json_fobj:
-			return json.load(json_fobj)
+		with open(json_file, 'r', encoding='utf-8') as raw_json:
+			return json.loads(raw_json.read())
 
 	except ValueError as err:
 		raise err
 		return None
+
+if __name__ == '__main__':
+	print(json.dumps(get_schedule(), indent=4, separators=(',', ': ')))
+	input()

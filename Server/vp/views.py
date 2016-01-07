@@ -65,15 +65,15 @@ class EditView:
 
 	@view_config(request_method='GET')
 	def edit(self):
-		return {} # wird fuer response wichtig
+		return {'info': 'none'} # Dummy für nischt
 
 	@view_config(request_method='POST')
 	def upload(self):
 		file_post = self.request.POST['file']
+		if process_file(file_post):
+			return {'info':'success'}
 
-		process_file(file_post)
-
-		return {}
+		return {'info':'error'}
 
 
 @view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')

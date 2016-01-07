@@ -1,23 +1,9 @@
 <!DOCTYPE html>
 <html lang="${request.locale_name}">
 <head>
-	<!-- <meta charset="utf-8"> *experimentell rauskommentiert* -->
+	<meta charset="utf-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/schedule.css')}">
-	<script>
-		"
-		$(document).ready(function () {
-			/*
-			Das zeug ist bald überfällig.
-			*/
-			$('span').each(function () {
-				$(this).html( $(this).html().replace(/&amp;auml;/g, '&auml;')
-											.replace(/&amp;ouml;/g, '&ouml;')
-											.replace(/&amp;uuml;/g, '&uuml;'));
-			})
-		});
-		"
-	</script>
 </head>
 <body>
 	<a href="${request.route_path('start', _query='logout')}">Ausmelden</a> <!-- Der Logout-Link -->
