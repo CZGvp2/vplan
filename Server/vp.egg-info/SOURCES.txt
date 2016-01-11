@@ -19,14 +19,15 @@ vp.egg-info/requires.txt
 vp.egg-info/top_level.txt
 vp/static/css/login.css
 vp/static/css/schedule.css
-vp/static/img/403.png
-vp/static/img/404.png
+vp/static/img/403.jpg
+vp/static/img/404.jpg
 vp/static/img/cancelling.png
 vp/static/img/info.png
 vp/static/img/lesson_change.png
 vp/static/img/lesson_switch.png
 vp/static/img/room_change.png
 vp/static/img/teacher_switch.png
+vp/static/js/login.js
 vp/templates/edit.pt
 vp/templates/error.pt
 vp/templates/login.pt

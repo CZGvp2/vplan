@@ -2,25 +2,73 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Vertretungsplan des CZG" />
+    <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/schedule.css')}">
+
 </head>
-<body>
-    <a href="${request.route_path('start', _query='logout')}">Ausmelden</a>
-    <div id="table">
-        <div id="theader"></div>
-        <table id="tbody">
-            <div class="entry ${'even' if repeat.event.even else 'odd'}" tal:repeat="event events" tal:switch="event.action">
-                <div tal:case="'cancelling'">
-                    <span class="subentry class" tal:content="event.lesson['class']"></span>
-                    <span class="subentry lesson" tal:content="event.lesson['time']"></span>
-                    <span class="subentry teacher" tal:content="event.lesson['teacher']"></span>
-                </div>
-                <div tal:case="'lesson_switch'">
-                    <!-- was anderes -->
+<body onload="$('#jsWarn').hide();">
+    <!--
+
+        Ich würde als Farbschema
+
+            http://paletton.com/#uid=13o0u0k3devvEBl00bC00++00bC
+
+        vorschlagen.
+
+        Das wären dann diese Farben:
+
+            .rgba-primary-0 { color: rgba( 65, 70, 72,1) }
+            .rgba-primary-1 { color: rgba(  8,140,178,1) }
+            .rgba-primary-2 { color: rgba( 58, 58, 58,1) }
+            .rgba-primary-3 { color: rgba(255,255,255,1) }
+            .rgba-primary-4 { color: rgba( 58, 58, 58,1) }
+
+        Mein Computer hatte kein Python, deshalb hab ich das CSS noch nicht bearbeitet.
+        Ich habe die HTML-Struktur allerdings grundsätzlich fertig.
+
+    -->
+    <div id="wrapper-top"><!-- Statischer Bereich -->
+        <div id="jsWarn"><noscript>
+            <p style="font-size:2em">JavaScript ist deaktiviert.</p>
+            Um die Seite benutzen zu können, muss JavaScript verwendet werden.
+            <br /> Stelle sicher, dass dies in den Browser-Eintellungen aktiviert ist und du keinen Blocker verwendest.
+            <!--- Bild, Logout button -->
+        </noscript></div>
+
+        <nav id="nav">
+            <ul>
+                <li><a href="javascript:void">Klasse</a></li>
+                <li><a href="javascript:void">Gesamt</a></li>
+                <li><a href="javascript:void">Termine</a></li>
+                <li><a href="javascript:void">Informationen</a></li>
+                <li><a href="${request.route_path('start', _query='logout')}">Abmelden</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="wrapper_bottom"><!-- Scrollbarer Bereich -->
+        <section id="content">
+            <div id="main">
+                <div class="entry ${'even' if repeat.event.even else 'odd'}" tal:repeat="event events" tal:switch="event.action">
+                    <div tal:case="'cancelling'">
+                        <span class="subentry class" tal:content="event.lesson['class']"></span>
+                        <span class="subentry lesson" tal:content="event.lesson['time']"></span>
+                        <span class="subentry teacher" tal:content="event.lesson['teacher']"></span>
+                    </div>
+                    <div tal:case="'lesson_switch'">
+                        <!-- was anderes -->
+                    </div>
+                    <div tal:case="''">
+                        <!-- noch was anderes -->
+                    </div>
                 </div>
             </div>
-        </table>
+        </section>
+        <footer><a href="javascript:showSomeOverlay">Impressum</a><p>&copy;2015 CZG</p></footer>
     </div>
 </body>
 </html>
