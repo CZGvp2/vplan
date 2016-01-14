@@ -2,7 +2,7 @@ import os
 import shutil
 import json
 
-from xml_reader import to_json
+from .xml_reader import to_json
 
 data_dir = os.path.join( os.path.dirname(__file__), 'data' )
 json_file = os.path.join( data_dir, 'schedule.json')

@@ -10,6 +10,7 @@ vp/parser.py
 vp/permissions.py
 vp/tests.py
 vp/views.py
+vp/xml_reader.py
 vp.egg-info/PKG-INFO
 vp.egg-info/SOURCES.txt
 vp.egg-info/dependency_links.txt
