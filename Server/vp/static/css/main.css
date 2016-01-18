@@ -38,6 +38,8 @@ body{
 }
 
 header{
+	color: rgba( 65, 70, 72,1);
+	text-shadow: 1px 1px 1px white;
 	font-size: 2.5em;
 	font-weight: bolder;
 	text-align: center;
@@ -130,19 +132,6 @@ div.wrapper_bottom{
 	border: none;
 }
 
-#footer{
-	position: fixed;
-	width: 100%;
-	height: auto;
-	bottom: 0;
-	background-color: rgba(  8,140,178,1);
-	font-size: .75em;
-	font-weight: lighter;
-	text-align: right;
-	padding: .2em 0;
-	box-shadow: -1px -1px 1px 1px black;
-}
-
 @media all and (max-width: 850px){
 	#main{
 		width: 600px;
@@ -175,4 +164,4 @@ div.wrapper_bottom{
 	#nav{
 		display: none;
 	}
-}                   s
+}

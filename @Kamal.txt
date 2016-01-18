@@ -1,2 +1,0 @@
-Das was ich an css gemacht hatte hat die Template-Datei komplett zerschossen. Als normales html/css Dokument ohne das Serverzeug hat alles funktioniert.
-Ich habe das erstmal nicht gepusht und auf meinen Stick kopiert, da ich in der Zeit nicht mehr in der Lage war, irgendwas zu beheben.

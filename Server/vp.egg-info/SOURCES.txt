@@ -4,6 +4,7 @@ README.txt
 development.ini
 production.ini
 setup.py
+vp/VplanKl.xml
 vp/__init__.py
 vp/group_finder.py
 vp/parser.py

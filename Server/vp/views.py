@@ -11,7 +11,7 @@ from .group_finder import can_read, can_edit
 
 @view_defaults(route_name='start', renderer='templates/login.pt')
 class StartView:
-	""" Startadresse "/". (Eigentlich Login) """ # <- Tim, das ist ein Python-Funktions-Docstring ;)
+	""" Startadresse "/". (Eigentlich Login) """ # <- Tim, das ist ein Python-Funktions-Docstring ;) Krass.
 	def __init__(self, request):
 		self.request = request
 
@@ -25,6 +25,9 @@ class StartView:
 
 		# Falls in der URL der Query ?logout war, wird der User über forget abgemeldet, 
 		# und zur Start(Anmelde)-Seite umgeleitet
+
+		# Die Permission wird aber nicht zurückgesetzt...
+		# auch nach dem Abmelden kann man noch /schedule ohne Passwort eingeben
 		if 'logout' in self.request.params:
 			headers = forget(self.request)
 			return self.redirect('start', headers)
