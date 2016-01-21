@@ -42,15 +42,15 @@ class StartView:
 
 	@view_config(request_method='POST')
 	def answer_post(self):
-		password = self.request.params['password']
+		pwd_hash = self.request.params['hash']
 		headers = None
 
-		if can_read(password):
-			headers = remember(self.request, password)
+		if can_read(pwd_hash):
+			headers = remember(self.request, pwd_hash)
 			return self.redirect('schedule', headers)
 
-		if can_edit(password):
-			headers = remember(self.request, password)
+		if can_edit(pwd_hash):
+			headers = remember(self.request, pwd_hash)
 			return self.redirect('edit', headers)
 
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort

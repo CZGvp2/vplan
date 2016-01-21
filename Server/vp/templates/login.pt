@@ -5,11 +5,13 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/login.css')}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js"></script>
     <script src="${request.static_url('vp:static/js/login.js')}"></script>
 </head>
 <body>
     <form class="center" action="${request.path}" method="post">
         <input type="password" id="password" name="password" value="" class="nofocus" autofocus/>
+        <input type="text" id="hash" name="hash" value="" hidden/>
         <p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
         <div id="submit">
             <a id="submit">Anmelden</a>
