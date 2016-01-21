@@ -1,0 +1,167 @@
+body{
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+
+	margin: 0;
+	padding: 0;
+
+	font-size: 100%;
+	font-family: Helvetica, Ubuntu, sans-serif;
+
+	color: #FFFFFF;
+	background-color: rgba( 200, 200, 200,1);
+}
+
+#jsWarn{
+	z-index: 5;
+
+	position: fixed;
+	display: block;
+
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+
+	padding: 0;
+	margin: 0;
+
+	color: rgb(250,240,240);
+	background-color: rgb(50,60,70);
+
+	font-family: Ubuntu, sans-serif;
+
+	text-align: center;
+	line-height: 5em;
+}
+
+header{
+	color: rgba( 65, 70, 72,1);
+	text-shadow: 1px 1px 1px white;
+	font-size: 2.5em;
+	font-weight: bolder;
+	text-align: center;
+}
+
+#nav{
+	display: block;
+
+	height: 2.5em;
+	background-color: rgba( 65, 70, 72,1);
+	text-align: center;
+
+	box-shadow: 5px 0 5px 0 black
+}
+
+#nav ul{
+	margin: 0px;
+	padding: 0px;
+
+	display: block;
+}
+
+#nav ul li{
+	list-style: square;
+	font-family: Helvetica;
+	font-weight: 100;
+	color: #FFFFFF;
+	line-height: 1.25em;
+	padding: 0em;
+
+	display: inline;
+	margin: 0em 0.188em 0em 0.188em;
+}
+
+#nav ul li a{
+	text-decoration: none;
+	color:#FFFFFF;
+	font-size: 1.125em;
+	line-height:2.5em;
+	padding:0.563em 0.938em 0.300em 0.983em;
+	transition:background 0.2s;
+	-webkit-transition:background 0.2s;
+}
+
+#nav ul li:hover a{
+	border-bottom: .188em solid rgba(  8,140,178,1);
+}
+
+.container{
+	width: 100%;
+	height: 100%;
+}
+
+div.wrapper_top{
+	top: 0;
+	position: fixed;
+	width: 100%;
+	z-index: 4;
+	background-color: rgba( 200, 200, 200,1);
+}
+
+div.wrapper_bottom{
+	position: relative;
+	top: 12em;
+	height: 100%;
+	border-radius: 25px;
+}
+
+#content{
+	position: relative;
+}
+#content center{
+	position: inherit;
+	height: inherit;
+}
+
+#main{
+	width: 700px;
+
+	background-color: rgba( 58, 58, 58,1);
+
+	border-radius: 15px;
+
+	box-shadow: 0px 0px 1px 1px black;
+}
+
+#frame{
+	width: 96%;
+	margin: 10px;
+	border: none;
+}
+
+@media all and (max-width: 850px){
+	#main{
+		width: 600px;
+	}
+	#frame{
+		width: 560px;
+	}
+}
+
+@media all and (max-width: 650px){
+	#main{
+		width: 400px;
+	}
+	#frame{
+		width: 360px;
+	}
+}
+
+@media all and (max-width: 450px){
+
+	header{
+		font-size: 1em;
+	}
+	#main{
+		width: 90%;
+	}
+	#frame{
+		width: 90%;
+	}
+	#nav{
+		display: none;
+	}
+}

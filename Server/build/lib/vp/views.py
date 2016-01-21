@@ -11,7 +11,7 @@ from .group_finder import can_read, can_edit
 
 @view_defaults(route_name='start', renderer='templates/login.pt')
 class StartView:
-	""" Startadresse "/". (Eigentlich Login) """ # <- Tim, das ist ein Python-Funktions-Docstring ;) Krass.
+	""" Startadresse "/". (Eigentlich Login) """ # <- Tim, das ist ein Python-Funktions-Docstring ;)
 	def __init__(self, request):
 		self.request = request
 
@@ -25,9 +25,6 @@ class StartView:
 
 		# Falls in der URL der Query ?logout war, wird der User über forget abgemeldet, 
 		# und zur Start(Anmelde)-Seite umgeleitet
-
-		# Die Permission wird aber nicht zurückgesetzt...
-		# auch nach dem Abmelden kann man noch /schedule ohne Passwort eingeben
 		if 'logout' in self.request.params:
 			headers = forget(self.request)
 			return self.redirect('start', headers)
@@ -45,15 +42,15 @@ class StartView:
 
 	@view_config(request_method='POST')
 	def answer_post(self):
-		pwd_hash = self.request.params['hash']
+		password = self.request.params['password']
 		headers = None
 
-		if can_read(pwd_hash):
-			headers = remember(self.request, pwd_hash)
+		if can_read(password):
+			headers = remember(self.request, password)
 			return self.redirect('schedule', headers)
 
-		if can_edit(pwd_hash):
-			headers = remember(self.request, pwd_hash)
+		if can_edit(password):
+			headers = remember(self.request, password)
 			return self.redirect('edit', headers)
 
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort

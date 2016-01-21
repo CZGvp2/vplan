@@ -2,8 +2,6 @@ import os
 import shutil
 import json
 
-from .xml_reader import to_json
-
 data_dir = os.path.join( os.path.dirname(__file__), 'data' )
 json_file = os.path.join( data_dir, 'schedule.json')
 tmp_file = os.path.join( data_dir, 'tmp.xml')
@@ -33,7 +31,7 @@ def process_file(file_post):
 
 	if content is not None:
 		with open(json_file, 'w') as fobj:
-			fobj.write( to_json(content) )
+			fobj.write(content)
 			return True
 
 	return False

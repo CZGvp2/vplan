@@ -33,16 +33,14 @@
         margin: 0px;
         color: #B1B1B1;
     }
-    <!-- TODO Mobile Anpassung -->
     </style>
 </head>
 <body>
 <div id="center">
     <p id="num">${err_code}</p>
-    <img src="${img_src}" width="500" />
+    <img src="${img_src}" width="500">
     <p id="denied">${err_message}</p><br/>
     <p id="url">${request.url}</p>
-    <!-- TODO Zurück-Button -->
 </div>
 </body>
 </html>
