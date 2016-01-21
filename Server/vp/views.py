@@ -68,7 +68,7 @@ class EditView:
 
 	@view_config(request_method='GET')
 	def edit(self):
-		return {'info': 'none'} # Dummy für nischt
+		return {'info':'none'} # Dummy für nischt
 
 	@view_config(request_method='POST')
 	def upload(self):

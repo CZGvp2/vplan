@@ -10,8 +10,8 @@
 </head>
 <body>
     <form class="center" action="${request.path}" method="post">
-        <input type="password" id="password" name="password" value="" class="nofocus" autofocus/>
-        <input type="text" id="hash" name="hash" value="" hidden/>
+        <input type="text" id="hash" name="hash" hidden/>
+        <input type="password" id="password" name="password" class="nofocus" autofocus/>
         <p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
         <div id="submit">
             <a id="submit">Anmelden</a>
