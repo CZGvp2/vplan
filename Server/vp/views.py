@@ -5,7 +5,7 @@ from pyramid.httpexceptions import HTTPFound
 
 from pyramid.view import view_config, view_defaults, notfound_view_config, forbidden_view_config
 
-from .parser import process_file, get_schedule
+from .file_handler import process_file, get_schedule
 from .group_finder import can_read, can_edit
 
 
@@ -41,7 +41,7 @@ class StartView:
 
 		# Falls keine der obigen Bedingungen erfüllt, kann es sich nur um eine
 		# erstmalige Anmeldung handeln. Also noch nichts falsch angezeigt.
-		return {'wrong_pwd':False}
+		return {'wrong_pwd': False}
 
 	@view_config(request_method='POST')
 	def answer_post(self):
@@ -58,7 +58,7 @@ class StartView:
 
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort
 		# falsch gewesen sein.
-		return {'wrong_pwd':True}
+		return {'wrong_pwd': True}
 
 
 @view_defaults(route_name='edit', permission='edit', renderer='templates/edit.pt')
@@ -68,15 +68,15 @@ class EditView:
 
 	@view_config(request_method='GET')
 	def edit(self):
-		return {'info':'none'} # Dummy für nischt
+		return {'info': 'none'} # Dummy für nischt
 
 	@view_config(request_method='POST')
 	def upload(self):
 		file_post = self.request.POST['file']
 		if process_file(file_post):
-			return {'info':'success'}
+			return {'info': 'success'}
 
-		return {'info':'error'}
+		return {'info': 'error'}
 
 
 @view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')
@@ -86,17 +86,17 @@ def schedule(request):
 @notfound_view_config(renderer='templates/error.pt')
 def notfound(request):
 	return {
-		'title':'404 - nicht gefunden',
-		'err_code':'404',
-		'err_message':'Seite konnte nicht gefunden werden',
-		'img_src':request.static_url('vp:static/img/404.jpg')
+		'title': '404 - nicht gefunden',
+		'err_code': '404',
+		'err_message': 'Seite konnte nicht gefunden werden',
+		'img_src': request.static_url('vp:static/img/404.jpg')
 	}
 
 @forbidden_view_config(renderer='templates/error.pt')
 def forbidden(request):
 	return {
-		'title':'403 - kein Zugriff',
-		'err_code':'403',
-		'err_message':'Zugriff verweigert',
-		'img_src':request.static_url('vp:static/img/403.jpg')
+		'title': '403 - kein Zugriff',
+		'err_code': '403',
+		'err_message': 'Zugriff verweigert',
+		'img_src': request.static_url('vp:static/img/403.jpg')
 	}
