@@ -10,7 +10,7 @@
     
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/main.css')}">
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/list.css')}" />
-
+    <link rel="shortcut icon" href="${request.static_url('vp:static/img/favicon.ico')}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
 
