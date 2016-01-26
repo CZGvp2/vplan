@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <!-- Meta-Tags fehlen -->
     <title>${title}</title>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
     <style type="text/css">
@@ -32,6 +33,26 @@
         font-size: 1.5em;
         margin: 0px;
         color: #B1B1B1;
+    }
+    @media all and (max-width:750px){
+        center{
+            width: 500px;
+        }
+    }
+    @media all and (max-width:525px){
+        center{
+            width: 450px;
+        }
+    }
+    @media all and (max-width:475px){
+        center{
+            width: 400px;
+        }
+    }
+    @media all and (max-width:410px){
+        center{
+            width: 90%;
+        }
     }
     <!-- TODO Mobile Anpassung -->
     </style>
