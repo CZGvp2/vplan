@@ -6,8 +6,8 @@ production.ini
 setup.py
 vp/VplanKl.xml
 vp/__init__.py
+vp/file_handler.py
 vp/group_finder.py
-vp/parser.py
 vp/permissions.py
 vp/tests.py
 vp/views.py
@@ -19,8 +19,9 @@ vp.egg-info/entry_points.txt
 vp.egg-info/not-zip-safe
 vp.egg-info/requires.txt
 vp.egg-info/top_level.txt
+vp/static/css/list.css
 vp/static/css/login.css
-vp/static/css/schedule.css
+vp/static/css/main.css
 vp/static/img/403.jpg
 vp/static/img/404.jpg
 vp/static/img/cancelling.png
