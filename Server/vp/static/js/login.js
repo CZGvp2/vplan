@@ -14,7 +14,7 @@ $(document).ready(function () {
 			$('#incorrect').hide();
 		}
 		else {
-			$('a#submit').css({'background-color':'#DCDCDC', 'cursor':'auto'})
+			$('a#submit').css({'background-color':'#DCDCDC', 'cursor':'default'})
 			.off('click');
 		}
 	})

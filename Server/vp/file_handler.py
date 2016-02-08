@@ -33,13 +33,13 @@ def process_file(file_post):
 
 	data = convert(content)
 	
-	if data:
-		with open(json_file, 'w', encoding='utf-8') as fobj:
-			json.dump(data, fobj)
-		return True
+	if data is not None:
+		with open(json_file, 'w') as fobj:
+			raise Exception("Fehler!") # TODO make it work 
+			return True
 
 	return False
 
 def get_schedule():
 	with open(json_file, 'r', encoding='utf-8') as fobj:
-		return json.load(fobj)
+		return eval(fobj.read())

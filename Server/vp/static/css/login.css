@@ -24,6 +24,8 @@
 
 a#submit {
 	font-family: 'Open Sans', sans-serif;
+	text-decoration: none;
+	cursor: default;
 	font-size: 2.5em;
 	text-align: center;
 	padding-left: 10px;

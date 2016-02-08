@@ -6,6 +6,7 @@ development.ini
 production.ini
 setup.py
 vp/VplanKl.xml
+vp/VplanLe.xml
 vp/__init__.py
 vp/file_handler.py
 vp/group_finder.py

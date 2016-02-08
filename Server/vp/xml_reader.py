@@ -46,7 +46,11 @@ def convert(xml_content):
 	if not xml_content:
 		return None
 
-	root = etree.fromstring(xml_content)
+	try:
+		root = etree.fromstring(xml_content)
+
+	except etree.ParseError:
+		return None
 
 	events = []
 	for element in root.findall('./haupt/aktion'):
