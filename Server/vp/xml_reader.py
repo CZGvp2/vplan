@@ -22,12 +22,13 @@ def read_action(element):
 		changes = []
 		if old['subject'] != new['subject']: changes.append('subject')
 		if old['teacher'] != new['teacher']: changes.append('teacher')
-		if not changes and not get('info'): changes.append('room')
-		# not changes besagt, dass changes leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
-		# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
-
 		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
 		if new['subject'] == '---': changes = ['cancelled']
+
+		if not changes and not get('info'): changes.append('room')
+		else: changes = ['info']
+		# not changes besagt, dass changes leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
+		# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
 
 		return {
 			'class': get('klasse'),

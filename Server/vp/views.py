@@ -61,22 +61,22 @@ class StartView:
 		return {'wrong_pwd': True}
 
 
-@view_defaults(route_name='edit', permission='edit', renderer='templates/edit.pt')
+@view_defaults(route_name='edit', permission='edit')
 class EditView:
 	def __init__(self, request):
 		self.request = request
 
-	@view_config(request_method='GET')
-	def edit(self):
-		return {'info': 'none'} # Dummy für nischt
+	@view_config(request_method='GET', renderer='templates/edit.pt')
+	def view_edit(self):
+		return dict()
 
-	@view_config(request_method='POST')
+	@view_config(request_method='POST', renderer='json')
 	def upload(self):
-		file_post = self.request.POST['file']
-		if process_file(file_post):
-			return {'info': 'success'}
+		for file_post in self.request.POST.getall('file'):
+			if not process_file(file_post):
+				return {'success':False}
 
-		return {'info': 'error'}
+		return {'success': True}
 
 
 @view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')

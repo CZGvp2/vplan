@@ -1,1 +1,446 @@
-{'events': [{'info': 'HÃ¤lfte des Kurses zu De BÃ– D311 andere HÃ¤lfte zu De MI D112', 'time': '6', 'new': {'room': ' ', 'subject': 'De', 'teacher': '---'}, 'changes': ['teacher'], 'old': {'subject': 'De', 'teacher': 'STE'}, 'class': '11/ de2'}, {'info': 'HÃ¤lfte des Kurses zu De BÃ– D311 andere HÃ¤lfte zu De MI D112', 'time': '7', 'new': {'room': ' ', 'subject': 'De', 'teacher': '---'}, 'changes': ['teacher'], 'old': {'subject': 'De', 'teacher': 'STE'}, 'class': '11/ de2'}, {'info': 'zusÃ¤tzlich HÃ¤lfte des Kurses De STE', 'time': '6', 'new': {'room': 'D311', 'subject': 'De', 'teacher': 'BÃ–'}, 'changes': [], 'old': {'subject': 'De', 'teacher': 'BÃ–'}, 'class': '11/ de3'}, {'info': 'zusÃ¤tzlich HÃ¤lfte des Kurses De STE', 'time': '7', 'new': {'room': 'D311', 'subject': 'De', 'teacher': 'BÃ–'}, 'changes': [], 'old': {'subject': 'De', 'teacher': 'BÃ–'}, 'class': '11/ de3'}, {'info': None, 'time': '1', 'new': {'room': 'D309', 'subject': 'Ku', 'teacher': 'DRM'}, 'changes': ['teacher'], 'old': {'subject': 'Ku', 'teacher': 'ES'}, 'class': '06B'}, {'info': 'Aufgaben im Unterrichtsraum', 'time': '1', 'new': {'room': 'D114', 'subject': 'De', 'teacher': 'HAU'}, 'changes': ['teacher'], 'old': {'subject': 'De', 'teacher': 'ME'}, 'class': '12/ de2'}, {'info': 'Aufgaben im, Unterrichtsraum', 'time': '2', 'new': {'room': 'D114', 'subject': 'De', 'teacher': 'HAU'}, 'changes': ['teacher'], 'old': {'subject': 'De', 'teacher': 'ME'}, 'class': '12/ de2'}, {'info': None, 'time': '3', 'new': {'room': 'D309', 'subject': 'Ku', 'teacher': 'HU'}, 'changes': ['teacher'], 'old': {'subject': 'Ku', 'teacher': 'ES'}, 'class': '10A'}, {'info': None, 'time': '3', 'new': {'room': 'B301', 'subject': 'Mu', 'teacher': 'KRG'}, 'changes': ['subject', 'teacher'], 'old': {'subject': 'De', 'teacher': 'STE'}, 'class': '09C'}, {'info': None, 'time': '7', 'new': {'room': 'D207', 'subject': 'Bi', 'teacher': 'MA'}, 'changes': ['subject', 'teacher'], 'old': {'subject': '---', 'teacher': '---'}, 'class': '07B'}, {'info': 'fÃ¤llt aus', 'time': '4', 'new': {'room': '---', 'subject': '---', 'teacher': '(MI)'}, 'changes': ['cancelled'], 'old': {'subject': 'De', 'teacher': 'MI'}, 'class': '07B'}, {'info': None, 'time': '4', 'new': {'room': 'B301', 'subject': 'En', 'teacher': 'MTH'}, 'changes': ['subject', 'teacher'], 'old': {'subject': 'De', 'teacher': 'STE'}, 'class': '09C'}, {'info': None, 'time': '3', 'new': {'room': 'B303', 'subject': 'Frz', 'teacher': 'RE'}, 'changes': ['room'], 'old': {'subject': 'Frz', 'teacher': 'RE'}, 'class': '06A,06B,06C/ 06FRZ2'}, {'info': None, 'time': '4', 'new': {'room': 'B303', 'subject': 'Frz', 'teacher': 'RE'}, 'changes': ['room'], 'old': {'subject': 'Frz', 'teacher': 'RE'}, 'class': '06A,06B,06C/ 06FRZ2'}, {'info': 'fÃ¤llt aus', 'time': '8', 'new': {'room': '---', 'subject': '---', 'teacher': '(REN)'}, 'changes': ['cancelled'], 'old': {'subject': 'Mu', 'teacher': 'REN'}, 'class': '11/ mu1'}, {'info': 'fÃ¤llt aus', 'time': '9', 'new': {'room': '---', 'subject': '---', 'teacher': '(REN)'}, 'changes': ['cancelled'], 'old': {'subject': 'Mu', 'teacher': 'REN'}, 'class': '11/ mu1'}, {'info': 'fÃ¤llt aus', 'time': '10', 'new': {'room': '---', 'subject': '---', 'teacher': '(REN)'}, 'changes': ['cancelled'], 'old': {'subject': 'Mu', 'teacher': 'REN'}, 'class': 'AG/ 07/12CHO'}, {'info': 'fÃ¤llt aus', 'time': '11', 'new': {'room': '---', 'subject': '---', 'teacher': '(REN)'}, 'changes': ['cancelled'], 'old': {'subject': 'Mu', 'teacher': 'REN'}, 'class': 'AG/ 07/12CHO'}, {'info': None, 'time': '2', 'new': {'room': 'D309', 'subject': 'Ku', 'teacher': 'SCI'}, 'changes': ['teacher'], 'old': {'subject': 'Ku', 'teacher': 'ES'}, 'class': '06B'}, {'info': 'zusÃ¤tzlich HÃ¤lfte des Kurses De STE', 'time': '6', 'new': {'room': 'D112', 'subject': 'De', 'teacher': 'SCI'}, 'changes': ['teacher'], 'old': {'subject': 'De', 'teacher': 'MI'}, 'class': '11/ de1'}, {'info': 'zusÃ¤tzlich HÃ¤lfte des Kurses De STE', 'time': '7', 'new': {'room': 'D112', 'subject': 'De', 'teacher': 'SCI'}, 'changes': ['teacher'], 'old': {'subject': 'De', 'teacher': 'MI'}, 'class': '11/ de1'}, {'info': 'EinfÃ¼hrung in das Kurssystem durch SCA', 'time': '5', 'new': {'room': 'D311', 'subject': 'En', 'teacher': 'SE'}, 'changes': [], 'old': {'subject': 'En', 'teacher': 'SE'}, 'class': '10A'}, {'info': 'Plakate mitbringen', 'time': '3', 'new': {'room': 'E303', 'subject': 'Ge', 'teacher': 'SK'}, 'changes': ['teacher'], 'old': {'subject': 'Ge', 'teacher': 'ME'}, 'class': '09B'}, {'info': None, 'time': '4', 'new': {'room': 'E303', 'subject': 'Ge', 'teacher': 'SK'}, 'changes': ['teacher'], 'old': {'subject': 'Ge', 'teacher': 'ME'}, 'class': '09B'}, {'info': None, 'time': '3', 'new': {'room': 'E302', 'subject': 'En', 'teacher': 'TRU'}, 'changes': ['subject', 'teacher'], 'old': {'subject': 'De', 'teacher': 'MI'}, 'class': '07B'}, {'info': 'verlegt nach St.4', 'time': '7', 'new': {'room': 'E302', 'subject': 'En', 'teacher': 'TRU'}, 'changes': [], 'old': {'subject': 'En', 'teacher': 'TRU'}, 'class': '07B'}]}
+{
+    "events": [
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ de2", 
+            "info": "Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112", 
+            "new": {
+                "room": " ", 
+                "subject": "De", 
+                "teacher": "---"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "STE"
+            }, 
+            "time": "6"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ de2", 
+            "info": "Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112", 
+            "new": {
+                "room": " ", 
+                "subject": "De", 
+                "teacher": "---"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "STE"
+            }, 
+            "time": "7"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ de3", 
+            "info": "zusätzlich Hälfte des Kurses De STE", 
+            "new": {
+                "room": "D311", 
+                "subject": "De", 
+                "teacher": "BÖ"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "BÖ"
+            }, 
+            "time": "6"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ de3", 
+            "info": "zusätzlich Hälfte des Kurses De STE", 
+            "new": {
+                "room": "D311", 
+                "subject": "De", 
+                "teacher": "BÖ"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "BÖ"
+            }, 
+            "time": "7"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "06B", 
+            "info": null, 
+            "new": {
+                "room": "D309", 
+                "subject": "Ku", 
+                "teacher": "DRM"
+            }, 
+            "old": {
+                "subject": "Ku", 
+                "teacher": "ES"
+            }, 
+            "time": "1"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "12/ de2", 
+            "info": "Aufgaben im Unterrichtsraum", 
+            "new": {
+                "room": "D114", 
+                "subject": "De", 
+                "teacher": "HAU"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "ME"
+            }, 
+            "time": "1"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "12/ de2", 
+            "info": "Aufgaben im, Unterrichtsraum", 
+            "new": {
+                "room": "D114", 
+                "subject": "De", 
+                "teacher": "HAU"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "ME"
+            }, 
+            "time": "2"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "10A", 
+            "info": null, 
+            "new": {
+                "room": "D309", 
+                "subject": "Ku", 
+                "teacher": "HU"
+            }, 
+            "old": {
+                "subject": "Ku", 
+                "teacher": "ES"
+            }, 
+            "time": "3"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "09C", 
+            "info": null, 
+            "new": {
+                "room": "B301", 
+                "subject": "Mu", 
+                "teacher": "KRG"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "STE"
+            }, 
+            "time": "3"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "07B", 
+            "info": null, 
+            "new": {
+                "room": "D207", 
+                "subject": "Bi", 
+                "teacher": "MA"
+            }, 
+            "old": {
+                "subject": "---", 
+                "teacher": "---"
+            }, 
+            "time": "7"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "07B", 
+            "info": "fällt aus", 
+            "new": {
+                "room": "---", 
+                "subject": "---", 
+                "teacher": "(MI)"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "MI"
+            }, 
+            "time": "4"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "09C", 
+            "info": null, 
+            "new": {
+                "room": "B301", 
+                "subject": "En", 
+                "teacher": "MTH"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "STE"
+            }, 
+            "time": "4"
+        }, 
+        {
+            "changes": [
+                "room"
+            ], 
+            "class": "06A,06B,06C/ 06FRZ2", 
+            "info": null, 
+            "new": {
+                "room": "B303", 
+                "subject": "Frz", 
+                "teacher": "RE"
+            }, 
+            "old": {
+                "subject": "Frz", 
+                "teacher": "RE"
+            }, 
+            "time": "3"
+        }, 
+        {
+            "changes": [
+                "room"
+            ], 
+            "class": "06A,06B,06C/ 06FRZ2", 
+            "info": null, 
+            "new": {
+                "room": "B303", 
+                "subject": "Frz", 
+                "teacher": "RE"
+            }, 
+            "old": {
+                "subject": "Frz", 
+                "teacher": "RE"
+            }, 
+            "time": "4"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ mu1", 
+            "info": "fällt aus", 
+            "new": {
+                "room": "---", 
+                "subject": "---", 
+                "teacher": "(REN)"
+            }, 
+            "old": {
+                "subject": "Mu", 
+                "teacher": "REN"
+            }, 
+            "time": "8"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ mu1", 
+            "info": "fällt aus", 
+            "new": {
+                "room": "---", 
+                "subject": "---", 
+                "teacher": "(REN)"
+            }, 
+            "old": {
+                "subject": "Mu", 
+                "teacher": "REN"
+            }, 
+            "time": "9"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "AG/ 07/12CHO", 
+            "info": "fällt aus", 
+            "new": {
+                "room": "---", 
+                "subject": "---", 
+                "teacher": "(REN)"
+            }, 
+            "old": {
+                "subject": "Mu", 
+                "teacher": "REN"
+            }, 
+            "time": "10"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "AG/ 07/12CHO", 
+            "info": "fällt aus", 
+            "new": {
+                "room": "---", 
+                "subject": "---", 
+                "teacher": "(REN)"
+            }, 
+            "old": {
+                "subject": "Mu", 
+                "teacher": "REN"
+            }, 
+            "time": "11"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "06B", 
+            "info": null, 
+            "new": {
+                "room": "D309", 
+                "subject": "Ku", 
+                "teacher": "SCI"
+            }, 
+            "old": {
+                "subject": "Ku", 
+                "teacher": "ES"
+            }, 
+            "time": "2"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ de1", 
+            "info": "zusätzlich Hälfte des Kurses De STE", 
+            "new": {
+                "room": "D112", 
+                "subject": "De", 
+                "teacher": "SCI"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "MI"
+            }, 
+            "time": "6"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "11/ de1", 
+            "info": "zusätzlich Hälfte des Kurses De STE", 
+            "new": {
+                "room": "D112", 
+                "subject": "De", 
+                "teacher": "SCI"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "MI"
+            }, 
+            "time": "7"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "10A", 
+            "info": "Einführung in das Kurssystem durch SCA", 
+            "new": {
+                "room": "D311", 
+                "subject": "En", 
+                "teacher": "SE"
+            }, 
+            "old": {
+                "subject": "En", 
+                "teacher": "SE"
+            }, 
+            "time": "5"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "09B", 
+            "info": "Plakate mitbringen", 
+            "new": {
+                "room": "E303", 
+                "subject": "Ge", 
+                "teacher": "SK"
+            }, 
+            "old": {
+                "subject": "Ge", 
+                "teacher": "ME"
+            }, 
+            "time": "3"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "09B", 
+            "info": null, 
+            "new": {
+                "room": "E303", 
+                "subject": "Ge", 
+                "teacher": "SK"
+            }, 
+            "old": {
+                "subject": "Ge", 
+                "teacher": "ME"
+            }, 
+            "time": "4"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "07B", 
+            "info": null, 
+            "new": {
+                "room": "E302", 
+                "subject": "En", 
+                "teacher": "TRU"
+            }, 
+            "old": {
+                "subject": "De", 
+                "teacher": "MI"
+            }, 
+            "time": "3"
+        }, 
+        {
+            "changes": [
+                "info"
+            ], 
+            "class": "07B", 
+            "info": "verlegt nach St.4", 
+            "new": {
+                "room": "E302", 
+                "subject": "En", 
+                "teacher": "TRU"
+            }, 
+            "old": {
+                "subject": "En", 
+                "teacher": "TRU"
+            }, 
+            "time": "7"
+        }
+    ]
+}

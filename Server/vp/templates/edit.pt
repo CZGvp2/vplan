@@ -9,26 +9,13 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        var action = "/edit";
+        var path = "${request.path}";
     </script>
     <script src="${request.static_url('vp:static/js/upload.js')}"></script>
-    
-
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/upload.css')}" />
 
 </head>
 <body>
-    <!--
-        # The formtarget Attribute
-        # The formtarget attribute specifies a name or a keyword that indicates where to 
-        # display the response that is received after submitting the form.
-        #
-        # The formtarget attribute overrides the target attribute of the <form> element.
-        #
-        # The formtarget attribute can be used with type="submit" and type="image".
-
-        Es könnte fürs Design gut funktionieren, die Antwort auf den Post auf ner extra Seite darzustellen, mit der JS-DragnDrop oben würde man einfach ne andere url übergeben
-    -->
     <a href="${request.route_path('start', _query='logout')}">Abmelden</a> <!-- Der Logout-Link -->
     
     <form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
@@ -36,12 +23,9 @@
 
     <div id="dropzone">
         <div id="content">
-            Drop Files Here
-            <div id="info" tal:switch="info">
-                <span style="color: blue" tal:case="'success'">Upload erfolgreich!</span>
-                <span style="color: red" tal:case="'error'">Upload fehlgeschlagen!</span>
-                <span tal:case="default">Laden sie ihre Datei hoch.</span>
-            </div><!-- Ich hab der Box nen 1:1 Seitenverhältnis gegeben, und jetzt lässt sich der Text nicht mehr mit padding vertikal zentrieren... Ich weiß nicht, was es außer line-height: 100%; vertical-align: center; noch für möglichkeiten gibt -->
+            Drop Files Here 
+           <!-- Ich hab der Box nen 1:1 Seitenverhältnis gegeben, und jetzt lässt sich der Text nicht mehr mit padding vertikal zentrieren...
+            Ich weiß nicht, was es außer line-height: 100%; vertical-align: center; noch für möglichkeiten gibt -->
         </div>
     </div>
 </body>

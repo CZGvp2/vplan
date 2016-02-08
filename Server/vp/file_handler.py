@@ -13,7 +13,7 @@ def read_via_tmp(input_file):
 		shutil.copyfileobj(input_file, dest)
 
 	try:
-		with open(tmp_file, 'r') as fobj:
+		with open(tmp_file, 'r', encoding='utf-8') as fobj:
 			content = fobj.read()
 
 	except UnicodeDecodeError:
@@ -34,12 +34,13 @@ def process_file(file_post):
 	data = convert(content)
 	
 	if data is not None:
-		with open(json_file, 'w') as fobj:
-			raise Exception("Fehler!") # TODO make it work 
+		with open(json_file, 'w', encoding='utf-8') as fobj:
+			content = json.dumps(data, ensure_ascii=False, indent=4, sort_keys=True)
+			fobj.write(content)
 			return True
 
 	return False
 
 def get_schedule():
 	with open(json_file, 'r', encoding='utf-8') as fobj:
-		return eval(fobj.read())
+		return json.loads(fobj.read())
