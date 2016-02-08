@@ -15,8 +15,8 @@ def read_action(element):
 		}
 		new = {
 			'subject': get('vfach'),
-			'teacher': get('lehrer'),
-			'room': get('room')
+			'teacher': get('vlehrer'),
+			'room': get('vraum')
 		}
 
 		changes = []
