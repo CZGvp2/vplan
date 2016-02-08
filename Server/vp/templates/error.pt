@@ -38,25 +38,42 @@
         center{
             width: 500px;
         }
+        img{
+            width: 450px;
+            height: auto;
+        }
     }
     @media all and (max-width:525px){
-        center{
+        center {
+
             width: 450px;
+        }
+        img{
+            width: 400px;
+            height: auto;
         }
     }
     @media all and (max-width:475px){
         center{
             width: 400px;
         }
+        img{
+            width: 90%;
+            height: auto;
+        }
     }
     @media all and (max-width:410px){
         center{
             width: 90%;
         }
+        img{
+            width: 90%;
+            height: auto;
+        }
     }
     <!-- TODO Mobile Anpassung -->
     </style>
-</head>
+    </head>
 <body>
 <div id="center">
     <p id="num">${err_code}</p>
@@ -64,6 +81,7 @@
     <p id="denied">${err_message}</p><br/>
     <p id="url">${request.url}</p>
     <!-- TODO Zurück-Button -->
+    <!-- <button onClick="void" label="Zurück"> Zurück </button>
 </div>
 </body>
 </html>

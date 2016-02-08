@@ -1,55 +1,61 @@
 import xml.etree.ElementTree as etree
 import json
 
-def to_json_event(self, element):
-	# element ist das XML-Element-Objekt der jew. Aktion
+def read_action(element):
+	"""Liest eine Veränderung im Lehrer-Vertretungsplan"""
 
-	# liest den Tag 'tag' der Aktion
-	get_text = lambda tag: element.find(tag).text
+	get = lambda tag: element.find(tag).text
+	# Liest den Text aus einem Element
+	# raised einen AttributeError falls tag nicht vorhanden.
+	
+	try:
+		old = {
+			'subject': get('fach'),
+			'teacher': get('lehrer')
+		}
+		new = {
+			'subject': get('vfach'),
+			'teacher': get('lehrer'),
+			'room': get('room')
+		}
 
-	# Name selbsterklärend, gibt eigentlich nur ein Dictionary zurück
-	# In der XML-File werden Änderungen immer durch ein Attribut mit dem Wert "ae"
-	# markiert. Sonst haben keine Tags in einer Aktion Attribute. Daher reicht es zu testen,
-	# ob überhaupt Attribute vorliegen, also ob das attrib-dictionary etwas enthält.
-	# Da nur in if's verwendet, reicht es, das dict zurückzugeben, da wenn len(dict) < 1, ist
-	# dict als bool immer False, sonst True
-	was_changed = lambda tag: element.find(tag).attrib
+		changes = []
+		if old['subject'] != new['subject']: changes.append('subject')
+		if old['teacher'] != new['teacher']: changes.append('teacher')
+		if not changes and not get('info'): changes.append('room')
+		# not changes besagt, dass changes leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
+		# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
 
-	# Liste aller vorgenommenen Änderungen
-	changes = []
-	if was_changed('fach'):
-		changes.append('subject')
+		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
+		if new['subject'] == '---': changes = ['cancelled']
 
-	if was_changed('lehrer'):
-		changes.append('teacher')
+		return {
+			'class': get('klasse'),
+			'time': get('stunde'),
+			'info': get('info'),
+			'old': old,
+			'new': new,
+			'changes': changes
+		}
 
-	if was_changed('raum'):
-		changes.append('room')
+	except AttributeError:
+		return None
 
-	if subject == '---':
-		# löscht alle vorherigen changes, weil Ausfall als Info reicht.
-		changes = ['cancelled']
+def convert(xml_content):
+	"""Konvertiert einen xml-String in ein dictionary"""
+	if not xml_content:
+		return None
 
-	return {
-		'class': get_text('klasse'),
-		'time': get_text('stunde'),
-		'subject': get_text('fach'),
-		'teacher': get_text('lehrer'),
-		'room': get_text('raum'),
-		'info': get_text('info'),
-		'changes': changes
-	}
-
-def to_json(xml_content):
-	events = []
 	root = etree.fromstring(xml_content)
 
-	for action_elem in root.findall('./haupt/aktion'):
-		event = to_json_event(action_elem)
-		events.append(event)
+	events = []
+	for element in root.findall('./haupt/aktion'):
+		event = read_action(element)
 
-	return json.dumps({'events':event})
+		if event:
+			events.append(event)
 
+		else:
+			return None
 
-		
-
+	return {'events': events}

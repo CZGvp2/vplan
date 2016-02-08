@@ -1,6 +1,7 @@
 CHANGES.txt
 MANIFEST.in
 README.txt
+Readme.txt
 development.ini
 production.ini
 setup.py

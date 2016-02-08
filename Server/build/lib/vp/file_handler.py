@@ -2,7 +2,7 @@ import os
 import shutil
 import json
 
-from .xml_reader import convert
+from .xml_reader import to_json
 
 data_dir = os.path.join( os.path.dirname(__file__), 'data' )
 json_file = os.path.join( data_dir, 'schedule.json')
@@ -31,15 +31,18 @@ def process_file(file_post):
 	input_file = file_post.file
 	content = read_via_tmp(input_file)
 
-	data = convert(content)
-	
-	if data:
-		with open(json_file, 'w', encoding='utf-8') as fobj:
-			json.dump(data, fobj)
-		return True
+	if content is not None:
+		with open(json_file, 'w') as fobj:
+			fobj.write( to_json(content) )
+			return True
 
 	return False
 
 def get_schedule():
-	with open(json_file, 'r', encoding='utf-8') as fobj:
-		return json.load(fobj)
+	try:
+		with open(json_file, 'r', encoding='utf-8') as raw_json:
+			return json.loads(raw_json.read())
+
+	except ValueError as err:
+		raise err
+		return None
