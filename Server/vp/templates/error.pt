@@ -13,8 +13,7 @@
         <img src="${img_src}" width="500" />
         <p id="denied">${err_message}</p><br/>
         <p id="url">${request.url}</p>
-        <!-- TODO Zurück-Button -->
-        <!-- <button onClick="void" label="Zurück"> Zurück </button> -->
+        <a href="javascript:void;">Das hier wird mal ein Zurückknopf</a>
     </div>
 </body>
 </html>

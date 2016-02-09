@@ -1,27 +1,34 @@
-/* Wenn der Browser JS nicht versteht, wird der Code nicht angezeigt sondern als Kommentar betrachtet. JS ignoriert den Kommentaranfang einfach. */
-
-/* Versuch, Drag and Drop mit jQuery/CSS ohne weitere Bibliotheken hinzubekommen */
-
-
 /* Browser machen sehr merkwürdige Sachen, 
-wenn man keine Default-Events verhindert
+wenn man keine Default-Events verhindert*/
 
-evtl. highlighting der Box
-*/
+// DragOver
 $(document).on(
     'dragover',
     function(e) {
         e.stopPropagation();
         e.preventDefault();
-        console.log('dragOver');
     }
 )
+
+//DragEnter
 $(document).on(
     'dragenter',
     function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('dragEnter');
+
+        document.body.style.backgroundColor = "#CFF";
+    }
+)
+
+//DragLeave
+$(document).on(
+    'dragleave',
+    function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        document.body.style.backgroundColor = "#FFF";
     }
 )
 
@@ -29,16 +36,12 @@ $(document).on(
 $(document).on(
     'drop',
     function(e){
-        console.log('drop');
+        console.log('Drop');
         if(e.originalEvent.dataTransfer){
-            /* .files sind alle gedroppten Dateien */
-
             /* Überprüfen ob >= eine Datei im Array ist*/
             if (e.originalEvent.dataTransfer.files.length) {
-                /* Defaultzeug*/
                 e.preventDefault();
                 e.stopPropagation();
-                /* Das hier sollte alles hochladen, ich hab kine Ahnung ob das funktioniert */
                 upload(e.originalEvent.dataTransfer.files);
             }   
         }
@@ -47,7 +50,7 @@ $(document).on(
 function upload(files) {
     var formData = new FormData($('form')[0]);
     
-    /* Tadaa, die Lösung des Problems: ganz viele einzelne 'file'-POST-vars (unglaublich, ich weiß) */
+    /* Tadaa, die Lösung des Problems: ganz viele einzelne 'file'-POST-vars (unglaublich, ich weiß) // :c */
     for (var i = 0; i < files.length; i++)
         formData.append('file', files[i]);
 
@@ -68,7 +71,7 @@ function upload(files) {
             if (response.success) alert("Ja dat funktioniert");
             //  ^^^^^^^^^^^^^^^^
             //     die Flag          (kann auch genauere Info sein) // also kann man einfach ne jQuery("p") auf nen success.msg string setzen? Wär gut
-            // und es muss $('form')[0] sein sonst liesst der ne liste und es wirft nen TypeError
+            //                                                      //und es muss $('form')[0] sein sonst ließt der ne liste und es wirft nen TypeError
             else alert("Computer says no.");
         }
 
