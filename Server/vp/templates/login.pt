@@ -12,17 +12,19 @@
     <script src="${request.static_url('vp:static/js/login.js')}"></script>
 </head>
 <body>
-    <form class="center" action="${request.path}" method="post">
-        <input type="text" id="hash" name="hash" hidden="hidden" />
-        <input type="password" id="password" name="password" class="nofocus" autofocus="autofocus" />
-        <p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
-        <div id="submit">
-            <a id="submit" href="javascript:void(0)">Anmelden</a>
-        </div>
-        <script type="text/javascript" tal:condition="wrong_pwd">
-            $('#password').css('border-bottom-color', '#FF5555');
-            $('div#submit').css('margin-top', '40px');
-        </script>
-    </form>
+    <div id="content">
+        <form class="center" action="${request.path}" method="post">
+            <input type="text" id="hash" name="hash" hidden="hidden" />
+            <input type="password" id="password" name="password" class="nofocus" autofocus="autofocus" />
+            <p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
+            <div id="submit">
+                <a id="submit" href="javascript:void(0)">Anmelden</a>
+            </div>
+            <script type="text/javascript" tal:condition="wrong_pwd">
+                $('#password').css('border-bottom-color', '#FF5555');
+                $('div#submit').css('margin-top', '40px');
+            </script>
+        </form>
+    </div>
 </body>
 </html>

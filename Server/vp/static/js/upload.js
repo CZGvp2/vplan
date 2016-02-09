@@ -1,3 +1,7 @@
+/* Browser machen sehr merkwürdige Sachen, 
+wenn man keine Default-Events verhindert*/
+
+// DragOver
 $(document).on(
     'dragover',
     function(e) {
@@ -6,20 +10,35 @@ $(document).on(
         console.log('dragOver');
     }
 )
+
+//DragEnter
 $(document).on(
     'dragenter',
     function(e) {
         e.preventDefault();
         e.stopPropagation();
-        console.log('dragEnter');
+
+        document.body.style.backgroundColor = "#CFF";
+    }
+)
+
+//DragLeave
+$(document).on(
+    'dragleave',
+    function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        document.body.style.backgroundColor = "#FFF";
     }
 )
 
 /* Eigentliches Dropevent fangen */
 $(document).on(
     'drop',
-    function(e){
+    function(e) {
         console.log('drop');
+        if(e.originalEvent.dataTransfer){
             if (e.originalEvent.dataTransfer.files.length) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -46,5 +65,6 @@ function upload(files) {
         processData: false,
         contentType: false,
         success: handleServerResponse
+        }
     });
 }
