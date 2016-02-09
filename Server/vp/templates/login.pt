@@ -2,7 +2,10 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Vertretungsplan des CZG" />
+    <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
+    <title>Vertretungsplan</title>
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/login.css')}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js"></script>

@@ -73,7 +73,7 @@
     }
     <!-- TODO Mobile Anpassung -->
     </style>
-    </head>
+</head>
 <body>
 <div id="center">
     <p id="num">${err_code}</p>

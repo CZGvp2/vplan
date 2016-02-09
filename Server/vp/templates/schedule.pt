@@ -5,58 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta name="description" content="Vertretungsplan des CZG" />
     <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
-
     <title>Vertretungsplan</title>
-
-    <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/main.css')}">
-    <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/list.css')}" />
-    <link rel="shortcut icon" href="${request.static_url('vp:static/img/favicon.ico')}">
+    <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/schedule.css')}" />
+    <link rel="shortcut icon" href="${request.static_url('vp:static/img/favicon.ico')}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    
-
 </head>
-<body onload="$('#jsWarn').hide();">
-    <div class="container">
-
-        <div class="wrapper_top" >
-            <div id="jsWarn"><p style="font-size:2em">JavaScript ist deaktiviert.</p>Um die Seite benutzen zu können, muss JavaScript verwendet werden.<br /> Stelle sicher, dass dies in den Browser-Eintellungen aktiviert ist und du keinen Blocker verwendest.</div>
-            
-            <header><p>Vertretungsplan</p></header>
-
-            <nav id="nav">
-                <ul>
-                    <li><a href="javascript:void">Klasse</a></li>
-                    <li><a href="javascript:void">Gesamt</a></li>
-                    <li><a href="javascript:void">Termine</a></li>
-                    <li><a href="javascript:void">Informationen</a></li>
-                    <li><a href="${request.route_path('start', _query='logout')}">Logout</a></li>
-                </ul>
-            </nav>
+<body>
+    <div id="topbar">
+        <a href="${request.route_path('start', _query='logout')}">Abmelden</a>
+    </div>
+    <div class="slide">
+        <div class="head">
         </div>
-
-        <div class="wrapper_bottom">
-            <section id="content">
-                <center>
-                    <div id="main">
-                        <div id="frame">
-                            <div class="entry ${'even' if repeat.event.even else 'odd'}" tal:repeat="event events" tal:switch="event.action">
-                                <div tal:case="'cancelling'">
-                                    <span class="subentry class" tal:content="event.lesson['class']"></span>
-                                    <span class="subentry lesson" tal:content="event.lesson['time']"></span>
-                                    <span class="subentry teacher" tal:content="event.lesson['teacher']"></span>
-                                </div>
-                                <div tal:case="'lesson_switch'">
-                                    <!-- was anderes -->
-                                </div>
-                                <div tal:case="''">
-                                    <!-- noch was anderes -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </center>
-            </section>
-        </div>
+        <table class="table">
+            <tr class="event" tal:repeat="event events">
+                <td class="entry" tal:content="event['class']" />
+                <td class="entry" tal:content="event.time" />
+                <td class="entry" tal:content="event.new['subject']" />
+                <td class="entry" tal:content="event.new['teacher']" />
+                <td class="entry" tal:content="event.new['room']" />
+                <td class="entry" tal:content="event.old['subject']" /> 
+                <td class="entry" tal:content="event.old['teacher']" />
+                <td class="entry" tal:content="event.info" />
+            </tr>
+        </table>
     </div>
 </body>
 </html>
