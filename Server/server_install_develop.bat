@@ -1,1 +1,1 @@
-@setup.py develop
+setup.py develop

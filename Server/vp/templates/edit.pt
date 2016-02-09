@@ -14,9 +14,12 @@
     <script src="${request.static_url('vp:static/js/upload.js')}"></script>
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/upload.css')}" />
 
+    <title> Vertretungsplan bearbeiten </title><!-- Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
+
 </head>
 <body>
-    <a href="${request.route_path('start', _query='logout')}">Abmelden</a> <!-- Der Logout-Link -->
+
+    <a href="${request.route_path('start', _query='logout')}" id="logout">Abmelden</a> <!-- Der Logout-Link -->
     
     <form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
     </form>

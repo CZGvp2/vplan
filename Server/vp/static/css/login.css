@@ -50,3 +50,12 @@ div#submit {
 	text-align: center;
 	color: #FF5555;
 }
+#content{
+	display: block;
+	position: absolute;
+
+	top: 50%;
+	left: 50%;
+
+	transform: translate(-50%, -50%);
+}

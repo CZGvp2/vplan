@@ -1,3 +1,6 @@
+*{
+    font-family: Helvetica, Ubuntu, sans-serif;
+}
 #dropzone{
     position: absolute;
     top: 50%;
@@ -20,4 +23,22 @@
     left: 0;
     right: 0;
     bottom: 0;
+}
+#logout{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    height: 2em;
+    width: 10%;
+    min-width: 5em;
+
+    border: none;
+    border-bottom-left-radius: 20px;
+
+    padding-left: 1%;
+
+    background-color: #bbb;
+    color: black;
+    text-decoration: none;
 }

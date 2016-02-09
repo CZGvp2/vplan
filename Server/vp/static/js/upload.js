@@ -45,7 +45,7 @@ $(document).on(
     }
 );
 function upload(files) {
-    var formData = new FormData($('form'));
+    var formData = new FormData($('form')[0]);
     
     /* Tadaa, die Lösung des Problems: ganz viele einzelne 'file'-POST-vars (unglaublich, ich weiß) */
     for (var i = 0; i < files.length; i++)
@@ -62,12 +62,13 @@ function upload(files) {
             // README
             /*
             nach 5h arbeit hab ich herausgefunden dasss der Server (richtig sick) JSON an die success-function übergeben kann.
-            jetzt kann ajax also den Server-Response handeln.
+            jetzt kann ajax also den Server-Response handeln. // nice
             */
 
             if (response.success) alert("Ja dat funktioniert");
             //  ^^^^^^^^^^^^^^^^
-            //     die Flag          (kann auch genauere Info sein)
+            //     die Flag          (kann auch genauere Info sein) // also kann man einfach ne jQuery("p") auf nen success.msg string setzen? Wär gut
+            // und es muss $('form')[0] sein sonst liesst der ne liste und es wirft nen TypeError
             else alert("Computer says no.");
         }
 
