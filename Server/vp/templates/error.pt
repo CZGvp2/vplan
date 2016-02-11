@@ -5,7 +5,6 @@
     <title>${title}</title>
     <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/error.css')}" />
     <!-- TODO Mobile Anpassung -->
-    </style>
 </head>
 <body>
     <div id="center">
@@ -13,7 +12,7 @@
         <img src="${img_src}" width="500" />
         <p id="denied">${err_message}</p><br/>
         <p id="url">${request.url}</p>
-        <a href="javascript:void(0)">Das hier wird mal ein Zurückknopf</a>
+        <a href="${request.route_path('start', _query='logout')}">Abmelden</a>
     </div>
 </body>
 </html>

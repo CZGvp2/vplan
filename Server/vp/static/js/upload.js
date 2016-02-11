@@ -65,6 +65,5 @@ function upload(files) {
         processData: false,
         contentType: false,
         success: handleServerResponse
-        }
     });
 }
