@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as etree
-import json
+import re
 
 def read_action(element):
 	"""Liest eine Veränderung im Lehrer-Vertretungsplan"""
@@ -19,28 +19,37 @@ def read_action(element):
 			'room': get('vraum')
 		}
 
-		changes = []
-		if old['subject'] != new['subject']: changes.append('subject')
-		if old['teacher'] != new['teacher']: changes.append('teacher')
+		change = 'info'
+		if old['subject'] != new['subject']: change = 'subject'
+		if old['teacher'] != new['teacher']: change = 'teacher'
 		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
-		if new['subject'] == '---': changes = ['cancelled']
+		if new['subject'] == '---': change = 'cancelled'
 
-		if not changes and not get('info'): changes.append('room')
-		else: changes = ['info']
-		# not changes besagt, dass changes leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
+		if not change and not get('info'): change = 'room'
+		# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
 		# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
 
 		return {
-			'class': get('klasse'),
+			'class': parse_class( get('klasse') ),
 			'time': get('stunde'),
 			'info': get('info'),
 			'old': old,
 			'new': new,
-			'changes': changes
+			'change': change
 		}
 
 	except AttributeError:
 		return None
+
+def parse_class(text):
+	lower_class_simple = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
+	lower_class_multiple_inter = re.compile( r'^(.*)/ (?P<grade>0[5-9]|10)(?P<subject>[A-Z]{2,3})(?P<subclass>\d)$' ) # 08FRZ1
+	higher_class_simple = re.compile( r'^(?P<grade>11|12)/ (?P<subject>[a-z]{2})(?P<subclass>\d)$' )
+
+	return text
+
+def _parse_lower_class_simple(match):
+	return match.groupdict()
 
 def convert(xml_content):
 	"""Konvertiert einen xml-String in ein dictionary"""

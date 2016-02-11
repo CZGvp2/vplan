@@ -74,7 +74,7 @@ class EditView:
 	def upload(self):
 		for file_post in self.request.POST.getall('file'):
 			if not process_file(file_post):
-				return {'success':False}
+				return {'success': False}
 
 		return {'success': True}
 

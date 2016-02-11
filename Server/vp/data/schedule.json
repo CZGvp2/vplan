@@ -1,9 +1,7 @@
 {
     "events": [
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "11/ de2", 
             "info": "Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112", 
             "new": {
@@ -18,9 +16,7 @@
             "time": "6"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "11/ de2", 
             "info": "Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112", 
             "new": {
@@ -35,9 +31,7 @@
             "time": "7"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "info", 
             "class": "11/ de3", 
             "info": "zusätzlich Hälfte des Kurses De STE", 
             "new": {
@@ -52,9 +46,7 @@
             "time": "6"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "info", 
             "class": "11/ de3", 
             "info": "zusätzlich Hälfte des Kurses De STE", 
             "new": {
@@ -69,9 +61,7 @@
             "time": "7"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "06B", 
             "info": null, 
             "new": {
@@ -86,9 +76,7 @@
             "time": "1"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "12/ de2", 
             "info": "Aufgaben im Unterrichtsraum", 
             "new": {
@@ -103,9 +91,7 @@
             "time": "1"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "12/ de2", 
             "info": "Aufgaben im, Unterrichtsraum", 
             "new": {
@@ -120,9 +106,7 @@
             "time": "2"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "10A", 
             "info": null, 
             "new": {
@@ -137,9 +121,7 @@
             "time": "3"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "09C", 
             "info": null, 
             "new": {
@@ -154,9 +136,7 @@
             "time": "3"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "07B", 
             "info": null, 
             "new": {
@@ -171,9 +151,7 @@
             "time": "7"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "cancelled", 
             "class": "07B", 
             "info": "fällt aus", 
             "new": {
@@ -188,9 +166,7 @@
             "time": "4"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "09C", 
             "info": null, 
             "new": {
@@ -205,9 +181,7 @@
             "time": "4"
         }, 
         {
-            "changes": [
-                "room"
-            ], 
+            "change": "info", 
             "class": "06A,06B,06C/ 06FRZ2", 
             "info": null, 
             "new": {
@@ -222,9 +196,7 @@
             "time": "3"
         }, 
         {
-            "changes": [
-                "room"
-            ], 
+            "change": "info", 
             "class": "06A,06B,06C/ 06FRZ2", 
             "info": null, 
             "new": {
@@ -239,9 +211,7 @@
             "time": "4"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "cancelled", 
             "class": "11/ mu1", 
             "info": "fällt aus", 
             "new": {
@@ -256,9 +226,7 @@
             "time": "8"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "cancelled", 
             "class": "11/ mu1", 
             "info": "fällt aus", 
             "new": {
@@ -273,9 +241,7 @@
             "time": "9"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "cancelled", 
             "class": "AG/ 07/12CHO", 
             "info": "fällt aus", 
             "new": {
@@ -290,9 +256,7 @@
             "time": "10"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "cancelled", 
             "class": "AG/ 07/12CHO", 
             "info": "fällt aus", 
             "new": {
@@ -307,9 +271,7 @@
             "time": "11"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "06B", 
             "info": null, 
             "new": {
@@ -324,9 +286,7 @@
             "time": "2"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "11/ de1", 
             "info": "zusätzlich Hälfte des Kurses De STE", 
             "new": {
@@ -341,9 +301,7 @@
             "time": "6"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "11/ de1", 
             "info": "zusätzlich Hälfte des Kurses De STE", 
             "new": {
@@ -358,9 +316,7 @@
             "time": "7"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "info", 
             "class": "10A", 
             "info": "Einführung in das Kurssystem durch SCA", 
             "new": {
@@ -375,9 +331,7 @@
             "time": "5"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "09B", 
             "info": "Plakate mitbringen", 
             "new": {
@@ -392,9 +346,7 @@
             "time": "3"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "09B", 
             "info": null, 
             "new": {
@@ -409,9 +361,7 @@
             "time": "4"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "teacher", 
             "class": "07B", 
             "info": null, 
             "new": {
@@ -426,9 +376,7 @@
             "time": "3"
         }, 
         {
-            "changes": [
-                "info"
-            ], 
+            "change": "info", 
             "class": "07B", 
             "info": "verlegt nach St.4", 
             "new": {

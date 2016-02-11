@@ -9,7 +9,7 @@ $(document).on(
         e.stopPropagation();
         console.log('dragOver');
     }
-)
+);
 
 //DragEnter
 $(document).on(
@@ -20,7 +20,7 @@ $(document).on(
 
         document.body.style.backgroundColor = "#CFF";
     }
-)
+);
 
 //DragLeave
 $(document).on(
@@ -31,7 +31,7 @@ $(document).on(
         
         document.body.style.backgroundColor = "#FFF";
     }
-)
+);
 
 /* Eigentliches Dropevent fangen */
 $(document).on(
@@ -47,7 +47,7 @@ $(document).on(
         }
     }
 );
-
+// tescht nein
 function handleServerResponse(response) {
     if (response.success) alert("Ja dat funktioniert");
     else alert("Computer says no.");
@@ -65,6 +65,5 @@ function upload(files) {
         processData: false,
         contentType: false,
         success: handleServerResponse
-        }
     });
 }
