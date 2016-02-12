@@ -12,13 +12,13 @@
 </head>
 <body>
     <div id="topbar">
-        <a href="${request.route_path('start', _query='logout')}">Abmelden</a>
+        <a href="${request.route_path('home', _query='logout')}">Abmelden</a>
     </div>
-    <div class="slide">
+    <div class="slide" tal:repeat="day days">
         <div class="head">
         </div>
         <table class="table">
-            <tr class="event" tal:repeat="event events">
+            <tr class="event" tal:repeat="event day.events">
                 <td class="entry" tal:content="event['class']" />
                 <td class="entry" tal:content="event.time" />
                 <td class="entry" tal:content="event.new['subject']" />
@@ -30,5 +30,6 @@
             </tr>
         </table>
     </div>
+    <hr>
 </body>
 </html>

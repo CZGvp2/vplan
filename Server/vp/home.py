@@ -1,21 +1,13 @@
-from pyramid.response import Response
 from pyramid.security import remember, forget
-
 from pyramid.httpexceptions import HTTPFound
+from pyramid.view import view_config, view_defaults
 
-from pyramid.view import view_config, view_defaults, notfound_view_config, forbidden_view_config
-
-from .file_handler import process_file, get_schedule
 from .group_finder import can_read, can_edit
 
-import logging
 
-log = logging.getLogger('serverlog')
-
-
-@view_defaults(route_name='start', renderer='templates/login.pt')
-class StartView:
-	""" Startadresse "/". (Eigentlich Login) """ # <- Tim, das ist ein Python-Funktions-Docstring ;) Krass.
+@view_defaults(route_name='home', renderer='templates/home.pt')
+class HomeView:
+	""" Startadresse "/". (Eigentlich Login) """
 	def __init__(self, request):
 		self.request = request
 
@@ -34,7 +26,7 @@ class StartView:
 		# auch nach dem Abmelden kann man noch /schedule ohne Passwort eingeben
 		if 'logout' in self.request.params:
 			headers = forget(self.request)
-			return self.redirect('start', headers)
+			return self.redirect('home', headers)
 		
 		# Redirects von der Startseite von schon angemeldeten Schülern
 		if self.request.has_permission('read'):
@@ -63,44 +55,3 @@ class StartView:
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort
 		# falsch gewesen sein.
 		return {'wrong_pwd': True}
-
-
-@view_defaults(route_name='edit', permission='edit')
-class EditView:
-	def __init__(self, request):
-		self.request = request
-
-	@view_config(request_method='GET', renderer='templates/edit.pt')
-	def view_edit(self):
-		return dict()
-
-	@view_config(request_method='POST', renderer='json')
-	def upload(self):
-		for file_post in self.request.POST.getall('file'):
-			if not process_file(file_post):
-				return {'success': False} # TODO mehrere Dateien betrachten
-
-		return {'success': True}
-
-
-@view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')
-def schedule(request):
-	return get_schedule()
-
-@notfound_view_config(renderer='templates/error.pt')
-def notfound(request):
-	return {
-		'title': '404 - nicht gefunden',
-		'err_code': '404',
-		'err_message': 'Seite konnte nicht gefunden werden',
-		'img_src': request.static_url('vp:static/img/404.jpg')
-	}
-
-@forbidden_view_config(renderer='templates/error.pt')
-def forbidden(request):
-	return {
-		'title': '403 - kein Zugriff',
-		'err_code': '403',
-		'err_message': 'Zugriff verweigert',
-		'img_src': request.static_url('vp:static/img/403.jpg')
-	}

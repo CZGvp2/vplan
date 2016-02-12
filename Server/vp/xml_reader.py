@@ -1,9 +1,12 @@
 import xml.etree.ElementTree as etree
 import re
-
 import logging
 
+from .exceptions import XMLReadingError, XMLParsingError
+
+
 log = logging.getLogger('serverlog')
+
 
 # Bsp: Montag, 19. Oktober 2015
 date_syntax = re.compile( r'^(?P<dow>Montag|Dienstag|Mittwoch|Donnerstag|Freitag),\s(?P<date>.+)$' )
@@ -22,57 +25,53 @@ class_syntax = {
 	'higher_class': re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)$' )
 }
 
+def get(element, path):
+	target = element.find(path)
+
+	if target is not None:
+		return target.text
+
+	else:
+		raise XMLReadingError(path)
+
 def read_action(element):
 	"""Liest eine Veränderung im Lehrer-Vertretungsplan"""
 
-	def get(tag):
-		nonlocal element
-		target = element.find(tag)
+	get_tag = lambda tag: get(element, tag)
 
-		if target is not None:
-			return target.text
+	old = {
+		'subject': get_tag('fach'),
+		'teacher': get_tag('lehrer')
+	}
+	new = {
+		'subject': get_tag('vfach'),
+		'teacher': get_tag('vlehrer'),
+		'room': get_tag('vraum')
+	}
 
-		else:
-			log.error('Could not find tag <%s>', tag)
-			raise KeyError()
-	
-	try:
-		old = {
-			'subject': get('fach'),
-			'teacher': get('lehrer')
-		}
-		new = {
-			'subject': get('vfach'),
-			'teacher': get('vlehrer'),
-			'room': get('vraum')
-		}
+	change = 'info'
+	if old['subject'] != new['subject']: change = 'subject'
+	if old['teacher'] != new['teacher']: change = 'teacher'
+	# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
+	if new['subject'] == '---': change = 'cancelled'
 
-		change = 'info'
-		if old['subject'] != new['subject']: change = 'subject'
-		if old['teacher'] != new['teacher']: change = 'teacher'
-		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
-		if new['subject'] == '---': change = 'cancelled'
+	if not change and not get_tag('info'): change = 'room'
+	# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
+	# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
 
-		if not change and not get('info'): change = 'room'
-		# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
-		# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
-
-		return {
-			'class': parse_class( get('klasse') ),
-			'time': get('stunde'),
-			'info': get('info'),
-			'old': old,
-			'new': new,
-			'change': change
-		}
-
-	except KeyError:
-		return None
+	return {
+		'class': parse_class( get_tag('klasse') ),
+		'time': get_tag('stunde'),
+		'info': get_tag('info'),
+		'old': old,
+		'new': new,
+		'change': change
+	}
 
 def parse_class(text):
 	return text
 
-def _parse_lower_class_simple(match):
+def _parse_lower_class_simple(text):
 	"""Parst einen Klassen-Bezeichner in JSON"""
 	for typ, syntax in class_syntax.items():
 		match = syntax.match(text)
@@ -82,6 +81,7 @@ def _parse_lower_class_simple(match):
 
 			return data
 
+	log.warning('Could not parse class "%s"', text)
 	return {
 		'type': None,
 		'class': text
@@ -97,32 +97,31 @@ def parse_date(text):
 	if match:
 		return match.groupdict()
 
-	log.warning('Could not parse date "%s"', text)
+	log.warning('Could not parse date "%s"' % text)
+	return text
 
 def convert(xml_content):
-	"""Konvertiert einen xml-String in ein dictionary, Ergebnis sind JSON-Daten für einen Tag"""
-	if not xml_content:
-		return None
+	"""Konvertiert einen xml-String in ein dictionary, Ergebnis sind JSON-Daten für einen Tag
+	   gibt (data, errorCode) als Tupel zurück
+	"""
 
 	try:
 		root = etree.fromstring(xml_content)
 
 	except etree.ParseError as e:
-		log.error('Parsing Error at line %d column %d', *e.position)
-		return None
+		raise XMLParsingError(e)
+
+	filename = get(root, './kopf/datei')
+	date = parse_date( get(root, './kopf/titel') )
 
 	events = []
 	for element in root.findall('./haupt/aktion'):
 		event = read_action(element)
-
-		if event:
-			events.append(event)
-
-		else:
-			return None
+		events.append(event)
 
 	return {
 		'events': events,
-		'filename': root.find('./kopf/datei').text,
-		'date': parse_date( root.find('./kopf/titel').text )
+		'filename': filename,
+		'date': date
 	}
+		

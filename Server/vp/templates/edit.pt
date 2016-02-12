@@ -12,7 +12,7 @@
     <script src="${request.static_url('vp:static/js/upload.js')}"></script>
 </head>
 <body>
-    <a href="${request.route_path('start', _query='logout')}" id="logout">Abmelden</a> 
+    <a href="${request.route_path('home', _query='logout')}" id="logout">Abmelden</a> 
     <form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data"></form>
     <div id="dropzone">
         <div id="content">

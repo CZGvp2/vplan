@@ -49,8 +49,7 @@ $(document).on(
 );
 // tescht nein
 function handleServerResponse(response) {
-    if (response.success) alert("Ja dat funktioniert");
-    else alert("Computer says no.");
+    alert(JSON.stringify(response));
 }
 
 function upload(files) {

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vp>
+  <kopf>
+    <datei>VplanLe19102015.xml</datei>
+    <titel>alt</titel>
+    <schulname>Carl-Zeiss-Gymnasium Jena</schulname>
+    <datum>11.01.2016, 09:33</datum>
+    <kopfinfo>
+      <abwesendl>BA; ME; MI; REN; STE</abwesendl>
+      <aenderungl>BÖ; DRM; ES; HAU; HER; HU; KRG; MA; ME; MTH; RE; RIE; SCI; SE; SK; STE; TRU</aenderungl>
+      <aenderungk>06A, 06B, 06C, 07B, 09B, 09C, 10A, 11, 12, AG</aenderungk>
+    </kopfinfo>
+  </kopf>
+  <freietage>
+    <ft>150803</ft>
+    <ft>150804</ft>
+    <ft>150805</ft>
+    <ft>150806</ft>
+    <ft>150807</ft>
+    <ft>150810</ft>
+    <ft>150811</ft>
+    <ft>150812</ft>
+    <ft>150813</ft>
+    <ft>150814</ft>
+    <ft>150817</ft>
+    <ft>150818</ft>
+    <ft>150819</ft>
+    <ft>150820</ft>
+    <ft>150821</ft>
+    <ft>151005</ft>
+    <ft>151006</ft>
+    <ft>151007</ft>
+    <ft>151008</ft>
+    <ft>151009</ft>
+    <ft>151012</ft>
+    <ft>151013</ft>
+    <ft>151014</ft>
+    <ft>151015</ft>
+    <ft>151016</ft>
+    <ft>151130</ft>
+    <ft>151223</ft>
+    <ft>151224</ft>
+    <ft>151225</ft>
+    <ft>151228</ft>
+    <ft>151229</ft>
+    <ft>151230</ft>
+    <ft>151231</ft>
+    <ft>160101</ft>
+    <ft>160201</ft>
+    <ft>160202</ft>
+    <ft>160203</ft>
+    <ft>160204</ft>
+    <ft>160205</ft>
+    <ft>160324</ft>
+    <ft>160325</ft>
+    <ft>160328</ft>
+    <ft>160329</ft>
+    <ft>160330</ft>
+    <ft>160331</ft>
+    <ft>160401</ft>
+    <ft>160505</ft>
+    <ft>160506</ft>
+    <ft>160516</ft>
+    <ft>160627</ft>
+    <ft>160628</ft>
+    <ft>160629</ft>
+    <ft>160630</ft>
+    <ft>160701</ft>
+    <ft>160704</ft>
+    <ft>160705</ft>
+    <ft>160706</ft>
+    <ft>160707</ft>
+    <ft>160708</ft>
+    <ft>160711</ft>
+    <ft>160712</ft>
+    <ft>160713</ft>
+    <ft>160714</ft>
+    <ft>160715</ft>
+    <ft>160718</ft>
+    <ft>160719</ft>
+    <ft>160720</ft>
+    <ft>160721</ft>
+    <ft>160722</ft>
+    <ft>160725</ft>
+    <ft>160726</ft>
+    <ft>160727</ft>
+    <ft>160728</ft>
+    <ft>160729</ft>
+  </freietage>
+  <aufsichten>
+    <aufsichtzeile>
+      <aufsichtinfo>09:30:  1.Hofp. - Gang unten  --&gt;  HER (für ME)</aufsichtinfo>
+    </aufsichtzeile>
+    <aufsichtzeile>
+      <aufsichtinfo>09:30:  1.Hofp. - Hof 1.1  --&gt;  RIE (für STE)</aufsichtinfo>
+    </aufsichtzeile>
+  </aufsichten>
+  <haupt>
+    <aktion>
+      <stunde>6</stunde>
+      <fach>De</fach>
+      <lehrer>STE</lehrer>
+      <klasse>11/ de2</klasse>
+      <vfach>De</vfach>
+      <vlehrer>---</vlehrer>
+      <vraum> </vraum>
+      <info>Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112</info>
+    </aktion>
+    <aktion>
+      <stunde>7</stunde>
+      <fach>De</fach>
+      <lehrer>STE</lehrer>
+      <klasse>11/ de2</klasse>
+      <vfach>De</vfach>
+      <vlehrer>---</vlehrer>
+      <vraum> </vraum>
+      <info>Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112</info>
+    </aktion>
+    <aktion>
+      <stunde>6</stunde>
+      <fach>De</fach>
+      <lehrer>BÖ</lehrer>
+      <klasse>11/ de3</klasse>
+      <vfach>De</vfach>
+      <vlehrer>BÖ</vlehrer>
+      <vraum>D311</vraum>
+      <info>zusätzlich Hälfte des Kurses De STE</info>
+    </aktion>
+    <aktion>
+      <stunde>7</stunde>
+      <fach>De</fach>
+      <lehrer>BÖ</lehrer>
+      <klasse>11/ de3</klasse>
+      <vfach>De</vfach>
+      <vlehrer>BÖ</vlehrer>
+      <vraum>D311</vraum>
+      <info>zusätzlich Hälfte des Kurses De STE</info>
+    </aktion>
+    <aktion>
+      <stunde>1</stunde>
+      <fach>Ku</fach>
+      <lehrer>ES</lehrer>
+      <klasse>06B</klasse>
+      <vfach>Ku</vfach>
+      <vlehrer>DRM</vlehrer>
+      <vraum>D309</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>1</stunde>
+      <fach>De</fach>
+      <lehrer>ME</lehrer>
+      <klasse>12/ de2</klasse>
+      <vfach>De</vfach>
+      <vlehrer>HAU</vlehrer>
+      <vraum>D114</vraum>
+      <info>Aufgaben im Unterrichtsraum</info>
+    </aktion>
+    <aktion>
+      <stunde>2</stunde>
+      <fach>De</fach>
+      <lehrer>ME</lehrer>
+      <klasse>12/ de2</klasse>
+      <vfach>De</vfach>
+      <vlehrer>HAU</vlehrer>
+      <vraum>D114</vraum>
+      <info>Aufgaben im, Unterrichtsraum</info>
+    </aktion>
+    <aktion>
+      <stunde>3</stunde>
+      <fach>Ku</fach>
+      <lehrer>ES</lehrer>
+      <klasse>10A</klasse>
+      <vfach>Ku</vfach>
+      <vlehrer>HU</vlehrer>
+      <vraum>D309</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>3</stunde>
+      <fach>De</fach>
+      <lehrer>STE</lehrer>
+      <klasse>09C</klasse>
+      <vfach>Mu</vfach>
+      <vlehrer>KRG</vlehrer>
+      <vraum>B301</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>7</stunde>
+      <fach>---</fach>
+      <lehrer>---</lehrer>
+      <klasse>07B</klasse>
+      <vfach>Bi</vfach>
+      <vlehrer>MA</vlehrer>
+      <vraum>D207</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>4</stunde>
+      <fach>De</fach>
+      <lehrer>MI</lehrer>
+      <klasse>07B</klasse>
+      <vfach>---</vfach>
+      <vlehrer>(MI)</vlehrer>
+      <vraum>---</vraum>
+      <info>fällt aus</info>
+    </aktion>
+    <aktion>
+      <stunde>4</stunde>
+      <fach>De</fach>
+      <lehrer>STE</lehrer>
+      <klasse>09C</klasse>
+      <vfach>En</vfach>
+      <vlehrer>MTH</vlehrer>
+      <vraum>B301</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>3</stunde>
+      <fach>Frz</fach>
+      <lehrer>RE</lehrer>
+      <klasse>06A,06B,06C/ 06FRZ2</klasse>
+      <vfach>Frz</vfach>
+      <vlehrer>RE</vlehrer>
+      <vraum>B303</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>4</stunde>
+      <fach>Frz</fach>
+      <lehrer>RE</lehrer>
+      <klasse>06A,06B,06C/ 06FRZ2</klasse>
+      <vfach>Frz</vfach>
+      <vlehrer>RE</vlehrer>
+      <vraum>B303</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>8</stunde>
+      <fach>Mu</fach>
+      <lehrer>REN</lehrer>
+      <klasse>11/ mu1</klasse>
+      <vfach>---</vfach>
+      <vlehrer>(REN)</vlehrer>
+      <vraum>---</vraum>
+      <info>fällt aus</info>
+    </aktion>
+    <aktion>
+      <stunde>9</stunde>
+      <fach>Mu</fach>
+      <lehrer>REN</lehrer>
+      <klasse>11/ mu1</klasse>
+      <vfach>---</vfach>
+      <vlehrer>(REN)</vlehrer>
+      <vraum>---</vraum>
+      <info>fällt aus</info>
+    </aktion>
+    <aktion>
+      <stunde>10</stunde>
+      <fach>Mu</fach>
+      <lehrer>REN</lehrer>
+      <klasse>AG/ 07/12CHO</klasse>
+      <vfach>---</vfach>
+      <vlehrer>(REN)</vlehrer>
+      <vraum>---</vraum>
+      <info>fällt aus</info>
+    </aktion>
+    <aktion>
+      <stunde>11</stunde>
+      <fach>Mu</fach>
+      <lehrer>REN</lehrer>
+      <klasse>AG/ 07/12CHO</klasse>
+      <vfach>---</vfach>
+      <vlehrer>(REN)</vlehrer>
+      <vraum>---</vraum>
+      <info>fällt aus</info>
+    </aktion>
+    <aktion>
+      <stunde>2</stunde>
+      <fach>Ku</fach>
+      <lehrer>ES</lehrer>
+      <klasse>06B</klasse>
+      <vfach>Ku</vfach>
+      <vlehrer>SCI</vlehrer>
+      <vraum>D309</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>6</stunde>
+      <fach>De</fach>
+      <lehrer>MI</lehrer>
+      <klasse>11/ de1</klasse>
+      <vfach>De</vfach>
+      <vlehrer>SCI</vlehrer>
+      <vraum>D112</vraum>
+      <info>zusätzlich Hälfte des Kurses De STE</info>
+    </aktion>
+    <aktion>
+      <stunde>7</stunde>
+      <fach>De</fach>
+      <lehrer>MI</lehrer>
+      <klasse>11/ de1</klasse>
+      <vfach>De</vfach>
+      <vlehrer>SCI</vlehrer>
+      <vraum>D112</vraum>
+      <info>zusätzlich Hälfte des Kurses De STE</info>
+    </aktion>
+    <aktion>
+      <stunde>5</stunde>
+      <fach>En</fach>
+      <lehrer>SE</lehrer>
+      <klasse>10A</klasse>
+      <vfach>En</vfach>
+      <vlehrer>SE</vlehrer>
+      <vraum>D311</vraum>
+      <info>Einführung in das Kurssystem durch SCA</info>
+    </aktion>
+    <aktion>
+      <stunde>3</stunde>
+      <fach>Ge</fach>
+      <lehrer>ME</lehrer>
+      <klasse>09B</klasse>
+      <vfach>Ge</vfach>
+      <vlehrer>SK</vlehrer>
+      <vraum>E303</vraum>
+      <info>Plakate mitbringen</info>
+    </aktion>
+    <aktion>
+      <stunde>4</stunde>
+      <fach>Ge</fach>
+      <lehrer>ME</lehrer>
+      <klasse>09B</klasse>
+      <vfach>Ge</vfach>
+      <vlehrer>SK</vlehrer>
+      <vraum>E303</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>3</stunde>
+      <fach>De</fach>
+      <lehrer>MI</lehrer>
+      <klasse>07B</klasse>
+      <vfach>En</vfach>
+      <vlehrer>TRU</vlehrer>
+      <vraum>E302</vraum>
+      <info></info>
+    </aktion>
+    <aktion>
+      <stunde>7</stunde>
+      <fach>En</fach>
+      <lehrer>TRU</lehrer>
+      <klasse>07B</klasse>
+      <vfach>En</vfach>
+      <vlehrer>TRU</vlehrer>
+      <vraum>E302</vraum>
+      <info>verlegt nach St.4</info>
+    </aktion>
+  </haupt>
+</vp>
