@@ -5,6 +5,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from .group_finder import get_group
 from .permissions import RootFactory
 
+
 timeout = 1000
 
 def main(global_config, **settings):

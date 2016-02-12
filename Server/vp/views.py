@@ -8,6 +8,10 @@ from pyramid.view import view_config, view_defaults, notfound_view_config, forbi
 from .file_handler import process_file, get_schedule
 from .group_finder import can_read, can_edit
 
+import logging
+
+log = logging.getLogger('serverlog')
+
 
 @view_defaults(route_name='start', renderer='templates/login.pt')
 class StartView:
@@ -74,7 +78,7 @@ class EditView:
 	def upload(self):
 		for file_post in self.request.POST.getall('file'):
 			if not process_file(file_post):
-				return {'success': False}
+				return {'success': False} # TODO mehrere Dateien betrachten
 
 		return {'success': True}
 
