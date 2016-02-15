@@ -6,11 +6,14 @@ development.ini
 production.ini
 setup.py
 vp/__init__.py
+vp/edit.py
+vp/errors.py
+vp/exceptions.py
 vp/file_handler.py
 vp/group_finder.py
+vp/home.py
 vp/permissions.py
-vp/tests.py
-vp/views.py
+vp/schedule.py
 vp/xml_reader.py
 vp.egg-info/PKG-INFO
 vp.egg-info/SOURCES.txt
@@ -38,5 +41,5 @@ vp/static/js/login.js
 vp/static/js/upload.js
 vp/templates/edit.pt
 vp/templates/error.pt
-vp/templates/login.pt
+vp/templates/home.pt
 vp/templates/schedule.pt

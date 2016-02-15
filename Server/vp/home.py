@@ -24,6 +24,8 @@ class HomeView:
 
 		# Die Permission wird aber nicht zurückgesetzt...
 		# auch nach dem Abmelden kann man noch /schedule ohne Passwort eingeben
+
+		# // sollte es aber? wenn man jemand anderen an den rechner lassen will bzw. dieser öffentlich ist sollte es aus sicherheitsgründen komplett abmelden
 		if 'logout' in self.request.params:
 			headers = forget(self.request)
 			return self.redirect('home', headers)

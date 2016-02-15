@@ -60,7 +60,6 @@ class JSONFileReadingError(InternalServerError):
 	def __init__(self):
 		InternalServerError.__init__(self, 'Invalid data structure in JSON file')
 
-
 def log_unexpected_error():
 	typ, msg, tb = sys.exc_info()
 	log.critical('Unexpected Error\n%s\n%s', msg, traceback.format_tb(tb, limit=-1)[0])

@@ -88,7 +88,7 @@ def _parse_lower_class_simple(text):
 	} # Als Backup falls das Parsen nirgends funktioniert hat
 
 def parse_subject(text):
-	"""Parst ein Fach in JSON"""
+	"""Parst ein Fach in JSON """
 	pass
 
 def parse_date(text):
