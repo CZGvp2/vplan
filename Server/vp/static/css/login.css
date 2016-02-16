@@ -1,7 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 .center {
-	display: block;
+	display: flex;
+
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+
+    width: 50%;
+    max-width: 360px;
+    
 	position: absolute;
 	top: 30%;
 	left: 50%;
@@ -15,7 +24,6 @@
 	border: none;
 	outline: none;
 	border-bottom: solid 2px #88A6FF;
-	width: 360px;
 	margin: 20px;
 	margin-bottom: 5px;
 }
@@ -39,10 +47,12 @@ a#submit {
 }
 
 div#submit {
-	margin-left: auto;
-	margin-right: auto;
 	margin-top: 73px;
-	width: 211px;
+
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
 }
 
 #incorrect {
@@ -51,4 +61,22 @@ div#submit {
 	margin: 0px;
 	text-align: center;
 	color: #FF5555;
+}
+
+@media all and (max-width: 420px){
+	.center{
+		width: 90%;
+	}
+	#password{
+		font-size: 1em;
+	}
+	a#submit{
+		font-size: 1em;
+		height: 100%;
+		line-height: 3em;
+		vertical-align: center;
+	}
+	div#submit{
+		height: 3em;
+	}
 }

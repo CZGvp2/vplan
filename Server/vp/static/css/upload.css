@@ -1,16 +1,31 @@
+/* 
+Das Farbschema das ich für die Seiten erstmal nehm:
+$color1: #0e0e0e; // Schwarz
+$color2: #282828; // Grau
+$color3: #2c6221; // Grün1 (Dark)
+$color4: #3d892d; // Grün2 (grünes Grün)
+$color5: #4db038; // Grün3 (Light)
+
+*/
+
 *{
     font-family: Helvetica, Ubuntu, sans-serif;
+}
+body{
+    background-color: #282828;
 }
 #dropzone{
     position: absolute;
     top: 50%;
     left: 50%;
     width: 20%;
-    background-color: #ccc;
+    background-color: #4db038;
     text-align: center;
-    border: 3px dashed #bbb;
+    border: 3px dashed #2c6221;
     border-radius: 15%;
     transform: translate(-50%, -50%);
+
+    box-shadow: 0px 0px 3px 3px rgba(200,200,200,.3);
 }
 #dropzone:before{
     content: "";
@@ -24,10 +39,16 @@
     left: 0;
     right: 0;
     bottom: 0;
-    align-items: center;
+
+    font-size: 3em;
+
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
 }
 #sidebar{
-    /* flexbox ist das BESTE CSS3 Feature nach 3DTransform und Animation*/
+    /* flexbox ist das BESTE CSS3 Feature nach 3DTransform und Animation... funktioniert aber nur
+        bei CSS3-Support... d.h. wir unterstützen kein IE8 (wie traurig). */
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -44,7 +65,7 @@
     margin: 0;
     padding: 0;
 
-    background-color: rgb(30,30,35);
+    background-color: #0e0e0e;
 
     transition: width 1s;
 }
@@ -63,13 +84,13 @@
     display: block;
 }
 .entry:hover{
-    background-color: rgba(255,255,255,.1);
+    background-color: #282828;
 }
 #space{
     flex-grow: 2;
 }
 #space:hover{
-    background-color: rgb(30,30,35);
+    background-color: inherit;
 }
 #logout{
     left: 0;
@@ -77,4 +98,7 @@
     vertical-align: center;
     color: white;
     text-decoration: none;
+}
+.dragOver{
+    background-color: #4db038;
 }
