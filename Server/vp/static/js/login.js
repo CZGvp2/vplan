@@ -27,3 +27,8 @@ $(document).ready(function () {
 	});
 }
 )
+
+// Das sollte funktionieren, tut es aber nicht.
+(jQCheck = function(){
+	if(typeof $ === 'undefined') alert('(ERROR) jQuery konnte nicht geladen werden. Bitte wende dich an einen Server-Admin.')
+})();

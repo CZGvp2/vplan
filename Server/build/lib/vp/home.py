@@ -57,7 +57,3 @@ class HomeView:
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort
 		# falsch gewesen sein.
 		return {'wrong_pwd': True}
-
-# Ich weiß nicht, wo ich das sonst hinschreiben soll:
-#	Wir sollten in der Server-Dateien eine Offline-Kopie von jQuery haben, damit ich mich auch im Internat anmelden kann.
-#	Aktuell gibt es keine JS-Überprüfung, ob $ erfolgreich geladen worden ist.

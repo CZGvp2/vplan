@@ -19,22 +19,30 @@
 }
 #content{
     position: absolute;
-    display: flex;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    align-items: center;
+}
+#logout{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    height: 2em;
+    width: 10%;
+    min-width: 5em;
+
+    border: none;
+    border-bottom-left-radius: 20px;
+
+    padding-left: 1%;
+
+    background-color: #bbb;
+    color: black;
+    text-decoration: none;
 }
 #sidebar{
-    /* flexbox ist das BESTE CSS3 Feature nach 3DTransform und Animation*/
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-
-    overflow: hidden;
     position: absolute;
     top: 0;
     right: 0;
@@ -42,7 +50,6 @@
     height: 100%;
     width: 20px;
     margin: 0;
-    padding: 0;
 
     background-color: rgb(30,30,35);
 
@@ -50,8 +57,6 @@
 }
 #sidebar .entry{
     display: none;
-    width: 100%;
-    height: 4em;  
 }
 #sidebar:hover{
     width: 30%;
@@ -59,22 +64,14 @@
     transition: width 1s;
 }
 #sidebar:hover .entry{
-    padding-left: 3em;
-    display: block;
+
 }
-.entry:hover{
-    background-color: rgba(255,255,255,.1);
-}
-#space{
-    flex-grow: 2;
-}
-#space:hover{
-    background-color: rgb(30,30,35);
-}
-#logout{
-    left: 0;
-    line-height: 4em;
+
+#sidebar .logout{
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+    line-height: 300%;
     vertical-align: center;
-    color: white;
-    text-decoration: none;
+    padding-left: 1em;
 }
