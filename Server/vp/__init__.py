@@ -6,7 +6,7 @@ from .group_finder import get_group
 from .permissions import RootFactory
 
 
-timeout = 5
+timeout = 1000
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.

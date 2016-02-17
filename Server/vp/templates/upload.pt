@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         var path = "${request.path}";
-        var statics = "${request.static_url('vp:static/img/')}"
+        var statics = "${request.static_path('vp:static/img/')}"
     </script>
     <script src="${request.static_path('vp:static/js/upload.js')}"></script>
     <!--<style>
@@ -27,11 +27,11 @@
         </div>
     </div>
     <div id="sidebar">
-        <img src="${request.static_url('vp:static/img/bg.png')}" id="sidebar_image" width="0" height="0" /><!-- Bild? -->
-        <span class="entry"><a href="${request.route_path('home', _query='logout')}"  id="logout">Abmelden</a></span>
-        <span class="entry"><a href="${request.route_path('schedule', _query='')}"  id="logout">Zum Vertretungsplan</a></span>
+        <img src="${request.static_path('vp:static/img/bg.png')}" id="sidebar_image" width="0" height="0" /><!-- Bild? -->
+        <span class="entry"><a href="${request.route_path('home', _query='logout')}" id="logout">Abmelden</a></span>
+        <span class="entry"><a href="${request.route_path('schedule')}" id="logout">Zum Vertretungsplan</a></span>
         <span class="entry" id="space"></span>
-        <span class="entry"><a href="${request.route_path('home', _query='logout')}"  id="logout">Abmelden</a></span>
+        <span class="entry"><a href="${request.route_path('home', _query='logout')}" id="logout">Abmelden</a></span>
     </div>
     <div id="list"> hallo.</div>
 </body>

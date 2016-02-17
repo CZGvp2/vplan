@@ -20,7 +20,7 @@ class_syntax = {
 	'mult': re.compile( r'^((0[5-9]|10)[A-D],?)?/\s(?P<grade>0[5-9]|10)(?P<subject>[A-Z]{2,})(?P<subclass>\d)$' ),
 
 	# Klassen aus bestimmten Klassen einer Klassenstufe. Bsp: "06A,06B/ 06ABET"
-	'mult_spec' : None # TODO
+	'mult_spec' : None, # TODO
 
 	# Klassen die in Gruppen geteilt sind: 10C/ 10CIF2
 	'split': re.compile( r'^(?P<class>(0[5-9]|10)[A-D])/\s(?P=class)(?P<subject>[A-Z]{2,})(?P<subclass>\d)$' ),

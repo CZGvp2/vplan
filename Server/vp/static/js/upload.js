@@ -68,7 +68,7 @@ function handleServerResponse(response) {
         var image = success ? (response.results[0].action=="change" ? "upload_change.png" : "upload_new.png") : "upload_error.png";
         
         var el = "<div class=\"list\" style=\"color:" + color + ";\"><img href=\""+ statics + image +"\"></img>" + msg + "</div>";
-        b.innerHTML+=el;
+        b.innerHTML+=el;  // vllt jQuery ind '"' statt "\"" ?
     }
 }
 
