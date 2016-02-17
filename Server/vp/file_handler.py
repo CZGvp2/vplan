@@ -1,7 +1,6 @@
 import os
 import shutil
 import json
-	
 from .xml_reader import convert
 from .exceptions import *
 
@@ -29,15 +28,21 @@ log.addHandler(filehandler)
 
 
 def process_file(input_file):
+	# Lesen der Daten mit Temporärdatei
 	content = read_via_tmp(input_file)
 
+	# Konvertieren von XML zu JSON
 	day = convert(content)
 
 	try:
 		with open(json_file, 'r+', encoding='utf-8') as fobj:
+			# Laden der alten Daten
 			old_data = json.loads( fobj.read() )
+
+			# Hinzufügen des Tages zu den Daten
 			data, action = add_day(old_data, day)
 
+			# Speichern der neuen Daten
 			content = json.dumps(data, ensure_ascii=False, indent=4, sort_keys=True)
 
 			fobj.seek(0) # geht zum anfang der Datei
@@ -70,6 +75,7 @@ def read_via_tmp(input_file):
 	return content
 
 def add_day(data, new_day):
+	"""Fügt einen neuen Tag zu data hinzu"""
 	try:
 		days = data['days']
 		for i, day in enumerate(days):

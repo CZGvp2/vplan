@@ -1,7 +1,10 @@
 {
     "days": [
         {
-            "date": "alt",
+            "date": {
+                "date": "19. Oktober 2015",
+                "dow": "Montag"
+            },
             "events": [
                 {
                     "change": "teacher",

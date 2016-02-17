@@ -7,6 +7,7 @@
     <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
     <title>Vertretungsplan</title>
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/login.css')}" />
+    <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.ico')}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha512.js"></script>
     <script src="${request.static_path('vp:static/js/login.js')}"></script>
@@ -19,7 +20,7 @@
         <div id="submit">
             <a id="submit" href="javascript:void(0)">Anmelden</a>
         </div>
-        <script type="text/javascript" tal:condition="wrong_pwd">
+        <script tal:condition="wrong_pwd">
             $('#password').css('border-bottom-color', '#FF5555');
             $('div#submit').css('margin-top', '40px');
         </script>

@@ -25,10 +25,7 @@ $(document).ready(function () {
 		$('#hash').val( CryptoJS.SHA512($('#password').val()) );
 		$('#password').val('');
 	});
-}
-)
-
-// Das sollte funktionieren, tut es aber nicht.
+}); // das Semikolon hat gefehlt
 (jQCheck = function(){
 	if(typeof $ === 'undefined') alert('(ERROR) jQuery konnte nicht geladen werden. Bitte wende dich an einen Server-Admin.')
 })();
