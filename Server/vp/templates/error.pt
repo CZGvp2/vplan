@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>${title}</title>
-    <link rel="stylesheet" type="text/css" href="${request.static_url('vp:static/css/error.css')}" />
+    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/error.css')}" />
     <!-- TODO Mobile Anpassung -->
 </head>
 <body>

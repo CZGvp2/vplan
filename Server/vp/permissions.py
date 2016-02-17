@@ -5,8 +5,8 @@ class RootFactory:
 		(Allow, 'group:students', 'read'),
 		(Allow, 'group:teachers', 'read'),
 		(Allow, 'group:editors', 'read'),
-		(Allow, 'group:editors', 'edit')
+		(Allow, 'group:editors', 'upload')
 	]
 
 	def __init__(self, request):
-		pass
+		self.request = request

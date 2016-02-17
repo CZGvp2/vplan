@@ -61,8 +61,10 @@ function upload(files) {
         url: path,
         type: 'POST',
         data: formData,
+        dataType: 'json',
         processData: false,
         contentType: false,
-        success: handleServerResponse
+        success: handleServerResponse,
+        failure: function () {alert('ups')}
     });
 }

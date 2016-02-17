@@ -1,0 +1,6 @@
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Einleitung}{3}
+\contentsline {chapter}{\numberline {2}Theoretische Grundlagen}{4}
+\contentsline {chapter}{\numberline {3}L\IeC {\"o}sungsidee}{5}
+\contentsline {section}{\numberline {3.1}Wahl eines Webframeworks}{5}
+\contentsline {section}{\numberline {3.2}Struktur der Applikation}{5}

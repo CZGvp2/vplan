@@ -1,0 +1,78 @@
+\chapter{Lösungsidee}
+\section{Wahl eines Webframeworks}
+Für die Umsetzung des Projektes war ein Webframework unabdingbar, welches einem Anforderungen wie Sicherheit,  % TODO glossar
+ein voll funktionsfähiger Webserver, Template-Rendering, Cookie-Policies und vielem mehr abnimmt. Jedoch waren % same
+viele Frameworks viel zu umfangreich, und erforderten viel überflüssigen Aufwand. Daher bat sich ein Microframework
+an. Auf Grund von unseren Vorkenntnissen und der schnellen Produktion entschieden wir uns für ein \Python-basiertes
+Microframework.
+Schlussendlich fiel die Wahl auf das \texttt{Pyramid Web Framework}\footnote{siehe \url{http://docs.pylonsproject.org/projects/pyramid/en/latest/index.html}}.
+
+\section{Struktur der Applikation}
+Die Applikation ist in drei Teile gegliedert: die \Python-Scripts, den \texttt{Pyramid Web Server} und die eigentliche Seite.
+Sowohl die Scripts als auch der Webserver sind serverseitig, während die Seite beim Client agiert.\\
+Die Seite muss eine Nutzeroberfläche anbieten, die die Daten vom Server dem Nutzer visualisiert, und die vom
+Nutzer eingegebenen Daten dem Server zustellt. Der \texttt{Pyramid Web Server} muss für sicheren den Datenaustausch zwischen den 
+\Python-Scripts und der Seite via sorgen. An höhster stelle stehen die \Python-Scripts, welche die vom Nutzer eingegebenen Daten
+bearbeiten, speichern, und allen Nutzern zurückgeben müssen.
+\vspace{2em}
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[
+		box/.style={rectangle,
+		draw=black,
+		minimum width=10cm,
+		minimum height=2em,
+		font=\sffamily
+	    }
+  	]
+		\node (python) [box] {Python Scripts};
+		\node (pyramid) [box, below=3cm of python] {Pyramid Web Server};
+		\node (site) [box, below=3cm of pyramid] {Seite};
+
+		\draw [->,black,thick] ([xshift=-1cm]python.south) to ([xshift=-1cm]pyramid.north);
+		\draw [<-,black,thick] ([xshift= 1cm]python.south) to ([xshift= 1cm]pyramid.north);
+
+		\draw [->,black,thick] ([xshift=-1cm]pyramid.south) to ([xshift=-1cm]site.north);
+		\draw [<-,black,thick] ([xshift= 1cm]pyramid.south) to ([xshift= 1cm]site.north);
+		
+	\end{tikzpicture}
+	\caption{Grobe Applikations-Struktur}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\begin{tikzpicture}[
+		box/.style={rectangle,
+		draw=black,
+		minimum width=10cm,
+		minimum height=2em,
+		font=\sffamily
+	    }
+  	]
+  		\node (python) [box] {Python Scripts};
+  		\node (files) [box, above=1cm of python, minimum width=3cm] {Server-Daten};	
+  		\node () [anchor=east, left=5mm of {$(python.north)!0.5!(files.south)$}] {\texttt{lesen}};
+  		\node () [anchor=west, right=5mm of {$(python.north)!0.5!(files.south)$}] {\texttt{schreiben}};
+		\node (pyramid) [box,
+			below=1cm of python,
+			minimum height=10cm,
+			draw=gray!20,
+			fill=gray!20
+			] {};
+		\node (site) [box, below=3cm of pyramid] {Seite};
+
+		\draw [<-,black,thick] ([xshift=-5mm]python.north) to ([xshift=-5mm]files.south);
+		\draw [->,black,thick] ([xshift= 5mm]python.north) to ([xshift= 5mm]files.south);
+
+		\draw [->,black,thick] ([xshift=-5mm]pyramid.south) to ([xshift=-5mm]site.north);
+		\draw [<-,black,thick] ([xshift= 5mm]pyramid.south) to ([xshift= 5mm]site.north);
+		
+	\end{tikzpicture}
+	\caption{Detailierte Applikations-Struktur}
+\end{figure}
+
+ 
+%Die Nutzeroberfläche baut dabei auf \texttt{HTML 5} und \texttt{CSS 3} auf,
+%während die Daten im Hintergrund von \JavaScript-Scripts dem Server zugestellt werden. Dabei nutzen wir \texttt{jQuery}
+%für die Interaktion zwischen \HTML und \JavaScript, und für die Kommunikation mit dem Server im Hintergrund \texttt{AJAX}.\\

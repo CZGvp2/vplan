@@ -6,7 +6,7 @@ from .group_finder import get_group
 from .permissions import RootFactory
 
 
-timeout = 1000
+timeout = 5
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.
@@ -20,7 +20,7 @@ def main(global_config, **settings):
 	config.set_authorization_policy(authz_policy)
 	
 	config.add_route('home', '/')
-	config.add_route('edit', '/edit')
+	config.add_route('upload', '/upload')
 	config.add_route('schedule', '/schedule')
 
 	config.add_static_view('static', 'static', cache_max_age=3600)

@@ -6,24 +6,23 @@ log = logging.getLogger('serverlog')
 
 
 class BasicError(Exception):
-	def __init__(self, code, msg, args=None, log_level=logging.ERROR):
+	def __init__(self, code, msg_format, log_level):
 		self.code = code
-		self.msg = msg
-		self.args = args
-		log.log(log_level, msg)
+		self.format = msg_format
+		self.log_level = log_level
+
+	def log(self):
+		log.log(self.log_level, self.format % self.__dict__)
 
 
 class ProcessingError(BasicError):
 	"""Meldung die beim Bearbeiten eines Uploads entsteht, aber im schlimmsten Fall
 	   einen Fehlschlag beim Hinzufügen einer Datei bedeuten"""
 
-	def __init__(self, code, msg, **args):
-		BasicError.__init__(self, code, msg, args, logging.ERROR)
+	def __init__(self, code, msg):
+		msg = 'File "%(file)s": ' + msg
+		BasicError.__init__(self, code, msg, logging.ERROR)
 
-
-class UnexpectedPostError(ProcessingError):
-	def __init__(self):
-		ProcessingError.__init__(self, 'ERR_READING_POST', 'Could not read POST data')
 
 class BadEncodingError(ProcessingError):
 	def __init__(self):
@@ -31,20 +30,19 @@ class BadEncodingError(ProcessingError):
 
 class XMLParsingError(ProcessingError):
 	def __init__(self, error):
-		line, col = error.position
-		msg = 'XML Parsing Error at line %d column %d' % error.position
-		ProcessingError.__init__(self, 'ERR_PARSING_XML', msg, line=line, column=col)
+		ProcessingError.__init__(self, 'ERR_PARSING_XML', 'XML Parsing Error at line %(line)d column %(column)d')
+		self.line, self.column = error.position
 
 class XMLReadingError(ProcessingError):
 	def __init__(self, path):
-		msg = 'Could not find tag or path "%s"' % path
-		ProcessingError.__init__(self, 'ERR_READING_XML', msg, path=path)
+		ProcessingError.__init__(self, 'ERR_READING_XML', 'Could not find tag or path "%(path)s"')
+		self.path = path
 
 
 class InternalServerError(BasicError):
 	"""kritischer Fehler der auf eine dauerhafte Beeinträchtigung der Serverfunktionalität hinweist"""
-	def __init__(self, msg, **args):
-		BasicError.__init__(self, 'INTERNAL_SERVER_ERROR', msg, args, logging.CRITICAL)
+	def __init__(self, msg):
+		BasicError.__init__(self, 'INTERNAL_SERVER_ERROR', msg, logging.CRITICAL)
 
 
 class IOServerError(InternalServerError):
@@ -53,12 +51,14 @@ class IOServerError(InternalServerError):
 
 class JSONFileParsingError(InternalServerError):
 	def __init__(self, error):
-		msg = 'Parsing Error in JSON file line %d column %d' % (error.lineno, error.colno)
-		InternalServerError.__init__(self, msg)
+		InternalServerError.__init__(self, 'Parsing Error in JSON file line %(line)d column %(column)d')
+		self.line = error.lineno
+		self.column = error.colno
 
 class JSONFileReadingError(InternalServerError):
 	def __init__(self):
 		InternalServerError.__init__(self, 'Invalid data structure in JSON file')
+
 
 def log_unexpected_error():
 	typ, msg, tb = sys.exc_info()

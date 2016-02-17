@@ -1,2 +1,2 @@
 @echo off
-run_kamal.bat || run_schule.bat
+@C:\Python35\Scripts\pserve %cd%\development.ini

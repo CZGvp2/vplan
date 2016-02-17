@@ -8,16 +8,16 @@ from .exceptions import *
 import logging
 
 data_dir = os.path.join( os.path.dirname(__file__), 'data' )
-json_file = os.path.join( data_dir, 'schedule.json')
-tmp_file = os.path.join( data_dir, 'tmp.xml')
-logfile = os.path.join( data_dir, 'server.log')
+json_file = os.path.join(data_dir, 'schedule.json')
+tmp_file = os.path.join(data_dir, 'tmp.xml')
+logfile = os.path.join(data_dir, 'server.log')
 
 log = logging.getLogger('serverlog')
 filehandler = logging.FileHandler(logfile)
 console = logging.StreamHandler()
 
 formatter = logging.Formatter(
-	fmt='%(asctime)s %(module)s:%(funcName)s [%(levelname)s] %(message)s',
+	fmt='%(asctime)s [%(levelname)-8s] %(message)s',
 	datefmt='%H:%M:%S'
 )
 
@@ -28,11 +28,7 @@ filehandler.setFormatter(formatter)
 log.addHandler(filehandler)
 
 
-def process_file(file_post):
-	if not hasattr(file_post, 'file'):
-		raise UnexpectedPostError()
-
-	input_file = file_post.file
+def process_file(input_file):
 	content = read_via_tmp(input_file)
 
 	day = convert(content)
@@ -54,8 +50,8 @@ def process_file(file_post):
 	except IOError:
 		raise IOServerError()
 
-	except json.JSONDecodeError as e:
-		raise JSONFileParsingError()
+	except json.JSONDecodeError as error:
+		raise JSONFileParsingError(error)
 
 def read_via_tmp(input_file):
 	with open(tmp_file, 'wb') as dest:
@@ -84,7 +80,8 @@ def add_day(data, new_day):
 		days.append(new_day) # Sonst hinzufügen als neuer Tag
 		return data, 'add'
 
-	except KeyError:
+	except KeyError as e:
+		log.debug(e.args)
 		raise JSONFileReadingError()
 
 def get_schedule():

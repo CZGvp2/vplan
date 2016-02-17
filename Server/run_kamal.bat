@@ -1,3 +1,0 @@
-@echo.
-@echo Trying to find pserve in C:\Python\3.5\Scripts...
-@C:\Python35\Scripts\pserve %cd%\development.ini
