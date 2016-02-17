@@ -1,0 +1,77 @@
+*{
+    font-family: Helvetica, Ubuntu, sans-serif;
+}
+#dropzone{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20%;
+    background-color: #ccc;
+    text-align: center;
+    border: 3px dashed #bbb;
+    border-radius: 15%;
+    transform: translate(-50%, -50%);
+}
+#dropzone:before{
+    content: "";
+    display: block;
+    padding-top: 100%;
+}
+#content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+#logout{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    height: 2em;
+    width: 10%;
+    min-width: 5em;
+
+    border: none;
+    border-bottom-left-radius: 20px;
+
+    padding-left: 1%;
+
+    background-color: #bbb;
+    color: black;
+    text-decoration: none;
+}
+#sidebar{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    height: 100%;
+    width: 20px;
+    margin: 0;
+
+    background-color: rgb(30,30,35);
+
+    transition: width 1s;
+}
+#sidebar .entry{
+    display: none;
+}
+#sidebar:hover{
+    width: 30%;
+
+    transition: width 1s;
+}
+#sidebar:hover .entry{
+
+}
+
+#sidebar .logout{
+    position: absolute;
+    bottom: 0;
+    height: 10%;
+    line-height: 300%;
+    vertical-align: center;
+    padding-left: 1em;
+}

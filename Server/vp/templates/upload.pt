@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-
-    <!-- Ich will das hier eigentlich in upload.pt umbenennen -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/upload.css')}" />
     <title>Vertretungsplan bearbeiten</title><!-- Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         var path = "${request.path}";
+        var statics = "${request.static_url('vp:static/img/')}"
     </script>
     <script src="${request.static_path('vp:static/js/upload.js')}"></script>
-
+    <!--<style>
+        body{ 
+            background: #ffffff url("${request.static_url('vp:static/img/bg.png')}") repeat-x left top;
+            background-size: 1px 300px;
+            padding: 0;
+        }
+    </style>-->
 </head>
 <body>
-    <a href="${request.route_path('home', _query='logout')}" id="logout">Abmelden</a> 
     <form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data"></form>
     <div id="dropzone">
         <div id="content">
-            Drop Files Here 
+            Drag &amp; Drop <br /> to upload
         </div>
     </div>
     <div id="sidebar">
-        <img src="" id="sidebar_image" />
-        <span class="entry"> Hallo. </span>
+        <img src="${request.static_url('vp:static/img/bg.png')}" id="sidebar_image" width="0" height="0" /><!-- Bild? -->
+        <span class="entry"><a href="${request.route_path('home', _query='logout')}"  id="logout">Abmelden</a></span>
+        <span class="entry"><a href="${request.route_path('schedule', _query='')}"  id="logout">Zum Vertretungsplan</a></span>
+        <span class="entry" id="space"></span>
+        <span class="entry"><a href="${request.route_path('home', _query='logout')}"  id="logout">Abmelden</a></span>
     </div>
+    <div id="list"> hallo.</div>
 </body>
 </html>

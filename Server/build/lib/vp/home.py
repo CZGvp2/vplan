@@ -12,7 +12,6 @@ class HomeView:
 		self.request = request
 
 	def redirect(self, route_name, headers=None):
-		"""Gibt eine Response zurück, die den Nutzer umleitet"""
 		# erspart Tipparbeit
 		return HTTPFound(location=self.request.route_path(route_name), headers=headers)
 
@@ -22,6 +21,11 @@ class HomeView:
 
 		# Falls in der URL der Query ?logout war, wird der User über forget abgemeldet, 
 		# und zur Start(Anmelde)-Seite umgeleitet
+
+		# Die Permission wird aber nicht zurückgesetzt...
+		# auch nach dem Abmelden kann man noch /schedule ohne Passwort eingeben
+
+		# // sollte es aber? wenn man jemand anderen an den rechner lassen will bzw. dieser öffentlich ist sollte es aus sicherheitsgründen komplett abmelden
 		if 'logout' in self.request.params:
 			headers = forget(self.request)
 			return self.redirect('home', headers)
@@ -30,8 +34,8 @@ class HomeView:
 		if self.request.has_permission('read'):
 			return self.redirect('schedule')
 		
-		if self.request.has_permission('upload'):
-			return self.redirect('upload')
+		if self.request.has_permission('edit'):
+			return self.redirect('edit')
 
 		# Falls keine der obigen Bedingungen erfüllt, kann es sich nur um eine
 		# erstmalige Anmeldung handeln. Also noch nichts falsch angezeigt.
@@ -43,21 +47,13 @@ class HomeView:
 		headers = None
 
 		if can_read(pwd_hash):
-			# Hat Lese-Premission
-			# headers sind die Serverseitigen Speicherungen der Premissions,
-			# remember erklärt sich ja von selbst
 			headers = remember(self.request, pwd_hash)
 			return self.redirect('schedule', headers)
 
 		if can_edit(pwd_hash):
-			# Hat Bearbeitungspremission
 			headers = remember(self.request, pwd_hash)
-			return self.redirect('upload', headers)
+			return self.redirect('edit', headers)
 
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort
 		# falsch gewesen sein.
 		return {'wrong_pwd': True}
-
-# Ich weiß nicht, wo ich das sonst hinschreiben soll:
-#	Wir sollten in der Server-Dateien eine Offline-Kopie von jQuery haben, damit ich mich auch im Internat anmelden kann.
-#	Aktuell gibt es keine JS-Überprüfung, ob $ erfolgreich geladen worden ist.

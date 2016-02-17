@@ -6,3 +6,26 @@
 a {
 	font-family: 'Open Sans', sans-serif;
 }
+
+@media print{
+	/* Drucker-CSS*/
+}
+
+/**
+Mögliche @media-Einträge:
+	screen - Computerbildschirme
+	handheld - Handys und Tablets (nicht ganz zuverlässig, aber eig. ausreichend)
+	all - alle halt
+	aural - sprach- und tonsynthese (frag mich nicht wieso man dafür css braucht)
+	braille - "Used for braille tactile feedback devices"
+	embossed - "Used for paged braille printers"
+	print - Drucker (sollte unter 2 Umständen benutzt werden: 1. das gerät sagt ich bin ein drucker 2. der browser sagt es wird jetzt gedruckt)
+	projection - präsentation wie power-point, keine ahnung wann das benutzt wird
+	tty - Terminals (WIESO braucht man CSS um mit NEM TERMINAL ne WEBSITE zu öffnen, wie auch immer das gehen soll?!??!!)
+	tv - Fernseher (das is ok)
+
+diese dinger können auch einem style-link übergeben werden
+(beispiel: 
+	<link rel="stylesheet" type="text/css" href="print.css" media="print">
+wird nur beim drucken eingebunden)
+*/

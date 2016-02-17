@@ -31,6 +31,7 @@ vp/static/css/upload.css
 vp/static/img/403.jpg
 vp/static/img/404.jpg
 vp/static/img/cancelling.png
+vp/static/img/expand.png
 vp/static/img/favicon.ico
 vp/static/img/info.png
 vp/static/img/lesson_change.png
