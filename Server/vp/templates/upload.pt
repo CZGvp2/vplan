@@ -27,7 +27,7 @@
         </div>
     </div>
     <div id="sidebar">
-        <img src="${request.static_path('vp:static/img/bg.png')}" id="sidebar_image" width="0" height="0" /><!-- Bild? -->
+        <img src="${request.static_path('vp:static/img/expand.png')}" id="sidebar_image" width="10px" height="20px" /><!-- Bild? -->
         <span class="entry"><a href="${request.route_path('upload', _query='files')}" id="logout">Dateiverzeichnis</a></span><!-- Das könnte nen div mit allen geparsten z. Z. auf dem Server liegenden Dateien anzeigen lassen, wenn ich vom Server nen schönes JSON bekomm -->
         <span class="entry"><a href="${request.route_path('schedule')}" id="logout">Zum Vertretungsplan</a></span>
         <span class="entry space"></span>
