@@ -7,8 +7,6 @@ setColor = function(){
 resetColor = function(){
     $("body").css("background-color", "#282828");
 }
-
-
 // DragOver
 $(document).on(
     'dragover',
@@ -54,21 +52,30 @@ $(document).on(
         }
     }
 );
-var glb;
+
+var global_buffer_debug;
 function handleServerResponse(response) {
-    glb = response;
-    alert(JSON.stringify(response));
-    var b = $("#list").get(0);
+    global_buffer_debug = JSON.stringify(response);
+    var b = $("#uploadList").get(0);
+    $("#uploadList").css("display", "flex");
 
     for(var i = 0; i < response.results.length; i++){
-        var success = response.results[0].success;
+        // hardcoded div-bastelschleife der Hölle
 
-        var msg = success ? "Erfolgeich!" : "Fehlgeschlagen: " + response.results[0].errorCode;
-        var color = success ? "green" : "red";
-        var image = success ? (response.results[0].action=="change" ? "upload_change.png" : "upload_new.png") : "upload_error.png";
+        var success = response.results[i].success;
+
+        var filename = response.results[i].file;
+        var msg = success ? "Erfolgeich!" : "Fehlgeschlagen: " + response.results[i].errorCode;
+        var color = success ? "inherit" : "red";
+        var image = success ? (response.results[i].action=="change" ? "upload_change.png" : "upload_new.png") : "upload_error.png";
         
-        var el = "<div class=\"list\" style=\"color:" + color + ";\"><img href=\""+ statics + image +"\"></img>" + msg + "</div>";
-        b.innerHTML+=el;  // vllt jQuery ind '"' statt "\"" ?
+        var el = "<div class=\"upload\"><img class=\"ulImg\" src=\"."+ statics + image +"\"></img>" +
+            "<span> " + filename + "</span><span class=\"space\"></span>" + 
+            "<span style=\"background-color:" + color + ";\">" + msg + "</span></div>";
+
+        if(b.children.length > 6) b.children[0].remove();
+        b.innerHTML+=el;  // vllt jQuery ind '"' statt "\"" ? // erstmal nicht, später vllt
+        console.log("added " + el);
     }
 }
 
