@@ -6,4 +6,7 @@
 *.out
 *.toc
 *.synctex.gz
-*.pyc
+Server/vp/__pycache__
+Server/vp.egg-info
+Server/vp/data/schedule.json
+*.xml
