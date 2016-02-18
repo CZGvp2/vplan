@@ -23,5 +23,6 @@ Tim
 })("Hello World!");
 ```
 
-[markdown Editor](https://jbt.github.io/markdown-editor/)
-[readme](https://github.com/CZGvp2/vplan/blob/master/README.md)
+[MarkDown Editor](https://jbt.github.io/markdown-editor/) um .md Dateien zu bararbeiten
+
+[readme](https://github.com/CZGvp2/vplan/blob/master/README.md)-datei
