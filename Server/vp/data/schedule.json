@@ -8,8 +8,14 @@
             },
             "events": [
                 {
+<<<<<<< HEAD
                     "change": "TEACHER",
                     "info": "Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112",
+=======
+                    "change": "teacher",
+                    "class": "11/ de2",
+                    "info": "hallo",
+>>>>>>> origin/master
                     "new": {
                         "room": " ",
                         "subject": "De",

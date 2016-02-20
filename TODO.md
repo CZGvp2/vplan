@@ -1,6 +1,7 @@
 Kamal
 
 - seperate Funktion read/write JSON
+<<<<<<< HEAD
 - Datum handeln _done_
 - Exception args für User
 - Upload Template Vars _done_
@@ -10,6 +11,14 @@ Kamal
 - Relevante Einträge
 	- Post von Schedule handeln (eigentlich kann JavaScript die ganzen Cookies alleine machen)
 	- Schedule Template bearbeiten _done_
+=======
+- Datum handeln
+- Upload Template Vars
+- Schedule Template Vars für Tim immitieren
+- Relevante Einträge
+	- Post von Schedule handeln
+	- Schedule Template bearbeiten
+>>>>>>> origin/master
 - mehr logging (man kann nie genug loggen)
 
 
@@ -28,4 +37,8 @@ Tim
 
 [MarkDown Editor](https://jbt.github.io/markdown-editor/) um .md Dateien zu bararbeiten
 
+<<<<<<< HEAD
 [readme](https://github.com/CZGvp2/vplan/blob/master/README.md)-datei
+=======
+[readme](https://github.com/CZGvp2/vplan/blob/master/README.md)-datei
+>>>>>>> origin/master
