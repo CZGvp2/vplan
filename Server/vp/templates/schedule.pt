@@ -12,7 +12,8 @@
 </head>
 <body>
     <div id="topbar">
-        <a href="${request.route_path('home', _query='logout')}">Abmelden</a>
+        <a href="${request.route_path('home', _query='logout')}">Abmelden</a><br/>
+        <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum bearbeiten</a>
     </div>
     <div class="slide" tal:repeat="day days">
         <div class="head">

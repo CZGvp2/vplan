@@ -65,6 +65,7 @@ def process_file_post(file_post):
 	success = False
 	filename = file_post.filename
 	action = None
+	date = None
 	error_code = None
 
 	try:
@@ -136,6 +137,10 @@ Beispiel
 		{
 			"success": true,
 			"filename": "VplanKl.xml",
+			"date": {
+				"weekday": "Montag",
+				"date": "19. Oktober 2015"
+			},
 			"errorCode": null,
 			"action": "add"
 		},
@@ -143,6 +148,7 @@ Beispiel
 			"success": false,
 			"filename": "VplanLe.xml",
 			"errorCode": "ERR_READING_XML",
+			"date": null,
 			"action": null
 		}
 	]

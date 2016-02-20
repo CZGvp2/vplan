@@ -10,6 +10,9 @@ log = logging.getLogger('serverlog')
 locale.setlocale(locale.LC_TIME, 'deu_deu')  # TODO fehler auf Unix?
 
 
+
+
+
 # 08A, 10B usw.
 SIMPLE = re.compile( r'^(0[5-9]|10)[A-D]$' )
 
