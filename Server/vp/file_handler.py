@@ -1,30 +1,15 @@
 import os
 import shutil
 import json
-from .xml_reader import convert
-from .exceptions import *
 
-import logging
+from .xml_reader import convert
+from .regex_parser import parse_response_date
+from .exceptions import *
 
 data_dir = os.path.join( os.path.dirname(__file__), 'data' )
 json_file = os.path.join(data_dir, 'schedule.json')
 tmp_file = os.path.join(data_dir, 'tmp.xml')
-logfile = os.path.join(data_dir, 'server.log')
-
-log = logging.getLogger('serverlog')
-filehandler = logging.FileHandler(logfile)
-console = logging.StreamHandler()
-
-formatter = logging.Formatter(
-	fmt='%(asctime)s [%(levelname)-8s] %(message)s',
-	datefmt='%H:%M:%S'
-)
-
-log.setLevel(logging.DEBUG)
-filehandler.setLevel(logging.DEBUG)
-
-filehandler.setFormatter(formatter)
-log.addHandler(filehandler)
+log_file = os.path.join(data_dir, 'server.log')
 
 
 def process_file(input_file):
@@ -40,7 +25,7 @@ def process_file(input_file):
 			old_data = json.loads( fobj.read() )
 
 			# Hinzufügen des Tages zu den Daten
-			data, action = add_day(old_data, day)
+			data, info = add_day(old_data, day)
 
 			# Speichern der neuen Daten
 			content = json.dumps(data, ensure_ascii=False, indent=4, sort_keys=True)
@@ -49,8 +34,7 @@ def process_file(input_file):
 			fobj.write(content)
 			fobj.truncate()
 
-			log.info('%s file "%s" successfully', ('Added' if action == 'add' else 'Replaced'), day['filename'])
-			return action
+			return info
 
 	except IOError:
 		raise IOServerError()
@@ -75,16 +59,19 @@ def read_via_tmp(input_file):
 	return content
 
 def add_day(data, new_day):
-	"""Fügt einen neuen Tag zu data hinzu"""
+	"""Fügt einen neuen Tag zu data hinzu. Gibt (data, info) zurück, wobei info (action, date) ist"""
 	try:
 		days = data['days']
+		date = new_day['date']
+		parsed_date = parse_response_date(date)
+
 		for i, day in enumerate(days):
-			if day['filename'] == new_day['filename']:
+			if day['date'] == date:
 				days[i] = new_day # Überschreiben des schon vorhandenen Tages
-				return data, 'replace'
+				return data, ('replace', parsed_date)
 
 		days.append(new_day) # Sonst hinzufügen als neuer Tag
-		return data, 'add'
+		return data, ('add', parsed_date)
 
 	except KeyError as e:
 		log.debug(e.args)

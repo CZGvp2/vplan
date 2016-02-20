@@ -3,21 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/upload.css')}" />
     <title>Vertretungsplan bearbeiten</title><!-- Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
+    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/upload.css')}" />   
+    <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         var path = "${request.path}";
         var statics = "${request.static_path('vp:static/img/')}"
     </script>
     <script src="${request.static_path('vp:static/js/upload.js')}"></script>
-    <!--<style>
-        body{ 
-            background: #ffffff url("${request.static_url('vp:static/img/bg.png')}") repeat-x left top;
-            background-size: 1px 300px;
-            padding: 0;
-        }
-    </style>-->
 </head>
 <body>
     <form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data"></form>
@@ -27,7 +21,7 @@
         </div>
     </div>
     <div id="sidebar">
-        <img src="${request.static_path('vp:static/img/bg.png')}" id="sidebar_image" width="0" height="0" /><!-- Bild? -->
+        <img src="${request.static_path('vp:static/img/expand.png')}" id="sidebar_image" width="10px" height="20px" />
         <span class="entry"><a href="${request.route_path('upload', _query='files')}" id="logout">Dateiverzeichnis</a></span><!-- Das könnte nen div mit allen geparsten z. Z. auf dem Server liegenden Dateien anzeigen lassen, wenn ich vom Server nen schönes JSON bekomm -->
         <span class="entry"><a href="${request.route_path('schedule')}" id="logout">Zum Vertretungsplan</a></span>
         <span class="entry space"></span>

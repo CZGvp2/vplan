@@ -6,10 +6,12 @@ log = logging.getLogger('serverlog')
 
 
 class BasicError(Exception):
-	def __init__(self, code, msg_format, log_level):
+	def __init__(self, code, msg_format, log_level, **args):
 		self.code = code
 		self.format = msg_format
 		self.log_level = log_level
+
+		self.__dict__.update(args)
 
 	def log(self):
 		log.log(self.log_level, self.format % self.__dict__)

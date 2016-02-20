@@ -88,6 +88,17 @@ body{
 .entry:hover{
     background-color: #282828;
 }
+#sidebar_image{
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+
+    transform: translateY(-50%);
+}
 .space{
     flex-grow: 2;
 }

@@ -5,6 +5,8 @@
 *.lot
 *.out
 *.toc
-*.pyc
-*.json
+*.synctex.gz
+Server/vp/__pycache__
+Server/vp.egg-info
+Server/vp/data/schedule.json
 *.xml

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>${title}</title>
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/error.css')}" />
+    <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <!-- TODO Mobile Anpassung -->
 </head>
 <body>

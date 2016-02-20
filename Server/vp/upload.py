@@ -1,8 +1,12 @@
 from pyramid.view import view_config, view_defaults, forbidden_view_config
 
+import logging
+
 from .file_handler import process_file
 from .exceptions import ProcessingError, InternalServerError, log_unexpected_error
 
+
+log = logging.getLogger('serverlog')
 
 INTERNAL_ERROR = {
 	'internalError': True,
@@ -64,8 +68,10 @@ def process_file_post(file_post):
 	error_code = None
 
 	try:
-		action = process_file(file_post.file)  # Action entweder 'add' oder 'replace'
+		action, date = process_file(file_post.file)
 		success = True
+
+		log.info('%s file "%s" (%s %s)', ('Added' if action == 'add' else 'Replaced'), filename, *date.values())
 
 	except ProcessingError as error:
 		error.file = filename
@@ -73,13 +79,13 @@ def process_file_post(file_post):
 
 		error_code = error.code
 
-	finally:
-		return {
-			'success': success,
-			'file': filename,
-			'action': action,
-			'errorCode': error_code
-		}
+	return {
+		'success': success,
+		'file': filename,
+		'date': date,
+		'action': action,
+		'errorCode': error_code
+	}
 
 # 403 falls Session abgelaufen
 @forbidden_view_config(accept='application/json', renderer='json')
@@ -109,6 +115,12 @@ Struktur der Response
           +-- success [boolean] (Falls Bearbeiten erfolgreich war)
           |
           +-- filename [String] (Name der Datei)
+          |
+          +-- date (Datum des Plans)
+          |   |
+          |   +-- weekday [String] (Wochentag)
+          |   |
+          |   +-- date [String] (Datum Bsp:"18. August 2012")
           |
           +-- errorCode [String] (Code des aufgetretenen Fehlers, bei keinem Fehler null)
           |

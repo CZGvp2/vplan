@@ -1,5 +1,15 @@
-/* Browser machen sehr merkwürdige Sachen, 
-wenn man keine Default-Events verhindert*/
+/* 
+*   UPLOAD.JS
+*
+* This script will
+* (1) Handle dropEvents
+* (2) Use jQuery to post the dropped files and receive data from the server
+*
+*/
+
+// Debug?
+var debug = true;
+var debugTag = "[DEBUG] ";
 
 setColor = function(){
     $("body").css("background-color", "#4db038");
@@ -7,6 +17,7 @@ setColor = function(){
 resetColor = function(){
     $("body").css("background-color", "#282828");
 }
+
 // DragOver
 $(document).on(
     'dragover',
@@ -41,7 +52,7 @@ $(document).on(
     'drop',
     function(e) {
         resetColor();
-        console.log('drop');
+        if(debug) console.log(debugTag + 'dropEvent caught, pushing to server...');
         if(e.originalEvent.dataTransfer){
             if (e.originalEvent.dataTransfer.files.length) {
                 e.preventDefault();
@@ -53,9 +64,12 @@ $(document).on(
     }
 );
 
-var global_buffer_debug;
+/* Serverantwort abfangen und verarbeiten */
+var global_debug_responseBuffer;
 function handleServerResponse(response) {
-    global_buffer_debug = JSON.stringify(response);
+    if(debug) { global_debug_responseBuffer = JSON.stringify(response); 
+                console.log(debugTag + 'Got AJAX response: ' + global_debug_responseBuffer); }
+    
     var b = $("#uploadList").get(0);
     $("#uploadList").css("display", "flex");
 
@@ -66,23 +80,25 @@ function handleServerResponse(response) {
 
         var filename = response.results[i].file;
         var msg = success ? "Erfolgeich!" : "Fehlgeschlagen: " + response.results[i].errorCode;
-        var color = success ? "inherit" : "red";
-        var image = success ? (response.results[i].action=="change" ? "upload_change.png" : "upload_new.png") : "upload_error.png";
+        var color = success ? "inherit" : "red"; // Hier möchte nen schöner Fehlerfarbenhexwert hin!
+        var image = success ? (response.results[i].action=="replace" ? "upload_change.png" : "upload_new.png") : "upload_error.png";
         
         var el = "<div class=\"upload\"><img class=\"ulImg\" src=\"."+ statics + image +"\"></img>" +
             "<span> " + filename + "</span><span class=\"space\"></span>" + 
             "<span style=\"background-color:" + color + ";\">" + msg + "</span></div>";
 
         if(b.children.length > 6) b.children[0].remove();
-        b.innerHTML+=el;  // vllt jQuery ind '"' statt "\"" ? // erstmal nicht, später vllt
-        console.log("added " + el);
+        b.innerHTML+=el;  // vllt jQuery ind '"' statt "\"" ? // erstmal nicht, später vllt... JavaScript Klassenorientierung ist Overkill, oder? Sonst würd ich das noch nen bisschen strukturieren
     }
 }
 
+// AJAX Upload
 function upload(files) {
     var formData = new FormData($('form')[0]); // besser?
     for (var i = 0; i < files.length; i++)
         formData.append('file', files[i]);
+
+    if(debug) console.log(debugTag + 'Posting data to ' + path + '.');
 
     return $.ajax({
         url: path,
@@ -92,6 +108,6 @@ function upload(files) {
         processData: false,
         contentType: false,
         success: handleServerResponse,
-        failure: function () {alert('ups')}
+        failure: function () {alert('AJAX: Connection Error')}
     });
 }
