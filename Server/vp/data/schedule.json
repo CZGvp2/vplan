@@ -22,7 +22,7 @@
                     "selector": {
                         "grade": "11",
                         "subclass": "2",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "11"
                         ],
@@ -45,7 +45,7 @@
                     "selector": {
                         "grade": "11",
                         "subclass": "2",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "11"
                         ],
@@ -68,7 +68,7 @@
                     "selector": {
                         "grade": "11",
                         "subclass": "3",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "11"
                         ],
@@ -91,7 +91,7 @@
                     "selector": {
                         "grade": "11",
                         "subclass": "3",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "11"
                         ],
@@ -135,7 +135,7 @@
                     "selector": {
                         "grade": "12",
                         "subclass": "2",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "12"
                         ],
@@ -158,7 +158,7 @@
                     "selector": {
                         "grade": "12",
                         "subclass": "2",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "12"
                         ],
@@ -192,7 +192,7 @@
                     "info": null,
                     "new": {
                         "room": "B301",
-                        "subject": "Mu",
+                        "subject": "M",
                         "teacher": "KRG"
                     },
                     "old": {
@@ -213,11 +213,11 @@
                     "info": null,
                     "new": {
                         "room": "D207",
-                        "subject": "Bi",
+                        "subject": "Bio",
                         "teacher": "MA"
                     },
                     "old": {
-                        "subject": "---",
+                        "subject": null,
                         "teacher": "---"
                     },
                     "selector": {
@@ -230,11 +230,11 @@
                     "time": "7"
                 },
                 {
-                    "change": "CANCELLED",
+                    "change": "TEACHER",
                     "info": "fällt aus",
                     "new": {
                         "room": "---",
-                        "subject": "---",
+                        "subject": null,
                         "teacher": "(MI)"
                     },
                     "old": {
@@ -286,7 +286,7 @@
                     "selector": {
                         "classes": "6",
                         "subclass": "2",
-                        "subject": "FRZ",
+                        "subject": "Frz",
                         "targets": [
                             "6a",
                             "6b",
@@ -311,7 +311,7 @@
                     "selector": {
                         "classes": "6",
                         "subclass": "2",
-                        "subject": "FRZ",
+                        "subject": "Frz",
                         "targets": [
                             "6a",
                             "6b",
@@ -322,21 +322,21 @@
                     "time": "4"
                 },
                 {
-                    "change": "CANCELLED",
+                    "change": "TEACHER",
                     "info": "fällt aus",
                     "new": {
                         "room": "---",
-                        "subject": "---",
+                        "subject": null,
                         "teacher": "(REN)"
                     },
                     "old": {
-                        "subject": "Mu",
+                        "subject": "M",
                         "teacher": "REN"
                     },
                     "selector": {
                         "grade": "11",
                         "subclass": "1",
-                        "subject": "mu",
+                        "subject": "M",
                         "targets": [
                             "11"
                         ],
@@ -345,21 +345,21 @@
                     "time": "8"
                 },
                 {
-                    "change": "CANCELLED",
+                    "change": "TEACHER",
                     "info": "fällt aus",
                     "new": {
                         "room": "---",
-                        "subject": "---",
+                        "subject": null,
                         "teacher": "(REN)"
                     },
                     "old": {
-                        "subject": "Mu",
+                        "subject": "M",
                         "teacher": "REN"
                     },
                     "selector": {
                         "grade": "11",
                         "subclass": "1",
-                        "subject": "mu",
+                        "subject": "M",
                         "targets": [
                             "11"
                         ],
@@ -368,15 +368,15 @@
                     "time": "9"
                 },
                 {
-                    "change": "CANCELLED",
+                    "change": "TEACHER",
                     "info": "fällt aus",
                     "new": {
                         "room": "---",
-                        "subject": "---",
+                        "subject": null,
                         "teacher": "(REN)"
                     },
                     "old": {
-                        "subject": "Mu",
+                        "subject": "M",
                         "teacher": "REN"
                     },
                     "selector": {
@@ -387,15 +387,15 @@
                     "time": "10"
                 },
                 {
-                    "change": "CANCELLED",
+                    "change": "TEACHER",
                     "info": "fällt aus",
                     "new": {
                         "room": "---",
-                        "subject": "---",
+                        "subject": null,
                         "teacher": "(REN)"
                     },
                     "old": {
-                        "subject": "Mu",
+                        "subject": "M",
                         "teacher": "REN"
                     },
                     "selector": {
@@ -441,7 +441,7 @@
                     "selector": {
                         "grade": "11",
                         "subclass": "1",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "11"
                         ],
@@ -464,7 +464,7 @@
                     "selector": {
                         "grade": "11",
                         "subclass": "1",
-                        "subject": "de",
+                        "subject": "De",
                         "targets": [
                             "11"
                         ],

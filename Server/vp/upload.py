@@ -2,8 +2,9 @@ from pyramid.view import view_config, view_defaults, forbidden_view_config
 
 import logging
 
-from .file_handler import process_file
-from .exceptions import ProcessingError, InternalServerError, log_unexpected_error
+from .fileProcessing.file_handler import process_file, get_schedule
+from .fileProcessing.regex_parser import parse_response_date
+from .fileProcessing.exceptions import ProcessingError, InternalServerError, log_unexpected_error
 
 
 log = logging.getLogger('serverlog')
@@ -30,7 +31,14 @@ class UploadView:
 	@view_config(request_method='GET', renderer='templates/upload.pt')
 	def view_site(self):
 		"""Gibt die sichtbare Seite zurück"""
-		return dict()
+		data = get_schedule()
+
+		for i in range( len(data['days']) ):
+			day = data['days'][i]
+			day.pop('events')  # unnütze Information
+			day['date'] = parse_response_date(day['date'])
+
+		return data
 
 	@view_config(request_method='POST', renderer='json')
 	def upload(self):
@@ -61,18 +69,18 @@ class UploadView:
 
 def process_file_post(file_post):
 	"""Bearbeitet einen einzelnen File-Post"""
-
+	
 	success = False
 	filename = file_post.filename
-	action = None
+	replaced = None
 	date = None
 	error_code = None
 
 	try:
-		action, date = process_file(file_post.file)
+		replaced, date = process_file(file_post.file)
 		success = True
 
-		log.info('%s file "%s" (%s %s)', ('Added' if action == 'add' else 'Replaced'), filename, *date.values())
+		log.info('%s file "%s" (%s %s)', ('Replaced' if replaced else 'Added'), filename, *date.values())
 
 	except ProcessingError as error:
 		error.file = filename
@@ -84,7 +92,7 @@ def process_file_post(file_post):
 		'success': success,
 		'file': filename,
 		'date': date,
-		'action': action,
+		'replaced': replaced,
 		'errorCode': error_code
 	}
 
@@ -125,7 +133,7 @@ Struktur der Response
           |
           +-- errorCode [String] (Code des aufgetretenen Fehlers, bei keinem Fehler null)
           |
-          +-- action [String] ('add' wenn Datei hinzugefügt, 'replace' wenn Datei ersetzt, null falls Fehler)
+          +-- replaced [boolean] (false wenn Datei hinzugefügt, true wenn Datei ersetzt, null falls Fehler)
 
 
 Beispiel
@@ -142,14 +150,14 @@ Beispiel
 				"date": "19. Oktober 2015"
 			},
 			"errorCode": null,
-			"action": "add"
+			"replaced": true
 		},
 		{
 			"success": false,
 			"filename": "VplanLe.xml",
 			"errorCode": "ERR_READING_XML",
 			"date": null,
-			"action": null
+			"replaced": null
 		}
 	]
 }

@@ -9,6 +9,17 @@
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <?python
+    def color(subject):
+        """Gibt die Farbe des Faches zurück"""
+        colors = {
+            'De': '#FF0000',
+            'Ma': '#0000FF',
+            'Bio': '#00FF00'
+        }
+
+        return colors.get(subject, '#555555') # Wert falls nicht gefunden
+    ?>
 </head>
 <body>
     <div id="topbar">
@@ -22,7 +33,7 @@
             <tr class="event" tal:repeat="event day.events">
                 <td class="entry" data-targets="${ ' '.join(event['selector']['targets']) # Python Code!!! }" />
                 <td class="entry" tal:content="event.time" />
-                <td class="entry" tal:content="event.new['subject']" />
+                <td class="entry" tal:content="event.new['subject']" style="color: ${color(event.new['subject'])}" />
                 <td class="entry" tal:content="event.new['teacher']" />
                 <td class="entry" tal:content="event.new['room']" />
                 <td class="entry" tal:content="event.old['subject']" /> 

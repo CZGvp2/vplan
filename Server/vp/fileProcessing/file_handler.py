@@ -1,12 +1,16 @@
 import os
 import shutil
 import json
+import logging
+from datetime import datetime
 
 from .xml_reader import convert
 from .regex_parser import parse_response_date
 from .exceptions import *
 
-data_dir = os.path.join( os.path.dirname(__file__), 'data' )
+log = logging.getLogger('serverlog')
+
+data_dir = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data' ) )
 json_file = os.path.join(data_dir, 'schedule.json')
 tmp_file = os.path.join(data_dir, 'tmp.xml')
 log_file = os.path.join(data_dir, 'server.log')
@@ -37,7 +41,7 @@ def process_file(input_file):
 			return info
 
 	except IOError:
-		raise IOServerError()
+		raise IOServerError(json_file)
 
 	except json.JSONDecodeError as error:
 		raise JSONFileParsingError(error)
@@ -62,30 +66,41 @@ def add_day(data, new_day):
 	"""Fügt einen neuen Tag zu data hinzu. Gibt (data, info) zurück, wobei info (action, date) ist"""
 	try:
 		days = data['days']
-		date = new_day['date']
-		parsed_date = parse_response_date(date)
+		new_date = new_day['date']
+		parsed_date = parse_response_date(new_date)
 
+		to_datetime = lambda day: datetime(**day['date'])
+
+		# Entfernen veralteter Dateien (erstmal nich)
+#		today = datetime.today()
+#		for day in days.copy():
+#			date = to_datetime(day)
+#			if date < today.date():
+#				days.remove(day)
+#				log.info('Removed day ')
+#
+#			else:
+#				break
+
+		# Einfügen des Tages
+		replaced = False
 		for i, day in enumerate(days):
-			if day['date'] == date:
+			if day['date'] == new_date:
 				days[i] = new_day # Überschreiben des schon vorhandenen Tages
-				return data, ('replace', parsed_date)
+				replaced = True
+				break
 
-		days.append(new_day) # Sonst hinzufügen als neuer Tag
-		return data, ('add', parsed_date)
+		if not replaced:
+			days.append(new_day) # Sonst hinzufügen als neuer Tag
+
+		# Sortieren nach Datum
+		days.sort(key=to_datetime)
+
+		return data, (replaced, parsed_date)
 
 	except KeyError as e:
-		log.debug(e.args)
-		raise JSONFileReadingError()
+		raise JSONFileReadingError(e)
 
 def get_schedule():
-	try:
-		with open(json_file, 'r', encoding='utf-8') as fobj:
-			return json.loads(fobj.read())
-
-	except IOError:
-		log.error('Could not read JSON file: Error reading file')
-		# TODO return error page
-
-	except json.JSONDecodeError:
-		log.error('Could not read JSON file: Error decoding JSON')
-		# same
+	with open(json_file, 'r', encoding='utf-8') as fobj:
+		return json.loads(fobj.read())

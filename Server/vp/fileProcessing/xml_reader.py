@@ -65,7 +65,8 @@ def read_action(element):
 	if old['subject'] != new['subject']: change = 'SUBJECT'
 	if old['teacher'] != new['teacher']: change = 'TEACHER'
 	# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
-	if new['subject'] == '---': change = 'CANCELLED'
+	if new['subject'] == '---':
+		change = 'CANCELLED'
 
 	if not change and not get_tag('info'): change = 'ROOM'
 	# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin

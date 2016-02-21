@@ -1,11 +1,12 @@
-Kamal
+#Kamal
 
-- Exception args für User
-- Tage nach Datum sortieren, Indices für JSON
-- Fächer übersetzen
+* Exception args für User
+* weniger Exception classes
+* Lehrer selector
+* AG
+* get_schedule None problem
 
-Tim
-
+#Tim
 * "hardcoded div-bastelschleife der Hölle" ein Ende setzen
 * TODO-Liste schreiben
 * Flexibles Design für alles

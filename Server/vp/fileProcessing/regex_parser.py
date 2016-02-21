@@ -1,16 +1,16 @@
 import re
+import os.path
 from datetime import datetime
 import locale
 import logging
 
-log = logging.getLogger('serverlog')
+from .exceptions import IOServerError, InternalServerError, ProcessingError
 
+
+log = logging.getLogger('serverlog')
 
 # Setzen des Datumsformats von Deutscherland
 locale.setlocale(locale.LC_TIME, 'deu_deu')  # TODO fehler auf Unix?
-
-
-
 
 
 # 08A, 10B usw.
@@ -20,7 +20,24 @@ SIMPLE = re.compile( r'^(0[5-9]|10)[A-D]$' )
 MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(0[5-9]|10)[A-D]{,4})(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
 
 # Kurssystem Bsp.: 11/ ma2  oder 12/ de1
-COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)$' )
+COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)$' ) # TODO spezielles Parsen
+
+# TODO AG
+
+# Laden der subjects.data TODO (sollte jedes mal beim Uploaden passieren)
+subjects_file = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data/subjects.data' ) )
+subjects = {}
+try:
+	with open(subjects_file, 'r') as fobj:
+		for lineno, line in enumerate( fobj.readlines() ):
+			name, replacement = tuple( line[:-1].split(' ') ) # :-1 entfernt den letzten character, \n
+			subjects[name] = replacement
+
+except IOError:
+	raise IOServerError(subjects_file)
+
+except ValueError:
+	raise InternalServerError('Invalid Syntax in subjects.data line %(lineno)d "%(line)s"', lineno=lineno, line=lines)
 
 
 lower = lambda text: (text[1:] if text[0] == '0' else text).lower() # '08' -> '8', oder '09B' -> '9b'
@@ -34,7 +51,7 @@ def parse_simple(text):
 	return {
 		'type': 'SIMPLE',
 		'class': _class,
-		'targets': [_class]
+		'targets': (_class,)
 	}
 
 def parse_mult(text):
@@ -47,7 +64,7 @@ def parse_mult(text):
 		'classes': lower( match.group('classes') ),
 		'subject': replace_subject( match.group('subject') ),
 		'subclass': match.group('subclass'),
-		'targets': list( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ['8a', '8b', '8c']
+		'targets': tuple( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ['8a', '8b', '8c']
 	}
 
 def parse_course(text):
@@ -60,7 +77,7 @@ def parse_course(text):
 	# Hinzufügen der weiteren Daten
 	data['type'] = 'COURSE'
 	data['subject'] = replace_subject( match.group('subject') )
-	data['targets'] = [ match.group('grade') ]
+	data['targets'] = ( match.group('grade'), )
 
 	return data
 
@@ -77,23 +94,33 @@ def parse_selector(text):
 	return {
 		'type': 'FAILED',
 		'class': text,
-		'targets': []
-	} #  Als Backup falls das Parsen nirgends funktioniert hat
+		'targets': ()
+	}
 
 def replace_subject(text):
-	"""Parst ein Fach in JSON """
-	return text  # TODO du weißt was
+	"""Übersetzt ein Fach"""
+	if text == '---':
+		return None
+
+	try:
+		return subjects[ text.lower() ]
+
+	except KeyError:
+		log.warning('Could not replace subject "%s"', text)
+		return text.capitalize()
 
 def parse_date(text):
 	"""Parst das Datum der Datei aus text zu JSON"""
+	try:
+		date = datetime.strptime(text, '%A, %d. %B %Y')
+		return {
+			'day': date.day,
+			'month': date.month,
+			'year': date.year
+		}
 
-	date = datetime.strptime(text, '%A, %d. %B %Y')
-	return {
-		'day': date.day,
-		'month': date.month,
-		'year': date.year
-	}
-	 # TODO  Error User info + log
+	except ValueError:
+		raise ProcessingError('ERR_PARSING_DATE', 'Could not parse date "%(date)s"', date=text)
 
 def parse_response_date(date):
 	"""Parst das Datum für die Ajax Response"""

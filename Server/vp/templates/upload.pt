@@ -22,8 +22,8 @@
     </div>
     <div id="sidebar">
         <img src="${request.static_path('vp:static/img/expand.png')}" id="sidebar_image" width="10px" height="20px" />
-        <span class="entry"><a href="${request.route_path('upload', _query='files')}" id="logout">Dateiverzeichnis</a></span><!-- Das könnte nen div mit allen geparsten z. Z. auf dem Server liegenden Dateien anzeigen lassen, wenn ich vom Server nen schönes JSON bekomm -->
         <span class="entry"><a href="${request.route_path('schedule', _query='from_upload')}" id="logout">Zum Vertretungsplan</a></span>
+        <span class="entry" tal:repeat="day days"><a>${day.filename} (${day.date['weekday']}, ${day.date['date']})</a></span> <!-- tob dich aus -->
         <span class="entry space"></span>
         <span class="entry"><a href="${request.route_path('home', _query='logout')}" id="logout">Abmelden</a></span>
     </div>

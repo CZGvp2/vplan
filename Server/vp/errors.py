@@ -1,4 +1,5 @@
-from pyramid.view import notfound_view_config, forbidden_view_config
+from pyramid.view import view_config, notfound_view_config, forbidden_view_config
+from .fileProcessing.exceptions import log_unexpected_error
 
 
 @notfound_view_config(renderer='templates/error.pt')
@@ -17,4 +18,14 @@ def forbidden(request):
 		'err_code': '403',
 		'err_message': 'Zugriff verweigert',
 		'img_src': request.static_path('vp:static/img/403.jpg')
+	}
+
+@view_config(context=Exception, renderer='templates/error.pt')
+def internal_Error(exc, request):
+	log_unexpected_error()
+	return {
+		'title': '500 - Fehler',
+		'err_code': '500',
+		'err_message': 'Interner Fehler',
+		'img_src': request.static_path('vp:static/img/500.jpg')
 	}
