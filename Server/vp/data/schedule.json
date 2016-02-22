@@ -204,7 +204,7 @@
                     "info": null,
                     "new": {
                         "room": "B301",
-                        "subject": "M",
+                        "subject": "Mu",
                         "teacher": "Krg"
                     },
                     "old": {
@@ -350,13 +350,13 @@
                         "teacher": "Ren"
                     },
                     "old": {
-                        "subject": "M",
+                        "subject": "Mu",
                         "teacher": "Ren"
                     },
                     "selector": {
                         "grade": "11",
                         "subclass": "1",
-                        "subject": "M",
+                        "subject": "Mu",
                         "type": "COURSE"
                     },
                     "targets": [
@@ -374,13 +374,13 @@
                         "teacher": "Ren"
                     },
                     "old": {
-                        "subject": "M",
+                        "subject": "Mu",
                         "teacher": "Ren"
                     },
                     "selector": {
                         "grade": "11",
                         "subclass": "1",
-                        "subject": "M",
+                        "subject": "Mu",
                         "type": "COURSE"
                     },
                     "targets": [
@@ -398,7 +398,7 @@
                         "teacher": "Ren"
                     },
                     "old": {
-                        "subject": "M",
+                        "subject": "Mu",
                         "teacher": "Ren"
                     },
                     "selector": {
@@ -419,7 +419,7 @@
                         "teacher": "Ren"
                     },
                     "old": {
-                        "subject": "M",
+                        "subject": "Mu",
                         "teacher": "Ren"
                     },
                     "selector": {

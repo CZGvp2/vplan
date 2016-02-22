@@ -4,6 +4,7 @@
 * weniger Exception classes
 * AG
 * get_schedule None problem
+* Sortation [des JSONS](https://github.com/CZGvp2/vplan/blob/master/Server/vp/data)
 
 #Tim
 * "hardcoded div-bastelschleife der Hölle" ein Ende setzen

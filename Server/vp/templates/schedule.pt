@@ -15,33 +15,53 @@
         colors = {
             'De': '#FF0000',
             'Ma': '#0000FF',
-            'Bio': '#00FF00'
+            'Bio': '#00FF00',
+            'Ku' : '#bbbbbb',
+            'Frz' : '#FF33bb',
+            'En' : '#cccc00',
+            'Ge' : '#bb0000'
         }
 
         return colors.get(subject, '#555555') # Wert falls nicht gefunden
     ?>
 </head>
 <body>
-    <div id="topbar">
-        <a href="${request.route_path('home', _query='logout')}">Abmelden</a><br/>
-        <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum bearbeiten</a>
-    </div>
-    <div class="slide" tal:repeat="day days">
-        <div class="head">
+    <div id="wrapper">
+        <div id="topbar">
+            <a href="${request.route_path('home', _query='logout')}">Abmelden</a>
+            <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum bearbeiten</a>
         </div>
-        <table class="table">
-            <tr class="event" tal:repeat="event day.events">
-                <td class="entry" data-targets="${ ' '.join(event.targets) # Python Code!!! }" />
-                <td class="entry" tal:content="event.time" />
-                <td class="entry" tal:content="event.new['subject']" style="color: ${color(event.new['subject'])}" />
-                <td class="entry" tal:content="event.new['teacher']" />
-                <td class="entry" tal:content="event.new['room']" />
-                <td class="entry" tal:content="event.old['subject']" />
-                <td class="entry" tal:content="event.old['teacher']" />
-                <td class="entry" tal:content="event.info" />
-            </tr>
-        </table>
+        <div id="header">
+                Vertretungsplan
+        </div>
+        <div class="slide" tal:repeat="day days">
+            <div class="head">
+                ${day.date['weekday']}
+            </div>
+            <table class="table">
+                <tr class="event" tal:repeat="event day.events" data-targets="${ ' '.join(event.targets) # Python Code!!! }" >
+                    <td class="entry" />
+                    <td class="entry" tal:content="event.time" />
+                    <td class="entry" tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; color: white;" />
+                    <td class="entry" tal:content="event.new['teacher']" />
+                    <td class="entry" tal:content="event.new['room']" />
+                    <td class="entry" tal:content="event.old['subject']" />
+                    <td class="entry" tal:content="event.old['teacher']" />
+                    <td class="entry" tal:content="event.info" />
+                </tr>
+            </table>
+        </div>
+        <script>
+            for(var i = 0; i < document.body.children.length; i++) {
+                var a = $('.table')[0].children[i]; 
+                if(a.data()!="${<get target>}") {
+                    a.remove();
+                    console.log(a + " removed");
+                }
+            }
+
+        </script>
+        <hr>
     </div>
-    <hr>
 </body>
 </html>
