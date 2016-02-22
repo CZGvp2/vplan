@@ -21,6 +21,13 @@ toggleSlide = function(dir){
   slides[nextSlide].style.display = "block";
   currentSlide = nextSlide;
 }
-
+/*
+document.body.onkeypress = function(e){
+  switch(e.which){
+    case 37: toggleSlide("left"); break;
+    case 38: toggleSlide("right"); break;
+    default: break;
+  }
+}*/
 // = $(document).ready(prepSlides);
 $(prepSlides);

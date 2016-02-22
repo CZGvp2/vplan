@@ -13,15 +13,22 @@
     <?python
       def color(subject):
           """Gibt die Farbe des Faches zurück"""
-          colors = {
-              'De' : '#FF0000',
-              'Ma' : '#0000FF',
-              'Bio' : '#00FF00',
-              'Ku' : '#bbbbbb',
-              'Frz' : '#FF33bb',
-              'En' : '#cccc00',
-              'Ge' : '#bb0000',
-              'Mu' : '#0000bb'
+          colors = { # alle Farben von Philip ausgewählt
+            'Ma' : '#006496',
+            'Ph' : '#3296C8',
+            'Inf' : '#64C8FA',
+            'Ch' : '#009632',
+            'Bio' : '#00C800',
+            'De' : '#B40000',
+            'Ge' : '#FF9B0F',
+            'Geo' : '#FF690F',
+            'En' : '#96001E',
+            'Frz' : '#78003C',
+            'La' : '#78003C',
+            'Ru' : '#78003C',
+            'Et' : '#FFCD0F',
+            'Ku' : '#A0008C',
+            'Mu' : '#8C00A0'
           }
           return colors.get(subject, '#555555') # Wert falls nicht gefunden
     ?>
@@ -32,7 +39,7 @@
             <a href="${request.route_path('home', _query='logout')}">Abmelden</a>
             <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
             <div class="space"></div>
-            <img src="${request.static_path('vp:static/img/menue_icon.png')}" onClick="toggleMenue(); console.log('Menue Button Clicked')"></img><!-- TODO: IMAGE -->
+            <img src="${request.static_path('vp:static/img/menue_icon.png')}" onClick="toggleMenue(); console.log('Menue Button Clicked')" height="1em" width="1em"></img><!-- TODO: IMAGE -->
         </div>
         <div id="header">
                 Vertretungsplan
@@ -49,7 +56,9 @@
                 <tr class="event" tal:repeat="event day.events" data-targets="${ ' '.join(event.targets) # Python Code!!! }" >
                     <td class="entry" />
                     <td class="entry" tal:content="event.time" />
-                    <td class="entry" tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; color: white;" />
+                    <td class="entry" style="background-color: white; padding: .1em;">
+                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; color: white; display: block;">---</span>
+                    </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />
                     <td class="entry" tal:content="event.old['subject']" />
@@ -60,17 +69,17 @@
         </div>
         <!-- test -->
         <div class="slide" style="background-color: gray;">hello</div>
-        <script>
+        <!--<script>
             for(var i = 0; i < document.body.children.length; i++) {
-                var a = $('.table')[0].children[i];
-                if(a.data()!="${<get target>}") {
+                var a = $('.event')[0].children[i];
+                if(a.data!="10a") {
                     a.remove();
                     console.log(a + " removed");
                 }
             }
 
-        </script>
-        <hr>
+        </script>-->
+        <!---<footer id="footer">CZG 2016</footer>--->
     </div>
 </body>
 </html>
