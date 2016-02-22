@@ -1,4 +1,4 @@
-/* 
+/*
 Das Farbschema das ich für die Seiten erstmal nehm:
 $color1: #0e0e0e; // Schwarz
 $color2: #282828; // Grau
@@ -6,6 +6,12 @@ $color3: #2c6221; // Grün1 (Dark)
 $color4: #3d892d; // Grün2 (grünes Grün)
 $color5: #4db038; // Grün3 (Light)
 
+$color1: #0e0e0e;
+$color2: #232323;
+$color3: #1d3954;
+$color4: #274f74;
+$color5: #316495;
+$color6: #3a7ab6;
 
 $color1: #393939;
 
@@ -25,16 +31,16 @@ $color6: #75a1d3;
     font-family: Helvetica, Ubuntu, sans-serif;
 }
 body{
-    background-color: #282828;
+    background-color: #232323;
 }
 #dropzone{
     position: absolute;
     top: 50%;
     left: 50%;
     width: 20%;
-    background-color: #4db038;
+    background-color: #3a7ab6;
     text-align: center;
-    border: 3px dashed #2c6221;
+    border: 3px dashed #1d3954;
     border-radius: 15%;
     transform: translate(-50%, -50%);
 
@@ -87,7 +93,7 @@ body{
 #sidebar .entry{
     display: none;
     width: 100%;
-    height: 4em;  
+    height: 4em;
 }
 #sidebar:hover{
     width: 30%;
@@ -99,7 +105,7 @@ body{
     display: block;
 }
 .entry:hover{
-    background-color: #282828;
+    background-color: #232323;
 }
 #sidebar_image{
     position: absolute;
@@ -131,7 +137,7 @@ body{
     text-decoration: none;
 }
 .dragOver{
-    background-color: #4db038;
+    background-color: #3a7ab6;
 }
 #uploadList{
     position: absolute;
@@ -147,7 +153,7 @@ body{
     border-top-left-radius: 1em;
     border-top-right-radius: 1em;
 
-    background-color: #4db038;
+    background-color: #3a7ab6;
     color: black;
 
     flex-direction: column;

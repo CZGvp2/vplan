@@ -9,33 +9,40 @@
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
     <?python
-    def color(subject):
-        """Gibt die Farbe des Faches zurück"""
-        colors = {
-            'De': '#FF0000',
-            'Ma': '#0000FF',
-            'Bio': '#00FF00',
-            'Ku' : '#bbbbbb',
-            'Frz' : '#FF33bb',
-            'En' : '#cccc00',
-            'Ge' : '#bb0000'
-        }
-
-        return colors.get(subject, '#555555') # Wert falls nicht gefunden
+      def color(subject):
+          """Gibt die Farbe des Faches zurück"""
+          colors = {
+              'De' : '#FF0000',
+              'Ma' : '#0000FF',
+              'Bio' : '#00FF00',
+              'Ku' : '#bbbbbb',
+              'Frz' : '#FF33bb',
+              'En' : '#cccc00',
+              'Ge' : '#bb0000',
+              'Mu' : '#0000bb'
+          }
+          return colors.get(subject, '#555555') # Wert falls nicht gefunden
     ?>
 </head>
 <body>
     <div id="wrapper">
         <div id="topbar">
             <a href="${request.route_path('home', _query='logout')}">Abmelden</a>
-            <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum bearbeiten</a>
+            <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
+            <div class="space"></div>
+            <img src="${request.static_path('vp:static/img/menue_icon.png')}" onClick="toggleMenue(); console.log('Menue Button Clicked')"></img><!-- TODO: IMAGE -->
         </div>
         <div id="header">
                 Vertretungsplan
         </div>
+        <div class="slidebutton">
+          <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')"><span class="day_title">Freitag</span></div>
+          <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')"><span class="day_title">Donnerstag</span></div>
+        </div>
         <div class="slide" tal:repeat="day days">
-            <div class="head">
+            <div class="slide_title">
                 ${day.date['weekday']}
             </div>
             <table class="table">
@@ -51,9 +58,11 @@
                 </tr>
             </table>
         </div>
+        <!-- test -->
+        <div class="slide" style="background-color: gray;">hello</div>
         <script>
             for(var i = 0; i < document.body.children.length; i++) {
-                var a = $('.table')[0].children[i]; 
+                var a = $('.table')[0].children[i];
                 if(a.data()!="${<get target>}") {
                     a.remove();
                     console.log(a + " removed");

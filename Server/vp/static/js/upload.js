@@ -1,4 +1,4 @@
-/* 
+/*
 *   UPLOAD.JS
 *
 * This script will
@@ -7,7 +7,7 @@
 *
 */
 
-// Debug?
+// Debug? Die Variable sollte evtl vom Server für localhost gesetzt werden
 var debug = true;
 var debugTag = "[DEBUG] ";
 
@@ -59,7 +59,7 @@ $(document).on(
                 e.stopPropagation();
                 resetColor();
                 upload(e.originalEvent.dataTransfer.files);
-            }   
+            }
         }
     }
 );
@@ -67,9 +67,9 @@ $(document).on(
 /* Serverantwort abfangen und verarbeiten */
 var global_debug_responseBuffer;
 function handleServerResponse(response) {
-    if(debug) { global_debug_responseBuffer = JSON.stringify(response); 
+    if(debug) { global_debug_responseBuffer = JSON.stringify(response);
                 console.log(debugTag + 'Got AJAX response: ' + global_debug_responseBuffer); }
-    
+
     var b = $("#uploadList").get(0);
     $("#uploadList").css("display", "flex");
 
@@ -82,9 +82,9 @@ function handleServerResponse(response) {
         var msg = success ? "Erfolgeich!" : "Fehlgeschlagen: " + response.results[i].errorCode;
         var color = success ? "inherit" : "red"; // Hier möchte nen schöner Fehlerfarbenhexwert hin!
         var image = success ? (response.results[i].action=="replace" ? "upload_change.png" : "upload_new.png") : "upload_error.png";
-        
+
         var el = "<div class=\"upload\"><img class=\"ulImg\" src=\"."+ statics + image +"\"></img>" +
-            "<span> " + filename + "</span><span class=\"space\"></span>" + 
+            "<span> " + filename + "</span><span class=\"space\"></span>" +
             "<span style=\"background-color:" + color + ";\">" + msg + "</span></div>";
 
         if(b.children.length > 6) b.children[0].remove();
@@ -108,6 +108,9 @@ function upload(files) {
         processData: false,
         contentType: false,
         success: handleServerResponse,
-        failure: function () {alert('AJAX: Connection Error')}
+        failure: function () {
+            var json = JSON.parse("results:[{success: false, filename: \"---\", errorCode: \"CONNECTION_ERROR\"}]");
+            handleServerResponse(json);
+        }
     });
 }
