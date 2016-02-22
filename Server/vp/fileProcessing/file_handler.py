@@ -101,6 +101,6 @@ def add_day(data, new_day):
 	except KeyError as e:
 		raise JSONFileReadingError(e)
 
-def get_schedule():
+def read_schedule():
 	with open(json_file, 'r', encoding='utf-8') as fobj:
 		return json.loads(fobj.read())

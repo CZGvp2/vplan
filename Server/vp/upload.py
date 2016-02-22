@@ -2,7 +2,7 @@ from pyramid.view import view_config, view_defaults, forbidden_view_config
 
 import logging
 
-from .fileProcessing.file_handler import process_file, get_schedule
+from .fileProcessing.file_handler import process_file, read_schedule
 from .fileProcessing.regex_parser import parse_response_date
 from .fileProcessing.exceptions import ProcessingError, InternalServerError, log_unexpected_error
 
@@ -31,7 +31,7 @@ class UploadView:
 	@view_config(request_method='GET', renderer='templates/upload.pt')
 	def view_site(self):
 		"""Gibt die sichtbare Seite zurück"""
-		data = get_schedule()
+		data = read_schedule()
 
 		for i in range( len(data['days']) ):
 			day = data['days'][i]
