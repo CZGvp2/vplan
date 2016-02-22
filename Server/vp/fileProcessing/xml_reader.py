@@ -2,7 +2,7 @@ import xml.etree.ElementTree as etree
 import logging
 
 from .exceptions import XMLReadingError, XMLParsingError
-from .regex_parser import parse_selector, parse_date, replace_subject
+from .regex_parser import parse_selector, parse_date, replace_subject, replace_teacher
 
 
 log = logging.getLogger('serverlog')
@@ -51,13 +51,13 @@ def read_action(element):
 	# Alte Stunde
 	old = {
 		'subject': replace_subject( get_tag('fach') ),
-		'teacher': get_tag('lehrer')
+		'teacher': replace_teacher( get_tag('lehrer') )
 	}
 
 	# Neue Stunde
 	new = {
 		'subject': replace_subject( get_tag('vfach') ),
-		'teacher': get_tag('vlehrer'),
+		'teacher': replace_teacher( get_tag('vlehrer') ),
 		'room': get_tag('vraum')
 	}
 
@@ -72,8 +72,16 @@ def read_action(element):
 	# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
 	# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
 
+	selector, targets = parse_selector( get_tag('klasse') )
+	if old['teacher']:
+		targets += ( old['teacher'], )  # Falls Teacher '---' und damit None, nicht hinzufügen
+
+	if new['teacher'] and new['teacher'] not in targets:
+		targets += ( new['teacher'], )
+	
 	return {
-		'selector': parse_selector( get_tag('klasse') ),
+		'selector': selector,
+		'targets': targets,
 		'time': get_tag('stunde'),
 		'info': get_tag('info'),
 		'old': old,

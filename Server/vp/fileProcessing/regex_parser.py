@@ -22,6 +22,9 @@ MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(0[5-9]|1
 # Kurssystem Bsp.: 11/ ma2  oder 12/ de1
 COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)$' ) # TODO spezielles Parsen
 
+# Lehrer, passt sowohl mit als auch ohne Klammern. Bsp.: "MUE", "(REN)"
+TEACHER = re.compile( r'^\(?([A-ZÄÖÜ]{2,})\)?$' )
+
 # TODO AG
 
 # Laden der subjects.data TODO (sollte jedes mal beim Uploaden passieren)
@@ -45,60 +48,60 @@ lower = lambda text: (text[1:] if text[0] == '0' else text).lower() # '08' -> '8
 def parse_simple(text):
 	match = SIMPLE.match(text)
 	if not match:
-		return None
+		return None, ()
 
 	_class = lower(text)
 	return {
 		'type': 'SIMPLE',
 		'class': _class,
-		'targets': (_class,)
-	}
+	}, (_class,)
 
 def parse_mult(text):
+	"""Parst einen auf mehrere Klassen verweisenden Ausdruck. Gibt JSON und tupel von targets zurück."""
 	match = MULT.match(text)
 	if not match:
-		return None
+		return None, ()
 
-	return {
+	data = {
 		'type': 'MULT',
 		'classes': lower( match.group('classes') ),
 		'subject': replace_subject( match.group('subject') ),
-		'subclass': match.group('subclass'),
-		'targets': tuple( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ['8a', '8b', '8c']
+		'subclass': match.group('subclass')
 	}
+	targets = tuple( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ['8a', '8b', '8c']
+
+	return data, targets
 
 def parse_course(text):
 	match = COURSE.match(text)
 	if not match:
-		return None
+		return None, ()
 
 	data = match.groupdict()  # hat grade und subclass gleich drin
 
 	# Hinzufügen der weiteren Daten
 	data['type'] = 'COURSE'
 	data['subject'] = replace_subject( match.group('subject') )
-	data['targets'] = ( match.group('grade'), )
 
-	return data
+	return data, ( match.group('grade'), )
 
 def parse_selector(text):
-	"""Parst einen Klassen-Bezeichner in JSON"""
+	"""Parst einen Klassen-Bezeichner in JSON, gibt data und targets zurück"""
 
 	for parser in (parse_simple, parse_mult, parse_course):
-		data = parser(text)
+		data, targets = parser(text)
 
 		if data:
-			return data
+			return data, targets
 
 	log.warning('Could not parse class "%s"', text)
 	return {
 		'type': 'FAILED',
-		'class': text,
-		'targets': ()
-	}
+		'class': text
+	}, ()
 
 def replace_subject(text):
-	"""Übersetzt ein Fach"""
+	"""Ersetzt ein Fach."""
 	if text == '---':
 		return None
 
@@ -108,6 +111,18 @@ def replace_subject(text):
 	except KeyError:
 		log.warning('Could not replace subject "%s"', text)
 		return text.capitalize()
+
+def replace_teacher(text):
+	"""Übersetzt einen Lehrer. Klammern werden entfernt, Anfangsbuchstabe groß"""
+	if text == '---':
+		return None
+
+	match = TEACHER.match(text)
+	if not match:
+		log.warning('Could not replace teacher "%s"', text)
+		return text.capitalize()
+
+	return match.group(1).capitalize()
 
 def parse_date(text):
 	"""Parst das Datum der Datei aus text zu JSON"""

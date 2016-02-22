@@ -1,3 +1,4 @@
+# PDF
 *~
 *.aux
 *.lof
@@ -6,7 +7,12 @@
 *.out
 *.toc
 *.synctex.gz
-Server/vp/__pycache__
+
+#Python
+*.pyc
 Server/vp.egg-info
-Server/vp/data/schedule.json
+*.json
 *.xml
+
+# Anscheinend muss man die Dateien erst untracken
+# mit git rm --cached *.pyc

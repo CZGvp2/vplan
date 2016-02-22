@@ -2,7 +2,6 @@
 
 * Exception args für User
 * weniger Exception classes
-* Lehrer selector
 * AG
 * get_schedule None problem
 

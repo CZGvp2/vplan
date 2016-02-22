@@ -31,12 +31,12 @@
         </div>
         <table class="table">
             <tr class="event" tal:repeat="event day.events">
-                <td class="entry" data-targets="${ ' '.join(event['selector']['targets']) # Python Code!!! }" />
+                <td class="entry" data-targets="${ ' '.join(event.targets) # Python Code!!! }" />
                 <td class="entry" tal:content="event.time" />
                 <td class="entry" tal:content="event.new['subject']" style="color: ${color(event.new['subject'])}" />
                 <td class="entry" tal:content="event.new['teacher']" />
                 <td class="entry" tal:content="event.new['room']" />
-                <td class="entry" tal:content="event.old['subject']" /> 
+                <td class="entry" tal:content="event.old['subject']" />
                 <td class="entry" tal:content="event.old['teacher']" />
                 <td class="entry" tal:content="event.info" />
             </tr>
