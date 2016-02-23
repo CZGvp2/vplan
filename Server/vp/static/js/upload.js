@@ -64,6 +64,12 @@ $(document).on(
     }
 );
 
+var errorDict = {
+  "ERR_PARSING_XML" : "Keine XML-Datei",
+  "ERR_READING_XML" : "XML-Strukturfehler",
+  "ERR_PARSING_DATE" : "Datumsformat fehlerhaft",
+  "ERR_DECODING" : "Keine Textdatei (kein UTF-8 Format)"
+}
 /* Serverantwort abfangen und verarbeiten */
 var global_debug_responseBuffer;
 function handleServerResponse(response) {
@@ -79,8 +85,9 @@ function handleServerResponse(response) {
         var success = response.results[i].success;
 
         var filename = response.results[i].file;
-        var msg = success ? "Erfolgeich!" : "Fehlgeschlagen: " + response.results[i].errorCode;
-        var color = success ? "inherit" : "red"; // Hier möchte nen schöner Fehlerfarbenhexwert hin!
+        var errorMsg = typeof errorDict[response.results[i].errorCode] == 'undefined'?response.results[i].errorCode:errorDict[response.results[i].errorCode];
+        var msg = success ? "Erfolgeich!" : "Fehlgeschlagen: " + errorMsg;
+        var color = success ? "inherit" : "#AA0000"; // Hier möchte nen schöner Fehlerfarbenhexwert hin!
         var image = success ? (response.results[i].action=="replace" ? "upload_change.png" : "upload_new.png") : "upload_error.png";
 
         var el = "<div class=\"upload\"><img class=\"ulImg\" src=\"."+ statics + image +"\"></img>" +

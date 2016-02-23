@@ -32,6 +32,9 @@
           }
           return colors.get(subject, '#555555') # Wert falls nicht gefunden
     ?>
+    <script>
+      var currentSlide = 0;
+    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -45,8 +48,8 @@
                 Vertretungsplan
         </div>
         <div class="slidebutton">
-          <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')"><span class="day_title">Freitag</span></div>
-          <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')"><span class="day_title">Donnerstag</span></div>
+          <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')"><span class="day_title" id="left">Freitag</span></div>
+          <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')"><span class="day_title" id="right">Donnerstag</span></div>
         </div>
         <div class="slide" tal:repeat="day days">
             <div class="slide_title">
@@ -57,7 +60,7 @@
                     <td class="entry" />
                     <td class="entry" tal:content="event.time" />
                     <td class="entry" style="background-color: white; padding: .1em;">
-                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; color: white; display: block;">---</span>
+                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; color: white; display: block;"></span>
                     </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />
@@ -67,8 +70,6 @@
                 </tr>
             </table>
         </div>
-        <!-- test -->
-        <div class="slide" style="background-color: gray;">hello</div>
         <!--<script>
             for(var i = 0; i < document.body.children.length; i++) {
                 var a = $('.event')[0].children[i];

@@ -1,3 +1,22 @@
+@keyframes fade_left{
+	from { transform: translateX(-50%); display: block; }
+	99% { display: block; }
+	to { transform: translateX(-200%); display: none; }
+}
+@keyframes fade_right{
+	from { transform: translateX(-50%); display: block; }
+	99% { display: block; }
+	to { transform: translateX(100%); display: none; }
+}
+@keyframes from_left{
+	from { transform: translateX(-200%); display: block; }
+	to { transform: translateX(-50%); display: block; }
+}
+@keyframes from_right{
+	from { transform: translateX(100%); display: block; }
+	to { transform: translateX(-50%); display: block; }
+}
+
 @media screen{
 	*{
 		z-index: 2;
@@ -77,6 +96,7 @@
 		margin-top: 1em;
 		left: 50%;
 		transform: translateX(-50%);
+		transition: transform 1s;
 	}
 	.slide>.slide_title{
 		text-align: center;
@@ -96,7 +116,7 @@
 		width: 2em;
 		background-color: #232323;
 		transition: background-color .2s;
-
+		cursor: pointer;
 		display: flex;
 	  flex-direction: column;
 	  flex-wrap: nowrap;

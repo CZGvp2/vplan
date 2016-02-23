@@ -94,8 +94,8 @@ body{
     color: white;
     overflow: hidden;
     display: none;
-    width: 100%;
-    height: 4em;
+    width: 500%;
+    min-height: 4em;
 }
 #sidebar:hover{
     width: 30%;
@@ -128,8 +128,12 @@ body{
     height: 100%;
 }
 .entry>.files{
+    display: block;
     padding-left: 1em;
     font-size: .9em;
+}
+.filelist{
+  display: block;
 }
 .space{
     flex-grow: 2;
