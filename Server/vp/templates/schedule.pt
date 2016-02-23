@@ -8,6 +8,7 @@
     <title>Vertretungsplan</title>
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
+    <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
     <?python
@@ -32,9 +33,6 @@
           }
           return colors.get(subject, '#555555') # Wert falls nicht gefunden
     ?>
-    <script>
-      var currentSlide = 0;
-    </script>
 </head>
 <body>
     <div id="wrapper">
@@ -48,8 +46,8 @@
                 Vertretungsplan
         </div>
         <div class="slidebutton">
-          <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide2('left')"><span class="day_title" id="left">Freitag</span></div>
-          <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide2('right')"><span class="day_title" id="right">Donnerstag</span></div>
+          <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')"><span class="day_title" id="left">Freitag</span></div>
+          <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')"><span class="day_title" id="right">Donnerstag</span></div>
         </div>
         <div class="slide" tal:repeat="day days" data-index="${day.index}">
             <!-- data-index ist der relative index zum aktuellen datum.
