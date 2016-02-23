@@ -8,6 +8,7 @@
     <title>Vertretungsplan</title>
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
+    <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
     <?python
@@ -67,18 +68,30 @@
                     <td class="entry" tal:content="event.old['subject']" />
                     <td class="entry" tal:content="event.old['teacher']" />
                     <td class="entry" tal:content="event.info" />
+                    <td class="entry" tal:content="event.targets" />
                 </tr>
             </table>
         </div>
-        <!--<script>
-            for(var i = 0; i < document.body.children.length; i++) {
-                var a = $('.event')[0].children[i];
-                if(a.data!="10a") {
-                    a.remove();
-                    console.log(a + " removed");
-                }
+        <script>
+          var showAll = false;
+          if(typeof $ == 'undefined') console.log("$ Error");
+          removeEntries = function(){
+            c = 0;
+            for(var i = 0; i < $(".event").length; i++) {
+              var b = $(".event")[i];
+              dSet = b.dataset['targets'].toLowerCase();
+              console.log(">" + dSet + "<");
+              if(!(dSet.contains("sci") || showAll)) { // cookie reading here
+                console.log(b.remove()); // Ich bin SEHR verwirrt... manchmal haut das die Zeilen raus und manchmal nicht...
+              } else {
+                console.log("--- ENTRY FOUND ---");
+                c++;
+              }
             }
-
+            console.log(c);
+            if(!c) $(".table").innerHTML += "keine Vertretungen";
+          }
+          $(removeEntries);
         </script>-->
         <!---<footer id="footer">CZG 2016</footer>--->
     </div>

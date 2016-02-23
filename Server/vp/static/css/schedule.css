@@ -23,7 +23,7 @@
 		font-family: Helvetica, Ubuntu, sans-serif;
 	}
 	.entry {
-		font-family: 'Open Sans', sans-serif;
+		font-family: Helvetica, Ubuntu, 'Open Sans', sans-serif;
 	}
 
 	a {
@@ -76,6 +76,8 @@
 	  flex-wrap: nowrap;
 	  justify-content: flex-start;
 	  align-items: stretch;
+
+		overflow: hidden;
 	}
 	#header{
 		z-index: 5;
@@ -85,6 +87,7 @@
 		padding-top: 1em;
 		color: white;
 		text-align: center;
+		text-shadow: 1px 3px 10px black;
 	}
 	.space{
 		flex-grow: 2;
@@ -99,6 +102,7 @@
 		left: 50%;
 		transform: translateX(-50%);
 		transition: transform 1s;
+		min-width: 40%;
 	}
 	.slide>.slide_title{
 		text-align: center;
