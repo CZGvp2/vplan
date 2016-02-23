@@ -62,14 +62,14 @@ def read_via_tmp(input_file):
 
 	return content
 
+to_datetime = lambda day: datetime(**day['date'])
+
 def add_day(data, new_day):
 	"""Fügt einen neuen Tag zu data hinzu. Gibt (data, info) zurück, wobei info (action, date) ist"""
 	try:
 		days = data['days']
 		new_date = new_day['date']
-		parsed_date = parse_response_date(new_date)
-
-		to_datetime = lambda day: datetime(**day['date'])
+		parsed_date = parse_response_date(new_date)	
 
 		# Entfernen veralteter Dateien (erstmal nich)
 #		today = datetime.today()

@@ -1,68 +1,141 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-.entry {
-	font-family: 'Open Sans', sans-serif;
-}
+@media screen{
+	*{
+		z-index: 2;
+		font-family: Helvetica, Ubuntu, sans-serif;
+	}
+	.entry {
+		font-family: 'Open Sans', sans-serif;
+	}
 
-a {
-	font-family: 'Open Sans', sans-serif;
-	text-decoration: none;
-	color: white;
-}
-body{
-	padding: 0;
-	margin: 0;
-}
-#topbar{
-	display: flex;
+	a {
+		font-family: 'Open Sans', sans-serif;
+		text-decoration: none;
+		color: white;
+	}
+	body{
+		padding: 0;
+		margin: 0;
+		background-color: #0e0e0e;
+		color: white;
+	}
+	#topbar{
+		display: flex;
+	  flex-direction: row;
+	  flex-wrap: nowrap;
+	  justify-content: space-between;
+	  align-items: stretch;
 
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    align-items: stretch;
+		top: 0;
+		left: 0;
+		margin: 0;
+		margin-left: 2em;
+		margin-right: 2em;
+		padding: 0;
+		background-color: #0e0e0e;
+		width: auto;
+		min-height: 2em;
+		height: 15%;
+		max-height: 3em;
+		line-height: 2em;
+		vertical-align: middle;
+	}
+	#topbar>a{
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+	#topbar>img{
+		height: 100%;
+		width: auto;
+	}
+	#wrapper{
+		padding: 0;
+		margin: 0;
+		width: 100%;
+		display: flex;
 
-	top: 0;
-	left: 0;
-	margin: 0;
-	margin-bottom: 1em;
-	padding: 0;
-	background-color: #0e0e0e;
-	width: 100%;
-	min-height: 2em;
-	height: 15%;
-	max-height: 3em;
-	line-height: 2em;
-	vertical-align: middle;
+	  flex-direction: column;
+	  flex-wrap: nowrap;
+	  justify-content: flex-start;
+	  align-items: stretch;
+	}
+	#header{
+		background-color: #1d3954;
+		height: 1.5em;
+		font-size: 3em;
+		padding-top: 1em;
+		color: white;
+		text-align: center;
+	}
+	.space{
+		flex-grow: 2;
+	}
+	.slide{
+		padding: 1em;
+		background-color: #232323;
+		border-radius: 10px;
+		position: absolute;
+		margin-top: 1em;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.slide>.slide_title{
+		text-align: center;
+		font-size: 2em;
+	}
+	.slidebutton{
+		z-index: 0;
+		position: fixed;
+		top: 0;
+		height: 100%;
+		width: 100%;
+	}
+	.singleslidebutton{
+		position: absolute;
+		height: 100%;
+		z-index: 1;
+		width: 2em;
+		background-color: #232323;
+		transition: background-color .2s;
+
+		display: flex;
+	  flex-direction: column;
+	  flex-wrap: nowrap;
+	  justify-content: center;
+	  align-items: stretch;
+	}
+	.singleslidebutton>.day_title{
+		display: block;
+		transform: rotate(-90deg);
+	}
+	.singleslidebutton:hover{
+		background-color: #3a7ab6;
+	}
+	#leftslidebutton{
+		left: 0;
+	}
+	#rightslidebutton{
+		right: 0;
+	}
+	@media print{
+		/* Drucker-CSS*/
+	}
+
+	/**
+	Mögliche @media-Einträge:
+		screen - Computerbildschirme
+		handheld - Handys und Tablets (nicht ganz zuverlässig, aber eig. ausreichend)
+		all - alle halt
+		aural - sprach- und tonsynthese (frag mich nicht wieso man dafür css braucht)
+		braille - "Used for braille tactile feedback devices"
+		embossed - "Used for paged braille printers"
+		print - Drucker (sollte unter 2 Umständen benutzt werden: 1. das gerät sagt ich bin ein drucker 2. der browser sagt es wird jetzt gedruckt)
+		projection - präsentation wie power-point, keine ahnung wann das benutzt wird
+		tty - Terminals (WIESO braucht man CSS um mit NEM TERMINAL ne WEBSITE zu öffnen, wie auch immer das gehen soll?!??!!)
+		tv - Fernseher (das is ok)
+
+	diese dinger können auch einem style-link übergeben werden
+	(beispiel:
+		<link rel="stylesheet" type="text/css" href="print.css" media="print">
+	wird nur beim drucken eingebunden)
+	*/
 }
-#wrapper{
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	display: flex;
-
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-}
-@media print{
-	/* Drucker-CSS*/
-}
-
-/**
-Mögliche @media-Einträge:
-	screen - Computerbildschirme
-	handheld - Handys und Tablets (nicht ganz zuverlässig, aber eig. ausreichend)
-	all - alle halt
-	aural - sprach- und tonsynthese (frag mich nicht wieso man dafür css braucht)
-	braille - "Used for braille tactile feedback devices"
-	embossed - "Used for paged braille printers"
-	print - Drucker (sollte unter 2 Umständen benutzt werden: 1. das gerät sagt ich bin ein drucker 2. der browser sagt es wird jetzt gedruckt)
-	projection - präsentation wie power-point, keine ahnung wann das benutzt wird
-	tty - Terminals (WIESO braucht man CSS um mit NEM TERMINAL ne WEBSITE zu öffnen, wie auch immer das gehen soll?!??!!)
-	tv - Fernseher (das is ok)
-
-diese dinger können auch einem style-link übergeben werden
-(beispiel: 
-	<link rel="stylesheet" type="text/css" href="print.css" media="print">
-wird nur beim drucken eingebunden)
-*/

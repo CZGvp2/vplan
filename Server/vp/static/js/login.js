@@ -7,14 +7,15 @@ $(document).ready(function () {
 			submit();
 
 		if ($('#password').val() || event.charCode) {
-			$('a#submit').css({'background-color':'#88A6FF', 'cursor':'pointer'})
+			// #88A6FF - border-bottom, button bg
+			$('a#submit').css({'background-color':'#316495', 'cursor':'pointer'})
 			.off('click').on('click', submit);
-			$('#password').css('border-bottom-color', '#88A6FF');
+			$('#password').css('border-bottom-color', '#316495');
 			$('div#submit').css('margin-top', '73px');
 			$('#incorrect').hide();
 		}
 		else {
-			$('a#submit').css({'background-color':'#DCDCDC', 'cursor':'default'})
+			$('a#submit').css({'background-color':'#232323', 'cursor':'default'})
 			.off('click');
 		}
 	})
