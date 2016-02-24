@@ -11,6 +11,9 @@
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
+    <script>
+      //currentIndex =
+    </script>
     <?python
       def color(subject):
           """Gibt die Farbe des Faches zurück"""
@@ -52,16 +55,17 @@
         <div class="slide" tal:repeat="day days" data-index="${day.index}">
             <!-- data-index ist der relative index zum aktuellen datum.
                  aber eigentlich brauchen wir das doch nicht, da die tage ja sowieso chronologisch geordnet sind,
-                 und es keine daten vor dem heutigen tag gibt, oder? -->
+                 und es keine daten vor dem heutigen tag gibt, oder? ja, aber ist trotzdem gut mit drin zu haben... vlt wollen wir ja den vorherigen tag noch drinlassen -->
             <div class="slide_title">
                 ${day.date['weekday']}
             </div>
+            <span style="font-size: .6em;">(${day.date['date']})</span>
             <table class="table">
                 <tr class="event" tal:repeat="event day.events" data-targets="${' '.join(event.targets)}" >
                     <td class="entry" />
                     <td class="entry" tal:content="event.time" />
-                    <td class="entry" style="background-color: white; padding: .1em;">
-                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; color: white; display: block;"></span>
+                    <td class="entry"> <!--style="background-color: white; padding: .1em;"-->
+                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; display: block;"></span>
                     </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />
