@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta name="description" content="Vertretungsplan des CZG" />
     <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
+
     <title>Vertretungsplan</title>
+
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
+
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
     <!--<script>
       //currentIndex =
     </script>-->
-    <?python
+    <?python # Preprocessor function definition
       def color(subject):
           """Gibt die Farbe des Faches zurück"""
           colors = { # alle Farben von Philip ausgewählt
@@ -38,12 +41,13 @@
     ?>
 </head>
 <body>
+    <div id="fixedHeader">Vertretungsplan</div>
     <div id="wrapper">
         <div id="topbar">
             <a href="${request.route_path('home', _query='logout')}">Abmelden</a>
             <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
             <div class="space"></div>
-            <img src="${request.static_path('vp:static/img/menue_icon.png')}" onClick="toggleMenue(); console.log('Menue Button Clicked')" height="1em" width="1em"></img><!-- TODO: IMAGE -->
+            <img src="${request.static_path('vp:static/img/menue_icon.png')}" onClick="toggleMenue();" height="1em" width="1em"></img>
         </div>
         <div id="header">
                 Vertretungsplan

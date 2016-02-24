@@ -91,6 +91,19 @@
 		text-shadow: 1px 3px 10px black;
 
 	}
+	#fixedHeader{
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 51;
+		height: 1.5em;
+		width: 100%;
+		font-size: 1.5em;
+		background-color: #1d3954;
+		padding-top: 10px;
+		text-align: center;
+		text-shadow: 1px 3px 10px black;
+	}
 	.space{
 		flex-grow: 2;
 	}
@@ -134,7 +147,9 @@
 	}
 	.singleslidebutton>.day_title{
 		display: block;
-		transform: rotate(-90deg);
+		transform: rotate(-90deg) translateX(-50%);
+		/* fun fact: vor der totation wär das translateY(50%) gewesen.
+		CSS3 Rotation dreht den Koordinatenursprung mit dem Element mit */
 	}
 	.singleslidebutton:hover{
 		background-color: #3a7ab6;
@@ -149,7 +164,7 @@
 		position: absolute;
 	}
 
-	.inner-container::-webkit-scrollbar {
+	body::-webkit-scrollbar {
 	  display: none;
 	}
 	/**

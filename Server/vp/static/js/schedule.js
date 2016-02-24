@@ -1,4 +1,4 @@
-// Die is schön
+// Filter functions
 filter = function(target) {
 	var events = $('.event');
 	if(target){
@@ -19,9 +19,34 @@ removeFilter = function(){
   }
 }
 
+// Cookie functions
+setCookie = function(attrib, value, exp_days) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exp_days*24*60*60*1000));
+  document.cookie = attrib + "=" + value + "; expires=" + d.toUTCString();
+}
+
+getCookie = function(attrib){
+  var split_cookie = document.cookie.split("; ");
+  attrib+="=";
+  for(var i=0; i<split_cookie.length; i++)
+    if(split_cookie[i].indexOf(attrib) == 0)
+      return split_cookie[i].substring(attrib.length,split_cookie[i].length);
+  return "";
+}
+
+removeCookie = function(attrib){
+  setCookie(attrib, "", -1);
+}
+
+
 var currentIndex = 0;
 
-prepSlides = function(){
+// Setup function
+setup = function(){
+  filter(getCookie("class"));
+  $("#fixedHeader").hide();
+  setSidebars(currentIndex, $(".slide"));
   var slides = $('.slide');
   for(var i = 0; i < slides.length; i++)
     slides[i].style.display = i==currentIndex?'block':'none';
@@ -29,23 +54,27 @@ prepSlides = function(){
   $('#right').get(0).innerHTML = currentIndex<slides.length-1?slides[currentIndex+1].children[0].innerHTML:'---';
 }
 
+// Quick access to Math-Package functions
 max = function(i, j){ return Math.max(i, j); }
 min = function(i, j){ return Math.min(i, j); }
 
 var animationTime = 0.5;
 var t_out = -1;
 
+// Function to allow sliding between different days
+// Argument: "left" or "right"
 toggleSlide = function(dir){
-  var slides = $(".slide");
+  var slides = $(".slide"); // <- jQuery
   if(slides.length <= 1 || t_out >= 0) return;
-  scrollTo(0,0)
-  var nextSlide = dir=="left"?max(currentIndex-1, 0):min(currentIndex+1,slides.length-1);
-  if(nextSlide!=currentIndex){
+  var nextIndex = dir=="left"?max(currentIndex-1, 0):min(currentIndex+1,slides.length-1);
+  if(nextIndex!=currentIndex){
+    scrollTo(0,0);
+    onScroll(0);
     for(var i = 0; i < slides.length; i++) slides[i].style.display = "none";
-    slides[nextSlide].style.display = slides[currentIndex].style.display = "block";
-    slides[currentIndex].style.animation = (nextSlide>currentIndex?"fade_left":"fade_right") + " " + animationTime + "s ease-in-out 0s 1";
-    slides[nextSlide].style.animation = (nextSlide<currentIndex?"from_left":"from_right") + " " + animationTime + "s ease-in-out 0s 1";
-    var tmpNext = nextSlide;
+    slides[nextIndex].style.display = slides[currentIndex].style.display = "block";
+    slides[currentIndex].style.animation = (nextIndex>currentIndex?"fade_left":"fade_right") + " " + animationTime + "s ease-in-out 0s 1";
+    slides[nextIndex].style.animation = (nextIndex<currentIndex?"from_left":"from_right") + " " + animationTime + "s ease-in-out 0s 1";
+    var tmpNext = nextIndex;
     var tmpCurr = currentIndex;
     slides[tmpNext].style.display = "block";
     t_out = window.setTimeout(function(){
@@ -54,58 +83,62 @@ toggleSlide = function(dir){
     }, animationTime*1000);
   } else {
     slides[currentIndex].style.display = "none";
-    slides[nextSlide].style.display = "block";
-  }
-  currentIndex = nextSlide;
-  $("#left").get(0).innerHTML = currentIndex>0?slides[currentIndex-1].children[0].innerHTML:"---";
-  $("#right").get(0).innerHTML = currentIndex<slides.length-1?slides[currentIndex+1].children[0].innerHTML:"---";
-}
-
-// EINE KOSTPROBE JQUERY
-//... die nicht funktioniert?!? schau mal auf die Tagesnamen an den Seiten,
-// wenn man toggleSlide in der .pt mit toggleSlide2 ersetzt hängt das updaten immer ne slide hinterher
-/*toggleSlide2 = function(dir){
-  var slides = $('.slide');
-  if(slides.length <= 1) return;
-  var nextIndex = dir=='left'?max(currentIndex-1, 0):min(currentIndex+1,slides.length-1);
-
-  var currentSlide = $( slides[currentIndex] );
-  var nextSlide = $( slides[nextIndex] );
-
-  if(nextIndex != currentIndex){
-    slides.hide();
-    currentSlide.show();
-    nextSlide.show();
-
-    currentSlide.css({animation: (nextIndex>currentIndex?'fade_left':'fade_right') + ' ' + animationTime + 's ease-in-out 0s 1'});
-    nextSlide.css({animation: (nextIndex<currentIndex?'from_left':'from_right') + ' ' + animationTime + 's ease-in-out 0s 1'});
-    var tmpNext = $( slides[nextIndex] );
-    var tmpCurr = $( slides[currentIndex] );
-    window.setTimeout(function() {
-        tmpNext.show();
-        tmpCurr.hide();
-    }, animationTime*1000);
-  } else {
-    currentSlide.hide();
-    nextSlide.show();
+    slides[nextIndex].style.display = "block";
   }
   currentIndex = nextIndex;
-  var prev = currentSlide.prev('.slide');
-  var next = currentSlide.next('.slide');
-  $("#left").text(prev.length ? prev.find('div.slide_title').text() : '---');
-  $("#right").text(next.length ? next.find('div.slide_title').text() : '---');
-}*/
+  setSidebars(currentIndex, slides);
+}
 
-// Bist du jetzt glücklich?
+setSidebars = function(idx, slides){
+  if(idx>0){
+    $("#leftslidebutton").show();
+    $("#left").text($(slides[idx-1]).find(".slide_title").text());
+  } else $("#leftslidebutton").hide();
+  if(idx<slides.length-1){
+    $("#rightslidebutton").show();
+    $("#right").text($(slides[idx+1]).find(".slide_title").text());
+  } else $("#rightslidebutton").hide();
+}
+
+onScroll = function(evt){
+  if(typeof evt == 'number') $("#fixedHeader").hide();
+  else{
+    evt.preventDefault();
+    if(scrollY > $("#wrapper").height() - $("#fixedHeader").height() - 20 && !show_f_h){
+      $("#fixedHeader").fadeIn(animationTime*1000*0.5);
+      show_f_h = true;
+    }
+    else if(scrollY < $("#wrapper").height() - $("#fixedHeader").height() - 20 && show_f_h){
+      $("#fixedHeader").fadeOut(animationTime*1000*0.5);
+      show_f_h = false;
+    }
+  }
+}
+
+toggleMenue = function(){
+  console.log("Menue button clicked");
+  removeFilter();
+}
+
 // Add keylistener to toggle slides via arrow keys
 $(document).on('keypress', function(evt){
-  evt.preventDefault();
-  evt.stopPropagation();
   switch(evt.keyCode){
-    case 37: toggleSlide('left'); break;
-    case 39: toggleSlide('right'); break;
+    case 37:
+      toggleSlide('left');
+      evt.preventDefault();
+      evt.stopPropagation();
+      break;
+    case 39:
+      toggleSlide('right');
+      evt.preventDefault();
+      evt.stopPropagation();
+      break;
   }
 });
 
-// Call prepSlides() when DOM is ready
-$(prepSlides);
+var show_f_h = false;
+// Catch Scrollevents, show or hide header
+$(document).on('scroll', onScroll);
+
+// Call setup() when DOM is ready
+$(setup);
