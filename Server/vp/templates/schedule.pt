@@ -11,9 +11,9 @@
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
-    <script>
+    <!--<script>
       //currentIndex =
-    </script>
+    </script>-->
     <?python
       def color(subject):
           """Gibt die Farbe des Faches zurück"""
@@ -34,7 +34,7 @@
             'Ku' : '#A0008C',
             'Mu' : '#8C00A0'
           }
-          return colors.get(subject, '#555555') # Wert falls nicht gefunden
+          return colors.get(subject, '#555555')
     ?>
 </head>
 <body>
@@ -53,9 +53,6 @@
           <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')"><span class="day_title" id="right">Donnerstag</span></div>
         </div>
         <div class="slide" tal:repeat="day days" data-index="${day.index}">
-            <!-- data-index ist der relative index zum aktuellen datum.
-                 aber eigentlich brauchen wir das doch nicht, da die tage ja sowieso chronologisch geordnet sind,
-                 und es keine daten vor dem heutigen tag gibt, oder? ja, aber ist trotzdem gut mit drin zu haben... vlt wollen wir ja den vorherigen tag noch drinlassen -->
             <div class="slide_title">
                 ${day.date['weekday']}
             </div>
@@ -64,8 +61,8 @@
                 <tr class="event" tal:repeat="event day.events" data-targets="${' '.join(event.targets)}" >
                     <td class="entry" />
                     <td class="entry" tal:content="event.time" />
-                    <td class="entry"> <!--style="background-color: white; padding: .1em;"-->
-                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; display: block;"></span>
+                    <td class="entry">
+                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; display: block; margin-left: .1em; min-width: 50px; text-align: center;"></span>
                     </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />
@@ -75,7 +72,6 @@
                 </tr>
             </table>
         </div>
-        <!-- <footer id="footer">CZG 2016</footer> -->
     </div>
 </body>
 </html>

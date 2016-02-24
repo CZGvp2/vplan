@@ -33,10 +33,12 @@ max = function(i, j){ return Math.max(i, j); }
 min = function(i, j){ return Math.min(i, j); }
 
 var animationTime = 0.5;
+var t_out = -1;
 
 toggleSlide = function(dir){
   var slides = $(".slide");
-  if(slides.length <= 1) return;
+  if(slides.length <= 1 || t_out >= 0) return;
+  scrollTo(0,0)
   var nextSlide = dir=="left"?max(currentIndex-1, 0):min(currentIndex+1,slides.length-1);
   if(nextSlide!=currentIndex){
     for(var i = 0; i < slides.length; i++) slides[i].style.display = "none";
@@ -45,9 +47,10 @@ toggleSlide = function(dir){
     slides[nextSlide].style.animation = (nextSlide<currentIndex?"from_left":"from_right") + " " + animationTime + "s ease-in-out 0s 1";
     var tmpNext = nextSlide;
     var tmpCurr = currentIndex;
-    window.setTimeout(function(){
-        slides[tmpNext].style.display = "block";
+    slides[tmpNext].style.display = "block";
+    t_out = window.setTimeout(function(){
         slides[tmpCurr].style.display = "none";
+        t_out = -1;
     }, animationTime*1000);
   } else {
     slides[currentIndex].style.display = "none";
@@ -96,6 +99,8 @@ toggleSlide = function(dir){
 // Bist du jetzt glücklich?
 // Add keylistener to toggle slides via arrow keys
 $(document).on('keypress', function(evt){
+  evt.preventDefault();
+  evt.stopPropagation();
   switch(evt.keyCode){
     case 37: toggleSlide('left'); break;
     case 39: toggleSlide('right'); break;

@@ -1,0 +1,210 @@
+@media all {
+  html, body {
+    margin:20px; 
+    padding:0px; 
+    }
+
+  body {
+    background-color:white;
+    color:black;
+    font-family:Helvetica,Arial,Tahoma,sans-serif;
+    font-size:12px;
+    text-align:left;
+    }
+
+  .vpfuer { 
+    font-size:14px;
+    }
+    
+  .vpfuerdatum { 
+    font-weight:bold;
+    }
+    
+  .vpschulname { 
+    font-size:10px;
+    }
+    
+  .vpdatum { 
+    font-size:10px;
+    }  
+
+  .ueberschrift {
+    font-size:12px;
+    font-weight:bold;
+    padding:0px;
+    }  
+
+  table {
+    border-collapse:collapse;
+    border-color:black;
+    table-layout:fixed;
+    
+    /* 
+    width:100%;
+    */ 
+
+    font-size:12px;
+    overflow:hidden;
+    }
+  
+    
+  .tableplan {
+    }
+   
+  .thplanklasse {
+    font-size:12px;
+
+    /* 
+    width:100px 
+    */ 
+    }
+     
+  .thplanstunde {
+    font-size:12px;
+    /* 
+    width:50px;
+    */ 
+    }
+     
+  .thplanfach {
+    font-size:12px;
+    /* 
+    width:50px;
+    */ 
+    }
+     
+  .thplanlehrer {
+    font-size:12px;
+    /* 
+    width:150px;
+    */ 
+    }
+     
+  .thplanraum {
+    font-size:12px;
+    /* 
+    width:50px;
+    */ 
+    }
+     
+  .thplaninfo {
+    font-size:12px;
+    }
+     
+  .thlplanstunde {
+    /* 
+    width:20px;
+    */ 
+    }
+     
+  .thlplanfach {
+    /* 
+    width:40px;
+    */ 
+    }
+     
+  .thlplanlehrer {
+    /* 
+    width:150px;
+    */ 
+    }
+
+  .thlplanklasse {
+    /* 
+    width:100px;
+    */ 
+    }
+
+  .thlplanvfach {
+    /* 
+    width:40px;
+    */ 
+    }
+
+  .thlplanvlehrer {
+    /* 
+    width:150px;
+    */ 
+    }
+     
+  .thlplanvraum {
+    /* 
+    width:40px;
+    */ 
+    }
+
+  .thlplaninfo {
+    /* 
+    width:200px;
+    */ 
+    }
+
+  .kopfstunde {
+    font-size:12px;
+    font-weight:bold;
+    width:50px;
+    text-align:center;
+    }
+     
+  .kopftag {
+    font-size:12px;
+    font-weight:bold;
+    text-align:center;
+    }
+     
+  .stunde {
+    font-size:12px;
+    text-align:center;
+    }
+
+  .klasse {
+    }
+   
+  tr {
+    vertical-align:top;
+    }
+   
+  td {
+    padding:5px;
+    border-color:black;
+    }
+    
+  th {
+    padding:5px;
+    border-color:black;
+    text-align:left;
+    }
+    
+  .thkopfabwesend {
+    padding-left:0px;
+    font-size:12px;
+    width:150px;
+    }
+
+  .thabwesend {
+    font-size:12px;
+    }
+
+  .thaktionen {
+    font-weight:bold;
+    font-size:12px;
+    }
+
+  .tdaktionen {
+    font-size:12px;
+    }
+
+  .tdaktionenneu {
+    font-size:12px;
+    color:red;
+    }
+
+  .aufsichtenkopf {
+    font-weight:bold;
+    font-size:12px;
+    }
+
+  .aufsichtendetails {
+    font-size:12px;
+    }
+  }

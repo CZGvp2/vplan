@@ -36,6 +36,7 @@
 		margin: 0;
 		background-color: #0e0e0e;
 		color: lightgray;
+		overflow-x: hidden;
 	}
 	#topbar{
 		display: flex;
@@ -73,14 +74,14 @@
 		display: flex;
 
 	  flex-direction: column;
-	  flex-wrap: nowrap;
+	  flex-wrap: wrap;
 	  justify-content: flex-start;
 	  align-items: stretch;
 
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 	#header{
-		z-index: 5;
+		z-index: 50;
 		background-color: #1d3954;
 		height: 1.5em;
 		font-size: 3em;
@@ -88,6 +89,7 @@
 		color: white;
 		text-align: center;
 		text-shadow: 1px 3px 10px black;
+
 	}
 	.space{
 		flex-grow: 2;
@@ -111,9 +113,10 @@
 	.slidebutton{
 		z-index: 0;
 		position: fixed;
-		top: 0;
-		height: 100%;
+		top: 50%;
+		height: 50%;
 		width: 100%;
+		transform: translateY(-50%);
 	}
 	.singleslidebutton{
 		position: absolute;
@@ -146,6 +149,9 @@
 		position: absolute;
 	}
 
+	.inner-container::-webkit-scrollbar {
+	  display: none;
+	}
 	/**
 	Mögliche @media-Einträge:
 		screen - Computerbildschirme
