@@ -58,6 +58,7 @@
 		max-height: 3em;
 		line-height: 2em;
 		vertical-align: middle;
+		overflow: visible;
 	}
 	#topbar>a{
 		padding-left: 1em;
@@ -162,6 +163,18 @@
 	}
 	#footer{
 		position: absolute;
+	}
+	#menu{
+		position: fixed;
+		right: 0;
+		min-width: 20%;
+		min-height: 20%;
+		top: 2em;
+		display: block;
+		z-index: 80;
+		background-color: #232323;
+		border: 3px solid #1d3954;
+		border-radius: 2em;
 	}
 
 	body::-webkit-scrollbar {

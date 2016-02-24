@@ -1,3 +1,19 @@
+/*
+* SCHEDULE.JS
+*
+* 1. Filter slides for a target query
+* 2. Read, write and remove Cookies
+* 3. Handle slides and corresponding keyEvents
+* 4. setup DOM once everything is built by the client
+*
+*/
+
+//vars
+var currentIndex = 0;
+var animationTime = 0.5;
+var t_out = -1;
+var show_f_h = false;
+
 // Filter functions
 filter = function(target) {
 	var events = $('.event');
@@ -23,6 +39,7 @@ removeFilter = function(){
 setCookie = function(attrib, value, exp_days) {
   var d = new Date();
   d.setTime(d.getTime() + (exp_days*24*60*60*1000));
+	// ich hab mal path=/ als standard dringelassen, müssen wir dasfür irgendwas ändern?
   document.cookie = attrib + "=" + value + "; expires=" + d.toUTCString();
 }
 
@@ -30,8 +47,8 @@ getCookie = function(attrib){
   var split_cookie = document.cookie.split("; ");
   attrib+="=";
   for(var i=0; i<split_cookie.length; i++)
-    if(split_cookie[i].indexOf(attrib) == 0)
-      return split_cookie[i].substring(attrib.length,split_cookie[i].length);
+    if(split_cookie[i].indexOf(attrib) != -1)
+      return split_cookie[i].substring(attrib.length + split_cookie[i].indexOf(attrib),split_cookie[i].length);
   return "";
 }
 
@@ -39,14 +56,13 @@ removeCookie = function(attrib){
   setCookie(attrib, "", -1);
 }
 
-
-var currentIndex = 0;
-
 // Setup function
 setup = function(){
   filter(getCookie("class"));
   $("#fixedHeader").hide();
   setSidebars(currentIndex, $(".slide"));
+	// "Debug" function
+	if(getCookie("philip").indexOf('q')==0) alert(getCookie("philip").substring(1));
   var slides = $('.slide');
   for(var i = 0; i < slides.length; i++)
     slides[i].style.display = i==currentIndex?'block':'none';
@@ -57,9 +73,6 @@ setup = function(){
 // Quick access to Math-Package functions
 max = function(i, j){ return Math.max(i, j); }
 min = function(i, j){ return Math.min(i, j); }
-
-var animationTime = 0.5;
-var t_out = -1;
 
 // Function to allow sliding between different days
 // Argument: "left" or "right"
@@ -136,8 +149,7 @@ $(document).on('keypress', function(evt){
   }
 });
 
-var show_f_h = false;
-// Catch Scrollevents, show or hide header
+// Catch Scrollevents, show/hide header if necessary
 $(document).on('scroll', onScroll);
 
 // Call setup() when DOM is ready
