@@ -14,10 +14,10 @@ locale.setlocale(locale.LC_TIME, 'deu_deu')  # TODO fehler auf Unix?
 
 
 # 08A, 10B usw.
-SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
+SIMPLE = re.compile( r'^(0[5-9]|10)[A-D]$' )
 
 # Klassenübergreifend. Bsp: "08A,08B,08C/ 08FRZ2", "06A,06B/ 06ABET", "10C/ 10CIF2"
-MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(?P<grade>0[5-9]|10)[A-D]{,4})(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
+MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(0[5-9]|10)[A-D]{,4})(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
 
 # Kurssystem Bsp.: 11/ ma2  oder 12/ de1
 COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)$' ) # TODO spezielles Parsen
@@ -44,82 +44,61 @@ except ValueError:
 
 
 lower = lambda text: (text[1:] if text[0] == '0' else text).lower() # '08' -> '8', oder '09B' -> '9b'
-to_int = lambda text: None if not text else int(text)
 
-class Selector:
-	"""Bezeichner für die Klassen"""
-	def __init__(self, text):
-		parsers = [
-			('SIMPLE', self.parse_simple),
-			('MULT', self.parse_mult),
-			('COURSE', self.parse_course)
-		]
+def parse_simple(text):
+	match = SIMPLE.match(text)
+	if not match:
+		return None, ()
 
-		self.type = 'FAILED'
+	_class = lower(text)
+	return {
+		'type': 'SIMPLE',
+		'class': _class,
+	}, (_class,)
 
-		for type, parser in parsers:
-			if parser(text):
-				self.type = type
-				break
+def parse_mult(text):
+	"""Parst einen auf mehrere Klassen verweisenden Ausdruck. Gibt JSON und tupel von targets zurück."""
+	match = MULT.match(text)
+	if not match:
+		return None, ()
 
-		if self.type == 'FAILED':
-			log.warning('Could not parse class "%s"', text)
-			self.text = text
-			self.targets = ('notset', )
+	data = {
+		'type': 'MULT',
+		'classes': lower( match.group('classes') ),
+		'subject': replace_subject( match.group('subject') ),
+		'subclass': match.group('subclass')
+	}
+	targets = tuple( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ['8a', '8b', '8c']
 
-	def parse_simple(self, text):
-		"""Einfacher Ausdruck, wie 8C oder 10C"""
-		match = SIMPLE.match(text)
-		if not match:
-			return False
+	return data, targets
 
-		self.grade = int( match.group('grade') )
-		self.subgrade = match.group('subgrade').lower()
-		self.targets = (lower(text), )
+def parse_course(text):
+	match = COURSE.match(text)
+	if not match:
+		return None, ()
 
-		return True
+	data = match.groupdict()  # hat grade und subclass gleich drin
 
-	def parse_mult(self, text):
-		"""Parst einen auf mehrere Klassen verweisenden Ausdruck."""
-		match = MULT.match(text)
-		if not match:
-			return False
+	# Hinzufügen der weiteren Daten
+	data['type'] = 'COURSE'
+	data['subject'] = replace_subject( match.group('subject') )
 
-		self.classes = lower( match.group('classes') )
-		self.grade = int( match.group('grade') )
-		self.subject = replace_subject( match.group('subject') )
-		self.subclass = to_int( match.group('subclass') )
-		self.targets = tuple( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ('8a', '8b', '8c')
+	return data, ( match.group('grade'), )
 
-		return True
+def parse_selector(text):
+	"""Parst einen Klassen-Bezeichner in JSON, gibt data und targets zurück"""
 
-	def parse_course(self, text):
-		"""Parst einen Kurs"""
-		match = COURSE.match(text)
-		if not match:
-			return False # hat grade und subclass gleich drin
+	for parser in (parse_simple, parse_mult, parse_course):
+		data, targets = parser(text)
 
-		self.grade = int( match.group('grade') )
-		self.subject = match.group('subject')
-		self.subclass = to_int( match.group('subclass') )
-		self.targets = (str(self.grade), )
+		if data:
+			return data, targets
 
-		return True
-
-	def json(self):
-		data = self.__dict__.copy()
-		data.pop('targets')
-		return data
-
-	def get_z(self):
-		"""Gibt einen Wert zum Sortieren zurück"""
-		if self.type == 'FAILED':
-			return 500  # ganz groß
-
-		order = 'SIMPLE', 'MULT', 'COURSE'
-
-		return 100*order.index(self.type) + self.grade
-
+	log.warning('Could not parse class "%s"', text)
+	return {
+		'type': 'FAILED',
+		'class': text
+	}, ()
 
 def replace_subject(text):
 	"""Ersetzt ein Fach."""

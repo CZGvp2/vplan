@@ -3,14 +3,9 @@
 
  - [ ] Exception args für User
  - [ ] weniger Exception classes
- - [ ] Probleme mit change
- - [ ] AG & WoU
- - [ ] Event-Klasse + Sortatition
+ - [ ] AG
  - [ ] get_schedule None problem
  - [ ] Sortation [des JSONS](https://github.com/CZGvp2/vplan/blob/master/Server/vp/data)
- - [ ] mehrfachstunden
- - [ ] Value Error int convert
- - [ ] schedule.json nur day-Array
 
 #Tim
 @Infoproject
@@ -18,8 +13,7 @@
  - [ ] TODO-Liste schreiben
  - [ ] Flexibles Design für alles
  - [ ] Wenn irgendwann mal das Format für das PlanJSON feststeht, ne ordentliche Seite
- - [ ] [das hier Lesen](https://github.com/CZGvp2/vplan/blob/master/Server/vp/schedule.py#L17)
- - [ ] [und das auch](https://github.com/CZGvp2/vplan/blob/master/Server/vp/upload.py#L112)
+
 Code:
 ```javascript
 (var loop = function(a){
