@@ -1,8 +1,9 @@
 #Kamal
 @Port5053
 
- - [x] Exception args für User
- - [x] AG & WoU & Course
+ - [ ] Exception args für User
+ - [ ] AG & WoU & Course
+ - [ ] automatisch schedule.json erzeugen
 
 #Tim
 @Infoproject
