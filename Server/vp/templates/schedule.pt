@@ -15,26 +15,29 @@
       //currentIndex =
     </script>-->
     <?python
-      def color(subject):
-          """Gibt die Farbe des Faches zurück"""
-          colors = { # alle Farben von Philip ausgewählt
-            'Ma' : '#006496',
-            'Ph' : '#3296C8',
-            'Inf' : '#64C8FA',
-            'Ch' : '#009632',
-            'Bio' : '#00C800',
-            'De' : '#B40000',
-            'Ge' : '#FF9B0F',
-            'Geo' : '#FF690F',
-            'En' : '#96001E',
-            'Frz' : '#78003C',
-            'La' : '#78003C',
-            'Ru' : '#78003C',
-            'Et' : '#FFCD0F',
-            'Ku' : '#A0008C',
-            'Mu' : '#8C00A0'
-          }
-          return colors.get(subject, '#555555')
+    def color(subject):
+        """Gibt die Farbe des Faches zurück"""
+        colors = { # alle Farben von Philip ausgewählt
+        'Ma' : '#006496',
+        'Ph' : '#3296C8',
+        'Inf' : '#64C8FA',
+        'Ch' : '#009632',
+        'Bio' : '#00C800',
+        'De' : '#B40000',
+        'Ge' : '#FF9B0F',
+        'Geo' : '#FF690F',
+        'En' : '#96001E',
+        'Frz' : '#78003C',
+        'La' : '#78003C',
+        'Ru' : '#78003C',
+        'Et' : '#FFCD0F',
+        'Ku' : '#A0008C',
+        'Mu' : '#8C00A0'
+        }
+        return colors.get(subject, '#555555')
+
+    def join(iterable, string):
+        return string.join( map(str, iterable) )
     ?>
 </head>
 <body>
@@ -51,8 +54,12 @@
                 Vertretungsplan
         </div>
         <div class="slidebutton">
-          <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')"><span class="day_title" id="left">Freitag</span></div>
-          <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')"><span class="day_title" id="right">Donnerstag</span></div>
+          <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')">
+              <span class="day_title" id="left">Freitag</span>
+          </div>
+          <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')">
+              <span class="day_title" id="right">Donnerstag</span>
+          </div>
         </div>
         <div class="slide" tal:repeat="day days">
             <div class="slide_title">
@@ -60,13 +67,11 @@
             </div>
             <span style="font-size: .6em;">(${day.date['date']})</span>
             <table class="table">
-                <tr class="event" tal:repeat="event day.events" data-targets="${' '.join(event.targets)}" >
+                <tr class="event" tal:repeat="event day.events" data-targets="${join(event.targets, ' ')}" >
                     <td class="entry" />
-                    <td class="entry">${', '.join( map(str, event.time) )}<td/>
+                    <td class="entry">${join(event.time, ', ')}<td/>
                     <td class="entry">
-                      <span tal:content="event.new['subject']"
-                            class="class_identifier"
-                            style="background-image: linear-gradient(to bottom, ${color(event.new['subject'])} 40%, #FFFFFF 180%);"></span>
+                        <span class="class_identifier" style="background-color:${color(event.new['subject'])}">${event.new['subject']}</span>
                     </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />

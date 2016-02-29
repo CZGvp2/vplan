@@ -6,7 +6,7 @@ import os
 log_file = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data/server.log' ) )
 
 log = logging.getLogger('serverlog')
-file_logger = logging.FileHandler(log_file)
+file_logger = logging.FileHandler(log_file, mode='w', encoding='utf-8')
 
 formatter = logging.Formatter(
 	fmt='%(asctime)s [%(levelname)-8s] %(message)s',

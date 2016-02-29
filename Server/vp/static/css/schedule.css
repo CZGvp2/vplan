@@ -20,10 +20,6 @@
 @media screen{
 	*{
 		z-index: 2;
-		font-family: Helvetica, Ubuntu, sans-serif;
-	}
-	.entry {
-		font-family: Helvetica, Ubuntu, 'Open Sans', sans-serif;
 	}
 	.entry>.class_identifier{
 		 display: block;
@@ -32,7 +28,6 @@
 		 text-align: center;
 	}
 	a {
-		font-family: 'Open Sans', sans-serif;
 		text-decoration: none;
 		color: white;
 	}

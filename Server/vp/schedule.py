@@ -16,6 +16,7 @@ def schedule(request):
 
 	return data
 
+
 """
 Die Struktur vom Schedule Template Vars
 

@@ -3,7 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <title>Vertretungsplan bearbeiten</title><!-- Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
+    <title>Vertretungsplan bearbeiten</title><!-- TODO Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
+    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/upload.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
