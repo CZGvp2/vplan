@@ -1,5 +1,7 @@
 from pyramid.view import view_config
 
+from datetime import datetime
+
 from .fileProcessing.file_handler import read_schedule, to_datetime
 from .fileProcessing.regex_parser import parse_response_date
 
@@ -76,44 +78,14 @@ Die Struktur vom Schedule Template Vars
 
 >> siehe Hier
 
-die Selektoren
+	for i, day in enumerate(data['days']):
+		if to_datetime(day) == today:
+			day_0 = i
 
-1. Typ: SIMPLE (z. B. 9a, 10b)
+		day['date'] = parse_response_date(day['date'])
 
-selector
-|
-+-- type = "SIMPLE"
-|
-+-- grade [int] (Klassenstufe)
-|
-+-- subgrade [String] (Klassenbuchstabe, klein)
-
-
-2. Typ: MULT (z. B. 10A,10B,10C/ 10FRZ2)
-
-selector
-|
-+-- type = "MULT"
-|
-+-- grade [int] (Klassenstufe)
-|
-+-- subgrades [String] (Klassenbuchstaben der gemeinten Klassen, z.b. 10A,10B/ 10ABET -> "ab", leer wenn keine angegeben)
-|
-+-- subject [String]
-|
-+-- subclass [int] (optionale Gruppenbezeichnung am Ende)
-
-
-2. Typ: COURSE (z. B. 11/ene1)
-
-selector
-|
-+-- type = "COURSE"
-|
-+-- grade [int] (Klassenstufe 11 oder 12)
-|
-+-- subject [String]
-|
-+-- subclass [int] (optionale Gruppenbezeichnung am Ende)
+	# Einfügen der relativen Indices mit day_0
+	for i, day in enumerate(data['days']):
+		day['index'] = i - day_0
 
 """

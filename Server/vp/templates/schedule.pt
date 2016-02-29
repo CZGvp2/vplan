@@ -11,10 +11,13 @@
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
+    <!--<script>
+      //currentIndex =
+    </script>-->
     <?python
-    def color(subject):
-        """Gibt die Farbe des Faches zurück"""
-        colors = { # alle Farben von Philip ausgewählt
+      def color(subject):
+          """Gibt die Farbe des Faches zurück"""
+          colors = { # alle Farben von Philip ausgewählt
             'Ma' : '#006496',
             'Ph' : '#3296C8',
             'Inf' : '#64C8FA',
@@ -30,9 +33,9 @@
             'Et' : '#FFCD0F',
             'Ku' : '#A0008C',
             'Mu' : '#8C00A0'
-        }
-        return colors.get(subject, '#555555')
-        ?>
+          }
+          return colors.get(subject, '#555555')
+    ?>
 </head>
 <body>
     <div id="fixedHeader">Vertretungsplan</div>
@@ -59,9 +62,11 @@
             <table class="table">
                 <tr class="event" tal:repeat="event day.events" data-targets="${' '.join(event.targets)}" >
                     <td class="entry" />
-                    <td class="entry" tal:content="event.time" />
+                    <td class="entry">${', '.join( map(str, event.time) )}<td/>
                     <td class="entry">
-                        <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; display: block; margin-left: .1em; min-width: 50px; text-align: center;"></span>
+                      <span tal:content="event.new['subject']"
+                            class="class_identifier"
+                            style="background-image: linear-gradient(to bottom, ${color(event.new['subject'])} 40%, #FFFFFF 180%);"></span>
                     </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />

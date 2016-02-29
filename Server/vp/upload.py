@@ -116,22 +116,20 @@ Struktur der Response
   +-- results [Array] (Ergebnisse der einzelnen Dateien, null falls Interner Fehler)
       |
       +---+ (Instanz des Arrays)
-      |   |
-      |   +-- success [boolean] (Falls Bearbeiten erfolgreich war)
-      |   |
-      |   +-- filename [String] (Name der Datei)
-      |   |
-      |   +-- date (Datum des Plans)
-      |   |   |
-      |   |   +-- weekday [String] (Wochentag)
-      |   |   |
-      |   |   +-- date [String] (Datum Bsp:"18. August 2012")
-      |   |
-      |   +-- errorCode [String] (Code des aufgetretenen Fehlers, bei keinem Fehler null)
-      |   |
-      |   +-- replaced [boolean] (false wenn Datei hinzugefügt, true wenn Datei ersetzt, null falls Fehler)
-      |
-     ...
+          |
+          +-- success [boolean] (Falls Bearbeiten erfolgreich war)
+          |
+          +-- filename [String] (Name der Datei)
+          |
+          +-- date (Datum des Plans)
+          |   |
+          |   +-- weekday [String] (Wochentag)
+          |   |
+          |   +-- date [String] (Datum Bsp:"18. August 2012")
+          |
+          +-- errorCode [String] (Code des aufgetretenen Fehlers, bei keinem Fehler null)
+          |
+          +-- replaced [boolean] (false wenn Datei hinzugefügt, true wenn Datei ersetzt, null falls Fehler)
 
 
 Beispiel

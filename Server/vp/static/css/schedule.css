@@ -25,7 +25,12 @@
 	.entry {
 		font-family: Helvetica, Ubuntu, 'Open Sans', sans-serif;
 	}
-
+	.entry>.class_identifier{
+		 display: block;
+		 margin-left: .1em;
+		 min-width: 50px;
+		 text-align: center;
+	}
 	a {
 		font-family: 'Open Sans', sans-serif;
 		text-decoration: none;
@@ -84,6 +89,7 @@
 	#header{
 		z-index: 50;
 		background-color: #1d3954;
+		background-image: linear-gradient(to bottom, #0e0e0e 0%, rgba(0,0,0,0) 20%);
 		height: 1.5em;
 		font-size: 3em;
 		padding-top: 1em;

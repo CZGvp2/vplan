@@ -60,9 +60,14 @@ removeCookie = function(attrib){
 setup = function(){
   filter(getCookie("class"));
   $("#fixedHeader").hide();
+	$(".empty_msg").hide();
   setSidebars(currentIndex, $(".slide"));
+	showEmptyMessage($(".slide").get(currentIndex));
 	// "Debug" function
-	if(getCookie("philip").indexOf('q')==0) alert(getCookie("philip").substring(1));
+	if(getCookie("philip").indexOf('q')==0){
+		alert(getCookie("philip").substring(1));
+		$("body").css("background-image","linear-gradient(90deg, yellow, red, purple, blue, green, yellow)");
+	}
   var slides = $('.slide');
   for(var i = 0; i < slides.length; i++)
     slides[i].style.display = i==currentIndex?'block':'none';
@@ -100,6 +105,12 @@ toggleSlide = function(dir){
   }
   currentIndex = nextIndex;
   setSidebars(currentIndex, slides);
+	showEmptyMessage(slides[currentIndex]);
+}
+
+showEmptyMessage = function(slide){
+	if($(slide).find(".event:visible").length==0) $(slide).find(".empty_msg").show();
+	else $(".empty_msg").hide();
 }
 
 setSidebars = function(idx, slides){
@@ -113,6 +124,9 @@ setSidebars = function(idx, slides){
   } else $("#rightslidebutton").hide();
 }
 
+/*
+* Listener functions
+*/
 onScroll = function(evt){
   if(typeof evt == 'number') $("#fixedHeader").hide();
   else{
@@ -132,6 +146,16 @@ toggleMenue = function(){
   console.log("Menue button clicked");
   removeFilter();
 }
+
+toggleFilter = function(value){
+	setCookie("class", value, 100);
+	filter(value);
+}
+
+// Add listener to update filter and cookie when input is changed
+$("#input").on('keyup keypress paste', function(evt){
+	toggleFilter($('#input').val());
+});
 
 // Add keylistener to toggle slides via arrow keys
 $(document).on('keypress', function(evt){
