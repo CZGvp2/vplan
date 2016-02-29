@@ -29,10 +29,7 @@ filter = function(target) {
 }
 
 removeFilter = function(){
-  var events = $('.event');
-  for(var i = 0; i < events.length; i++){
-    $(events[i]).show();
-  }
+    $('.event').show();
 }
 
 // Cookie functions

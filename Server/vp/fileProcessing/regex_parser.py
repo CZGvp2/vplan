@@ -17,7 +17,7 @@ SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
 MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(?P<grade>0[5-9]|10)[A-D]{,4})(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
 
 # Kurssystem Bsp.: 11/ ma2  oder 12/ de1
-COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2})(?P<course>[ez]?)(?P<subclass>\d)$' ) # TODO spezielles Parsen
+COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2})(?P<course>[ez]?)°(?P<subclass>\d)$' ) # TODO spezielles Parsen
 
 # Lehrer, passt sowohl mit als auch ohne Klammern. Bsp.: "MUE", "(REN)"
 TEACHER = re.compile( r'^\(?([A-ZÄÖÜ]{2,})\)?$' )
@@ -99,6 +99,10 @@ class Selector:
 		self.grade = int( match.group('grade') )
 		self.subject = match.group('subject')
 		self.subclass = to_int( match.group('subclass') )
+<<<<<<< HEAD
+=======
+		self.course = match.group('course')
+>>>>>>> d07b20bdb24bfc2db307e813c4b09d1bffbd814f
 		self.targets = [ str(self.grade) ]
 
 		return True
@@ -116,7 +120,10 @@ class Selector:
 	def get_z(self):
 		"""Gibt einen Wert zum Sortieren zurück"""
 
-		order = 'SIMPLE', 'MULT', 'COURSE', 'FAILED'
+		if self.type == 'FAILED':
+			return 500  # ganz groß
+
+		order = 'SIMPLE', 'MULT', 'COURSE'
 		return 100*order.index(self.type) + self.grade
 
 
