@@ -15,6 +15,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <?python
 def color(subject):
     """Gibt die Farbe des Faches zurück"""
@@ -41,6 +42,12 @@ def color(subject):
       //currentIndex =
     </script>-->
     <?python
+=======
+    <!--<script>
+      //currentIndex =
+    </script>-->
+    <?python # Preprocessor function definition
+>>>>>>> parent of 8343cf0... Sortation von Zeugs,
       def color(subject):
           """Gibt die Farbe des Faches zurück"""
           colors = { # alle Farben von Philip ausgewählt
@@ -61,7 +68,10 @@ def color(subject):
             'Mu' : '#8C00A0'
           }
           return colors.get(subject, '#555555')
+<<<<<<< HEAD
 >>>>>>> origin/master
+=======
+>>>>>>> parent of 8343cf0... Sortation von Zeugs,
     ?>
 </head>
 <body>
@@ -81,7 +91,7 @@ def color(subject):
           <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')"><span class="day_title" id="left">Freitag</span></div>
           <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')"><span class="day_title" id="right">Donnerstag</span></div>
         </div>
-        <div class="slide" tal:repeat="day days">
+        <div class="slide" tal:repeat="day days" data-index="${day.index}">
             <div class="slide_title">
                 ${day.date['weekday']}
             </div>

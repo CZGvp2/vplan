@@ -2,7 +2,7 @@ import xml.etree.ElementTree as etree
 import logging
 
 from .exceptions import XMLReadingError, XMLParsingError
-from .regex_parser import Selector, parse_date, replace_subject, replace_teacher
+from .regex_parser import parse_selector, parse_date, replace_subject, replace_teacher
 
 
 log = logging.getLogger('serverlog')
@@ -24,72 +24,14 @@ def convert(xml_content):
 
 	events = []
 	for action in root.findall('./haupt/aktion'):
-		event = Event(action)
+		event = read_action(action)
 		events.append(event)
 
-	events.sort(key=Event.get_z)  # je größer der Wert vom event, desto höher steht es in der liste
-
 	return {
-		'events': [event.json() for event in events],
+		'events': events,
 		'filename': filename,
 		'date': date
 	}
-
-class Event:
-	"""Eintrag im Lehrer-Vertretungsplan"""
-	def __init__(self, action):
-	# Erspart Tipparbeit, da in dieser Funktion get immer vom element ausgeht
-		get_tag = lambda tag: get(action, tag)
-
-		# Alte Stunde
-		self.old = {
-			'subject': replace_subject( get_tag('fach') ),
-			'teacher': replace_teacher( get_tag('lehrer') )
-		}
-
-		# Neue Stunde
-		self.new = {
-			'subject': replace_subject( get_tag('vfach') ),
-			'teacher': replace_teacher( get_tag('vlehrer') ),
-			'room': None if get_tag('vraum') == '---' else get_tag('vraum') 
-		}
-
-		self.info = get_tag('info')
-		self.time = int( get_tag('stunde') )  # TODO fehler?
-
-		self.change = None
-		if self.old['teacher'] != self.new['teacher']: self.change = 'TEACHER'
-		if self.old['subject'] != self.new['subject']: self.change = 'SUBJECT'
-		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
-		if not self.new['subject']:
-			self.change = 'CANCELLED'
-
-		if not self.change: self.change = 'ROOM'
-		# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer.
-		# daher kann es sich nur um eine Raumänderung handeln
-
-		self.selector = Selector( get_tag('klasse') )
-		self.targets = self.selector.targets
-
-		# Hinzufügen der Lehrer zu den Targets
-		if self.old['teacher']:
-			self.targets += ( self.old['teacher'], )  # Falls Teacher '---' und damit None, nicht hinzufügen
-
-		if self.new['teacher'] and self.new['teacher'] not in self.targets:
-			self.targets += ( self.new['teacher'], )
-
-
-	def get_z(self):
-		"""Gibt einen numerischen Wert zum Sortieren zurück"""
-
-		return 10*self.selector.get_z() + self.time
-
-	def json(self):
-		data = self.__dict__.copy()
-		data['selector'] = self.selector.json()
-
-		return data
-
 
 def get(element, path):
 	"""Gibt den Inhalt eines XML-Tags an der Postition path ausgehend vom Ursprung element an"""
@@ -99,3 +41,50 @@ def get(element, path):
 		raise XMLReadingError(path)
 
 	return target.text
+
+def read_action(element):
+	"""Liest eine Veränderung im Lehrer-Vertretungsplan"""
+
+	# Erspart Tipparbeit, da in dieser Funktion get immer vom element ausgeht
+	get_tag = lambda tag: get(element, tag)
+
+	# Alte Stunde
+	old = {
+		'subject': replace_subject( get_tag('fach') ),
+		'teacher': replace_teacher( get_tag('lehrer') )
+	}
+
+	# Neue Stunde
+	new = {
+		'subject': replace_subject( get_tag('vfach') ),
+		'teacher': replace_teacher( get_tag('vlehrer') ),
+		'room': get_tag('vraum')
+	}
+
+	change = 'INFO'
+	if old['subject'] != new['subject']: change = 'SUBJECT'
+	if old['teacher'] != new['teacher']: change = 'TEACHER'
+	# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
+	if new['subject'] == '---':
+		change = 'CANCELLED'
+
+	if not change and not get_tag('info'): change = 'ROOM'
+	# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer. Ist weiterhin
+	# keine Info vorhanden ( not get('info') ), dann kann es sich nur um eine Raumänderung handeln
+
+	selector, targets = parse_selector( get_tag('klasse') )
+	if old['teacher']:
+		targets += ( old['teacher'], )  # Falls Teacher '---' und damit None, nicht hinzufügen
+
+	if new['teacher'] and new['teacher'] not in targets:
+		targets += ( new['teacher'], )
+	
+	return {
+		'selector': selector,
+		'targets': targets,
+		'time': get_tag('stunde'),
+		'info': get_tag('info'),
+		'old': old,
+		'new': new,
+		'change': change
+	}

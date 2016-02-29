@@ -16,16 +16,16 @@ var show_f_h = false;
 
 // Filter functions
 filter = function(target) {
-    var events = $('.event');
-    if(target){
-        for(var i=0; i < events.length; i++){
-            var e = $(events[i]);
-            var targets = e.data().targets.split(' ');
+	var events = $('.event');
+	if(target){
+		for(var i=0; i < events.length; i++){
+			var e = $(events[i]);
+			var targets = e.data().targets.split(' ');
 
-            if (targets.indexOf(target) < 0) e.hide();
-            else e.show();
-        }
-    } else events.show();
+			if (targets.indexOf(target) < 0) e.hide();
+			else e.show();
+		}
+	} else events.show();
 }
 
 removeFilter = function(){
