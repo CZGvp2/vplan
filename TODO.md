@@ -1,8 +1,8 @@
 #Kamal
 @Port5053
 
- - [ ] Exception args für User
- - [ ] AG & WoU & Course
+ - [x] Exception args für User
+ - [x] AG & WoU & Course
 
 #Tim
 @Infoproject
