@@ -99,10 +99,6 @@ class Selector:
 		self.grade = int( match.group('grade') )
 		self.subject = match.group('subject')
 		self.subclass = to_int( match.group('subclass') )
-<<<<<<< HEAD
-=======
-		self.course = match.group('course')
->>>>>>> d07b20bdb24bfc2db307e813c4b09d1bffbd814f
 		self.targets = [ str(self.grade) ]
 
 		return True

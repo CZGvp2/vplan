@@ -3,6 +3,9 @@
 
  - [x] Exception args für User
  - [x] AG & WoU & Course
+ - [x] DIE SORTATION IS KAPUTT
+ - [x] mach die ganz!
+ - [ ] und die Errorcodes auch: [Error dictionary](https://github.com/CZGvp2/vplan/blob/master/Server/vp/static/js/upload.js)
 
 #Tim
 @Infoproject

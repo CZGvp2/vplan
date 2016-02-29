@@ -14,6 +14,7 @@
     <script src="${request.static_path('vp:static/js/login.js')}"></script>
 </head>
 <body>
+    <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
     <form class="center" action="${request.path}" method="post">
         <input type="text" id="hash" name="hash" hidden="hidden" />
         <input type="password" id="password" name="password" class="nofocus" autofocus="autofocus" />

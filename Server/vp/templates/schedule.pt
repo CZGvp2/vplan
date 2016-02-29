@@ -41,10 +41,11 @@
     ?>
 </head>
 <body>
+    <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
     <div id="fixedHeader">Vertretungsplan</div>
+    <nav id="menu"> hello </nav>
     <div id="wrapper">
         <div id="topbar">
-            <!--<nav id="menu"> hello </nav>-->
             <a href="${request.route_path('login', _query='logout')}">Abmelden</a>
             <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
             <div class="space"></div>

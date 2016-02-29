@@ -87,7 +87,7 @@ class Event:
 	def get_z(self):
 		"""Gibt einen numerischen Wert zum Sortieren zurück"""
 
-		return 10*self.selector.get_z() + min(self.time)
+		return self.selector.get_z() + 10*sum(self.time)/len(self.time)
 
 	def is_next(self, other):
 		"""Falls es sich um die gleiche Änderung in der darauffolgenden Stunde handelt"""

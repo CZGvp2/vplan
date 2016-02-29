@@ -4,7 +4,8 @@ function submit() {
 }
 
 // Update keylisteners
-$(document).ready(function () {
+$(function () {
+	$("#jsWarn").hide();
 	$('#password').on('keyup keypress paste', function (event) {
 		if (event.keyCode == 13 && $('#password').val())
 			submit();

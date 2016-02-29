@@ -60,7 +60,6 @@ div#submit {
 }
 
 #incorrect {
-	font-family: 'Open Sans', sans-serif;
 	font-size: 1.5em;
 	margin: 0px;
 	text-align: center;
@@ -82,5 +81,28 @@ div#submit {
 	}
 	div#submit{
 		height: 3em;
+	}
+
+	#jsWarn{
+		z-index: 500;
+
+		position: fixed;
+		display: block;
+
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+
+		padding: 0;
+		margin: 0;
+
+		color: rgb(250,240,240);
+		background-color: rgb(50,60,70);
+
+		font-family: Ubuntu, sans-serif;
+
+		text-align: center;
+		line-height: 5em;
 	}
 }

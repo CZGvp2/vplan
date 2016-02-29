@@ -58,6 +58,7 @@ setup = function(){
   filter(getCookie("class"));
   $("#fixedHeader").hide();
 	$(".empty_msg").hide();
+	$("#jsWarn").hide();
   setSidebars(currentIndex, $(".slide"));
 	showEmptyMessage($(".slide").get(currentIndex));
 	// "Debug" function
