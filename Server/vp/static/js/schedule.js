@@ -124,6 +124,9 @@ setSidebars = function(idx, slides){
   } else $("#rightslidebutton").hide();
 }
 
+/*
+* Listener functions
+*/
 onScroll = function(evt){
   if(typeof evt == 'number') $("#fixedHeader").hide();
   else{
@@ -143,6 +146,16 @@ toggleMenue = function(){
   console.log("Menue button clicked");
   removeFilter();
 }
+
+toggleFilter = function(value){
+	setCookie("class", value, 100);
+	filter(value);
+}
+
+// Add listener to update filter and cookie when input is changed
+$("#input").on('keyup keypress paste', function(evt){
+	toggleFilter($('#input').val());
+});
 
 // Add keylistener to toggle slides via arrow keys
 $(document).on('keypress', function(evt){
