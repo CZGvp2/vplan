@@ -5,8 +5,8 @@ from pyramid.view import view_config, view_defaults
 from .group_finder import can_read, can_edit
 
 
-@view_defaults(route_name='home', renderer='templates/home.pt')
-class HomeView:
+@view_defaults(route_name='login', renderer='templates/login.pt')
+class LoginView:
 	""" Startadresse "/". (Eigentlich Login) """
 	def __init__(self, request):
 		self.request = request
@@ -20,16 +20,16 @@ class HomeView:
 	def view_start(self):
 		"""Handelt einen GET-Request, wie z. B. Redirects"""
 
-		# Falls in der URL der Query ?logout war, wird der User über forget abgemeldet, 
+		# Falls in der URL der Query ?logout war, wird der User über forget abgemeldet,
 		# und zur Start(Anmelde)-Seite umgeleitet
 		if 'logout' in self.request.params:
 			headers = forget(self.request)
-			return self.redirect('home', headers)
-		
+			return self.redirect('login', headers)
+
 		# Redirects von der Startseite von schon angemeldeten Schülern
 		if self.request.has_permission('read'):
 			return self.redirect('schedule')
-		
+
 		if self.request.has_permission('upload'):
 			return self.redirect('upload')
 
@@ -57,7 +57,3 @@ class HomeView:
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort
 		# falsch gewesen sein.
 		return {'wrong_pwd': True}
-
-# Ich weiß nicht, wo ich das sonst hinschreiben soll:
-#	Wir sollten in der Server-Dateien eine Offline-Kopie von jQuery haben, damit ich mich auch im Internat anmelden kann.
-#	Aktuell gibt es keine JS-Überprüfung, ob $ erfolgreich geladen worden ist.

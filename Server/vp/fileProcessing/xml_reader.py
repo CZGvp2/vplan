@@ -1,11 +1,7 @@
 import xml.etree.ElementTree as etree
-import logging
 
-from .exceptions import XMLReadingError, XMLParsingError
+from .serverlog import ProcessingError
 from .regex_parser import Selector, parse_date, replace_subject, replace_teacher
-
-
-log = logging.getLogger('serverlog')
 
 
 def convert(xml_content):
@@ -17,15 +13,24 @@ def convert(xml_content):
 		root = etree.fromstring(xml_content)
 
 	except etree.ParseError as e:
-		raise XMLParsingError(e)
+		raise ProcessingError('XML_PARSING_ERROR', 'Could not parse XML')
 
 	filename = get(root, './kopf/datei')
 	date = parse_date( get(root, './kopf/titel') )
 
 	events = []
 	for action in root.findall('./haupt/aktion'):
-		event = Event(action)
-		events.append(event)
+		new_event = Event(action)
+
+		merged = False
+		for event in events:
+			if new_event.is_next(event):
+				event.merge(new_event)
+				merged = True
+				break
+
+		if not merged:
+			events.append(new_event)
 
 	events.sort(key=Event.get_z)  # je größer der Wert vom event, desto höher steht es in der liste
 
@@ -38,7 +43,7 @@ def convert(xml_content):
 class Event:
 	"""Eintrag im Lehrer-Vertretungsplan"""
 	def __init__(self, action):
-	# Erspart Tipparbeit, da in dieser Funktion get immer vom element ausgeht
+		# Erspart Tipparbeit, da in dieser Funktion get immer vom element ausgeht
 		get_tag = lambda tag: get(action, tag)
 
 		# Alte Stunde
@@ -51,11 +56,11 @@ class Event:
 		self.new = {
 			'subject': replace_subject( get_tag('vfach') ),
 			'teacher': replace_teacher( get_tag('vlehrer') ),
-			'room': None if get_tag('vraum') == '---' else get_tag('vraum') 
+			'room': None if get_tag('vraum') == '---' else get_tag('vraum')
 		}
 
 		self.info = get_tag('info')
-		self.time = int( get_tag('stunde') )  # TODO fehler?
+		self.time = [ int( get_tag('stunde') ) ]  # time ist liste von allen Stunden mit gleichen Infos
 
 		self.change = None
 		if self.old['teacher'] != self.new['teacher']: self.change = 'TEACHER'
@@ -82,9 +87,20 @@ class Event:
 	def get_z(self):
 		"""Gibt einen numerischen Wert zum Sortieren zurück"""
 
-		return 10*self.selector.get_z() + self.time
+		return 10*self.selector.get_z() + min(self.time)
+
+	def is_next(self, other):
+		"""Falls es sich um die gleiche Änderung in der darauffolgenden Stunde handelt"""
+		return (self.old, self.new, self.selector) == (other.old, other.new, other.selector)
+
+	def merge(self, other):
+		"""Hinzufügen von Zeit des anderen Events zu eigenem Event"""
+		if other.time[0] not in self.time:
+			self.time.append(other.time[0])
 
 	def json(self):
+		"""JSON Representation des Events"""
+
 		data = self.__dict__.copy()
 		data['selector'] = self.selector.json()
 
@@ -96,6 +112,6 @@ def get(element, path):
 	target = element.find(path)
 
 	if target is None:
-		raise XMLReadingError(path)
+		raise ProcessingError('XML_READING_ERROR', 'Could not find tag "%(path)s"', path=path)
 
 	return target.text

@@ -13,7 +13,7 @@
         <img src="${img_src}" width="500" />
         <p id="denied">${err_message}</p><br/>
         <p id="url">${request.url}</p>
-        <a href="${request.route_path('home', _query='logout')}">Abmelden</a>  
+        <a href="${request.route_path('login', _query='logout')}">Abmelden</a>  
     </div>
 </body>
 </html>

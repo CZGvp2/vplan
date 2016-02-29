@@ -3,6 +3,7 @@ from pyramid.view import view_config
 from .fileProcessing.file_handler import read_schedule, to_datetime
 from .fileProcessing.regex_parser import parse_response_date
 
+
 @view_config(route_name='schedule', permission='read', renderer='templates/schedule.pt')
 def schedule(request):
 	data = read_schedule()
@@ -38,7 +39,11 @@ Die Struktur vom Schedule Template Vars
       |       |   |
       |       |   +-- change [String] (die Veränderung: "SUBJECT" / "TEACHER" / "ROOM" / "CANCELLED" / "FAILED", letztes bei fehlparsen)
       |       |   |
-      |       |   +-- time [int] (Stunde)
+      |       |   +-- time [Array] (Alle betreffenden Stundenzeiten)
+	  |       |   |   |
+	  |       |   |   +-- [int] (Stunde)
+	  |       |   |   |
+	  |       |   |  ...
       |       |   |
       |       |   +-- info [String] (None falls leer)
       |       |   |

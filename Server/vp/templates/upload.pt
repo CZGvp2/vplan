@@ -6,7 +6,7 @@
     <title>Vertretungsplan bearbeiten</title><!-- Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/upload.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script>
         var path = "${request.path}";
         var statics = "${request.static_path('vp:static/img/')}"
@@ -28,7 +28,7 @@
           <div class="files" tal:repeat="day days"><a>${day.filename} (${day.date['weekday']}, ${day.date['date']})</a></div>
         </span> <!-- tob dich aus -->
         <span class="entry space"></span>
-        <span class="entry"><a href="${request.route_path('home', _query='logout')}" id="logout">Abmelden</a></span>
+        <span class="entry"><a href="${request.route_path('login', _query='logout')}" id="logout">Abmelden</a></span>
     </div>
     <div id="uploadList"></div>
 </body>

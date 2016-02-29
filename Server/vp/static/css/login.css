@@ -1,5 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
 body{
 	background-color: #0e0e0e;
 	color: white;
@@ -23,13 +21,10 @@ body{
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-.center{
-	background-color: #1d3954;
-}
+
 #password {
-	border-radius: 5px;
 	color: white;
-	background-color: #232323;
+	background-color: #0e0e0e;
 	font-family: arial;
 	font-size: 3em;
 	text-align: center;
@@ -45,26 +40,23 @@ body{
 }
 
 a#submit {
-	font-family: 'Open Sans', sans-serif;
 	text-decoration: none;
 	cursor: default;
 	font-size: 2.5em;
 	text-align: center;
-	padding-left: 10px;
-	padding-right: 10px;
+	margin-left: 70px;
+	margin-right: 70px;
 	border-style: none;
-	border-radius: 2px;
 	background-color: #232323;
 	color: white;
 }
 
 div#submit {
 	margin-top: 73px;
-
 	display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: stretch;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
 }
 
 #incorrect {

@@ -1,18 +1,14 @@
 from pyramid.view import view_config, view_defaults, forbidden_view_config
 
-import logging
-
 from .fileProcessing.file_handler import process_file, read_schedule
 from .fileProcessing.regex_parser import parse_response_date
-from .fileProcessing.exceptions import ProcessingError, InternalServerError, log_unexpected_error
+from .fileProcessing.serverlog import log, ProcessingError, InternalServerError, log_unexpected_error
 
-
-log = logging.getLogger('serverlog')
 
 INTERNAL_ERROR = {
 	'internalError': True,
 	'sessionExpired': False,
-	'results': None
+	'results': None,
 }
 
 SESSION_EXPIRED = {
@@ -69,7 +65,7 @@ class UploadView:
 
 def process_file_post(file_post):
 	"""Bearbeitet einen einzelnen File-Post"""
-	
+
 	success = False
 	filename = file_post.filename
 	replaced = None

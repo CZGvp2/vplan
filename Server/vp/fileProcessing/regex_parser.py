@@ -2,12 +2,9 @@ import re
 import os.path
 from datetime import datetime
 import locale
-import logging
 
-from .exceptions import IOServerError, InternalServerError, ProcessingError
+from .serverlog import log, InternalServerError, ProcessingError
 
-
-log = logging.getLogger('serverlog')
 
 # Setzen des Datumsformats von Deutscherland
 locale.setlocale(locale.LC_TIME, 'deu_deu')  # TODO fehler auf Unix?
@@ -20,7 +17,7 @@ SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
 MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(?P<grade>0[5-9]|10)[A-D]{,4})(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
 
 # Kurssystem Bsp.: 11/ ma2  oder 12/ de1
-COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)$' ) # TODO spezielles Parsen
+COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2})(?P<course>[ez]?)(?P<subclass>\d)$' ) # TODO spezielles Parsen
 
 # Lehrer, passt sowohl mit als auch ohne Klammern. Bsp.: "MUE", "(REN)"
 TEACHER = re.compile( r'^\(?([A-ZÄÖÜ]{2,})\)?$' )
@@ -37,7 +34,7 @@ try:
 			subjects[name] = replacement
 
 except IOError:
-	raise IOServerError(subjects_file)
+	raise InternalServerError("IO Error reading subjects")
 
 except ValueError:
 	raise InternalServerError('Invalid Syntax in subjects.data line %(lineno)d "%(line)s"', lineno=lineno, line=lines)
@@ -65,7 +62,7 @@ class Selector:
 		if self.type == 'FAILED':
 			log.warning('Could not parse class "%s"', text)
 			self.text = text
-			self.targets = ('notset', )
+			self.targets = ['notset']
 
 	def parse_simple(self, text):
 		"""Einfacher Ausdruck, wie 8C oder 10C"""
@@ -75,7 +72,7 @@ class Selector:
 
 		self.grade = int( match.group('grade') )
 		self.subgrade = match.group('subgrade').lower()
-		self.targets = (lower(text), )
+		self.targets = [ lower(text) ]
 
 		return True
 
@@ -89,7 +86,7 @@ class Selector:
 		self.grade = int( match.group('grade') )
 		self.subject = replace_subject( match.group('subject') )
 		self.subclass = to_int( match.group('subclass') )
-		self.targets = tuple( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ('8a', '8b', '8c')
+		self.targets = list( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ('8a', '8b', '8c')
 
 		return True
 
@@ -102,22 +99,24 @@ class Selector:
 		self.grade = int( match.group('grade') )
 		self.subject = match.group('subject')
 		self.subclass = to_int( match.group('subclass') )
-		self.targets = (str(self.grade), )
+		self.targets = [ str(self.grade) ]
 
 		return True
 
+	def __eq__(self, other):
+		"""Vergleichsfunktion für den gleichen Selektor"""
+		return self.__dict__ == other.__dict__
+
 	def json(self):
+		"""JSON Representation des Events"""
 		data = self.__dict__.copy()
 		data.pop('targets')
 		return data
 
 	def get_z(self):
 		"""Gibt einen Wert zum Sortieren zurück"""
-		if self.type == 'FAILED':
-			return 500  # ganz groß
 
-		order = 'SIMPLE', 'MULT', 'COURSE'
-
+		order = 'SIMPLE', 'MULT', 'COURSE', 'FAILED'
 		return 100*order.index(self.type) + self.grade
 
 

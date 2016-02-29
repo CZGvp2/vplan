@@ -2,22 +2,48 @@
     "days": [
         {
             "date": {
-                "day": 11,
+                "day": 9,
                 "month": 2,
                 "year": 2016
             },
             "events": [
                 {
-                    "change": "SUBJECT",
-                    "info": null,
+                    "change": "ROOM",
+                    "info": "verlegt nach St.3",
+                    "new": {
+                        "room": "B302",
+                        "subject": "De",
+                        "teacher": "Ar"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Ar"
+                    },
+                    "selector": {
+                        "grade": 5,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "5b",
+                        "Ar"
+                    ],
+                    "time": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "change": "ROOM",
+                    "info": "verlegt nach St.1",
                     "new": {
                         "room": "B302",
                         "subject": "Geo",
                         "teacher": "Fle"
                     },
                     "old": {
-                        "subject": "Ku",
-                        "teacher": "Hu"
+                        "subject": "Geo",
+                        "teacher": "Fle"
                     },
                     "selector": {
                         "grade": 5,
@@ -26,203 +52,95 @@
                     },
                     "targets": [
                         "5b",
-                        "Hu",
                         "Fle"
                     ],
-                    "time": 3
+                    "time": [
+                        3,
+                        4
+                    ]
                 },
                 {
                     "change": "TEACHER",
-                    "info": "Aufgaben im Unterrichtsraum",
+                    "info": null,
+                    "new": {
+                        "room": "D313",
+                        "subject": "De",
+                        "teacher": "Ar"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Re"
+                    },
+                    "selector": {
+                        "grade": 7,
+                        "subgrade": "a",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "7a",
+                        "Re",
+                        "Ar"
+                    ],
+                    "time": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "change": "SUBJECT",
+                    "info": null,
+                    "new": {
+                        "room": "D309",
+                        "subject": "En",
+                        "teacher": "Bö"
+                    },
+                    "old": {
+                        "subject": "Ku",
+                        "teacher": "Hu"
+                    },
+                    "selector": {
+                        "grade": 8,
+                        "subgrade": "a",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "8a",
+                        "Hu",
+                        "Bö"
+                    ],
+                    "time": [
+                        1
+                    ]
+                },
+                {
+                    "change": "SUBJECT",
+                    "info": null,
                     "new": {
                         "room": "B103",
-                        "subject": "Ku",
-                        "teacher": "Kri"
+                        "subject": "En",
+                        "teacher": "Bö"
                     },
                     "old": {
                         "subject": "Ku",
                         "teacher": "Hu"
                     },
                     "selector": {
-                        "grade": 5,
-                        "subgrade": "b",
+                        "grade": 8,
+                        "subgrade": "a",
                         "type": "SIMPLE"
                     },
                     "targets": [
-                        "5b",
+                        "8a",
                         "Hu",
-                        "Kri"
+                        "Bö"
                     ],
-                    "time": 4
-                },
-                {
-                    "change": "SUBJECT",
-                    "info": null,
-                    "new": {
-                        "room": "TH1",
-                        "subject": "Sp",
-                        "teacher": "Krue"
-                    },
-                    "old": {
-                        "subject": "Ku",
-                        "teacher": "Hu"
-                    },
-                    "selector": {
-                        "grade": 6,
-                        "subgrade": "c",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "6c",
-                        "Hu",
-                        "Krue"
-                    ],
-                    "time": 1
-                },
-                {
-                    "change": "ROOM",
-                    "info": null,
-                    "new": {
-                        "room": "E107",
-                        "subject": "De",
-                        "teacher": "Me"
-                    },
-                    "old": {
-                        "subject": "De",
-                        "teacher": "Me"
-                    },
-                    "selector": {
-                        "grade": 6,
-                        "subgrade": "b",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "6b",
-                        "Me"
-                    ],
-                    "time": 1
-                },
-                {
-                    "change": "SUBJECT",
-                    "info": null,
-                    "new": {
-                        "room": "TH1",
-                        "subject": "Sp",
-                        "teacher": "Krue"
-                    },
-                    "old": {
-                        "subject": "Ku",
-                        "teacher": "Hu"
-                    },
-                    "selector": {
-                        "grade": 6,
-                        "subgrade": "c",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "6c",
-                        "Hu",
-                        "Krue"
-                    ],
-                    "time": 2
-                },
-                {
-                    "change": "ROOM",
-                    "info": null,
-                    "new": {
-                        "room": "E107",
-                        "subject": "De",
-                        "teacher": "Me"
-                    },
-                    "old": {
-                        "subject": "De",
-                        "teacher": "Me"
-                    },
-                    "selector": {
-                        "grade": 6,
-                        "subgrade": "b",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "6b",
-                        "Me"
-                    ],
-                    "time": 2
-                },
-                {
-                    "change": "SUBJECT",
-                    "info": null,
-                    "new": {
-                        "room": "B301",
-                        "subject": "Mu",
-                        "teacher": "Ren"
-                    },
-                    "old": {
-                        "subject": "Ma",
-                        "teacher": "Bre"
-                    },
-                    "selector": {
-                        "grade": 6,
-                        "subgrade": "c",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "6c",
-                        "Bre",
-                        "Ren"
-                    ],
-                    "time": 3
+                    "time": [
+                        2
+                    ]
                 },
                 {
                     "change": "TEACHER",
-                    "info": null,
-                    "new": {
-                        "room": "B203",
-                        "subject": "Ma",
-                        "teacher": "Krg"
-                    },
-                    "old": {
-                        "subject": "Ma",
-                        "teacher": "Bre"
-                    },
-                    "selector": {
-                        "grade": 6,
-                        "subgrade": "c",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "6c",
-                        "Bre",
-                        "Krg"
-                    ],
-                    "time": 4
-                },
-                {
-                    "change": "CANCELLED",
-                    "info": "gehalten am Mi (10.02.) St.3",
-                    "new": {
-                        "room": null,
-                        "subject": null,
-                        "teacher": null
-                    },
-                    "old": {
-                        "subject": "Geo",
-                        "teacher": "Scm"
-                    },
-                    "selector": {
-                        "grade": 6,
-                        "subgrade": "c",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "6c",
-                        "Scm"
-                    ],
-                    "time": 8
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "Aufgaben im Unterrichtsraum",
+                    "info": "Aufgabenlösung im Unterrichtsraum",
                     "new": {
                         "room": "B103",
                         "subject": "Ku",
@@ -233,182 +151,97 @@
                         "teacher": "Hu"
                     },
                     "selector": {
-                        "grade": 7,
+                        "grade": 8,
                         "subgrade": "b",
                         "type": "SIMPLE"
                     },
                     "targets": [
-                        "7b",
+                        "8b",
                         "Hu",
                         "Rin"
                     ],
-                    "time": 7
+                    "time": [
+                        3
+                    ]
                 },
                 {
-                    "change": "CANCELLED",
-                    "info": "fällt aus",
+                    "change": "SUBJECT",
+                    "info": null,
                     "new": {
-                        "room": null,
-                        "subject": null,
-                        "teacher": "Hu"
+                        "room": "E104",
+                        "subject": "Geo",
+                        "teacher": "Scm"
                     },
                     "old": {
                         "subject": "Ku",
                         "teacher": "Hu"
                     },
                     "selector": {
-                        "grade": 7,
+                        "grade": 8,
                         "subgrade": "b",
                         "type": "SIMPLE"
                     },
                     "targets": [
-                        "7b",
-                        "Hu"
+                        "8b",
+                        "Hu",
+                        "Scm"
                     ],
-                    "time": 8
-                },
-                {
-                    "change": "CANCELLED",
-                    "info": "fällt aus",
-                    "new": {
-                        "room": null,
-                        "subject": null,
-                        "teacher": "Fi"
-                    },
-                    "old": {
-                        "subject": "Mu",
-                        "teacher": "Fi"
-                    },
-                    "selector": {
-                        "grade": 8,
-                        "subgrade": "c",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "8c",
-                        "Fi"
-                    ],
-                    "time": 1
+                    "time": [
+                        4
+                    ]
                 },
                 {
                     "change": "SUBJECT",
                     "info": null,
                     "new": {
-                        "room": "D307",
-                        "subject": "Ma",
-                        "teacher": "Mul"
+                        "room": "E104",
+                        "subject": "Wr",
+                        "teacher": "Fe"
                     },
                     "old": {
-                        "subject": "Mu",
-                        "teacher": "Fi"
+                        "subject": "Sk",
+                        "teacher": "Bo"
                     },
                     "selector": {
-                        "grade": 8,
+                        "grade": 9,
                         "subgrade": "c",
                         "type": "SIMPLE"
                     },
                     "targets": [
-                        "8c",
-                        "Fi",
-                        "Mul"
+                        "9c",
+                        "Bo",
+                        "Fe"
                     ],
-                    "time": 2
+                    "time": [
+                        1
+                    ]
                 },
                 {
                     "change": "TEACHER",
-                    "info": "Aufgaben im Unterrichtsraum",
-                    "new": {
-                        "room": "E104",
-                        "subject": "Ge",
-                        "teacher": "Ar"
-                    },
-                    "old": {
-                        "subject": "Ge",
-                        "teacher": "Fi"
-                    },
-                    "selector": {
-                        "grade": 8,
-                        "subgrade": "a",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "8a",
-                        "Fi",
-                        "Ar"
-                    ],
-                    "time": 3
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "Aufgaben im Unterrichtsraum",
-                    "new": {
-                        "room": "E104",
-                        "subject": "Ge",
-                        "teacher": "Ar"
-                    },
-                    "old": {
-                        "subject": "Ge",
-                        "teacher": "Fi"
-                    },
-                    "selector": {
-                        "grade": 8,
-                        "subgrade": "a",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "8a",
-                        "Fi",
-                        "Ar"
-                    ],
-                    "time": 4
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "Präsentationstechniken",
+                    "info": null,
                     "new": {
                         "room": "D208",
                         "subject": "Ma",
-                        "teacher": "Mi"
+                        "teacher": "Rie"
                     },
                     "old": {
                         "subject": "Ma",
-                        "teacher": "Rie"
+                        "teacher": "Mel"
                     },
                     "selector": {
-                        "grade": 9,
+                        "grade": 10,
                         "subgrade": "b",
                         "type": "SIMPLE"
                     },
                     "targets": [
-                        "9b",
-                        "Rie",
-                        "Mi"
+                        "10b",
+                        "Mel",
+                        "Rie"
                     ],
-                    "time": 1
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "Präsentationstechniken",
-                    "new": {
-                        "room": "D208",
-                        "subject": "Ma",
-                        "teacher": "Mi"
-                    },
-                    "old": {
-                        "subject": "Ma",
-                        "teacher": "Rie"
-                    },
-                    "selector": {
-                        "grade": 9,
-                        "subgrade": "b",
-                        "type": "SIMPLE"
-                    },
-                    "targets": [
-                        "9b",
-                        "Rie",
-                        "Mi"
-                    ],
-                    "time": 2
+                    "time": [
+                        1,
+                        2
+                    ]
                 },
                 {
                     "change": "CANCELLED",
@@ -424,396 +257,223 @@
                     },
                     "selector": {
                         "grade": 10,
-                        "subgrade": "b",
+                        "subgrade": "c",
                         "type": "SIMPLE"
                     },
                     "targets": [
-                        "10b",
+                        "10c",
                         "Mel"
                     ],
-                    "time": 7
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "ganze Klasse EVL KRG B303",
-                    "new": {
-                        "room": " ",
-                        "subject": "Mk",
-                        "teacher": null
-                    },
-                    "old": {
-                        "subject": "Mk",
-                        "teacher": "Scö"
-                    },
-                    "selector": {
-                        "classes": "5a",
-                        "grade": 5,
-                        "subclass": null,
-                        "subject": "Mk",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "5a",
-                        "Scö"
-                    ],
-                    "time": 6
+                    "time": [
+                        5
+                    ]
                 },
                 {
                     "change": "ROOM",
-                    "info": "ganze Klasse",
+                    "info": "verlegt nach St.5",
                     "new": {
-                        "room": "B303",
-                        "subject": "Evl",
-                        "teacher": "Krg"
+                        "room": "E302",
+                        "subject": "En",
+                        "teacher": "Tru"
                     },
                     "old": {
-                        "subject": "Evl",
-                        "teacher": "Krg"
+                        "subject": "En",
+                        "teacher": "Tru"
                     },
                     "selector": {
-                        "classes": "5a",
-                        "grade": 5,
-                        "subclass": null,
-                        "subject": "Evl",
-                        "type": "MULT"
+                        "grade": 10,
+                        "subgrade": "c",
+                        "type": "SIMPLE"
                     },
                     "targets": [
-                        "5a",
-                        "Krg"
+                        "10c",
+                        "Tru"
                     ],
-                    "time": 6
+                    "time": [
+                        9
+                    ]
                 },
                 {
                     "change": "TEACHER",
-                    "info": "ganze Klasse EVL SCI B102",
-                    "new": {
-                        "room": " ",
-                        "subject": "Mk",
-                        "teacher": null
-                    },
-                    "old": {
-                        "subject": "Mk",
-                        "teacher": "Scö"
-                    },
-                    "selector": {
-                        "classes": "5c",
-                        "grade": 5,
-                        "subclass": null,
-                        "subject": "Mk",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "5c",
-                        "Scö"
-                    ],
-                    "time": 7
-                },
-                {
-                    "change": "ROOM",
-                    "info": "ganze Klasse",
-                    "new": {
-                        "room": "B102",
-                        "subject": "Evl",
-                        "teacher": "Sci"
-                    },
-                    "old": {
-                        "subject": "Evl",
-                        "teacher": "Sci"
-                    },
-                    "selector": {
-                        "classes": "5c",
-                        "grade": 5,
-                        "subclass": null,
-                        "subject": "Evl",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "5c",
-                        "Sci"
-                    ],
-                    "time": 7
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "gemeinsam mit Frz MUE D313",
-                    "new": {
-                        "room": " ",
-                        "subject": "Frz",
-                        "teacher": null
-                    },
-                    "old": {
-                        "subject": "Frz",
-                        "teacher": "Re"
-                    },
-                    "selector": {
-                        "classes": "7",
-                        "grade": 7,
-                        "subclass": 1,
-                        "subject": "Frz",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "7a",
-                        "7b",
-                        "7c",
-                        "Re"
-                    ],
-                    "time": 1
-                },
-                {
-                    "change": "ROOM",
-                    "info": null,
-                    "new": {
-                        "room": "D313",
-                        "subject": "Frz",
-                        "teacher": "Mue"
-                    },
-                    "old": {
-                        "subject": "Frz",
-                        "teacher": "Mue"
-                    },
-                    "selector": {
-                        "classes": "7",
-                        "grade": 7,
-                        "subclass": 2,
-                        "subject": "Frz",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "7a",
-                        "7b",
-                        "7c",
-                        "Mue"
-                    ],
-                    "time": 1
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "gemeinsam mit Frz MUE D313",
-                    "new": {
-                        "room": " ",
-                        "subject": "Frz",
-                        "teacher": null
-                    },
-                    "old": {
-                        "subject": "Frz",
-                        "teacher": "Re"
-                    },
-                    "selector": {
-                        "classes": "7",
-                        "grade": 7,
-                        "subclass": 1,
-                        "subject": "Frz",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "7a",
-                        "7b",
-                        "7c",
-                        "Re"
-                    ],
-                    "time": 2
-                },
-                {
-                    "change": "ROOM",
-                    "info": null,
-                    "new": {
-                        "room": "D313",
-                        "subject": "Frz",
-                        "teacher": "Mue"
-                    },
-                    "old": {
-                        "subject": "Frz",
-                        "teacher": "Mue"
-                    },
-                    "selector": {
-                        "classes": "7",
-                        "grade": 7,
-                        "subclass": 2,
-                        "subject": "Frz",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "7a",
-                        "7b",
-                        "7c",
-                        "Mue"
-                    ],
-                    "time": 2
-                },
-                {
-                    "change": "TEACHER",
-                    "info": null,
-                    "new": {
-                        "room": "D208",
-                        "subject": "Wou",
-                        "teacher": "Nau"
-                    },
-                    "old": {
-                        "subject": "Wou",
-                        "teacher": "Sca"
-                    },
-                    "selector": {
-                        "classes": "7",
-                        "grade": 7,
-                        "subclass": null,
-                        "subject": "Wouma",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "7a",
-                        "7b",
-                        "7c",
-                        "Sca",
-                        "Nau"
-                    ],
-                    "time": 5
-                },
-                {
-                    "change": "TEACHER",
-                    "info": null,
-                    "new": {
-                        "room": "D307",
-                        "subject": "Frz",
-                        "teacher": "Mue"
-                    },
-                    "old": {
-                        "subject": "Frz",
-                        "teacher": "Re"
-                    },
-                    "selector": {
-                        "classes": "8abc",
-                        "grade": 8,
-                        "subclass": null,
-                        "subject": "Frz",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "8a",
-                        "8b",
-                        "8c",
-                        "Re",
-                        "Mue"
-                    ],
-                    "time": 5
-                },
-                {
-                    "change": "CANCELLED",
-                    "info": "fällt aus",
+                    "info": "gemeinsam mit Frz MUE D207",
                     "new": {
                         "room": null,
-                        "subject": null,
-                        "teacher": "Scö"
-                    },
-                    "old": {
-                        "subject": "Wou",
-                        "teacher": "Scö"
-                    },
-                    "selector": {
-                        "classes": "8",
-                        "grade": 8,
-                        "subclass": 2,
-                        "subject": "Wouif",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "8a",
-                        "8b",
-                        "8c",
-                        "Scö"
-                    ],
-                    "time": 8
-                },
-                {
-                    "change": "ROOM",
-                    "info": null,
-                    "new": {
-                        "room": "E107",
-                        "subject": "Wou",
-                        "teacher": "Wi"
-                    },
-                    "old": {
-                        "subject": "Wou",
-                        "teacher": "Wi"
-                    },
-                    "selector": {
-                        "classes": "8",
-                        "grade": 8,
-                        "subclass": null,
-                        "subject": "Woubi",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "8a",
-                        "8b",
-                        "8c",
-                        "Wi"
-                    ],
-                    "time": 8
-                },
-                {
-                    "change": "SUBJECT",
-                    "info": null,
-                    "new": {
-                        "room": "D307",
-                        "subject": "En",
-                        "teacher": "Bö"
+                        "subject": "Frz",
+                        "teacher": null
                     },
                     "old": {
                         "subject": "Frz",
                         "teacher": "Re"
                     },
                     "selector": {
-                        "classes": "9",
-                        "grade": 9,
+                        "classes": "6",
+                        "grade": 6,
+                        "subclass": 2,
+                        "subject": "Frz",
+                        "type": "MULT"
+                    },
+                    "targets": [
+                        "6a",
+                        "6b",
+                        "6c",
+                        "Re"
+                    ],
+                    "time": [
+                        6
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "gemeinsam bei WE",
+                    "new": {
+                        "room": "D313",
+                        "subject": "La",
+                        "teacher": null
+                    },
+                    "old": {
+                        "subject": "La",
+                        "teacher": "Bo"
+                    },
+                    "selector": {
+                        "classes": "6",
+                        "grade": 6,
+                        "subclass": 1,
+                        "subject": "La",
+                        "type": "MULT"
+                    },
+                    "targets": [
+                        "6a",
+                        "6b",
+                        "6c",
+                        "Bo"
+                    ],
+                    "time": [
+                        6
+                    ]
+                },
+                {
+                    "change": "ROOM",
+                    "info": "gemeinsam mit Frz RE",
+                    "new": {
+                        "room": "D207",
+                        "subject": "Frz",
+                        "teacher": "Mue"
+                    },
+                    "old": {
+                        "subject": "Frz",
+                        "teacher": "Mue"
+                    },
+                    "selector": {
+                        "classes": "6",
+                        "grade": 6,
                         "subclass": 1,
                         "subject": "Frz",
                         "type": "MULT"
                     },
                     "targets": [
-                        "9a",
-                        "9b",
-                        "9c",
-                        "Re",
-                        "Bö"
+                        "6a",
+                        "6b",
+                        "6c",
+                        "Mue"
                     ],
-                    "time": 3
+                    "time": [
+                        6
+                    ]
                 },
                 {
                     "change": "TEACHER",
                     "info": null,
                     "new": {
-                        "room": "D307",
-                        "subject": "Frz",
+                        "room": "B201",
+                        "subject": "Agm",
                         "teacher": "Jar"
                     },
                     "old": {
-                        "subject": "Frz",
-                        "teacher": "Re"
+                        "subject": "Agm",
+                        "teacher": "Mel"
                     },
                     "selector": {
-                        "classes": "9",
-                        "grade": 9,
-                        "subclass": 1,
-                        "subject": "Frz",
+                        "classes": "6",
+                        "grade": 6,
+                        "subclass": null,
+                        "subject": "Ma",
                         "type": "MULT"
                     },
                     "targets": [
-                        "9a",
-                        "9b",
-                        "9c",
-                        "Re",
+                        "6a",
+                        "6b",
+                        "6c",
+                        "Mel",
                         "Jar"
                     ],
-                    "time": 4
+                    "time": [
+                        7
+                    ]
                 },
                 {
                     "change": "TEACHER",
-                    "info": "Ansprechpartner OTH",
+                    "info": null,
+                    "new": {
+                        "room": "E206",
+                        "subject": "Agi",
+                        "teacher": "Scu"
+                    },
+                    "old": {
+                        "subject": "Agi",
+                        "teacher": "Bre"
+                    },
+                    "selector": {
+                        "classes": "6",
+                        "grade": 6,
+                        "subclass": null,
+                        "subject": "Inf",
+                        "type": "MULT"
+                    },
+                    "targets": [
+                        "6a",
+                        "6b",
+                        "6c",
+                        "Bre",
+                        "Scu"
+                    ],
+                    "time": [
+                        7
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "OTH",
+                    "new": {
+                        "room": "E206",
+                        "subject": "Inf",
+                        "teacher": null
+                    },
+                    "old": {
+                        "subject": "Inf",
+                        "teacher": "Bre"
+                    },
+                    "selector": {
+                        "classes": "7b",
+                        "grade": 7,
+                        "subclass": 2,
+                        "subject": "Inf",
+                        "type": "MULT"
+                    },
+                    "targets": [
+                        "7b",
+                        "Bre"
+                    ],
+                    "time": [
+                        5
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": null,
                     "new": {
                         "room": "E205",
                         "subject": "Inf",
-                        "teacher": null
+                        "teacher": "Koe"
                     },
                     "old": {
                         "subject": "Inf",
@@ -828,132 +488,156 @@
                     },
                     "targets": [
                         "9b",
-                        "Scö"
+                        "Scö",
+                        "Koe"
                     ],
-                    "time": 5
+                    "time": [
+                        3,
+                        4
+                    ]
                 },
                 {
                     "change": "TEACHER",
                     "info": "Ansprechpartner OTH",
                     "new": {
-                        "room": "E204",
+                        "room": "E205",
                         "subject": "Inf",
                         "teacher": null
                     },
                     "old": {
                         "subject": "Inf",
-                        "teacher": "Koe"
+                        "teacher": "Scö"
                     },
                     "selector": {
-                        "classes": "10b",
+                        "classes": "9a",
+                        "grade": 9,
+                        "subclass": 2,
+                        "subject": "Inf",
+                        "type": "MULT"
+                    },
+                    "targets": [
+                        "9a",
+                        "Scö"
+                    ],
+                    "time": [
+                        7
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "Ansprechpartner KOE",
+                    "new": {
+                        "room": "E205",
+                        "subject": "Inf",
+                        "teacher": null
+                    },
+                    "old": {
+                        "subject": "Inf",
+                        "teacher": "Scö"
+                    },
+                    "selector": {
+                        "classes": "10a",
                         "grade": 10,
                         "subclass": 2,
                         "subject": "Inf",
                         "type": "MULT"
                     },
                     "targets": [
+                        "10a",
+                        "Scö"
+                    ],
+                    "time": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "gemeinsam mit La WE D310",
+                    "new": {
+                        "room": " ",
+                        "subject": "La",
+                        "teacher": null
+                    },
+                    "old": {
+                        "subject": "La",
+                        "teacher": "Bo"
+                    },
+                    "selector": {
+                        "classes": "10",
+                        "grade": 10,
+                        "subclass": 2,
+                        "subject": "La",
+                        "type": "MULT"
+                    },
+                    "targets": [
+                        "10a",
                         "10b",
-                        "Koe"
+                        "10c",
+                        "Bo"
                     ],
-                    "time": 1
+                    "time": [
+                        7,
+                        8
+                    ]
                 },
                 {
-                    "change": "TEACHER",
-                    "info": "Ansprechpartner KOE",
+                    "change": "CANCELLED",
+                    "info": "fällt aus",
                     "new": {
-                        "room": "E205",
-                        "subject": "Inf",
-                        "teacher": null
+                        "room": null,
+                        "subject": null,
+                        "teacher": "Re"
                     },
                     "old": {
-                        "subject": "Inf",
-                        "teacher": "Scö"
+                        "subject": "Frz",
+                        "teacher": "Re"
                     },
                     "selector": {
-                        "classes": "10c",
+                        "classes": "10",
                         "grade": 10,
-                        "subclass": 1,
-                        "subject": "Inf",
+                        "subclass": null,
+                        "subject": "Frz",
                         "type": "MULT"
                     },
                     "targets": [
+                        "10a",
+                        "10b",
                         "10c",
-                        "Scö"
+                        "Re"
                     ],
-                    "time": 3
+                    "time": [
+                        7,
+                        8
+                    ]
                 },
                 {
                     "change": "TEACHER",
-                    "info": "Ansprechpartner KOE",
+                    "info": null,
                     "new": {
-                        "room": "E205",
-                        "subject": "Inf",
-                        "teacher": null
+                        "room": "D112",
+                        "subject": "Sk",
+                        "teacher": "Fle"
                     },
                     "old": {
-                        "subject": "Inf",
-                        "teacher": "Scö"
-                    },
-                    "selector": {
-                        "classes": "10c",
-                        "grade": 10,
-                        "subclass": 1,
-                        "subject": "Inf",
-                        "type": "MULT"
-                    },
-                    "targets": [
-                        "10c",
-                        "Scö"
-                    ],
-                    "time": 4
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "Aufgaben im Unterrichtsraum",
-                    "new": {
-                        "room": "E206",
-                        "subject": "Inf",
-                        "teacher": null
-                    },
-                    "old": {
-                        "subject": "Inf",
-                        "teacher": "Bre"
+                        "subject": "Sk",
+                        "teacher": "Bo"
                     },
                     "selector": {
                         "grade": 11,
                         "subclass": 1,
-                        "subject": "if",
+                        "subject": "sk",
                         "type": "COURSE"
                     },
                     "targets": [
                         "11",
-                        "Bre"
+                        "Bo",
+                        "Fle"
                     ],
-                    "time": 6
-                },
-                {
-                    "change": "TEACHER",
-                    "info": "Aufgaben im Unterrichtsraum",
-                    "new": {
-                        "room": "E206",
-                        "subject": "Inf",
-                        "teacher": null
-                    },
-                    "old": {
-                        "subject": "Inf",
-                        "teacher": "Bre"
-                    },
-                    "selector": {
-                        "grade": 11,
-                        "subclass": 1,
-                        "subject": "if",
-                        "type": "COURSE"
-                    },
-                    "targets": [
-                        "11",
-                        "Bre"
-                    ],
-                    "time": 7
+                    "time": [
+                        3,
+                        4
+                    ]
                 },
                 {
                     "change": "TEACHER",
@@ -978,179 +662,120 @@
                         "Mel",
                         "Scu"
                     ],
-                    "time": 3
+                    "time": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "Aufgaben im Unterrichtsraum",
+                    "new": {
+                        "room": "B103",
+                        "subject": "Ku",
+                        "teacher": null
+                    },
+                    "old": {
+                        "subject": "Ku",
+                        "teacher": "Hu"
+                    },
+                    "selector": {
+                        "grade": 12,
+                        "subclass": 2,
+                        "subject": "ku",
+                        "type": "COURSE"
+                    },
+                    "targets": [
+                        "12",
+                        "Hu"
+                    ],
+                    "time": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "change": "CANCELLED",
+                    "info": "fällt aus",
+                    "new": {
+                        "room": null,
+                        "subject": null,
+                        "teacher": "Scö"
+                    },
+                    "old": {
+                        "subject": "Ife",
+                        "teacher": "Scö"
+                    },
+                    "selector": {
+                        "grade": 12,
+                        "subclass": 2,
+                        "subject": "if",
+                        "type": "COURSE"
+                    },
+                    "targets": [
+                        "12",
+                        "Scö"
+                    ],
+                    "time": [
+                        8,
+                        9
+                    ]
                 },
                 {
                     "change": "TEACHER",
                     "info": null,
                     "new": {
-                        "room": "D211",
-                        "subject": "Ma",
-                        "teacher": "Scu"
+                        "room": "D201",
+                        "subject": "Bie",
+                        "teacher": "Wh"
                     },
                     "old": {
-                        "subject": "Ma",
-                        "teacher": "Mel"
-                    },
-                    "selector": {
-                        "grade": 12,
-                        "subclass": 1,
-                        "subject": "ma",
-                        "type": "COURSE"
-                    },
-                    "targets": [
-                        "12",
-                        "Mel",
-                        "Scu"
-                    ],
-                    "time": 4
-                },
-                {
-                    "change": "ROOM",
-                    "info": "Leistungskontrolle",
-                    "new": {
-                        "room": "D209",
-                        "subject": "Ge",
-                        "teacher": "Hau"
-                    },
-                    "old": {
-                        "subject": "Ge",
-                        "teacher": "Hau"
+                        "subject": "Bie",
+                        "teacher": "Wi"
                     },
                     "selector": {
                         "grade": 12,
                         "subclass": 2,
-                        "subject": "ge",
+                        "subject": "bi",
                         "type": "COURSE"
                     },
                     "targets": [
                         "12",
-                        "Hau"
+                        "Wi",
+                        "Wh"
                     ],
-                    "time": 6
+                    "time": [
+                        8
+                    ]
                 },
                 {
-                    "change": "ROOM",
-                    "info": "Leistungskontrolle",
+                    "change": "CANCELLED",
+                    "info": "fällt aus",
                     "new": {
-                        "room": "D114",
-                        "subject": "Ge",
-                        "teacher": "Me"
+                        "room": null,
+                        "subject": null,
+                        "teacher": "Wi"
                     },
                     "old": {
-                        "subject": "Ge",
-                        "teacher": "Me"
-                    },
-                    "selector": {
-                        "grade": 12,
-                        "subclass": 1,
-                        "subject": "ge",
-                        "type": "COURSE"
-                    },
-                    "targets": [
-                        "12",
-                        "Me"
-                    ],
-                    "time": 6
-                },
-                {
-                    "change": "ROOM",
-                    "info": "Leistungskontrolle",
-                    "new": {
-                        "room": "D209",
-                        "subject": "Ge",
-                        "teacher": "Hau"
-                    },
-                    "old": {
-                        "subject": "Ge",
-                        "teacher": "Hau"
+                        "subject": "Bie",
+                        "teacher": "Wi"
                     },
                     "selector": {
                         "grade": 12,
                         "subclass": 2,
-                        "subject": "ge",
+                        "subject": "bi",
                         "type": "COURSE"
                     },
                     "targets": [
                         "12",
-                        "Hau"
+                        "Wi"
                     ],
-                    "time": 7
-                },
-                {
-                    "change": "ROOM",
-                    "info": "Leistungskontrolle",
-                    "new": {
-                        "room": "D114",
-                        "subject": "Ge",
-                        "teacher": "Me"
-                    },
-                    "old": {
-                        "subject": "Ge",
-                        "teacher": "Me"
-                    },
-                    "selector": {
-                        "grade": 12,
-                        "subclass": 1,
-                        "subject": "ge",
-                        "type": "COURSE"
-                    },
-                    "targets": [
-                        "12",
-                        "Me"
-                    ],
-                    "time": 7
-                },
-                {
-                    "change": "ROOM",
-                    "info": null,
-                    "new": {
-                        "room": "E303",
-                        "subject": "De",
-                        "teacher": "Ar"
-                    },
-                    "old": {
-                        "subject": "De",
-                        "teacher": "Ar"
-                    },
-                    "selector": {
-                        "grade": 12,
-                        "subclass": 3,
-                        "subject": "de",
-                        "type": "COURSE"
-                    },
-                    "targets": [
-                        "12",
-                        "Ar"
-                    ],
-                    "time": 8
-                },
-                {
-                    "change": "ROOM",
-                    "info": null,
-                    "new": {
-                        "room": "E303",
-                        "subject": "De",
-                        "teacher": "Ar"
-                    },
-                    "old": {
-                        "subject": "De",
-                        "teacher": "Ar"
-                    },
-                    "selector": {
-                        "grade": 12,
-                        "subclass": 3,
-                        "subject": "de",
-                        "type": "COURSE"
-                    },
-                    "targets": [
-                        "12",
-                        "Ar"
-                    ],
-                    "time": 9
+                    "time": [
+                        9
+                    ]
                 }
             ],
-            "filename": "VplanLe11022016.xml"
+            "filename": "VplanLe09022016.xml"
         }
     ]
 }

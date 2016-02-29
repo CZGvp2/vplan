@@ -1,5 +1,5 @@
 from pyramid.view import view_config, notfound_view_config, forbidden_view_config
-from .fileProcessing.exceptions import log_unexpected_error
+from .fileProcessing.serverlog import log_unexpected_error
 
 
 @notfound_view_config(renderer='templates/error.pt')

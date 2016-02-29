@@ -1,14 +1,12 @@
 import os
 import shutil
 import json
-import logging
 from datetime import datetime
 
 from .xml_reader import convert
 from .regex_parser import parse_response_date
-from .exceptions import *
+from .serverlog import log, ProcessingError, InternalServerError
 
-log = logging.getLogger('serverlog')
 
 data_dir = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data' ) )
 json_file = os.path.join(data_dir, 'schedule.json')
@@ -17,6 +15,7 @@ log_file = os.path.join(data_dir, 'server.log')
 
 
 def process_file(input_file):
+	"""Bearbeitet eine einzelne Datei"""
 	# Lesen der Daten mit Temporärdatei
 	content = read_via_tmp(input_file)
 
@@ -41,10 +40,11 @@ def process_file(input_file):
 			return info
 
 	except IOError:
-		raise IOServerError(json_file)
+		raise InternalServerError("IO Error reading schedule")
 
 	except json.JSONDecodeError as error:
-		raise JSONFileParsingError(error)
+		raise InternalServerError('Parsing Error in JSON file line %(line)d column %(column)d',
+			line=error.lineno, column=error.colno)
 
 def read_via_tmp(input_file):
 	with open(tmp_file, 'wb') as dest:
@@ -55,7 +55,7 @@ def read_via_tmp(input_file):
 			content = fobj.read()
 
 	except UnicodeDecodeError:
-		raise BadEncodingError()
+		raise ProcessingError('ERR_DECODING', 'Bad Encoding')
 
 	finally:
 		os.remove(tmp_file)
@@ -69,7 +69,7 @@ def add_day(data, new_day):
 	try:
 		days = data['days']
 		new_date = new_day['date']
-		parsed_date = parse_response_date(new_date)	
+		parsed_date = parse_response_date(new_date)
 
 		# Entfernen veralteter Dateien (erstmal nich)
 #		today = datetime.today()
@@ -77,7 +77,7 @@ def add_day(data, new_day):
 #			date = to_datetime(day)
 #			if date < today.date():
 #				days.remove(day)
-#				log.info('Removed day ')
+#				log.info('Removed day %s', date.strftime('%A %d. %B %Y'))
 #
 #			else:
 #				break
@@ -98,8 +98,8 @@ def add_day(data, new_day):
 
 		return data, (replaced, parsed_date)
 
-	except KeyError as e:
-		raise JSONFileReadingError(e)
+	except KeyError as error:
+		raise InternalServerError('Error reading json. Could not find key "%(key)s"', key=error.args[0])
 
 def read_schedule():
 	with open(json_file, 'r', encoding='utf-8') as fobj:

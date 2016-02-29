@@ -5,45 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta name="description" content="Vertretungsplan des CZG" />
     <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
-
     <title>Vertretungsplan</title>
-
+    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
     <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
-
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
-<<<<<<< HEAD
     <?python
-def color(subject):
-    """Gibt die Farbe des Faches zurück"""
-    colors = { # alle Farben von Philip ausgewählt
-        'Ma' : '#006496',
-        'Ph' : '#3296C8',
-        'Inf' : '#64C8FA',
-        'Ch' : '#009632',
-        'Bio' : '#00C800',
-        'De' : '#B40000',
-        'Ge' : '#FF9B0F',
-        'Geo' : '#FF690F',
-        'En' : '#96001E',
-        'Frz' : '#78003C',
-        'La' : '#78003C',
-        'Ru' : '#78003C',
-        'Et' : '#FFCD0F',
-        'Ku' : '#A0008C',
-        'Mu' : '#8C00A0'
-    }
-    return colors.get(subject, '#555555')
-=======
-    <!--<script>
-      //currentIndex =
-    </script>-->
-    <?python
-      def color(subject):
-          """Gibt die Farbe des Faches zurück"""
-          colors = { # alle Farben von Philip ausgewählt
+    def color(subject):
+        """Gibt die Farbe des Faches zurück"""
+        colors = { # alle Farben von Philip ausgewählt
             'Ma' : '#006496',
             'Ph' : '#3296C8',
             'Inf' : '#64C8FA',
@@ -59,17 +30,16 @@ def color(subject):
             'Et' : '#FFCD0F',
             'Ku' : '#A0008C',
             'Mu' : '#8C00A0'
-          }
-          return colors.get(subject, '#555555')
->>>>>>> origin/master
-    ?>
+        }
+        return colors.get(subject, '#555555')
+        ?>
 </head>
 <body>
     <div id="fixedHeader">Vertretungsplan</div>
     <div id="wrapper">
         <div id="topbar">
             <!--<nav id="menu"> hello </nav>-->
-            <a href="${request.route_path('home', _query='logout')}">Abmelden</a>
+            <a href="${request.route_path('login', _query='logout')}">Abmelden</a>
             <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
             <div class="space"></div>
             <img src="${request.static_path('vp:static/img/menue_icon.png')}" onClick="toggleMenue();" height="1em" width="1em"></img>
@@ -91,7 +61,7 @@ def color(subject):
                     <td class="entry" />
                     <td class="entry" tal:content="event.time" />
                     <td class="entry">
-                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; display: block; margin-left: .1em; min-width: 50px; text-align: center;"></span>
+                        <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; display: block; margin-left: .1em; min-width: 50px; text-align: center;"></span>
                     </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />
