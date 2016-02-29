@@ -63,7 +63,7 @@ setup = function(){
 	showEmptyMessage($(".slide").get(currentIndex));
 	// "Debug" function
 	if(getCookie("philip").indexOf('q')==0){
-		alert(getCookie("philip").substring(1));
+		if(getCookie("philip").substring(1)) alert(getCookie("philip").substring(1));
 		$("body").css("background-image","linear-gradient(90deg, yellow, red, purple, blue, green, yellow)");
 	}
   var slides = $('.slide');
@@ -122,6 +122,11 @@ setSidebars = function(idx, slides){
   } else $("#rightslidebutton").hide();
 }
 
+toggleVisibility = function(obj){
+  if(obj.style.display == "none"){$(obj).fadeIn(animationTime*1000*0.2); return true;}
+  else $(obj).fadeOut(animationTime*1000*0.2);
+  return false;
+}
 /*
 * Listener functions
 */
@@ -140,9 +145,15 @@ onScroll = function(evt){
   }
 }
 
-toggleMenue = function(){
-  console.log("Menue button clicked");
-  removeFilter();
+toggleMenu = function(){
+  var shown = toggleVisibility($("#menuContainer")[0]);
+  if(shown){
+    $("#topbar").css("background-color", "#3a7ab6");
+    $("#header").css("background-image", "linear-gradient(to bottom, #3a7ab6 0%, rgba(0,0,0,0) 70%)");
+  } else {
+    $("#topbar").css("background-color", "");
+    $("#header").css("background-image", "");
+  }
 }
 
 toggleFilter = function(value){
@@ -150,9 +161,16 @@ toggleFilter = function(value){
 	filter(value);
 }
 
-// Add listener to update filter and cookie when input is changed
-$("#input").on('keyup keypress paste', function(evt){
-	toggleFilter($('#input').val());
+$(function(){
+  // Add listener to update filter and cookie when input is changed
+  $("#input").on('keyup keypress paste', function(evt){
+  	toggleFilter($('#input').val());
+  });
+
+  // Add menu Listener
+  $("#menuContainer, #menuButton").on('click', toggleMenu);
+
+  toggleMenu();
 });
 
 // Add keylistener to toggle slides via arrow keys

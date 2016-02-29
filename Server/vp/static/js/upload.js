@@ -15,7 +15,7 @@ setColor = function(){
     $("body").css("background-color", "#3a7ab6");
 }
 resetColor = function(){
-    $("body").css("background-color", "#232323");
+    $("body").css("background-color", "#0e0e0e");
 }
 
 // DragOver

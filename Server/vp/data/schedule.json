@@ -2,6 +2,504 @@
     "days": [
         {
             "date": {
+                "day": 19,
+                "month": 10,
+                "year": 2015
+            },
+            "events": [
+                {
+                    "change": "TEACHER",
+                    "info": null,
+                    "new": {
+                        "room": "D309",
+                        "subject": "Ku",
+                        "teacher": "Drm"
+                    },
+                    "old": {
+                        "subject": "Ku",
+                        "teacher": "Es"
+                    },
+                    "selector": {
+                        "grade": 6,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "6b",
+                        "Es",
+                        "Drm"
+                    ],
+                    "time": [
+                        1
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": null,
+                    "new": {
+                        "room": "D309",
+                        "subject": "Ku",
+                        "teacher": "Sci"
+                    },
+                    "old": {
+                        "subject": "Ku",
+                        "teacher": "Es"
+                    },
+                    "selector": {
+                        "grade": 6,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "6b",
+                        "Es",
+                        "Sci"
+                    ],
+                    "time": [
+                        2
+                    ]
+                },
+                {
+                    "change": "SUBJECT",
+                    "info": null,
+                    "new": {
+                        "room": "E302",
+                        "subject": "En",
+                        "teacher": "Tru"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Mi"
+                    },
+                    "selector": {
+                        "grade": 7,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "7b",
+                        "Mi",
+                        "Tru"
+                    ],
+                    "time": [
+                        3
+                    ]
+                },
+                {
+                    "change": "SUBJECT",
+                    "info": null,
+                    "new": {
+                        "room": "B301",
+                        "subject": "Mu",
+                        "teacher": "Krg"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Ste"
+                    },
+                    "selector": {
+                        "grade": 9,
+                        "subgrade": "c",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "9c",
+                        "Ste",
+                        "Krg"
+                    ],
+                    "time": [
+                        3
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": null,
+                    "new": {
+                        "room": "D309",
+                        "subject": "Ku",
+                        "teacher": "Hu"
+                    },
+                    "old": {
+                        "subject": "Ku",
+                        "teacher": "Es"
+                    },
+                    "selector": {
+                        "grade": 10,
+                        "subgrade": "a",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "10a",
+                        "Es",
+                        "Hu"
+                    ],
+                    "time": [
+                        3
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "Plakate mitbringen",
+                    "new": {
+                        "room": "E303",
+                        "subject": "Ge",
+                        "teacher": "Sk"
+                    },
+                    "old": {
+                        "subject": "Ge",
+                        "teacher": "Me"
+                    },
+                    "selector": {
+                        "grade": 9,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "9b",
+                        "Me",
+                        "Sk"
+                    ],
+                    "time": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "change": "CANCELLED",
+                    "info": "fällt aus",
+                    "new": {
+                        "room": null,
+                        "subject": null,
+                        "teacher": "Mi"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Mi"
+                    },
+                    "selector": {
+                        "grade": 7,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "7b",
+                        "Mi"
+                    ],
+                    "time": [
+                        4
+                    ]
+                },
+                {
+                    "change": "SUBJECT",
+                    "info": null,
+                    "new": {
+                        "room": "B301",
+                        "subject": "En",
+                        "teacher": "Mth"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Ste"
+                    },
+                    "selector": {
+                        "grade": 9,
+                        "subgrade": "c",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "9c",
+                        "Ste",
+                        "Mth"
+                    ],
+                    "time": [
+                        4
+                    ]
+                },
+                {
+                    "change": "ROOM",
+                    "info": "Einführung in das Kurssystem durch SCA",
+                    "new": {
+                        "room": "D311",
+                        "subject": "En",
+                        "teacher": "Se"
+                    },
+                    "old": {
+                        "subject": "En",
+                        "teacher": "Se"
+                    },
+                    "selector": {
+                        "grade": 10,
+                        "subgrade": "a",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "10a",
+                        "Se"
+                    ],
+                    "time": [
+                        5
+                    ]
+                },
+                {
+                    "change": "SUBJECT",
+                    "info": null,
+                    "new": {
+                        "room": "D207",
+                        "subject": "Bio",
+                        "teacher": "Ma"
+                    },
+                    "old": {
+                        "subject": null,
+                        "teacher": null
+                    },
+                    "selector": {
+                        "grade": 7,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "7b",
+                        "Ma"
+                    ],
+                    "time": [
+                        7
+                    ]
+                },
+                {
+                    "change": "ROOM",
+                    "info": "verlegt nach St.4",
+                    "new": {
+                        "room": "E302",
+                        "subject": "En",
+                        "teacher": "Tru"
+                    },
+                    "old": {
+                        "subject": "En",
+                        "teacher": "Tru"
+                    },
+                    "selector": {
+                        "grade": 7,
+                        "subgrade": "b",
+                        "type": "SIMPLE"
+                    },
+                    "targets": [
+                        "7b",
+                        "Tru"
+                    ],
+                    "time": [
+                        7
+                    ]
+                },
+                {
+                    "change": "ROOM",
+                    "info": null,
+                    "new": {
+                        "room": "B303",
+                        "subject": "Frz",
+                        "teacher": "Re"
+                    },
+                    "old": {
+                        "subject": "Frz",
+                        "teacher": "Re"
+                    },
+                    "selector": {
+                        "classes": "6",
+                        "grade": 6,
+                        "subclass": 2,
+                        "subject": "Frz",
+                        "type": "MULT"
+                    },
+                    "targets": [
+                        "6a",
+                        "6b",
+                        "6c",
+                        "Re"
+                    ],
+                    "time": [
+                        3,
+                        4
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "Aufgaben im Unterrichtsraum",
+                    "new": {
+                        "room": "D114",
+                        "subject": "De",
+                        "teacher": "Hau"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Me"
+                    },
+                    "selector": {
+                        "text": "12/ de2",
+                        "type": "FAILED"
+                    },
+                    "targets": [
+                        "notset",
+                        "Me",
+                        "Hau"
+                    ],
+                    "time": [
+                        1,
+                        2
+                    ]
+                },
+                {
+                    "change": "SUBJECT",
+                    "info": "zusätzlich Hälfte des Kurses De STE",
+                    "new": {
+                        "room": "D311",
+                        "subject": "Geo",
+                        "teacher": "Bö"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Bö"
+                    },
+                    "selector": {
+                        "text": "11/ de3",
+                        "type": "FAILED"
+                    },
+                    "targets": [
+                        "notset",
+                        "Bö"
+                    ],
+                    "time": [
+                        6
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "Hälfte des Kurses zu De BÖ D311 andere Hälfte zu De MI D112",
+                    "new": {
+                        "room": " ",
+                        "subject": "De",
+                        "teacher": null
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Ste"
+                    },
+                    "selector": {
+                        "text": "11/ de2",
+                        "type": "FAILED"
+                    },
+                    "targets": [
+                        "notset",
+                        "Ste"
+                    ],
+                    "time": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "change": "TEACHER",
+                    "info": "zusätzlich Hälfte des Kurses De STE",
+                    "new": {
+                        "room": "D112",
+                        "subject": "De",
+                        "teacher": "Sci"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Mi"
+                    },
+                    "selector": {
+                        "text": "11/ de1",
+                        "type": "FAILED"
+                    },
+                    "targets": [
+                        "notset",
+                        "Mi",
+                        "Sci"
+                    ],
+                    "time": [
+                        6,
+                        7
+                    ]
+                },
+                {
+                    "change": "ROOM",
+                    "info": "zusätzlich Hälfte des Kurses De STE",
+                    "new": {
+                        "room": "D311",
+                        "subject": "De",
+                        "teacher": "Bö"
+                    },
+                    "old": {
+                        "subject": "De",
+                        "teacher": "Bö"
+                    },
+                    "selector": {
+                        "text": "11/ de3",
+                        "type": "FAILED"
+                    },
+                    "targets": [
+                        "notset",
+                        "Bö"
+                    ],
+                    "time": [
+                        7
+                    ]
+                },
+                {
+                    "change": "CANCELLED",
+                    "info": "fällt aus",
+                    "new": {
+                        "room": null,
+                        "subject": null,
+                        "teacher": "Ren"
+                    },
+                    "old": {
+                        "subject": "Mu",
+                        "teacher": "Ren"
+                    },
+                    "selector": {
+                        "text": "11/ mu1",
+                        "type": "FAILED"
+                    },
+                    "targets": [
+                        "notset",
+                        "Ren"
+                    ],
+                    "time": [
+                        8,
+                        9
+                    ]
+                },
+                {
+                    "change": "CANCELLED",
+                    "info": "fällt aus",
+                    "new": {
+                        "room": null,
+                        "subject": null,
+                        "teacher": "Ren"
+                    },
+                    "old": {
+                        "subject": "Mu",
+                        "teacher": "Ren"
+                    },
+                    "selector": {
+                        "text": "AG/ 07/12CHO",
+                        "type": "FAILED"
+                    },
+                    "targets": [
+                        "notset",
+                        "Ren"
+                    ],
+                    "time": [
+                        10,
+                        11
+                    ]
+                }
+            ],
+            "filename": "VplanLe19102015.xml"
+        },
+        {
+            "date": {
                 "day": 8,
                 "month": 2,
                 "year": 2016
