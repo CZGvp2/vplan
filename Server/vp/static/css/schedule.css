@@ -25,7 +25,12 @@
 	.entry {
 		font-family: Helvetica, Ubuntu, 'Open Sans', sans-serif;
 	}
-
+	.entry>.class_identifier{
+		 display: block;
+		 margin-left: .1em;
+		 min-width: 50px;
+		 text-align: center;
+	}
 	a {
 		font-family: 'Open Sans', sans-serif;
 		text-decoration: none;

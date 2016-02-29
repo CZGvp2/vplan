@@ -67,7 +67,9 @@
                     <td class="entry" />
                     <td class="entry" tal:content="event.time" />
                     <td class="entry">
-                      <span tal:content="event.new['subject']" style="background-color: ${color(event.new['subject'])}; display: block; margin-left: .1em; min-width: 50px; text-align: center;"></span>
+                      <span tal:content="event.new['subject']"
+                            class="class_identifier"
+                            style="background-image: linear-gradient(to bottom, ${color(event.new['subject'])} 40%, #FFFFFF 180%);"></span>
                     </td>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />

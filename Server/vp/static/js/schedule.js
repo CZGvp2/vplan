@@ -16,16 +16,16 @@ var show_f_h = false;
 
 // Filter functions
 filter = function(target) {
-	var events = $('.event');
-	if(target){
-		for(var i=0; i < events.length; i++){
-			var e = $(events[i]);
-			var targets = e.data().targets.split(' ');
+    var events = $('.event');
+    if(target){
+        for(var i=0; i < events.length; i++){
+            var e = $(events[i]);
+            var targets = e.data().targets.split(' ');
 
-			if (targets.indexOf(target) < 0) e.hide();
-			else e.show();
-		}
-	} else events.show();
+            if (targets.indexOf(target) < 0) e.hide();
+            else e.show();
+        }
+    } else events.show();
 }
 
 removeFilter = function(){
@@ -60,9 +60,14 @@ removeCookie = function(attrib){
 setup = function(){
   filter(getCookie("class"));
   $("#fixedHeader").hide();
+	$(".empty_msg").hide();
   setSidebars(currentIndex, $(".slide"));
+	showEmptyMessage($(".slide").get(currentIndex));
 	// "Debug" function
-	if(getCookie("philip").indexOf('q')==0) alert(getCookie("philip").substring(1));
+	if(getCookie("philip").indexOf('q')==0){
+		alert(getCookie("philip").substring(1));
+		$("body").css("background-image","linear-gradient(90deg, yellow, red, purple, blue, green, yellow)");
+	}
   var slides = $('.slide');
   for(var i = 0; i < slides.length; i++)
     slides[i].style.display = i==currentIndex?'block':'none';
@@ -100,6 +105,12 @@ toggleSlide = function(dir){
   }
   currentIndex = nextIndex;
   setSidebars(currentIndex, slides);
+	showEmptyMessage(slides[currentIndex]);
+}
+
+showEmptyMessage = function(slide){
+	if($(slide).find(".event:visible").length==0) $(slide).find(".empty_msg").show();
+	else $(".empty_msg").hide();
 }
 
 setSidebars = function(idx, slides){
