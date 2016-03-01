@@ -41,6 +41,7 @@
     ?>
 </head>
 <body>
+  <div id="background"></div>
     <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
     <div id="fixedHeader">Vertretungsplan</div>
     <div id="menuContainer">

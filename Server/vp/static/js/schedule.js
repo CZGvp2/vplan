@@ -151,17 +151,18 @@ onScroll = function(evt){
 
 toggleMenu = function(){
   var shown = toggleVisibility($("#menuContainer")[0]);
-  if(shown){
+  /*if(shown){
     $("#topbar").css("background-color", "#3a7ab6");
     $("#header").css("background-image", "linear-gradient(to bottom, #3a7ab6 0%, rgba(0,0,0,0) 70%)");
   } else {
     $("#topbar").css("background-color", "");
     $("#header").css("background-image", "");
-  }
+  }*/
 }
 
 toggleFilter = function(value){
-	setCookie("class", value, 100);
+  if(!value) removeCookie("class");
+	else setCookie("class", value, 100);
 	filter(value);
 }
 

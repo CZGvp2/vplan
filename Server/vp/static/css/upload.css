@@ -90,19 +90,16 @@ body{
 #sidebar .entry{
     color: white;
     overflow: hidden;
-    display: none;
     width: 500%;
     min-height: 4em;
+    padding: 1em;
+    padding-left: 3em;
+    display: block;
 }
 #sidebar:hover{
     width: 30%;
 
     transition: width 1s;
-}
-#sidebar:hover .entry{
-    padding: 1em;
-    padding-left: 3em;
-    display: block;
 }
 .entry:hover{
     background-color: rgba(255,255,255,.1);
