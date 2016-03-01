@@ -23,7 +23,7 @@ def main(global_config, **settings):
 	config.add_route('upload', '/upload')
 	config.add_route('schedule', '/schedule')
 
-	config.add_static_view('static', 'static', cache_max_age=3600)
+	config.add_static_view('static', 'vp:static')
 	config.scan()
 
 	return config.make_wsgi_app()

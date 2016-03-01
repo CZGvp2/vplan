@@ -13,7 +13,7 @@ def convert(xml_content):
 		root = etree.fromstring(xml_content)
 
 	except etree.ParseError as e:
-		raise ProcessingError('XML_PARSING_ERROR', 'Could not parse XML')
+		raise ProcessingError('ERR_PARSING_XML', 'Could not parse XML')
 
 	filename = get(root, './kopf/datei')
 	date = parse_date( get(root, './kopf/titel') )
@@ -87,7 +87,7 @@ class Event:
 	def get_z(self):
 		"""Gibt einen numerischen Wert zum Sortieren zurück"""
 
-		return self.selector.get_z() + 10*sum(self.time)/len(self.time)
+		return 10*self.selector.get_z() + max(self.time)
 
 	def is_next(self, other):
 		"""Falls es sich um die gleiche Änderung in der darauffolgenden Stunde handelt"""
@@ -112,6 +112,6 @@ def get(element, path):
 	target = element.find(path)
 
 	if target is None:
-		raise ProcessingError('XML_READING_ERROR', 'Could not find tag "%(path)s"', path=path)
+		raise ProcessingError('ERR_READING_XML', 'Could not find tag "%(path)s"', path=path)
 
 	return target.text

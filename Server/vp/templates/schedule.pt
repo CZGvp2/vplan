@@ -38,10 +38,19 @@
 
     def join(iterable, string):
         return string.join( map(str, iterable) )
+
+    def get_icon(change):
+        icons = {
+            'SUBJECT': 'subject_icon.png',
+            'TEACHER': 'teacher_icon.png',
+            'ROOM': 'room_icon.png',
+            'CANCELLED': 'cancel_icon.png'
+        }
+        return icons.get(change, 'info_icon.png')
     ?>
 </head>
 <body>
-    <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
+    <div id="jsWarn">JavaScript ist nicht verfügbar.</div>  <!-- vielleicht ein iframe zu ner fehlerseite? -->
     <div id="fixedHeader">Vertretungsplan</div>
     <nav id="menu"> hello </nav>
     <div id="wrapper">
@@ -69,7 +78,9 @@
             <span style="font-size: .6em;">(${day.date['date']})</span>
             <table class="table">
                 <tr class="event" tal:repeat="event day.events" data-targets="${join(event.targets, ' ')}" >
-                    <td class="entry" />
+                    <td class="entry">
+                        <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
+                    </td>
                     <td class="entry">${join(event.time, ', ')}<td/>
                     <td class="entry">
                         <span class="class_identifier" style="background-color:${color(event.new['subject'])}">${event.new['subject']}</span>

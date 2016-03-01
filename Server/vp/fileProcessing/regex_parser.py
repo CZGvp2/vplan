@@ -16,8 +16,8 @@ SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
 # Klassenübergreifend. Bsp: "08A,08B,08C/ 08FRZ2", "06A,06B/ 06ABET", "10C/ 10CIF2"
 MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(?P<grade>0[5-9]|10)[A-D]{,4})(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
 
-# Kurssystem Bsp.: 11/ ma2  oder 12/ de1
-COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2})(?P<course>[ez]?)°(?P<subclass>\d)$' ) # TODO spezielles Parsen
+# Kurssystem Bsp.: 11/ ma2  oder 12/ ene
+COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2})(?P<course>[ez])?(?P<subclass>\d)?)?$' ) # TODO spezielles Parsen
 
 # Lehrer, passt sowohl mit als auch ohne Klammern. Bsp.: "MUE", "(REN)"
 TEACHER = re.compile( r'^\(?([A-ZÄÖÜ]{2,})\)?$' )
@@ -33,7 +33,7 @@ try:
 			name, replacement = tuple( line[:-1].split(' ') ) # :-1 entfernt den letzten character, \n
 			subjects[name] = replacement
 
-except IOError:
+except FileNotFoundError:
 	raise InternalServerError("IO Error reading subjects")
 
 except ValueError:
@@ -98,6 +98,7 @@ class Selector:
 
 		self.grade = int( match.group('grade') )
 		self.subject = match.group('subject')
+		self.course = match.group('course')
 		self.subclass = to_int( match.group('subclass') )
 		self.targets = [ str(self.grade) ]
 
@@ -117,10 +118,10 @@ class Selector:
 		"""Gibt einen Wert zum Sortieren zurück"""
 
 		if self.type == 'FAILED':
-			return 500  # ganz groß
+			return 5000  # ganz groß
 
 		order = 'SIMPLE', 'MULT', 'COURSE'
-		return 100*order.index(self.type) + self.grade
+		return 10*self.grade + order.index(self.type)
 
 
 def replace_subject(text):

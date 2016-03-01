@@ -13,6 +13,10 @@ json_file = os.path.join(data_dir, 'schedule.json')
 tmp_file = os.path.join(data_dir, 'tmp.xml')
 log_file = os.path.join(data_dir, 'server.log')
 
+SCHEDULE_STARTUP = {
+	'days': []
+}
+
 
 def process_file(input_file):
 	"""Bearbeitet eine einzelne Datei"""
@@ -39,8 +43,8 @@ def process_file(input_file):
 
 			return info
 
-	except IOError:
-		raise InternalServerError("IO Error reading schedule")
+	except FileNotFoundError:
+		generate_schedule()
 
 	except json.JSONDecodeError as error:
 		raise InternalServerError('Parsing Error in JSON file line %(line)d column %(column)d',
@@ -102,5 +106,23 @@ def add_day(data, new_day):
 		raise InternalServerError('Error reading json. Could not find key "%(key)s"', key=error.args[0])
 
 def read_schedule():
-	with open(json_file, 'r', encoding='utf-8') as fobj:
-		return json.loads(fobj.read())
+	"""Gibt die Daten aus schedule als dict zurück"""
+	try:
+		with open(json_file, 'r', encoding='utf-8') as fobj:
+			return json.loads(fobj.read())
+
+	except FileNotFoundError:
+		generate_schedule()
+		return SCHEDULE_STARTUP
+
+	except json.JSONDecodeError as error:
+		raise InternalServerError('Parsing Error in JSON file line %(line)d column %(column)d',
+			line=error.lineno, column=error.colno)
+
+def generate_schedule():
+	"""Erzeugt einen neuen leeren Schedule"""
+
+	log.warning('schedule.json not found. Generating new file.')
+	with open(json_file, 'w', encoding='utf-8') as fobj:
+		content = json.dumps(SCHEDULE_STARTUP, ensure_ascii=False, indent=4, sort_keys=True)
+		fobj.write(content)
