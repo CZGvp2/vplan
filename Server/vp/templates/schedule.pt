@@ -11,9 +11,6 @@
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
-    <!--<script>
-      //currentIndex =
-    </script>-->
     <?python
     def color(subject):
         """Gibt die Farbe des Faches zurück"""
@@ -35,9 +32,6 @@
         'Mu' : '#8C00A0'
         }
         return colors.get(subject, '#555555')
-
-    def join(iterable, string):
-        return string.join( map(str, iterable) )
 
     def get_icon(change):
         icons = {
@@ -77,20 +71,27 @@
               <span class="day_title" id="right"></span>
           </div>
         </div>
+        <!--  das Kommentar wird mitgerendert -->
+        <!--! das nicht, weil es mit ! endet -->
         <div class="slide" tal:repeat="day days">
             <div class="slide_title">
                 ${day.date['weekday']}
             </div>
             <span style="font-size: .6em;">(${day.date['date']})</span>
             <table class="table">
-                <tr class="event" tal:repeat="event day.events" data-targets="${join(event.targets, ' ')}" >
-                    <td class="entry">
+                <tr class="event" tal:repeat="event day.events" data-targets="event.targets">
+                    <td class="selector" tal:define="selector event.selector">
+                        <tal:block>
+                        <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
+                        <span tal:condition="selector.subject">${selector.subject}</span>
+                        <span tal:condition="selector.course">${selector.course}</span>
+                        <span tal:condition="selector.subclass">${selector.subclass}</span>
+                        </tal:block>
+                    </td>
+                    <td class="entry"> <!--! icon -->
                         <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
                     </td>
-                    <td class="entry">${join(event.time, ', ')}<td/>
-                    <td class="entry">
-                        <span class="class_identifier" style="background-color:${color(event.new['subject'])}">${event.new['subject']}</span>
-                    </td>
+                    <td class="entry">${event.time}<td/>
                     <td class="entry" tal:content="event.new['teacher']" />
                     <td class="entry" tal:content="event.new['room']" />
                     <td class="entry" tal:content="event.old['subject']" />

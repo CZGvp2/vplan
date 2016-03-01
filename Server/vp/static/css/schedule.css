@@ -34,6 +34,13 @@
 		text-decoration: none;
 		color: white;
 	}
+	/* Meine übernatürlichen CSS-Skills */
+	span {
+		background: blue;
+	}
+	td.selector {
+		float: right;
+	}
 	body{
 		padding: 0;
 		margin: 0;
