@@ -43,7 +43,13 @@
 <body>
     <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
     <div id="fixedHeader">Vertretungsplan</div>
-    <div id="menuContainer"><div id="menuSpace"></div><nav id="menu"> hello <br /> this is a <strong>menu</strong></nav></div>
+    <div id="menuContainer">
+      <div id="menuSpace"></div>
+      <nav id="menu">
+        <div class="menu_item">Filter: <input type="text" id="input" value="" /><button onclick="toggleFilter('');$('input').val('');">Entfernen</button></div>
+        <div class="menu_item"></div>
+      </nav>
+    </div>
     <div id="wrapper">
         <div id="topbar">
             <a href="${request.route_path('login', _query='logout')}">Abmelden</a>

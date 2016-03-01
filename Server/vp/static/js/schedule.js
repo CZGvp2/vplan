@@ -61,11 +61,15 @@ setup = function(){
 	$("#jsWarn").hide();
   setSidebars(currentIndex, $(".slide"));
 	showEmptyMessage($(".slide").get(currentIndex));
+  $('#input').val(getCookie('class'));
 	// "Debug" function
 	if(getCookie("philip").indexOf('q')==0){
 		if(getCookie("philip").substring(1)) alert(getCookie("philip").substring(1));
 		$("body").css("background-image","linear-gradient(90deg, yellow, red, purple, blue, green, yellow)");
 	}
+  if(getCookie("gradient").indexOf('yes')==0){
+    $(".class_identifier").css("background-image", "linear-gradient(to bottom, rgba(0,0,0,0) 40%, white 160%)");
+  }
   var slides = $('.slide');
   for(var i = 0; i < slides.length; i++)
     slides[i].style.display = i==currentIndex?'block':'none';
@@ -168,7 +172,7 @@ $(function(){
   });
 
   // Add menu Listener
-  $("#menuContainer, #menuButton").on('click', toggleMenu);
+  $("#menuSpace, #menuButton").on('click', toggleMenu);
 
   toggleMenu();
 });
