@@ -11,9 +11,6 @@
     <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
     <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
     <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
-    <!--<script>
-      //currentIndex =
-    </script>-->
     <?python
     def color(subject):
         """Gibt die Farbe des Faches zurück"""
@@ -36,8 +33,14 @@
         }
         return colors.get(subject, '#555555')
 
-    def join(iterable, string):
-        return string.join( map(str, iterable) )
+    def get_icon(change):
+        icons = {
+            'SUBJECT': 'subject_icon.png',
+            'TEACHER': 'teacher_icon.png',
+            'ROOM': 'room_icon.png',
+            'CANCELLED': 'cancel_icon.png'
+        }
+        return icons.get(change, 'info_icon.png')
     ?>
 </head>
 <body>

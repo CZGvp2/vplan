@@ -14,10 +14,10 @@ locale.setlocale(locale.LC_TIME, 'deu_deu')  # TODO fehler auf Unix?
 SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
 
 # Klassenübergreifend. Bsp: "08A,08B,08C/ 08FRZ2", "06A,06B/ 06ABET", "10C/ 10CIF2"
-MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<classes>(?P<grade>0[5-9]|10)[A-D]{,4})(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
+MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<grade>0[5-9]|10)(?P<subgrades>[A-D]{,4})?(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
 
-# Kurssystem Bsp.: 11/ ma2  oder 12/ de1
-COURSE = re.compile( r'^(?P<grade>11|12)/\s(?P<subject>[a-z]{2})(?P<course>[ez]?)°(?P<subclass>\d)$' ) # TODO spezielles Parsen
+# Kurssystem Bsp.: 11/ ma2  oder 12/ ene
+COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2})(?P<course>[ez])?(?P<subclass>\d)?)?$' ) # TODO spezielles Parsen
 
 # Lehrer, passt sowohl mit als auch ohne Klammern. Bsp.: "MUE", "(REN)"
 TEACHER = re.compile( r'^\(?([A-ZÄÖÜ]{2,})\)?$' )
@@ -33,7 +33,7 @@ try:
 			name, replacement = tuple( line[:-1].split(' ') ) # :-1 entfernt den letzten character, \n
 			subjects[name] = replacement
 
-except IOError:
+except FileNotFoundError:
 	raise InternalServerError("IO Error reading subjects")
 
 except ValueError:
@@ -52,6 +52,12 @@ class Selector:
 			('COURSE', self.parse_course)
 		]
 
+		self.grade = None
+		self.subgrades = None
+		self.subject = None
+		self.course = None
+		self.subclass = None
+		self.targets = ['notset']
 		self.type = 'FAILED'
 
 		for type, parser in parsers:
@@ -62,7 +68,6 @@ class Selector:
 		if self.type == 'FAILED':
 			log.warning('Could not parse class "%s"', text)
 			self.text = text
-			self.targets = ['notset']
 
 	def parse_simple(self, text):
 		"""Einfacher Ausdruck, wie 8C oder 10C"""
@@ -71,7 +76,7 @@ class Selector:
 			return False
 
 		self.grade = int( match.group('grade') )
-		self.subgrade = match.group('subgrade').lower()
+		self.subgrades = match.group('subgrade').lower()
 		self.targets = [ lower(text) ]
 
 		return True
@@ -82,7 +87,7 @@ class Selector:
 		if not match:
 			return False
 
-		self.classes = lower( match.group('classes') )
+		self.subgrades = match.group('subgrades').lower()
 		self.grade = int( match.group('grade') )
 		self.subject = replace_subject( match.group('subject') )
 		self.subclass = to_int( match.group('subclass') )
@@ -97,7 +102,8 @@ class Selector:
 			return False # hat grade und subclass gleich drin
 
 		self.grade = int( match.group('grade') )
-		self.subject = match.group('subject')
+		self.subject = replace_subject( match.group('subject') )
+		self.course = match.group('course')
 		self.subclass = to_int( match.group('subclass') )
 		self.targets = [ str(self.grade) ]
 
@@ -110,17 +116,20 @@ class Selector:
 	def json(self):
 		"""JSON Representation des Events"""
 		data = self.__dict__.copy()
+
+		# Entfernen von Targets
 		data.pop('targets')
+
 		return data
 
 	def get_z(self):
 		"""Gibt einen Wert zum Sortieren zurück"""
 
 		if self.type == 'FAILED':
-			return 500  # ganz groß
+			return 5000  # ganz groß
 
 		order = 'SIMPLE', 'MULT', 'COURSE'
-		return 100*order.index(self.type) + self.grade
+		return 10*self.grade + order.index(self.type)
 
 
 def replace_subject(text):
