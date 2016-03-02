@@ -183,10 +183,11 @@
     justify-content: space-around;
     align-items: stretch;
   }
-  #menuSpace{
+  #menuSpace{/* necessary for mobile design*/
     z-index: 101;
     height: 2em;
     width: 100%;
+		height: 0;
   }
 	#menu{
     z-index: 101;
@@ -250,7 +251,18 @@
     height: 100%;
     z-index: 0;
     background-color: #0e0e0e;
+		display: none;
   }
+	#cover{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 99;
+		background-color: rgba(255,255,255,0.1);
+		display: none;
+	}
 	/**
 	Mögliche @media-Einträge:
 		screen - Computerbildschirme

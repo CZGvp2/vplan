@@ -20,9 +20,9 @@ filter = function(target) {
     if(target){
         for(var i=0; i < events.length; i++){
             var e = $(events[i]);
-            var targets = e.data().targets.split(' ');
+            var targets = e.data().targets.toLowerCase()/*.split(' ')*/;
 
-            if (targets.indexOf(target) < 0) e.hide();
+            if (targets.indexOf(target.toLowerCase()) < 0) e.hide();
             else e.show();
         }
     } else events.show();
@@ -150,7 +150,7 @@ onScroll = function(evt){
 }
 
 toggleMenu = function(){
-  var shown = toggleVisibility($("#menuContainer")[0]);
+  if(toggleVisibility($("#menuContainer")[0])) $("#cover").show();
   /*if(shown){
     $("#topbar").css("background-color", "#3a7ab6");
     $("#header").css("background-image", "linear-gradient(to bottom, #3a7ab6 0%, rgba(0,0,0,0) 70%)");
@@ -174,6 +174,10 @@ $(function(){
 
   // Add menu Listener
   $("#menuSpace, #menuButton").on('click', toggleMenu);
+  $("#cover").on('click', function(){
+    toggleMenu();
+    $("#cover").hide();
+  });
 
   toggleMenu();
 });

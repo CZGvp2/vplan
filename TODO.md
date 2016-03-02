@@ -6,6 +6,7 @@
  - [x] DIE SORTATION IS KAPUTT
  - [x] mach die ganz!
  - [ ] und die Errorcodes auch: [Error dictionary](https://github.com/CZGvp2/vplan/blob/master/Server/vp/static/js/upload.js)
+ - [ ] bei einem Post an .../upload?<dateiname> mit ausreichenden Rechten soll die Datei manuell vom Server gelöscht werden.
 
 #Tim
 @Infoproject
