@@ -78,17 +78,26 @@
           </div>
           <span style="font-size: .6em;">(${day.date['date']})</span>
           <table class="table">
-              <tr class="event" tal:repeat="event day.events" data-targets="${join(event.targets, ' ')}" >
-                  <td class="entry" />
-                  <td class="entry">${join(event.time, ', ')}<td/>
-                  <td class="entry">
-                      <span class="class_identifier" style="background-color:${color(event.new['subject'])}">${event.new['subject']}</span>
-                  </td>
-                  <td class="entry" tal:content="event.new['teacher']" />
-                  <td class="entry" tal:content="event.new['room']" />
-                  <td class="entry" tal:content="event.old['subject']" />
-                  <td class="entry" tal:content="event.old['teacher']" />
-                  <td class="entry" tal:content="event.info" />
+              <tr class="event" tal:repeat="event day.events" data-targets="event.targets">
+                    <td class="entry"> <!--! icon -->
+                        <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
+                    </td>
+                    <td class="selector" tal:define="selector event.selector">
+                        <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
+                        <span tal:condition="selector.subject">${selector.subject}</span>
+                        <span tal:condition="selector.course">${selector.course}</span>
+                        <span tal:condition="selector.subclass">${selector.subclass}</span>
+                    </td>
+                    <td class="entry">${event.time}<td/>
+                    <td class="entry">
+                        <span tal:content="event.new['subject']" class="old" style="background-color: ${color(event.new['subject'])}"></span>${event.new['teacher']}
+                    </td>
+                    <td>&#8594;</td>
+                    <td class="entry">
+                        <span tal:content="event.old['subject']" class="new" style="background-color: ${color(event.old['subject'])}"></span>${event.old['teacher']}
+                    </td>
+                    <td class="entry" tal:content="event.new['room']" />
+                    <td class="entry" tal:content="event.info" />
               </tr>
           </table>
       </div>
