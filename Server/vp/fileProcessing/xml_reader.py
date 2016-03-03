@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as etree
 
 from .serverlog import ProcessingError
-from .regex_parser import Selector, parse_date, replace_subject, replace_teacher
+from .regex_parser import Selector, parse_date, parse_subject, replace_teacher
 
 
 def convert(xml_content):
@@ -48,13 +48,13 @@ class Event:
 
 		# Alte Stunde
 		self.old = {
-			'subject': replace_subject( get_tag('fach') ),
+			'subject': parse_subject( get_tag('fach') ),
 			'teacher': replace_teacher( get_tag('lehrer') )
 		}
 
 		# Neue Stunde
 		self.new = {
-			'subject': replace_subject( get_tag('vfach') ),
+			'subject': parse_subject( get_tag('vfach') ),
 			'teacher': replace_teacher( get_tag('vlehrer') ),
 			'room': None if get_tag('vraum') == '---' else get_tag('vraum')
 		}

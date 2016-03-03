@@ -22,7 +22,12 @@ COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2})(?P<course>[ez]
 # Lehrer, passt sowohl mit als auch ohne Klammern. Bsp.: "MUE", "(REN)"
 TEACHER = re.compile( r'^\(?([A-ZÄÖÜ]{2,})\)?$' )
 
-# TODO AG
+# Passt auf alle WoUs (schon lower) z.B: wouma, wouif, wou
+# Passt auf AGs z. B. agm, ag
+# Passt auf Kurs z. B. en, ma, ene, biz
+# gibt Prefix, Fach und Suffix in match
+SUBJECT = re.compile( r'^(?P<prefix>wou|ag)?(?P<subject>[a-z]{2})(?P<suffix>[ez])?$' ) # 2 Zeichen (das meiste)
+SUBJECT_LONG = re.compile( r'^(?P<prefix>wou|ag)?(?P<subject>[a-z]{3})(?P<suffix>[ez])?$' ) # 3 zeichen lang (Frz oder WoU)
 
 # Laden der subjects.data TODO (sollte jedes mal beim Uploaden passieren)
 subjects_file = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data/subjects.data' ) )
@@ -55,7 +60,6 @@ class Selector:
 		self.grade = None
 		self.subgrades = None
 		self.subject = None
-		self.course = None
 		self.subclass = None
 		self.targets = ['notset']
 		self.type = 'FAILED'
@@ -89,7 +93,7 @@ class Selector:
 
 		self.subgrades = match.group('subgrades').lower()
 		self.grade = int( match.group('grade') )
-		self.subject = replace_subject( match.group('subject') )
+		self.subject = parse_subject( match.group('subject') )
 		self.subclass = to_int( match.group('subclass') )
 		self.targets = list( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ('8a', '8b', '8c')
 
@@ -102,8 +106,7 @@ class Selector:
 			return False # hat grade und subclass gleich drin
 
 		self.grade = int( match.group('grade') )
-		self.subject = replace_subject( match.group('subject') )
-		self.course = match.group('course')
+		self.subject = parse_subject( match.group('subject') )
 		self.subclass = to_int( match.group('subclass') )
 		self.targets = [ str(self.grade) ]
 
@@ -132,17 +135,37 @@ class Selector:
 		return 10*self.grade + order.index(self.type)
 
 
-def replace_subject(text):
-	"""Ersetzt ein Fach."""
-	if text == '---':
+def parse_subject(text, long_subj=False):
+	"""Ersetzt ein Fach und versucht es in Präfix, Fach und Suffix zu Unterteilen"""
+	if not text or text == '---':
 		return None
 
-	try:
-		return subjects[ text.lower() ]
+	prefix = None
+	suffix = None
 
-	except KeyError:
-		log.warning('Could not replace subject "%s"', text)
-		return text.capitalize()
+	match = (SUBJECT_LONG if long_subj else SUBJECT).match( text.lower() )
+	if not match:
+		if long_subj:
+			log.warning('Could not match subject "%s"', text)
+			subject = text
+
+		else:  # Wenn nicht Kurz geparst werden konnte, versuche Lang
+			return parse_subject(text, long_subj=True)
+
+	else:
+		prefix, subject, suffix = match.groups()
+		try:
+			subject = subjects[ subject.lower() ]  # Ersetzen durch Daten aus subject.data
+
+		except KeyError:
+			log.warning('Could not replace subject "%s"', text)
+			subject = text.capitalize()
+
+	return {
+		'prefix': prefix,  # TODO prefixes
+		'subject': subject,
+		'suffix': suffix  # TODO suffix.upper()
+	}
 
 def replace_teacher(text):
 	"""Übersetzt einen Lehrer. Klammern werden entfernt, Anfangsbuchstabe groß"""

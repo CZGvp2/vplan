@@ -84,18 +84,28 @@
                     </td>
                     <td class="selector" tal:define="selector event.selector">
                         <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
-                        <span tal:condition="selector.subject">${selector.subject}</span>
-                        <span tal:condition="selector.course">${selector.course}</span>
+                        <div tal:define="s selector.subject" tal:condition="s">
+                            <!--! die div brauch ich nur wegen TAL. sie enthält das optionale Subject -->
+                            <span tal:condition="s.prefix">${s.prefix}</span>
+                            <span style="background-color: ${color(s.subject)}">${s.subject}</span>
+                            <span tal:condition="s.suffix">${s.suffix}</span>
+                        </div>
                         <span tal:condition="selector.subclass">${selector.subclass}</span>
                     </td>
                     <td class="entry">${event.time}<td/>
-                    <td class="entry">
-                        <span tal:content="event.new['subject']" class="old" style="background-color: ${color(event.new['subject'])}"></span>${event.new['teacher']}
+                    <td class="entry" tal:define="s event.new['subject']" tal:condition="s">
+                        <span tal:condition="s.prefix">${s.prefix}</span>
+                        <span style="background-color: ${color(s.subject)}">${s.subject}</span>
+                        <span tal:condition="s.suffix">${s.suffix}</span>${event.new['teacher']}
                     </td>
+                    <td tal:condition="not event.new['subject']"></td> <!--! falls subject Null -->
                     <td>&#8594;</td>
-                    <td class="entry">
-                        <span tal:content="event.old['subject']" class="new" style="background-color: ${color(event.old['subject'])}"></span>${event.old['teacher']}
+                    <td class="entry" tal:define="s event.old['subject']" tal:condition="s">
+                        <span tal:condition="s.prefix">${s.prefix}</span>
+                        <span tal:content="s.subject" class="old" style="background-color: ${color(s.subject)}"></span>
+                        <span tal:condition="s.suffix">${s.suffix}</span>${event.old['teacher']}
                     </td>
+                    <td tal:condition="not event.old['subject']"></td>
                     <td class="entry" tal:content="event.new['room']" />
                     <td class="entry" tal:content="event.info" />
               </tr>
