@@ -59,8 +59,13 @@ class Selector:
 
 		self.grade = None
 		self.subgrades = None
-		self.subject = None
 		self.subclass = None
+		self.subject = {
+			'prefix': None,
+			'subject': None,
+			'suffix': None
+		}
+		
 		self.targets = ['notset']
 		self.type = 'FAILED'
 
@@ -137,14 +142,16 @@ class Selector:
 
 def parse_subject(text, long_subj=False):
 	"""Ersetzt ein Fach und versucht es in Präfix, Fach und Suffix zu Unterteilen"""
-	if not text or text == '---':
-		return None
 
 	prefix = None
 	suffix = None
 
 	match = (SUBJECT_LONG if long_subj else SUBJECT).match( text.lower() )
-	if not match:
+
+	if not text or text == '---':
+		subject = None
+
+	elif not match:
 		if long_subj:
 			log.warning('Could not match subject "%s"', text)
 			subject = text

@@ -12,6 +12,7 @@
 *.pyc
 Server/vp.egg-info
 *.xml
+*.json
 
 # Anscheinend muss man die Dateien erst untracken
 # mit git rm --cached *.pyc

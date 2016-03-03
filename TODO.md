@@ -2,15 +2,14 @@
 @Port5053
 
  - [ ] Exception args für User
- - [x] AG
- - [x] WoU
+ - [ ] seltsame dinge wie Frz z oder 5a gif fixen
  - [x] Kurse
  - [x] DIE SORTATION IS KAPUTT
  - [x] mach die ganz!
  - [x] und die Errorcodes auch: [Error dictionary](https://github.com/CZGvp2/vplan/blob/master/Server/vp/static/js/upload.js)
- - [ ] bei einem Post an .../upload?<dateiname> mit ausreichenden Rechten soll die Datei manuell vom Server gelöscht werden.
+ - [ ] über AJAX Dateien deleten
  - [ ] table header machen
- - [ ] Tim die HTML-Stuktur erklären
+ - [x] Tim die HTML-Stuktur erklären
  - [x] verschiedenes für versch actions in schedule.pt
  - [x] unglaubliche HTML-Stuktur
  - [x] Tims seltsamen Fehler beheben

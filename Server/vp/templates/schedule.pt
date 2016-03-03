@@ -82,14 +82,11 @@
                     <td class="entry"> <!--! icon -->
                         <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
                     </td>
-                    <td class="selector" tal:define="selector event.selector">
+                    <td class="selector" tal:define="selector event.selector; s selector.subject">
                         <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
-                        <div tal:define="s selector.subject" tal:condition="s">
-                            <!--! die div brauch ich nur wegen TAL. sie enthält das optionale Subject -->
-                            <span tal:condition="s.prefix">${s.prefix}</span>
-                            <span style="background-color: ${color(s.subject)}">${s.subject}</span>
-                            <span tal:condition="s.suffix">${s.suffix}</span>
-                        </div>
+                        <span tal:condition="s.prefix">${s.prefix}</span>
+                        <span tal:condition="s.subject" style="background-color: ${color(s.subject)}">${s.subject}</span>
+                        <span tal:condition="s.suffix">${s.suffix}</span>
                         <span tal:condition="selector.subclass">${selector.subclass}</span>
                     </td>
                     <td class="entry">${event.time}<td/>
