@@ -1,12 +1,11 @@
 import xml.etree.ElementTree as etree
 
 from .serverlog import ProcessingError
-from .regex_parser import Selector, parse_date, parse_subject, replace_teacher
+from .regex_parser import Selector, parse_date, parse_subject, replace_teacher, dashToNone
 
 
 def convert(xml_content):
-	"""Konvertiert einen xml-String in ein dictionary, Ergebnis sind JSON-Daten für einen Tag
-	   gibt (data, errorCode) als Tupel zurück"""
+	"""Konvertiert einen xml-String in ein dictionary, Ergebnis sind JSON-Daten für einen Tag"""
 
 	try:
 		# Parsen vom String xml_content
@@ -46,17 +45,21 @@ class Event:
 		# Erspart Tipparbeit, da in dieser Funktion get immer vom element ausgeht
 		get_tag = lambda tag: get(action, tag)
 
+		# Selektor der Klasse(n)
+		self.selector = Selector( get_tag('klasse') )
+		is_course = self.selector.grade >= 11
+
 		# Alte Stunde
 		self.old = {
-			'subject': parse_subject( get_tag('fach') ),
-			'teacher': replace_teacher( get_tag('lehrer') )
+			'subject': parse_subject( get_tag('fach'), course=is_course  ),
+			'teacher': replace_teacher( get_tag('vlehrer') ),
 		}
 
 		# Neue Stunde
 		self.new = {
-			'subject': parse_subject( get_tag('vfach') ),
+			'subject': parse_subject( get_tag('vfach'), course=is_course ),
 			'teacher': replace_teacher( get_tag('vlehrer') ),
-			'room': None if get_tag('vraum') == '---' else get_tag('vraum')
+			'room': dashToNone( get_tag('vraum') )
 		}
 
 		self.info = get_tag('info')
@@ -66,22 +69,24 @@ class Event:
 		if self.old['teacher'] != self.new['teacher']: self.change = 'TEACHER'
 		if self.old['subject'] != self.new['subject']: self.change = 'SUBJECT'
 		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
-		if not self.new['subject']:
+
+		if not any( self.new['subject'].values() ):
 			self.change = 'CANCELLED'
+			self.new['subject'] = None
+			self.new['teacher'] = None
 
 		if not self.change: self.change = 'ROOM'
 		# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer.
 		# daher kann es sich nur um eine Raumänderung handeln
 
-		self.selector = Selector( get_tag('klasse') )
 		self.targets = self.selector.targets
 
 		# Hinzufügen der Lehrer zu den Targets
 		if self.old['teacher']:
-			self.targets += ( self.old['teacher'], )  # Falls Teacher '---' und damit None, nicht hinzufügen
+			self.targets.append(self.old['teacher'])  # Falls Teacher '---' und damit None, nicht hinzufügen
 
 		if self.new['teacher'] and self.new['teacher'] not in self.targets:
-			self.targets += ( self.new['teacher'], )
+			self.targets.append(self.new['teacher'])
 
 
 	def get_z(self):

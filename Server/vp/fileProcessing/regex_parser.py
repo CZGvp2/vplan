@@ -14,20 +14,17 @@ locale.setlocale(locale.LC_TIME, 'deu_deu')  # TODO fehler auf Unix?
 SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
 
 # Klassenübergreifend. Bsp: "08A,08B,08C/ 08FRZ2", "06A,06B/ 06ABET", "10C/ 10CIF2"
-MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<grade>0[5-9]|10)(?P<subgrades>[A-D]{,4})?(?P<subject>[A-Z]{2,})(?P<subclass>\d)?$' )
+MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<grade>0[5-9]|10)(?P<subgrades>[A-D]{,4})?(?P<subject>(WOU|AG)?[a-zA-Z]{2,3})(?P<subclass>\d)?$' )
 
 # Kurssystem Bsp.: 11/ ma2  oder 12/ ene
-COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2})(?P<course>[ez])?(?P<subclass>\d)?)?$' ) # TODO spezielles Parsen
-
-# Lehrer, passt sowohl mit als auch ohne Klammern. Bsp.: "MUE", "(REN)"
-TEACHER = re.compile( r'^\(?([A-ZÄÖÜ]{2,})\)?$' )
+COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)?)?$' ) # TODO spezielles Parsen
 
 # Passt auf alle WoUs (schon lower) z.B: wouma, wouif, wou
 # Passt auf AGs z. B. agm, ag
 # Passt auf Kurs z. B. en, ma, ene, biz
 # gibt Prefix, Fach und Suffix in match
-SUBJECT = re.compile( r'^(?P<prefix>wou|ag)?(?P<subject>[a-z]{2})(?P<suffix>[ez])?$' ) # 2 Zeichen (das meiste)
-SUBJECT_LONG = re.compile( r'^(?P<prefix>wou|ag)?(?P<subject>[a-z]{3})(?P<suffix>[ez])?$' ) # 3 zeichen lang (Frz oder WoU)
+SUBJECT = re.compile( r'^(?P<prefix>wou|ag)?(?P<subject>[a-z]{2,3})(?P<suffix>[ez]){0}$' ) # 2-3, kein Suffix (das meiste)
+SUBJECT_COURSE = re.compile( r'^(?P<prefix>)(?P<subject>[a-z]{2})(?P<suffix>[ez])?$' ) # 2 zeichen lang, opt. Suffix
 
 # Laden der subjects.data TODO (sollte jedes mal beim Uploaden passieren)
 subjects_file = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data/subjects.data' ) )
@@ -47,6 +44,7 @@ except ValueError:
 
 lower = lambda text: (text[1:] if text[0] == '0' else text).lower() # '08' -> '8', oder '09B' -> '9b'
 to_int = lambda text: None if not text else int(text)
+dashToNone = lambda text: None if text == "---" else text # gibt None zurück falls text == "---"
 
 class Selector:
 	"""Bezeichner für die Klassen"""
@@ -57,7 +55,7 @@ class Selector:
 			('COURSE', self.parse_course)
 		]
 
-		self.grade = None
+		self.grade = 0
 		self.subgrades = None
 		self.subclass = None
 		self.subject = {
@@ -65,7 +63,7 @@ class Selector:
 			'subject': None,
 			'suffix': None
 		}
-		
+
 		self.targets = ['notset']
 		self.type = 'FAILED'
 
@@ -98,7 +96,7 @@ class Selector:
 
 		self.subgrades = match.group('subgrades').lower()
 		self.grade = int( match.group('grade') )
-		self.subject = parse_subject( match.group('subject') )
+		self.subject = parse_subject( match.group('subject'), course=False )
 		self.subclass = to_int( match.group('subclass') )
 		self.targets = list( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ('8a', '8b', '8c')
 
@@ -111,7 +109,7 @@ class Selector:
 			return False # hat grade und subclass gleich drin
 
 		self.grade = int( match.group('grade') )
-		self.subject = parse_subject( match.group('subject') )
+		self.subject = parse_subject( match.group('subject'), course=True )
 		self.subclass = to_int( match.group('subclass') )
 		self.targets = [ str(self.grade) ]
 
@@ -140,33 +138,34 @@ class Selector:
 		return 10*self.grade + order.index(self.type)
 
 
-def parse_subject(text, long_subj=False):
+def parse_subject(text, course=False):
 	"""Ersetzt ein Fach und versucht es in Präfix, Fach und Suffix zu Unterteilen"""
 
 	prefix = None
 	suffix = None
 
-	match = (SUBJECT_LONG if long_subj else SUBJECT).match( text.lower() )
-
 	if not text or text == '---':
 		subject = None
 
-	elif not match:
-		if long_subj:
-			log.warning('Could not match subject "%s"', text)
-			subject = text
-
-		else:  # Wenn nicht Kurz geparst werden konnte, versuche Lang
-			return parse_subject(text, long_subj=True)
-
 	else:
-		prefix, subject, suffix = match.groups()
-		try:
-			subject = subjects[ subject.lower() ]  # Ersetzen durch Daten aus subject.data
+		match = (SUBJECT_COURSE if course else SUBJECT).match( text.lower() )
 
-		except KeyError:
-			log.warning('Could not replace subject "%s"', text)
-			subject = text.capitalize()
+		if not match:
+			if course:
+				log.warning('Could not match subject "%s"', text)
+				subject = text
+
+			else:  # Wenn nicht Kurz geparst werden konnte, versuche Kurs zu Parsen
+				return parse_subject(text, course=True)
+
+		else:
+			prefix, subject, suffix = match.groups()
+			try:
+				subject = subjects[ subject.lower() ]  # Ersetzen durch Daten aus subject.data
+
+			except KeyError:
+				log.warning('Could not replace subject "%s"', text)
+				subject = subject.capitalize()
 
 	return {
 		'prefix': prefix,  # TODO prefixes
@@ -175,16 +174,14 @@ def parse_subject(text, long_subj=False):
 	}
 
 def replace_teacher(text):
-	"""Übersetzt einen Lehrer. Klammern werden entfernt, Anfangsbuchstabe groß"""
-	if text == '---':
+	"""Ersetzt einen Lehrer, entfernt Klammern"""
+	if not text or text == '---':
 		return None
 
-	match = TEACHER.match(text)
-	if not match:
-		log.warning('Could not replace teacher "%s"', text)
-		return text.capitalize()
+	if text.startswith('(') and text.endswith(')'):
+		text = text[1:-1]
 
-	return match.group(1).capitalize()
+	return text.capitalize()
 
 def parse_date(text):
 	"""Parst das Datum der Datei aus text zu JSON"""

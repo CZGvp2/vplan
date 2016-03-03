@@ -1,6 +1,6 @@
 from pyramid.view import view_config, view_defaults, forbidden_view_config
 
-from .fileProcessing.file_handler import process_file, read_schedule
+from .fileProcessing.file_handler import process_file, remove_days, read_schedule
 from .fileProcessing.regex_parser import parse_response_date
 from .fileProcessing.serverlog import log, ProcessingError, InternalServerError, log_unexpected_error
 
@@ -37,7 +37,14 @@ class UploadView:
 		return data
 
 	@view_config(request_method='POST', renderer='json')
-	def upload(self):
+	def handle_post(self):
+		if 'delete' in self.request.params:
+			return self.remove_files()
+
+		else:
+			return self.upload_files()
+
+	def upload_files(self):
 		"""Bearbeitet den AJAX Post der Seite, gibt JSON zurück"""
 
 		# Liste aller Ergebnisse der bearbeiteten Dateien
@@ -61,6 +68,12 @@ class UploadView:
 			'sessionExpired': False,
 			'results': results
 		}
+
+	def remove_files(self):
+		log.debug('remove')
+		filenames = self.request.POST.getall('delfile')
+		remove_days(filenames)
+
 
 
 def process_file_post(file_post):

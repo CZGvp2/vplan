@@ -122,3 +122,20 @@ function upload(files) {
         }
     });
 }
+
+// Löscht Datei
+function delete_file(filename) {
+    var formData = new FormData($('form')[0]); // besser?
+    formData.append('delfile', filename);
+
+    return $.ajax({
+        url: path + '?delete',
+        type: 'POST',
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false,
+        success: function dosomething() {},
+        failure: function dosomethingelse() {}
+    });
+}

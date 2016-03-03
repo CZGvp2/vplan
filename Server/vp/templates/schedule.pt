@@ -78,7 +78,7 @@
           </div>
           <span style="font-size: .6em;">(${day.date['date']})</span>
           <table class="table">
-              <tr class="event" tal:repeat="event day.events" data-targets="event.targets">
+              <tr class="event" tal:repeat="event day.events" data-targets="${event.targets}">
                     <td class="entry"> <!--! icon -->
                         <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
                     </td>
@@ -92,14 +92,14 @@
                     <td class="entry">${event.time}<td/>
                     <td class="entry" tal:define="s event.new['subject']" tal:condition="s">
                         <span tal:condition="s.prefix">${s.prefix}</span>
-                        <span style="background-color: ${color(s.subject)}">${s.subject}</span>
+                        <span tal:condition="s.subject" style="background-color: ${color(s.subject)}">${s.subject}</span>
                         <span tal:condition="s.suffix">${s.suffix}</span>${event.new['teacher']}
                     </td>
                     <td tal:condition="not event.new['subject']"></td> <!--! falls subject Null -->
                     <td>&#8594;</td>
                     <td class="entry" tal:define="s event.old['subject']" tal:condition="s">
                         <span tal:condition="s.prefix">${s.prefix}</span>
-                        <span tal:content="s.subject" class="old" style="background-color: ${color(s.subject)}"></span>
+                        <span tal:condition="s.subject" style="background-color: ${color(s.subject)}">${s.subject}</span>
                         <span tal:condition="s.suffix">${s.suffix}</span>${event.old['teacher']}
                     </td>
                     <td tal:condition="not event.old['subject']"></td>

@@ -105,6 +105,27 @@ def add_day(data, new_day):
 	except KeyError as error:
 		raise InternalServerError('Error reading json. Could not find key "%(key)s"', key=error.args[0])
 
+def remove_days(filenames):
+	try:
+		with open(json_file, 'r+', encoding='utf-8') as fobj:
+			# Laden der alten Daten
+			data = json.loads( fobj.read() )
+
+			# Hinzufügen des Tages zu den Daten
+			for i, day in enumerate( data['days'].copy() ):
+				if day['filename'] in filenames:
+					data['days'].pop(i)
+
+			# Speichern der neuen Daten
+			content = json.dumps(data, ensure_ascii=False, indent=4, sort_keys=True)
+
+			fobj.seek(0) # geht zum anfang der Datei
+			fobj.write(content)
+			fobj.truncate()
+
+	except FileNotFoundError:
+		generate_schedule()
+
 def read_schedule():
 	"""Gibt die Daten aus schedule als dict zurück"""
 	try:
