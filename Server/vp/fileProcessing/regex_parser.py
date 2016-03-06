@@ -134,8 +134,9 @@ class Selector:
 		if self.type == 'FAILED':
 			return 5000  # ganz groß
 
-		order = 'SIMPLE', 'MULT', 'COURSE'
-		return 10*self.grade + order.index(self.type)
+		return 10*self.grade \
+			+ 4*('SIMPLE', 'MULT', 'COURSE').index(self.type) \
+			+ (0 if not self.subgrades else 'abcd'.index(self.subgrades[0]) )
 
 
 def parse_subject(text, course=False):
@@ -196,11 +197,15 @@ def parse_date(text):
 	except ValueError:
 		raise ProcessingError('ERR_PARSING_DATE', 'Could not parse date "%(date)s"', date=text)
 
-def parse_response_date(date):
+def parse_response_date(date, logging=False):
 	"""Parst das Datum für die Ajax Response"""
 	date = datetime(**date)
 
-	return {
-		'weekday': date.strftime('%A'),
-		'date': date.strftime('%d. %B %Y')
-	}
+	if logging:
+		return date.strftime('%A, %d. %B %Y')
+
+	else:
+		return {
+			'weekday': date.strftime('%A'),
+			'date': date.strftime('%d. %B %Y')
+		}

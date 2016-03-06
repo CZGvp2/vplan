@@ -90,17 +90,19 @@
                         <span tal:condition="selector.subclass">${selector.subclass}</span>
                     </td>
                     <td class="entry">${event.time}<td/>
-                    <td class="entry" tal:define="s event.new['subject']" tal:condition="s">
+                    <td class="entry" tal:define="s event.new['subject']">
                         <span tal:condition="s.prefix">${s.prefix}</span>
                         <span tal:condition="s.subject" style="background-color: ${color(s.subject)}">${s.subject}</span>
-                        <span tal:condition="s.suffix">${s.suffix}</span>${event.new['teacher']}
+                        <span tal:condition="s.suffix">${s.suffix}</span>
+                        ${event.new['teacher']}
                     </td>
                     <td tal:condition="not event.new['subject']"></td> <!--! falls subject Null -->
                     <td>&#8594;</td>
-                    <td class="entry" tal:define="s event.old['subject']" tal:condition="s">
+                    <td class="entry" tal:define="s event.old['subject']">
                         <span tal:condition="s.prefix">${s.prefix}</span>
                         <span tal:condition="s.subject" style="background-color: ${color(s.subject)}">${s.subject}</span>
-                        <span tal:condition="s.suffix">${s.suffix}</span>${event.old['teacher']}
+                        <span tal:condition="s.suffix">${s.suffix}</span>
+                        ${event.old['teacher']}
                     </td>
                     <td tal:condition="not event.old['subject']"></td>
                     <td class="entry" tal:content="event.new['room']" />

@@ -1,11 +1,9 @@
 import os
 import shutil
 import json
-from datetime import datetime
 
-from .xml_reader import convert
-from .regex_parser import parse_response_date
 from .serverlog import log, ProcessingError, InternalServerError
+from .regex_parser import parse_response_date
 
 
 data_dir = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data' ) )
@@ -17,38 +15,67 @@ SCHEDULE_STARTUP = {
 	'days': []
 }
 
+class JSONFile(object):
+	"""Klasse zum Lesen und Schreiben der JSON File"""
+	def __init__(self):
+		self.data = None
+		self.fobj = None
+		self.read_only = False
+		self.parse_date = False
+		self.no_events = False
 
-def process_file(input_file):
-	"""Bearbeitet eine einzelne Datei"""
-	# Lesen der Daten mit Temporärdatei
-	content = read_via_tmp(input_file)
+	def __call__(self, read_only=False, parse_date=False, no_events=False):
+		self.read_only = read_only
+		self.parse_date = parse_date
+		self.no_events = no_events
 
-	# Konvertieren von XML zu JSON
-	day = convert(content)
+		return self
 
-	try:
-		with open(json_file, 'r+', encoding='utf-8') as fobj:
-			# Laden der alten Daten
-			old_data = json.loads( fobj.read() )
+	def __enter__(self):
+		try:
+			self.fobj = open(json_file, 'r+', encoding='utf-8')
+			self.data = json.loads( self.fobj.read() )
 
-			# Hinzufügen des Tages zu den Daten
-			data, info = add_day(old_data, day)
+			for day in self.data['days']:
+				if self.parse_date:
+					day['date'] = parse_response_date(day['date'])
 
-			# Speichern der neuen Daten
-			content = json.dumps(data, ensure_ascii=False, indent=4, sort_keys=True)
+				if self.no_events:
+					day.pop('events')
 
-			fobj.seek(0) # geht zum anfang der Datei
-			fobj.write(content)
-			fobj.truncate()
+			return self.data
 
-			return info
+		except FileNotFoundError:
+			log.warning('Schedule file not found. Generating new file.')
+			self.generate_schedule()
+			return self.data
 
-	except FileNotFoundError:
-		generate_schedule()
+		except json.JSONDecodeError as error:
+			raise InternalServerError('Parsing Error in JSON file line %(line)d column %(column)d',
+				line=error.lineno, column=error.colno)
 
-	except json.JSONDecodeError as error:
-		raise InternalServerError('Parsing Error in JSON file line %(line)d column %(column)d',
-			line=error.lineno, column=error.colno)
+	def __exit__(self, exc_type, exc_value, traceback):
+		try:
+			self.write()
+
+		finally:
+			self.fobj.close()
+
+	def write(self):
+		if not self.read_only:
+			content = json.dumps(self.data, ensure_ascii=False, indent=4, sort_keys=True)
+
+			self.fobj.seek(0)  # geht zum anfang der Datei
+			self.fobj.write(content)
+			self.fobj.truncate()
+
+	def generate_schedule(self):
+		"""Erzeugt einen neuen leeren Schedule"""
+		self.fobj = open(json_file, 'w', encoding='utf-8')
+		self.data = SCHEDULE_STARTUP
+
+		self.write()
+
 
 def read_via_tmp(input_file):
 	with open(tmp_file, 'wb') as dest:
@@ -65,85 +92,3 @@ def read_via_tmp(input_file):
 		os.remove(tmp_file)
 
 	return content
-
-to_datetime = lambda day: datetime(**day['date'])
-
-def add_day(data, new_day):
-	"""Fügt einen neuen Tag zu data hinzu. Gibt (data, info) zurück, wobei info (action, date) ist"""
-	try:
-		days = data['days']
-		new_date = new_day['date']
-		parsed_date = parse_response_date(new_date)
-
-		# Entfernen veralteter Dateien (erstmal nich)
-#		today = datetime.today()
-#		for day in days.copy():
-#			date = to_datetime(day)
-#			if date < today.date():
-#				days.remove(day)
-#				log.info('Removed day %s', date.strftime('%A %d. %B %Y'))
-#
-#			else:
-#				break
-
-		# Einfügen des Tages
-		replaced = False
-		for i, day in enumerate(days):
-			if day['date'] == new_date:
-				days[i] = new_day # Überschreiben des schon vorhandenen Tages
-				replaced = True
-				break
-
-		if not replaced:
-			days.append(new_day) # Sonst hinzufügen als neuer Tag
-
-		# Sortieren nach Datum
-		days.sort(key=to_datetime)
-
-		return data, (replaced, parsed_date)
-
-	except KeyError as error:
-		raise InternalServerError('Error reading json. Could not find key "%(key)s"', key=error.args[0])
-
-def remove_days(filenames):
-	try:
-		with open(json_file, 'r+', encoding='utf-8') as fobj:
-			# Laden der alten Daten
-			data = json.loads( fobj.read() )
-
-			# Hinzufügen des Tages zu den Daten
-			for i, day in enumerate( data['days'].copy() ):
-				if day['filename'] in filenames:
-					data['days'].pop(i)
-
-			# Speichern der neuen Daten
-			content = json.dumps(data, ensure_ascii=False, indent=4, sort_keys=True)
-
-			fobj.seek(0) # geht zum anfang der Datei
-			fobj.write(content)
-			fobj.truncate()
-
-	except FileNotFoundError:
-		generate_schedule()
-
-def read_schedule():
-	"""Gibt die Daten aus schedule als dict zurück"""
-	try:
-		with open(json_file, 'r', encoding='utf-8') as fobj:
-			return json.loads(fobj.read())
-
-	except FileNotFoundError:
-		generate_schedule()
-		return SCHEDULE_STARTUP
-
-	except json.JSONDecodeError as error:
-		raise InternalServerError('Parsing Error in JSON file line %(line)d column %(column)d',
-			line=error.lineno, column=error.colno)
-
-def generate_schedule():
-	"""Erzeugt einen neuen leeren Schedule"""
-
-	log.warning('schedule.json not found. Generating new file.')
-	with open(json_file, 'w', encoding='utf-8') as fobj:
-		content = json.dumps(SCHEDULE_STARTUP, ensure_ascii=False, indent=4, sort_keys=True)
-		fobj.write(content)

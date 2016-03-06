@@ -1,6 +1,6 @@
 from pyramid.view import view_config, view_defaults, forbidden_view_config
 
-from .fileProcessing.file_handler import process_file, remove_days, read_schedule
+from .fileProcessing.processing import process_file, remove_days, schedule
 from .fileProcessing.regex_parser import parse_response_date
 from .fileProcessing.serverlog import log, ProcessingError, InternalServerError, log_unexpected_error
 
@@ -27,14 +27,8 @@ class UploadView:
 	@view_config(request_method='GET', renderer='templates/upload.pt')
 	def view_site(self):
 		"""Gibt die sichtbare Seite zurück"""
-		data = read_schedule()
-
-		for i in range( len(data['days']) ):
-			day = data['days'][i]
-			day.pop('events')  # unnütze Information
-			day['date'] = parse_response_date(day['date'])
-
-		return data
+		with schedule(read_only=True, parse_date=True, no_events=True) as data:
+			return data
 
 	@view_config(request_method='POST', renderer='json')
 	def handle_post(self):
@@ -70,11 +64,8 @@ class UploadView:
 		}
 
 	def remove_files(self):
-		log.debug('remove')
 		filenames = self.request.POST.getall('delfile')
 		remove_days(filenames)
-
-
 
 def process_file_post(file_post):
 	"""Bearbeitet einen einzelnen File-Post"""
@@ -86,10 +77,9 @@ def process_file_post(file_post):
 	error_code = None
 
 	try:
-		replaced, date = process_file(file_post.file)
+		process_file(file_post.file)
 		success = True
 
-		log.info('%s file "%s" (%s %s)', ('Replaced' if replaced else 'Added'), filename, *date.values())
 
 	except ProcessingError as error:
 		error.file = filename

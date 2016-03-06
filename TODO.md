@@ -1,19 +1,6 @@
 #Kamal
 @Port5053
-
- - [x] seltsame dinge wie Frz z oder 5a gif fixen
- - [x] Kurse
- - [x] DIE SORTATION IS KAPUTT
- - [x] mach die ganz!
- - [x] und die Errorcodes auch: [Error dictionary](https://github.com/CZGvp2/vplan/blob/master/Server/vp/static/js/upload.js)
- - [ ] über AJAX Dateien deleten
- - [ ] table header machen
- - [ ] sortieren nach Unterklasse (abc)
- - [ ] read/write funktion
- - [x] Tim die HTML-Stuktur erklären
- - [x] verschiedenes für versch actions in schedule.pt
- - [x] unglaubliche HTML-Stuktur
- - [x] Tims seltsamen Fehler beheben
+- [ ] Doku schreiben
 
 #Tim
 @Infoproject

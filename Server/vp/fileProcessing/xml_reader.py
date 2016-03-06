@@ -3,6 +3,11 @@ import xml.etree.ElementTree as etree
 from .serverlog import ProcessingError
 from .regex_parser import Selector, parse_date, parse_subject, replace_teacher, dashToNone
 
+NONE_SUBJ = {
+	'prefix': None,
+	'subject': None,
+	'suffix': None
+}
 
 def convert(xml_content):
 	"""Konvertiert einen xml-String in ein dictionary, Ergebnis sind JSON-Daten für einen Tag"""
@@ -52,7 +57,7 @@ class Event:
 		# Alte Stunde
 		self.old = {
 			'subject': parse_subject( get_tag('fach'), course=is_course  ),
-			'teacher': replace_teacher( get_tag('vlehrer') ),
+			'teacher': replace_teacher( get_tag('lehrer') ),
 		}
 
 		# Neue Stunde
@@ -70,10 +75,8 @@ class Event:
 		if self.old['subject'] != self.new['subject']: self.change = 'SUBJECT'
 		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
 
-		if not any( self.new['subject'].values() ):
+		if self.new['subject'] == NONE_SUBJ:
 			self.change = 'CANCELLED'
-			self.new['subject'] = None
-			self.new['teacher'] = None
 
 		if not self.change: self.change = 'ROOM'
 		# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer.
@@ -87,6 +90,18 @@ class Event:
 
 		if self.new['teacher'] and self.new['teacher'] not in self.targets:
 			self.targets.append(self.new['teacher'])
+
+		# Löschen von unnützen Daten
+		if self.change == 'CANCELLED':
+			self.new['subject'] = NONE_SUBJ
+			self.new['teacher'] = None
+
+		elif self.change == 'TEACHER':
+			self.old['subject'] = NONE_SUBJ
+
+		elif self.change == 'ROOM':
+			self.old['teacher'] = None
+			self.old['subject'] = NONE_SUBJ
 
 
 	def get_z(self):
