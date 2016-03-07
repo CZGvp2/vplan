@@ -21,7 +21,7 @@ def forbidden(request):
 	}
 
 @view_config(context=Exception, renderer='templates/error.pt')
-def internal_Error(exc, request):
+def internal_error(exc, request):
 	log_unexpected_error()
 	return {
 		'title': '500 - Fehler',

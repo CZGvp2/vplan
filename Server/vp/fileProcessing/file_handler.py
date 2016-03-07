@@ -9,7 +9,6 @@ from .regex_parser import parse_response_date
 data_dir = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data' ) )
 json_file = os.path.join(data_dir, 'schedule.json')
 tmp_file = os.path.join(data_dir, 'tmp.xml')
-log_file = os.path.join(data_dir, 'server.log')
 
 SCHEDULE_STARTUP = {
 	'days': []

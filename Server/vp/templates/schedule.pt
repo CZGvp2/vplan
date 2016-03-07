@@ -33,15 +33,15 @@
     }
     return colors.get(subject, '#555555')
 
-    def get_icon(change):
-      icons = {
-      'SUBJECT': 'subject_icon.png',
-      'TEACHER': 'teacher_icon.png',
-      'ROOM': 'room_icon.png',
-      'CANCELLED': 'cancel_icon.png'
-      }
-      return icons.get(change, 'info_icon.png')
-      ?>
+  def get_icon(change):
+    icons = {
+    'SUBJECT': 'subject_icon.png',
+    'TEACHER': 'teacher_icon.png',
+    'ROOM': 'room_icon.png',
+    'CANCELLED': 'cancel_icon.png'
+    }
+    return icons.get(change, 'info_icon.png')
+    ?>
 </head>
 <body>
 <div id="background"></div><div id="cover"></div>
