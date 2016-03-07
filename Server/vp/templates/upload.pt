@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <title>Vertretungsplan bearbeiten</title><!-- TODO Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
-    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
-    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/upload.css')}" />
-    <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
-    <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
-    <script>
-        var path = "${request.path}";
-        var statics = "${request.static_path('vp:static/img/')}"
-    </script>
-    <script src="${request.static_path('vp:static/js/upload.js')}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Vertretungsplan bearbeiten</title><!-- TODO Möglicherweise Titel vom Server dynamisch reinpacken lassen? -->
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/upload.css')}" />
+  <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
+  <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
+  <script>
+  var path = "${request.path}";
+  var statics = "${request.static_path('vp:static/img/')}"
+  </script>
+  <script src="${request.static_path('vp:static/js/upload.js')}"></script>
 </head>
 <body>
-    <form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data"></form>
-    <div id="dropzone">
-        <div id="content">
-            Drag &amp; Drop <br /> zum Hochladen
-        </div>
+  <form action="${request.path}" method="post" accept-charset="utf-8" enctype="multipart/form-data"></form>
+  <div id="dropzone">
+    <div id="content">
+      Drag &amp; Drop <br /> zum Hochladen
     </div>
-    <div id="sidebar">
-        <img src="${request.static_path('vp:static/img/expand.png')}" id="sidebar_image" width="10px" height="20px" />
-        <span class="entry"><a href="${request.route_path('schedule', _query='from_upload')}" id="logout">Zum Vertretungsplan</a></span>
-        <span class="entry filelist">
-          Aktuelle Dateien auf dem Server<br /><span style="font-size: 11pt;">Zum Löschen klicken.</span>
-          <div class="files" tal:repeat="day days">
-              <span onclick="delete_file('${day.filename}');$(this).hide()">${day.filename} (${day.date['weekday']}, ${day.date['date']})</span>
-          </div>
-        </span> <!-- tob dich aus -->
-        <span class="entry space"></span>
-        <span class="entry"><a href="${request.route_path('login', _query='logout')}" id="logout">Abmelden</a></span>
-    </div>
-    <div id="uploadList"></div>
+  </div>
+  <div id="sidebar">
+    <img src="${request.static_path('vp:static/img/expand.png')}" id="sidebar_image" width="10px" height="20px" />
+    <span class="entry"><a href="${request.route_path('schedule', _query='from_upload')}" id="logout">Zum Vertretungsplan</a></span>
+    <span class="entry filelist">
+      Aktuelle Dateien auf dem Server<br /><span style="font-size: 11pt;">Zum Löschen klicken.</span>
+      <div class="files" tal:repeat="day days">
+        <span onclick="delete_file('${day.filename}');$(this).hide()">${day.filename} (${day.date['weekday']}, ${day.date['date']})</span>
+      </div>
+    </span> <!-- tob dich aus -->
+    <span class="entry space"></span>
+    <span class="entry"><a href="${request.route_path('login', _query='logout')}" id="logout">Abmelden</a></span>
+  </div>
+  <div id="uploadList"></div>
 </body>
 </html>

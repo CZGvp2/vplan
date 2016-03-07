@@ -17,7 +17,7 @@ SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
 MULT = re.compile( r'^(?P<targets>((0[5-9]|10)[A-D],?)+)/\s(?P<grade>0[5-9]|10)(?P<subgrades>[A-D]{,4})?(?P<subject>(WOU|AG)?[a-zA-Z]{2,3})(?P<subclass>\d)?$' )
 
 # Kurssystem Bsp.: 11/ ma2  oder 12/ ene
-COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)?)?$' ) # TODO spezielles Parsen
+COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2,})(?P<subclass>\d)?)?$' )
 
 # Passt auf alle WoUs (schon lower) z.B: wouma, wouif, wou
 # Passt auf AGs z. B. agm, ag

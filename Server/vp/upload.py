@@ -32,6 +32,7 @@ class UploadView:
 
 	@view_config(request_method='POST', renderer='json')
 	def handle_post(self):
+		"""Bearbeitet den AJAX Post der Seite, gibt JSON zurück"""
 		if 'delete' in self.request.params:
 			return self.remove_files()
 
@@ -39,8 +40,7 @@ class UploadView:
 			return self.upload_files()
 
 	def upload_files(self):
-		"""Bearbeitet den AJAX Post der Seite, gibt JSON zurück"""
-
+		"""Bearbeitet hochgeladene Dateien"""
 		# Liste aller Ergebnisse der bearbeiteten Dateien
 		results = []
 
@@ -64,6 +64,7 @@ class UploadView:
 		}
 
 	def remove_files(self):
+		"""Entfernt von Nutzer gelöschte Dateien"""
 		filenames = self.request.POST.getall('delfile')
 		remove_days(filenames)
 
@@ -79,7 +80,6 @@ def process_file_post(file_post):
 	try:
 		process_file(file_post.file)
 		success = True
-
 
 	except ProcessingError as error:
 		error.file = filename
@@ -99,65 +99,3 @@ def process_file_post(file_post):
 @forbidden_view_config(accept='application/json', renderer='json')
 def forbidden(request):
 	return SESSION_EXPIRED
-
-
-"""
-Error Codes
-- ERR_DECODING
-- ERR_PARSING_XML
-- ERR_READING_XML
-
-
-Struktur der Response
-
---+
-  |
-  +-- internalError [boolean] (falls ein Server-Fehler auftrat, der nicht vom Nutzer beeinflusst werden kann)
-  |
-  +-- sessionExpired [boolean] (ob man noch angemeldet ist oder 403 bekommt)
-  |
-  +-- results [Array] (Ergebnisse der einzelnen Dateien, null falls Interner Fehler)
-      |
-      +---+ (Instanz des Arrays)
-          |
-          +-- success [boolean] (Falls Bearbeiten erfolgreich war)
-          |
-          +-- filename [String] (Name der Datei)
-          |
-          +-- date (Datum des Plans)
-          |   |
-          |   +-- weekday [String] (Wochentag)
-          |   |
-          |   +-- date [String] (Datum Bsp:"18. August 2012")
-          |
-          +-- errorCode [String] (Code des aufgetretenen Fehlers, bei keinem Fehler null)
-          |
-          +-- replaced [boolean] (false wenn Datei hinzugefügt, true wenn Datei ersetzt, null falls Fehler)
-
-
-Beispiel
-
-{
-	"internalError": false,
-	"sessionExpired": false,
-	"results": [
-		{
-			"success": true,
-			"filename": "VplanKl.xml",
-			"date": {
-				"weekday": "Montag",
-				"date": "19. Oktober 2015"
-			},
-			"errorCode": null,
-			"replaced": true
-		},
-		{
-			"success": false,
-			"filename": "VplanLe.xml",
-			"errorCode": "ERR_READING_XML",
-			"date": null,
-			"replaced": null
-		}
-	]
-}
-"""

@@ -1,123 +1,123 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <meta name="description" content="Vertretungsplan des CZG" />
-    <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
-    <title>Vertretungsplan</title>
-    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
-    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
-    <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
-    <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
-    <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
-    <?python
-    def color(subject):
-        """Gibt die Farbe des Faches zurück"""
-        colors = { # alle Farben von Philip ausgewählt
-        'Ma' : '#006496',
-        'Ph' : '#3296C8',
-        'Inf' : '#64C8FA',
-        'Ch' : '#009632',
-        'Bio' : '#00C800',
-        'De' : '#B40000',
-        'Ge' : '#FF9B0F',
-        'Geo' : '#FF690F',
-        'En' : '#96001E',
-        'Frz' : '#78003C',
-        'La' : '#78003C',
-        'Ru' : '#78003C',
-        'Et' : '#FFCD0F',
-        'Ku' : '#A0008C',
-        'Mu' : '#8C00A0'
-        }
-        return colors.get(subject, '#555555')
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Vertretungsplan des CZG" />
+  <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
+  <title>Vertretungsplan</title>
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule.css')}" />
+  <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
+  <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
+  <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
+  <?python
+  def color(subject):
+    """Gibt die Farbe des Faches zurück"""
+    colors = { # alle Farben von Philip ausgewählt
+    'Ma' : '#006496',
+    'Ph' : '#3296C8',
+    'Inf' : '#64C8FA',
+    'Ch' : '#009632',
+    'Bio' : '#00C800',
+    'De' : '#B40000',
+    'Ge' : '#FF9B0F',
+    'Geo' : '#FF690F',
+    'En' : '#96001E',
+    'Frz' : '#78003C',
+    'La' : '#78003C',
+    'Ru' : '#78003C',
+    'Et' : '#FFCD0F',
+    'Ku' : '#A0008C',
+    'Mu' : '#8C00A0'
+    }
+    return colors.get(subject, '#555555')
 
     def get_icon(change):
-        icons = {
-            'SUBJECT': 'subject_icon.png',
-            'TEACHER': 'teacher_icon.png',
-            'ROOM': 'room_icon.png',
-            'CANCELLED': 'cancel_icon.png'
-        }
-        return icons.get(change, 'info_icon.png')
-    ?>
+      icons = {
+      'SUBJECT': 'subject_icon.png',
+      'TEACHER': 'teacher_icon.png',
+      'ROOM': 'room_icon.png',
+      'CANCELLED': 'cancel_icon.png'
+      }
+      return icons.get(change, 'info_icon.png')
+      ?>
 </head>
 <body>
-  <div id="background"></div><div id="cover"></div>
-  <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
-  <div id="fixedHeader">Vertretungsplan</div>
-  <div id="menuContainer">
-    <div id="menuSpace"></div>
-    <nav id="menu">
-      <div class="menu_item">Filter: <input type="text" id="input" value="" /><button onclick="toggleFilter('');$('input').val('');">Entfernen</button></div>
-      <div class="menu_item"></div>
-    </nav>
+<div id="background"></div><div id="cover"></div>
+<div id="jsWarn">JavaScript ist nicht verfügbar.</div>
+<div id="fixedHeader">Vertretungsplan</div>
+<div id="menuContainer">
+  <div id="menuSpace"></div>
+  <nav id="menu">
+    <div class="menu_item">Filter: <input type="text" id="input" value="" />
+      <button onclick="toggleFilter('');$('input').val('');">Entfernen</button>
+    </div>
+    <div class="menu_item"></div>
+  </nav>
+</div>
+<div id="wrapper">
+  <div id="topbar">
+    <a href="${request.route_path('login', _query='logout')}">Abmelden</a>
+    <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
+    <div class="space"></div>
+    <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" id="menuButton"></img>
   </div>
-  <div id="wrapper">
-      <div id="topbar">
-          <a href="${request.route_path('login', _query='logout')}">Abmelden</a>
-          <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
-          <div class="space"></div>
-          <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" id="menuButton"></img>
-      </div>
-      <div id="header">
-              Vertretungsplan
-      </div>
-      <div class="slidebutton">
-        <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')">
-            <span class="day_title" id="left"></span>
-        </div>
-        <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')">
-            <span class="day_title" id="right"></span>
-        </div>
-      </div>
-      <div class="slide" tal:repeat="day days">
-          <div class="slide_title">
-              ${day.date['weekday']}
-          </div>
-          <span style="font-size: .6em;" title="">(${day.date['date']})</span>
-          <table class="table">
-              <tr class="event" tal:repeat="event day.events" data-targets="${event.targets}">
-                    <td class="entry"> <!--! icon -->
-                        <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
-                    </td>
-                    <td class="selector" tal:define="selector event.selector; s selector.subject">
-                      <span class="subject">
-                        <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
-                        <span tal:condition="s.prefix">${s.prefix}</span>
-                        <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject_2">${s.subject}</span>
-                        <span tal:condition="not s.subject" class="space"></span>
-                        <span tal:condition="s.suffix">${s.suffix}</span>
-                        <span tal:condition="selector.subclass">${selector.subclass}</span>
-                      </span>
-                    </td>
-                    <td class="entry">${event.time}<td/>
-                    <td class="entry" tal:define="s event.new['subject']">
-                      <span class="subject">
-                        <span tal:condition="s.prefix">${s.prefix}</span>
-                        <div tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</div>
-                        <span tal:condition="s.suffix">${s.suffix}</span>
-                        ${event.new['teacher']}
-                      </span>
-                    </td>
-                    <td tal:condition="not event.new['subject']"></td> <!--! falls subject Null -->
-                    <td>&#8594;</td>
-                    <td class="entry old" tal:define="s event.old['subject']">
-                      <span class="subject">
-                        <span tal:condition="s.prefix">${s.prefix}</span>
-                        <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject_2">${s.subject}</span>
-                        <span tal:condition="not s.subject" class="space"></span>
-                        <span tal:condition="s.suffix">${s.suffix}</span>
-                        ${event.old['teacher']}
-                      </span>
-                    </td>
-                    <td tal:condition="not event.old['subject']"></td>
-                    <td class="entry" tal:content="event.new['room']" />
-                    <td class="entry" tal:content="event.info" />
-              </tr>
-          </table>
-      </div>
+  <div id="header">
+    Vertretungsplan
+  </div>
+  <div class="slidebutton">
+    <div id="leftslidebutton" class="singleslidebutton" onclick="toggleSlide('left')">
+      <span class="day_title" id="left"></span>
+    </div>
+    <div id="rightslidebutton" class="singleslidebutton" onClick="toggleSlide('right')">
+      <span class="day_title" id="right"></span>
+    </div>
+  </div>
+  <div class="slide" tal:repeat="day days">
+    <div class="slide_title">
+      ${day.date['weekday']}
+    </div>
+    <span style="font-size: .6em;" title="">(${day.date['date']})</span>
+    <table class="table">
+      <tr class="event" tal:repeat="event day.events" data-targets="${event.targets}">
+        <td class="entry"> <!--! icon -->
+          <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
+        </td>
+        <td class="selector" tal:define="selector event.selector; s selector.subject">
+          <span class="subject">
+            <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
+            <span tal:condition="s.prefix">${s.prefix}</span>
+            <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject_2">${s.subject}</span>
+            <span tal:condition="not s.subject" class="space"></span>
+            <span tal:condition="s.suffix">${s.suffix}</span>
+            <span tal:condition="selector.subclass">${selector.subclass}</span>
+          </span>
+        </td>
+        <td class="entry">${event.time}<td/>
+          <td class="entry" tal:define="s event.new['subject']">
+            <span class="subject">
+              <span tal:condition="s.prefix">${s.prefix}</span>
+              <div tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</div>
+              <span tal:condition="s.suffix">${s.suffix}</span>
+              ${event.new['teacher']}
+            </span>
+          </td>
+          <td>&#8594;</td>
+          <td class="entry old" tal:define="s event.old['subject']">
+            <span class="subject">
+              <span tal:condition="s.prefix">${s.prefix}</span>
+              <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject_2">${s.subject}</span>
+              <span tal:condition="not s.subject" class="space"></span> <!--! elegant -->
+              <span tal:condition="s.suffix">${s.suffix}</span>
+              ${event.old['teacher']}
+            </span>
+          </td>
+          <td class="entry" tal:content="event.new['room']" />
+          <td class="entry" tal:content="event.info" />
+        </tr>
+      </table>
+    </div>
   </div>
 </body>
 </html>
