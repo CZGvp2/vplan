@@ -24,22 +24,32 @@
   .entry{
     padding-right: .5em;
   }
-	.entry>.class_identifier{
-		 display: block;
+	.entry>.subject{
+		 display: flex;
 		 margin-left: .1em;
-		 min-width: 50px;
-		 text-align: center;
+		 min-width: 70px;
+
+ 	  flex-direction: row;
+ 	  flex-wrap: nowrap;
+ 	  justify-content: space-between;
+ 	  align-items: baseline;
+
+		padding: 0 .1em;
+	}
+	.subject>.sub_subject{
+		min-width: 50px;
+		text-align: center;
+	}
+	.subject>.sub_subject_2{
+		min-width: 40px;
+		text-align: center;
+	}
+	.old{
+		opacity: .5;
 	}
 	a {
 		text-decoration: none;
 		color: white;
-	}
-	/* Meine übernatürlichen CSS-Skills */
-	span {
-		background: blue;
-	}
-	td.selector {
-		float: right;
 	}
 	body{
 		padding: 0;
