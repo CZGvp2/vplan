@@ -27,9 +27,9 @@
     <span class="entry filelist">
       Aktuelle Dateien auf dem Server<br /><span style="font-size: 11pt;">Zum Löschen klicken.</span>
       <div class="files" tal:repeat="day days">
-        <span onclick="delete_file('${day.filename}');$(this).hide()">${day.filename} (${day.date['weekday']}, ${day.date['date']})</span>
+        <span onclick="delete_file('${day.filename}');$(this).hide()" style="cursor: pointer;">${day.filename} (${day.date['weekday']}, ${day.date['date']})</span>
       </div>
-    </span> <!-- tob dich aus -->
+    </span>
     <span class="entry space"></span>
     <span class="entry"><a href="${request.route_path('login', _query='logout')}" id="logout">Abmelden</a></span>
   </div>

@@ -1,0 +1,59 @@
+/*
+  Is jetz noch nich viel hier, aber trotzdem eine Anleitung zum Anschaun in nem Firefox-Browser:
+
+  1. [Shift+F2] Firefox-Konsole (nicht JS!) öffnen
+  2. "media emulate handheld" eingeben
+  3. Fenster mit dev-Tools auf gewünschte Größe Skalieren (Shortcut: [Strg+Shift+M] oder in der Konsole "resize")
+
+  Mit der Konsole kann man praktisch alles machen.
+  Beispiele:
+    "highlight #header --showall" markiert alle tags mit der id header
+    "insert jQuery" baut jQuery in die Seite ein
+    "listen [port]" ermöglicht remote-debugging (bsp. meine im Firefox-Editor veränderten css-dateien auf dem server speichern)
+    "export [name]" speichert js/css/img/... Dateien lokal
+    "security csp" überprüft contentsecurity protokolle
+    "pref" ändert firefox-einstellungen
+    ...
+
+  und firefox hat ne komplette ide für webApps.
+  fällt mir früh auf.
+  [Shift+F8].
+*/
+
+#topbar{
+	display: none;
+}
+#wrapper{
+	height: 100%;
+	width: 100%;
+
+	padding: 0;
+	margin: 0;
+
+	display: flex;
+
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: stretch;
+
+	overflow-x: hidden;
+	overflow-y: shown;
+}
+#header{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 50;
+	background-color: #1d3954;
+	font-size: 25pt;
+  padding: .2em 0;
+	color: white;
+	text-align: center;
+  vertical-align: middle;
+}
+#header_fill{
+  font-size: 25pt;
+  height: 2em;
+}

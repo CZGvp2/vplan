@@ -63,8 +63,6 @@ body{
     justify-content: center;
 }
 #sidebar{
-    /* flexbox ist das BESTE CSS3 Feature nach 3DTransform und Animation... funktioniert aber nur
-        bei CSS3-Support... d.h. wir unterstützen kein IE8 (wie traurig). */
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -83,7 +81,7 @@ body{
 
     background-color: #232323;
 
-    transition: width 1s;
+    transition: width .5s;
 
     z-index: 4;
 }
@@ -99,7 +97,7 @@ body{
 #sidebar:hover{
     width: 30%;
 
-    transition: width 1s;
+    transition: width .5s;
 }
 .entry:hover{
     background-color: rgba(255,255,255,.1);
