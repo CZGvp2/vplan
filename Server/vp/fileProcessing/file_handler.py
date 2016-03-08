@@ -9,7 +9,6 @@ from .regex_parser import parse_response_date
 data_dir = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data' ) )
 json_file = os.path.join(data_dir, 'schedule.json')
 tmp_file = os.path.join(data_dir, 'tmp.xml')
-log_file = os.path.join(data_dir, 'server.log')
 
 SCHEDULE_STARTUP = {
 	'days': []
@@ -25,13 +24,15 @@ class JSONFile(object):
 		self.no_events = False
 
 	def __call__(self, read_only=False, parse_date=False, no_events=False):
-		self.read_only = read_only
-		self.parse_date = parse_date
-		self.no_events = no_events
+		"""Funktion die Instanz zurückgibt, zum Parameter-Bearbeiten"""
+		self.read_only = read_only  # Überschreibt die schedule.json nicht
+		self.parse_date = parse_date  # Ersetzt die Systemdaten durch Wochentag und Datum
+		self.no_events = no_events  # Entfernt alle events (nur Dateinamen und Datum)
 
 		return self
 
 	def __enter__(self):
+		"""Wird beim with-Statement aufgerufen"""
 		try:
 			self.fobj = open(json_file, 'r+', encoding='utf-8')
 			self.data = json.loads( self.fobj.read() )
@@ -78,6 +79,7 @@ class JSONFile(object):
 
 
 def read_via_tmp(input_file):
+	"""Liest die Daten einer Hochgeladenen Datei durch eine Temporärdatei"""
 	with open(tmp_file, 'wb') as dest:
 		shutil.copyfileobj(input_file, dest)
 

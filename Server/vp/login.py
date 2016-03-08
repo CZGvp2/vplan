@@ -3,6 +3,7 @@ from pyramid.httpexceptions import HTTPFound
 from pyramid.view import view_config, view_defaults
 
 from .group_finder import can_read, can_edit
+from .eastereggs import is_easteregg
 
 
 @view_defaults(route_name='login', renderer='templates/login.pt')
@@ -53,6 +54,10 @@ class LoginView:
 			# Hat Bearbeitungspremission
 			headers = remember(self.request, pwd_hash)
 			return self.redirect('upload', headers)
+
+		if is_easteregg(pwd_hash):
+			egg = self.request.route_path('eastereggs', hash=pwd_hash)
+			return HTTPFound(location=egg)
 
 		# wenn keines der obigen Bedingungen erfüllt, muss das Passwort
 		# falsch gewesen sein.

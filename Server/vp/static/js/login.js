@@ -26,7 +26,7 @@ $(function () {
 		$(this).toggleClass('nofocus');
 	});
 	$('form').submit(function () {
-		$('#hash').val( CryptoJS.SHA512($('#password').val()) );
+		$('#hash').val( CryptoJS.SHA512($('#password').val() ) ); // TODO random strings hinzufügen
 		$('#password').val('');
 	});
 });

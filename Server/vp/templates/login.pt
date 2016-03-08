@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <meta name="description" content="Vertretungsplan des CZG" />
-    <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
-    <title>Vertretungsplan</title>
-    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
-    <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/login.css')}" />
-    <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
-    <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
-    <script src="${request.static_path('vp:static/js/sha512.js')}"></script>
-    <script src="${request.static_path('vp:static/js/login.js')}"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Vertretungsplan des CZG" />
+  <meta name="keywords" lang="de" content="Vertretungsplan, Carl-Zeiss, Gymnasium, Jena" />
+  <title>Vertretungsplan</title>
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/login.css')}" />
+  <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
+  <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
+  <script src="${request.static_path('vp:static/js/sha512.js')}"></script>
+  <script src="${request.static_path('vp:static/js/login.js')}"></script>
 </head>
 <body>
-    <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
-    <form class="center" action="${request.path}" method="post">
-        <input type="text" id="hash" name="hash" hidden="hidden" />
-        <input type="password" id="password" name="password" class="nofocus" autofocus="autofocus" />
-        <p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
-        <div id="submit">
-            <a id="submit" href="javascript:void(0)">Anmelden</a>
-        </div>
-        <script tal:condition="wrong_pwd">
-            $('#password').css('border-bottom-color', '#FF5555');
-            $('div#submit').css('margin-top', '40px');
-        </script>
-    </form>
+  <div id="jsWarn">JavaScript ist nicht verfügbar.</div>
+  <form class="center" action="${request.path}" method="post">
+    <input type="text" id="hash" name="hash" hidden="hidden" />
+    <input type="password" id="password" name="password" class="nofocus" autofocus="autofocus" />
+    <p id="incorrect" tal:condition="wrong_pwd">Passwort inkorrekt</p>
+    <div id="submit">
+      <a id="submit" href="javascript:void(0)">Anmelden</a>
+    </div>
+    <script tal:condition="wrong_pwd">
+    $('#password').css('border-bottom-color', '#FF5555');
+    $('div#submit').css('margin-top', '40px');
+    </script>
+  </form>
 </body>
 </html>

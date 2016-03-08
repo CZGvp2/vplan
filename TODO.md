@@ -1,6 +1,7 @@
 #Kamal
 @Port5053
 - [ ] Doku schreiben
+- [ ] SSL zum laufen bringen
 
 #Tim
 @Infoproject

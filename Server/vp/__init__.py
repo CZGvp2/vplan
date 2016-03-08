@@ -22,6 +22,7 @@ def main(global_config, **settings):
 	config.add_route('login', '/')
 	config.add_route('upload', '/upload')
 	config.add_route('schedule', '/schedule')
+	config.add_route('eastereggs', '/eastereggs/{hash}')
 
 	config.add_static_view('static', 'vp:static')
 	config.scan()
