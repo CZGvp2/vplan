@@ -14,7 +14,7 @@
     <?python
     def color(subject):
         """Gibt die Farbe des Faches zurück"""
-        colors = { # alle Farben von Philip ausgewählt
+        colors = {
         'Ma' : '#006496',
         'Ph' : '#3296C8',
         'Inf' : '#64C8FA',
