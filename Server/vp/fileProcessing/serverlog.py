@@ -2,19 +2,22 @@ import logging
 import traceback
 import os
 
-
-log_file = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data/server.log' ) )
+from ..config import log_cfg
 
 log = logging.getLogger('serverlog')
-file_logger = logging.FileHandler(log_file, mode='w', encoding='utf-8')
-
-formatter = logging.Formatter(
-	fmt='%(asctime)s [%(levelname)-8s] %(message)s',
-	datefmt='%H:%M:%S'
+file_logger = logging.FileHandler(
+	log_cfg['file'],
+	mode=log_cfg['mode'],
+	encoding='utf-8'
 )
 
-log.setLevel(logging.DEBUG)
-file_logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter(
+	fmt=log_cfg['format'],
+	datefmt=log_cfg['datefmt']
+)
+
+log.setLevel(log_cfg['level'])
+file_logger.setLevel(log_cfg['level'])
 
 file_logger.setFormatter(formatter)
 log.addHandler(file_logger)

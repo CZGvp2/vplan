@@ -2,7 +2,7 @@ from pyramid.security import remember, forget
 from pyramid.httpexceptions import HTTPFound
 from pyramid.view import view_config, view_defaults
 
-from .group_finder import can_read, can_edit
+from .permissions import can_read, can_edit
 from .eastereggs import is_easteregg
 
 
