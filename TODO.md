@@ -3,6 +3,8 @@
 - [ ] Doku schreiben
 - [ ] SSL zum laufen bringen
 - [ ] Meine 3-Schritt-Anleitung zum Handy/Tablet emulieren durchlesen (schedule_handheld.css#1)
+- [ ] teachers
+- [ ] status ints
 
 #Tim
 @Infoproject

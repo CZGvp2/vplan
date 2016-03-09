@@ -4,6 +4,7 @@ from datetime import datetime
 import locale
 
 from .serverlog import log, InternalServerError, ProcessingError
+from ..config import subjects, teachers, prefixes
 
 
 # Setzen des Datumsformats von Deutscherland
@@ -26,25 +27,11 @@ COURSE = re.compile( r'^(?P<grade>11|12)(/\s(?P<subject>[a-z]{2,})(?P<subclass>\
 SUBJECT = re.compile( r'^(?P<prefix>wou|ag)?(?P<subject>[a-z]{2,3})(?P<suffix>[ez]){0}$' ) # 2-3, kein Suffix (das meiste)
 SUBJECT_COURSE = re.compile( r'^(?P<prefix>)(?P<subject>[a-z]{2})(?P<suffix>[ez])?$' ) # 2 zeichen lang, opt. Suffix
 
-# Laden der subjects.data TODO (sollte jedes mal beim Uploaden passieren)
-subjects_file = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data/subjects.data' ) )
-subjects = {}
-try:
-	with open(subjects_file, 'r') as fobj:
-		for lineno, line in enumerate( fobj.readlines() ):
-			name, replacement = tuple( line[:-1].split(' ') ) # :-1 entfernt den letzten character, \n
-			subjects[name] = replacement
-
-except FileNotFoundError:
-	raise InternalServerError("IO Error reading subjects")
-
-except ValueError:
-	raise InternalServerError('Invalid Syntax in subjects.data line %(lineno)d "%(line)s"', lineno=lineno, line=lines)
-
 
 lower = lambda text: (text[1:] if text[0] == '0' else text).lower() # '08' -> '8', oder '09B' -> '9b'
 to_int = lambda text: None if not text else int(text)
 dashToNone = lambda text: None if text == "---" else text # gibt None zurück falls text == "---"
+replace = lambda d, text: d.get(text, text.capitalize())
 
 class Selector:
 	"""Bezeichner für die Klassen"""
@@ -161,17 +148,14 @@ def parse_subject(text, course=False):
 
 		else:
 			prefix, subject, suffix = match.groups()
-			try:
-				subject = subjects[ subject.lower() ]  # Ersetzen durch Daten aus subject.data
-
-			except KeyError:
-				log.warning('Could not replace subject "%s"', text)
-				subject = subject.capitalize()
+			subject = replace(subjects, subject)
+			if prefix: prefix = replace(prefixes, prefix)
+			if suffix: suffix = suffix.upper()
 
 	return {
-		'prefix': prefix,  # TODO prefixes
+		'prefix': prefix,
 		'subject': subject,
-		'suffix': suffix  # TODO suffix.upper()
+		'suffix': suffix
 	}
 
 def replace_teacher(text):
@@ -182,7 +166,7 @@ def replace_teacher(text):
 	if text.startswith('(') and text.endswith(')'):
 		text = text[1:-1]
 
-	return text.capitalize()
+	return replace(teachers, text)
 
 def parse_date(text):
 	"""Parst das Datum der Datei aus text zu JSON"""

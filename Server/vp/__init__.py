@@ -2,8 +2,7 @@ from pyramid.config import Configurator
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 
-from .group_finder import get_group
-from .permissions import RootFactory
+from .permissions import RootFactory, get_group
 
 
 timeout = 1000

@@ -4,11 +4,7 @@ import json
 
 from .serverlog import log, ProcessingError, InternalServerError
 from .regex_parser import parse_response_date
-
-
-data_dir = os.path.normpath( os.path.join( os.path.dirname(__file__), '../data' ) )
-json_file = os.path.join(data_dir, 'schedule.json')
-tmp_file = os.path.join(data_dir, 'tmp.xml')
+from ..config import paths
 
 SCHEDULE_STARTUP = {
 	'days': []
@@ -34,7 +30,7 @@ class JSONFile(object):
 	def __enter__(self):
 		"""Wird beim with-Statement aufgerufen"""
 		try:
-			self.fobj = open(json_file, 'r+', encoding='utf-8')
+			self.fobj = open(paths['schedule'], 'r+', encoding='utf-8')
 			self.data = json.loads( self.fobj.read() )
 
 			for day in self.data['days']:
@@ -72,7 +68,7 @@ class JSONFile(object):
 
 	def generate_schedule(self):
 		"""Erzeugt einen neuen leeren Schedule"""
-		self.fobj = open(json_file, 'w', encoding='utf-8')
+		self.fobj = open(paths['schedule'], 'w', encoding='utf-8')
 		self.data = SCHEDULE_STARTUP
 
 		self.write()
@@ -80,17 +76,17 @@ class JSONFile(object):
 
 def read_via_tmp(input_file):
 	"""Liest die Daten einer Hochgeladenen Datei durch eine Temporärdatei"""
-	with open(tmp_file, 'wb') as dest:
+	with open(paths['tmp'], 'wb') as dest:
 		shutil.copyfileobj(input_file, dest)
 
 	try:
-		with open(tmp_file, 'r', encoding='utf-8') as fobj:
+		with open(paths['tmp'], 'r', encoding='utf-8') as fobj:
 			content = fobj.read()
 
 	except UnicodeDecodeError:
 		raise ProcessingError('ERR_DECODING', 'Bad Encoding')
 
 	finally:
-		os.remove(tmp_file)
+		os.remove(paths['tmp'])
 
 	return content
