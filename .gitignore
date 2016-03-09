@@ -14,5 +14,11 @@ Server/vp.egg-info
 *.xml
 *.json
 
+#desktop.ini
+desktop.ini
+
+#JSON
+*.json
+
 # Anscheinend muss man die Dateien erst untracken
 # mit git rm --cached *.pyc
