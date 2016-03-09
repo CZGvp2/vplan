@@ -52,16 +52,22 @@
 <div id="menuContainer">
   <div id="menuSpace"></div>
   <nav id="menu">
-    <div class="menu_item">Filter: <input type="text" id="input" value="" />
-      <button onclick="toggleFilter('');$('input').val('');">Entfernen</button>
+    <div class="menu_item">
+      <a href="${request.route_path('login', _query='logout')}">Abmelden</a>
     </div>
-    <div class="menu_item"></div>
+    <div class="menu_item" tal:condition="from_upload">
+      <a href="${request.route_path('upload')}">Zurück zum Bearbeiten</a>
+    </div>
+    <div class="menu_item">
+      <a id="toggleFilterButton" onClick="toggleFilterbutton();" style="cursor: pointer;">Filter aktivieren</a>
+    </div>
+    <div class="menu_item" id="filterBox" style="display: none;">
+      Filter: <input type="text" id="input" value="" />
+    </div>
   </nav>
 </div>
 <div id="wrapper">
   <div id="topbar">
-    <a href="${request.route_path('login', _query='logout')}">Abmelden</a>
-    <a href="${request.route_path('upload')}" tal:condition="from_upload">Zurück zum Bearbeiten</a>
     <div class="space"></div>
     <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" id="menuButton"></img>
   </div>
@@ -103,7 +109,7 @@
           <td class="entry" tal:define="s event.new['subject']">
             <span class="subject">
               <span tal:condition="s.prefix">${s.prefix}</span>
-              <div tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</div>
+              <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
               <span tal:condition="s.suffix">${s.suffix}</span>
               ${event.new['teacher']}
             </span>
@@ -119,7 +125,7 @@
             </span>
           </td>
           <td class="entry" tal:content="event.new['room']" />
-          <td class="entry" tal:content="event.info" />
+          <td class="entry information" tal:content="event.info" />
         </tr>
       </table>
     </div>

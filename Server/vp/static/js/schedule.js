@@ -59,6 +59,7 @@ setup = function(){
   $("#fixedHeader").hide();
 	$(".empty_msg").hide();
 	$("#jsWarn").hide();
+  if(getCookie("class")) toggleFilterbutton();
   setSidebars(currentIndex, $(".slide"));
 	showEmptyMessage($(".slide").get(currentIndex));
   $('#input').val(getCookie('class'));
@@ -68,7 +69,8 @@ setup = function(){
 		$("body").css("background-image","linear-gradient(90deg, yellow, red, purple, blue, green, yellow)");
 	}
   if(getCookie("gradient").indexOf('yes')==0){
-    $(".class_identifier").css("background-image", "linear-gradient(to bottom, rgba(0,0,0,0) 40%, white 160%)");
+    $(".sub_subject, .sub_subject_2").css("background-image", "linear-gradient(to bottom, rgba(0,0,0,0) 40%, white 160%)");
+    $("#header").css("background-image", "linear-gradient(to bottom, #0e0e0e 0%, rgba(0,0,0,0) 20%)");
   }
   var slides = $('.slide');
   for(var i = 0; i < slides.length; i++)
@@ -164,6 +166,17 @@ toggleFilter = function(value){
   if(!value) removeCookie("class");
 	else setCookie("class", value, 100);
 	filter(value);
+}
+
+toggleFilterbutton = function(){
+  var b = $("#toggleFilterButton")[0];
+  if(toggleVisibility($("#filterBox").get(0)))
+    b.innerHTML = 'Filter deaktivieren';
+  else{
+    b.innerHTML = 'Filter aktivieren';
+    toggleFilter('');
+    $('input').val('');
+  }
 }
 
 $(function(){

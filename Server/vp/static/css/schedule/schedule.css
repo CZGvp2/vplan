@@ -48,12 +48,20 @@ body{
 	padding: 0 .1em;
 }
 .subject>.sub_subject{
+	display: inline-block;
 	min-width: 50px;
 	text-align: center;
 }
 .subject>.sub_subject_2{
+	display: inline-block;
 	min-width: 40px;
 	text-align: center;
+}
+.information{
+	max-width: 10em;
+	overflow: auto;
+	white-space: normal;
+	word-break: normal;
 }
 .old{
 	opacity: .5;
