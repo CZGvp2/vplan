@@ -17,7 +17,7 @@
   def color(subject):
     """Gibt die Farbe des Faches zurück"""
     colors = {
-    'Ma' : '#006496',
+    'Ma' : '#006496', 
     'Ph' : '#3296C8',
     'Inf' : '#64C8FA',
     'Ch' : '#009632',
@@ -47,7 +47,7 @@
 </head>
 <body>
 <div id="background"></div><div id="cover"></div>
-<div id="jsWarn">JavaScript ist nicht verfügbar.</div>
+<div id="jsWarn">JavaScript ist nicht verfügbar.<br />Versuche, etwas zu warten oder die Seite neu zu laden.<br /></div>
 <div id="fixedHeader">Vertretungsplan</div>
 <div id="menuContainer">
   <div id="menuSpace"></div>

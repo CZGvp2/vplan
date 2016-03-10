@@ -14,6 +14,12 @@ var animationTime = 0.5;
 var t_out = -1;
 var show_f_h = false;
 
+
+showEmptyMessage = function(slide){
+	if($(slide).find(".event:visible").length==0) $(slide).find(".empty_msg").show();
+	else $(".empty_msg").hide();
+}
+
 // Filter functions
 filter = function(target) {
     var events = $('.event');
@@ -21,15 +27,16 @@ filter = function(target) {
         for(var i=0; i < events.length; i++){
             var e = $(events[i]);
             var targets = e.data().targets.toLowerCase()/*.split(' ')*/;
-
             if (targets.indexOf(target.toLowerCase()) < 0) e.hide();
             else e.show();
         }
     } else events.show();
+	  showEmptyMessage($(".slide").get(currentIndex));
 }
 
 removeFilter = function(){
     $('.event').show();
+    showEmptyMessage($(".slide").get(currentIndex));
 }
 
 // Cookie functions
@@ -110,11 +117,6 @@ toggleSlide = function(dir){
   currentIndex = nextIndex;
   setSidebars(currentIndex, slides);
 	showEmptyMessage(slides[currentIndex]);
-}
-
-showEmptyMessage = function(slide){
-	if($(slide).find(".event:visible").length==0) $(slide).find(".empty_msg").show();
-	else $(".empty_msg").hide();
 }
 
 setSidebars = function(idx, slides){
