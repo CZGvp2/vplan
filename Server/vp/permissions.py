@@ -6,7 +6,6 @@ from .config import logins
 class RootFactory:
 	__acl__ = [
 		(Allow, 'group:readers', 'read'),
-		(Allow, 'group:teachers', 'read'),
 		(Allow, 'group:editors', 'read'),
 		(Allow, 'group:editors', 'upload')
 	]

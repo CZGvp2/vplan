@@ -71,7 +71,7 @@ class Selector:
 
 		self.grade = int( match.group('grade') )
 		self.subgrades = match.group('subgrade').lower()
-		self.targets = [ lower(text) ]
+		self.targets = [ str(self.grade), lower(text) ]
 
 		return True
 

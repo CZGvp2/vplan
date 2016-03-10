@@ -1,6 +1,7 @@
 from pyramid.view import view_config, view_defaults, forbidden_view_config
 
-from .fileProcessing.processing import process_file, remove_days, schedule
+from .fileProcessing.processing import process_file, remove_days
+from .fileProcessing.file_handler import Schedule
 from .fileProcessing.regex_parser import parse_response_date
 from .fileProcessing.serverlog import log, ProcessingError, InternalServerError, log_unexpected_error
 
@@ -27,7 +28,7 @@ class UploadView:
 	@view_config(request_method='GET', renderer='templates/upload.pt')
 	def view_site(self):
 		"""Gibt die sichtbare Seite zurück"""
-		with schedule(read_only=True, parse_date=True, no_events=True) as data:
+		with Schedule(read_only=True, parse_date=True, no_events=True) as data:
 			return data
 
 	@view_config(request_method='POST', renderer='json')
