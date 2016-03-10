@@ -1,13 +1,8 @@
 import xml.etree.ElementTree as etree
 
 from .serverlog import ProcessingError
-from .regex_parser import Selector, parse_date, parse_subject, replace_teacher, dashToNone
+from .regex_parser import Selector, parse_date, parse_subject, parse_teacher, dashToNone
 
-NONE_SUBJ = {
-	'prefix': None,
-	'subject': None,
-	'suffix': None
-}
 
 def convert(xml_content):
 	"""Konvertiert einen xml-String in ein dictionary, Ergebnis sind JSON-Daten für einen Tag"""
@@ -44,6 +39,7 @@ def convert(xml_content):
 		'date': date
 	}
 
+
 class Event:
 	"""Eintrag im Lehrer-Vertretungsplan"""
 	def __init__(self, action):
@@ -57,17 +53,17 @@ class Event:
 		# Alte Stunde
 		self.old = {
 			'subject': parse_subject( get_tag('fach'), course=is_course  ),
-			'teacher': replace_teacher( get_tag('lehrer') ),
+			'teacher': parse_teacher( get_tag('lehrer') )
 		}
 
 		# Neue Stunde
 		self.new = {
 			'subject': parse_subject( get_tag('vfach'), course=is_course ),
-			'teacher': replace_teacher( get_tag('vlehrer') ),
-			'room': dashToNone( get_tag('vraum') )
+			'teacher': parse_teacher( get_tag('vlehrer') )
 		}
 
 		self.info = get_tag('info')
+		self.room = dashToNone( get_tag('vraum') )
 		self.time = [ int( get_tag('stunde') ) ]  # time ist liste von allen Stunden mit gleichen Infos
 
 		self.change = None
@@ -75,7 +71,7 @@ class Event:
 		if self.old['subject'] != self.new['subject']: self.change = 'SUBJECT'
 		# Am Ende falls Ausfall, werden alle vorherigen Flags überschrieben.
 
-		if self.new['subject'] == NONE_SUBJ:
+		if not self.new['subject']:
 			self.change = 'CANCELLED'
 
 		if not self.change: self.change = 'ROOM'
@@ -86,22 +82,21 @@ class Event:
 
 		# Hinzufügen der Lehrer zu den Targets
 		if self.old['teacher']:
-			self.targets.append(self.old['teacher'])  # Falls Teacher '---' und damit None, nicht hinzufügen
+			self.targets.extend( self.old['teacher'].values() )  # Falls Teacher '---' und damit None, nicht hinzufügen
 
 		if self.new['teacher'] and self.new['teacher'] not in self.targets:
-			self.targets.append(self.new['teacher'])
+			self.targets.extend( self.new['teacher'].values() )
 
 		# Löschen von unnützen Daten
 		if self.change == 'CANCELLED':
-			self.new['subject'] = NONE_SUBJ
-			self.new['teacher'] = None
+			self.new = None
+			self.room = None
 
 		elif self.change == 'TEACHER':
-			self.old['subject'] = NONE_SUBJ
+			self.old['subject'] = None
 
 		elif self.change == 'ROOM':
-			self.old['teacher'] = None
-			self.old['subject'] = NONE_SUBJ
+			self.old = None
 
 
 	def get_z(self):
@@ -120,7 +115,6 @@ class Event:
 
 	def json(self):
 		"""JSON Representation des Events"""
-
 		data = self.__dict__.copy()
 		data['selector'] = self.selector.json()  # Selektor als dictionary
 		data['targets'] = ' '.join(self.selector.targets)  # Liste zu String mit Leerzeichen machen

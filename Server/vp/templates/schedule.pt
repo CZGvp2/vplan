@@ -98,37 +98,40 @@
         <td class="selector" tal:define="selector event.selector; s selector.subject">
           <span class="subject">
             <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
-            <span tal:condition="s.prefix">${s.prefix}</span>
-            <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject_2">${s.subject}</span>
-            <span tal:condition="not s.subject" class="space"></span>
-            <span tal:condition="s.suffix">${s.suffix}</span>
+            <span class="subject" tal:condition="s"> <!--! diese Container sind notwendig für TAL -->
+              <span tal:condition="s.prefix">${s.prefix}</span>
+              <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
+              <span tal:condition="s.suffix">${s.suffix}</span>
+            </span>
             <span tal:condition="selector.subclass">${selector.subclass}</span>
           </span>
         </td>
-        <td class="entry">${event.time}<td/>
-          <td class="entry" tal:define="s event.new['subject']">
-            <span class="subject">
-              <span tal:condition="s.prefix">${s.prefix}</span>
-              <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
-              <span tal:condition="s.suffix">${s.suffix}</span>
-              ${event.new['teacher']}
-            </span>
-          </td>
-          <td>&#8594;</td>
-          <td class="entry old" tal:define="s event.old['subject']">
-            <span class="subject">
-              <span tal:condition="s.prefix">${s.prefix}</span>
-              <span tal:condition="s.subject" style="background-color: ${color(s.subject)}" class="sub_subject_2">${s.subject}</span>
-              <span tal:condition="not s.subject" class="space"></span>
-              <span tal:condition="s.suffix">${s.suffix}</span>
-              ${event.old['teacher']}
-            </span>
-          </td>
-          <td class="entry" tal:content="event.new['room']" />
-          <td class="entry information" tal:content="event.info" />
-        </tr>
-      </table>
-    </div>
+        <td class="entry">${event.time}</td>
+        <td class="entry" tal:define="entry event.new" tal:condition="entry">
+          <span class="subject" tal:define="s entry.subject" tal:condition="s">
+            <span tal:condition="s.prefix">${s.prefix}</span>
+            <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
+            <span tal:condition="s.suffix">${s.suffix}</span>
+          </span>
+          <!--! data-full ist der volle Name, hab mit onclick gemacht (FIXME) Funktioniert bis jetzt nur für Röschi-->
+          <span data-full="${t.full}" onclick="$(this).text(this.dataset.full)" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
+        </td>
+        <td tal:condition="not event.new"></td>
+        <td>&#8594;</td>
+        <td class="entry" tal:define="entry event.old" tal:condition="entry">
+          <span class="subject" tal:define="s entry.subject" tal:condition="s">
+            <span tal:condition="s.prefix">${s.prefix}</span>
+            <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
+            <span tal:condition="s.suffix">${s.suffix}</span>
+          </span>
+          <span data-full="${t.full}" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
+        </td>
+        <td tal:condition="not event.old"></td>
+        <td class="entry">${event.room}</td>
+        <td class="entry information">${event.info}</td>
+      </tr>
+    </table>
   </div>
+</div>
 </body>
 </html>

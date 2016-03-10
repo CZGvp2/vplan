@@ -20,5 +20,7 @@ desktop.ini
 #JSON
 *.json
 
+Server/vp/eastereggs
+
 # Anscheinend muss man die Dateien erst untracken
 # mit git rm --cached *.pyc

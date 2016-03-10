@@ -8,8 +8,12 @@ from ..config import subjects, teachers, prefixes
 
 
 # Setzen des Datumsformats von Deutscherland
-locale.setlocale(locale.LC_TIME, 'deu_deu')  # TODO fehler auf Unix?
 
+try:
+	locale.setlocale(locale.LC_TIME, 'deu_deu')  # Windows
+
+except locale.Error:
+	locale.setlocale(locale.LC_TIME, 'de_DE')  # Unix
 
 # 08A, 10B usw.
 SIMPLE = re.compile( r'^(?P<grade>0[5-9]|10)(?P<subgrade>[A-D])$' )
@@ -45,11 +49,7 @@ class Selector:
 		self.grade = 0
 		self.subgrades = None
 		self.subclass = None
-		self.subject = {
-			'prefix': None,
-			'subject': None,
-			'suffix': None
-		}
+		self.subject = None
 
 		self.targets = ['notset']
 		self.type = 'FAILED'
@@ -85,7 +85,8 @@ class Selector:
 		self.grade = int( match.group('grade') )
 		self.subject = parse_subject( match.group('subject'), course=False )
 		self.subclass = to_int( match.group('subclass') )
-		self.targets = list( map(lower, match.group('targets').split(',')) )  # '08A,08B,08C' zu ('8a', '8b', '8c')
+		self.targets = [ str(self.grade) ]
+		self.targets.extend( map(lower, match.group('targets').split(',')) ) # '08A,08B,08C' zu ('8a', '8b', '8c')
 
 		return True
 
@@ -109,10 +110,8 @@ class Selector:
 	def json(self):
 		"""JSON Representation des Events"""
 		data = self.__dict__.copy()
-
 		# Entfernen von Targets
 		data.pop('targets')
-
 		return data
 
 	def get_z(self):
@@ -128,29 +127,24 @@ class Selector:
 
 def parse_subject(text, course=False):
 	"""Ersetzt ein Fach und versucht es in Präfix, Fach und Suffix zu Unterteilen"""
-
-	prefix = None
-	suffix = None
-
 	if not text or text == '---':
-		subject = None
+		return None
+
+	match = (SUBJECT_COURSE if course else SUBJECT).match( text.lower() )
+
+	if not match:
+		if course:
+			log.warning('Could not match subject "%s"', text)
+			subject = text
+
+		else:  # Wenn nicht Kurz geparst werden konnte, versuche Kurs zu Parsen
+			return parse_subject(text, course=True)
 
 	else:
-		match = (SUBJECT_COURSE if course else SUBJECT).match( text.lower() )
-
-		if not match:
-			if course:
-				log.warning('Could not match subject "%s"', text)
-				subject = text
-
-			else:  # Wenn nicht Kurz geparst werden konnte, versuche Kurs zu Parsen
-				return parse_subject(text, course=True)
-
-		else:
-			prefix, subject, suffix = match.groups()
-			subject = replace(subjects, subject)
-			if prefix: prefix = replace(prefixes, prefix)
-			if suffix: suffix = suffix.upper()
+		prefix, subject, suffix = match.groups()
+		subject = replace(subjects, subject)
+		if prefix: prefix = replace(prefixes, prefix)
+		if suffix: suffix = suffix.upper()
 
 	return {
 		'prefix': prefix,
@@ -158,7 +152,7 @@ def parse_subject(text, course=False):
 		'suffix': suffix
 	}
 
-def replace_teacher(text):
+def parse_teacher(text):
 	"""Ersetzt einen Lehrer, entfernt Klammern"""
 	if not text or text == '---':
 		return None
@@ -166,7 +160,10 @@ def replace_teacher(text):
 	if text.startswith('(') and text.endswith(')'):
 		text = text[1:-1]
 
-	return replace(teachers, text)
+	return {
+		'short': text.capitalize(),
+		'full': replace(teachers, text)
+	}
 
 def parse_date(text):
 	"""Parst das Datum der Datei aus text zu JSON"""
