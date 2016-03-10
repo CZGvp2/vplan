@@ -58,7 +58,7 @@ body{
 	text-align: center;
 }
 .information{
-	max-width: 10em;
+	max-width: 20em;
 	overflow: auto;
 	white-space: normal;
 	word-break: normal;
