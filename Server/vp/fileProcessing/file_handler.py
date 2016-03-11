@@ -10,22 +10,16 @@ SCHEDULE_STARTUP = {
 	'days': []
 }
 
-class JSONFile(object):
+class Schedule(object):
 	"""Klasse zum Lesen und Schreiben der JSON File"""
-	def __init__(self):
+	def __init__(self, read_only=False, parse_date=False, no_events=False):
 		self.data = None
 		self.fobj = None
-		self.read_only = False
-		self.parse_date = False
-		self.no_events = False
+		self.generated = False
+		self.read_only = read_only
+		self.parse_date = parse_date
+		self.no_events = no_events
 
-	def __call__(self, read_only=False, parse_date=False, no_events=False):
-		"""Funktion die Instanz zurückgibt, zum Parameter-Bearbeiten"""
-		self.read_only = read_only  # Überschreibt die schedule.json nicht
-		self.parse_date = parse_date  # Ersetzt die Systemdaten durch Wochentag und Datum
-		self.no_events = no_events  # Entfernt alle events (nur Dateinamen und Datum)
-
-		return self
 
 	def __enter__(self):
 		"""Wird beim with-Statement aufgerufen"""
@@ -59,7 +53,7 @@ class JSONFile(object):
 			self.fobj.close()
 
 	def write(self):
-		if not self.read_only:
+		if not self.read_only or self.generated:
 			content = json.dumps(self.data, ensure_ascii=False, indent=4, sort_keys=True)
 
 			self.fobj.seek(0)  # geht zum anfang der Datei
@@ -70,8 +64,8 @@ class JSONFile(object):
 		"""Erzeugt einen neuen leeren Schedule"""
 		self.fobj = open(paths['schedule'], 'w', encoding='utf-8')
 		self.data = SCHEDULE_STARTUP
+		self.generated = True
 
-		self.write()
 
 
 def read_via_tmp(input_file):

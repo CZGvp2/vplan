@@ -1,11 +1,10 @@
 from datetime import datetime
 
-from .file_handler import read_via_tmp, JSONFile
+from .file_handler import read_via_tmp, Schedule
 from .xml_reader import convert
 from .regex_parser import parse_response_date
 from .serverlog import log
 
-schedule = JSONFile()
 
 to_datetime = lambda day: datetime(**day['date'])
 
@@ -17,7 +16,7 @@ def process_file(input_file):
 	# Konvertieren von XML zu JSON
 	new_day = convert(content)
 
-	with schedule() as data:
+	with Schedule() as data:
 		# Hinzufügen des Tages zu den Daten
 		days = data['days']
 		new_date = new_day['date']
@@ -50,7 +49,7 @@ def process_file(input_file):
 		log.info('%s day %s', ('Replaced' if replaced else 'Added'), parse_response_date(new_date, logging=True))
 
 def remove_days(filenames):
-	with schedule() as data:
+	with Schedule() as data:
 		# Hinzufügen des Tages zu den Daten
 		for i, day in enumerate( data['days'].copy() ):
 			if day['filename'] in filenames:

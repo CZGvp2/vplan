@@ -1,7 +1,7 @@
 #Kamal
 @Port5053
 - [ ] Doku schreiben
-- [x] SSL zum laufen bringen
+- [ ] SSL zum laufen bringen
 - [x] Meine 3-Schritt-Anleitung zum Handy/Tablet emulieren durchlesen (schedule_handheld.css#1)
 - [x] teachers
 - [ ] status ints
