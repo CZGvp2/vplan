@@ -5,7 +5,7 @@
 - [x] Meine 3-Schritt-Anleitung zum Handy/Tablet emulieren durchlesen (schedule_handheld.css#1)
 - [x] teachers
 - [ ] status ints
-
+- [ ] in der schedule.js ganz nach unten scrollen
 #Tim
 @Infoproject
  - [ ] "hardcoded div-bastelschleife ~~der Hölle~~" ein Ende setzen (!)

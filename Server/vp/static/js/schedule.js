@@ -27,7 +27,7 @@ filter = function(target) {
         for(var i=0; i < events.length; i++){
             var e = $(events[i]);
             var targets = e.data().targets.toLowerCase()/*.split(' ')*/;
-            if (targets.indexOf(target.toLowerCase()) < 0) e.hide();
+            if (!~targets.indexOf(target.toLowerCase())) e.hide();
             else e.show();
         }
     } else events.show();
@@ -51,7 +51,7 @@ getCookie = function(attrib){
   var split_cookie = document.cookie.split("; ");
   attrib+="=";
   for(var i=0; i<split_cookie.length; i++)
-    if(split_cookie[i].indexOf(attrib) != -1)
+    if(~split_cookie[i].indexOf(attrib))
       return split_cookie[i].substring(attrib.length + split_cookie[i].indexOf(attrib),split_cookie[i].length);
   return "";
 }
@@ -218,3 +218,12 @@ $(document).on('scroll', onScroll);
 
 // Call setup() when DOM is ready
 $(setup);
+
+/**
+JAVASCRIPT CHALLENGE #1
+r = Math.random;
+var x = (...p)=>((r()*(p[~-1]-p[+!0]+~-2))+p[~-2])>>+!1;
+
+Welchen Wert hat x?
+Was passiert bei 'x(1,10);'?
+*/
