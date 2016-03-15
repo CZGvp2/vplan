@@ -32,6 +32,8 @@ filter = function(target) {
         }
     } else events.show();
 	  showEmptyMessage($(".slide").get(currentIndex));
+		if(target) $(".selector").fadeOut(animationTime*1000*0.3);
+		else $(".selector").fadeIn(animationTime*1000*0.3);
 }
 
 removeFilter = function(){
@@ -153,8 +155,8 @@ onScroll = function(evt){
   }
 }
 
-toggleMenu = function(){
-  if(toggleVisibility($("#menuContainer")[0])) $("#cover").fadeIn(animationTime*1000*0.5);
+toggleMenu = function(time = animationTime*1000*0.5){
+  if(toggleVisibility($("#menuContainer")[0])) $("#cover").fadeIn(time);
   /*if(shown){
     $("#topbar").css("background-color", "#3a7ab6");
     $("#header").css("background-image", "linear-gradient(to bottom, #3a7ab6 0%, rgba(0,0,0,0) 70%)");
@@ -194,7 +196,7 @@ $(function(){
     $("#cover").fadeOut(animationTime*1000*0.5);
   });
 
-  toggleMenu();
+  toggleMenu(0);
 });
 
 // Add keylistener to toggle slides via arrow keys

@@ -72,10 +72,6 @@ body{
 .empty_msg{
 	text-align: center;
 }
-td{
-	padding-left: .2em;
-	padding-right: .2em;
-}
 #jsWarn{
 	z-index: 500;
 
@@ -97,4 +93,22 @@ td{
 
 	text-align: center;
 	line-height: 5em;
+}
+.table{
+	display: table;
+}
+.table_row{
+	display: table-row;
+}
+.table_cell{
+	display: table-cell;
+
+	padding-left: .2em;
+	padding-right: .2em;
+}
+.thead{
+	display: table-header-group;
+}
+.tbody{
+	display: table-row-group;
 }

@@ -92,50 +92,65 @@
       ${day.date['weekday']}
     </div>
     <span style="font-size: .6em;" title="">(${day.date['date']})</span>
-    <table class="table">
-      <tr style="text-align: center;"><td></td> <td>Klasse</td> <td>Stunde</td> <td></td> <td>Fach</td> <td></td> <td>Ersetzt</td> <td>Raum</td> <td>Information</td></tr>
-      <tr class="empty_msg"><td colspan="9">--- Keine Vertretungen ---</td></tr>
-      <tr class="event" tal:repeat="event day.events" data-targets="${event.targets}">
-        <td class="entry">
-          <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
-        </td>
-        <td class="selector" tal:define="selector event.selector; s selector.subject">
-          <span class="subject">
-            <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
-            <span class="subject" tal:condition="s"> <!--! diese Container sind notwendig für TAL -->
+    <main class="table">
+      <div class="thead">
+        <div class="table_row" style="text-align: center;">
+          <div class="table_cell"></div>
+          <div class="table_cell">Klasse</div>
+          <div class="table_cell">Stunde</div>
+          <div class="table_cell">Fach</div>
+          <div class="table_cell"></div>
+          <div class="table_cell dropdown">Ersetzt</div>
+          <div class="table_cell dropdown">Raum</div>
+          <div class="table_cell dropdown">Information</div>
+        </div>
+        <div class="empty_msg table_row">
+          --- Keine Vertretungen ---
+        </div>
+      </div>
+      <div class="tbody">
+        <div class="event table_row" tal:repeat="event day.events" data-targets="${event.targets}">
+          <div class="entry table_cell">
+            <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
+          </div>
+          <div class="table_cell" tal:define="selector event.selector; s selector.subject">
+            <span class="subject">
+              <span tal:condition="selector.grade" class="selector">${selector.grade}${selector.subgrades}</span>
+              <span class="subject" tal:condition="s"> <!--! diese Container sind notwendig für TAL -->
+                <span tal:condition="s.prefix">${s.prefix}</span>
+                <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
+                <span tal:condition="s.suffix">${s.suffix}</span>
+              </span>
+              <span tal:condition="selector.subclass">${selector.subclass}</span>
+            </span>
+          </div>
+          <div class="entry table_cell">${event.time}</div>
+          <div class="entry table_cell" tal:define="entry event.new" tal:condition="entry">
+            <span class="subject" tal:define="s entry.subject" tal:condition="s">
               <span tal:condition="s.prefix">${s.prefix}</span>
               <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
               <span tal:condition="s.suffix">${s.suffix}</span>
+              <span data-full="${t.full}" onclick="$(this).text(this.dataset.full)" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
             </span>
-            <span tal:condition="selector.subclass">${selector.subclass}</span>
-          </span>
-        </td>
-        <td class="entry">${event.time}</td>
-        <td class="entry" tal:define="entry event.new" tal:condition="entry">
-          <span class="subject" tal:define="s entry.subject" tal:condition="s">
-            <span tal:condition="s.prefix">${s.prefix}</span>
-            <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
-            <span tal:condition="s.suffix">${s.suffix}</span>
-          </span>
-          <!--! data-full ist der volle Name, hab mit onclick gemacht (FIXME) Funktioniert bis jetzt nur für Röschi
-        TODO mach das mal ganz, ich muss nen bisschen was reparieren-->
-          <span data-full="${t.full}" onclick="$(this).text(this.dataset.full)" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
-        </td>
-        <td tal:condition="not event.new"></td>
-        <td>&#8594;</td>
-        <td class="entry" tal:define="entry event.old" tal:condition="entry">
-          <span class="subject" tal:define="s entry.subject" tal:condition="s">
-            <span tal:condition="s.prefix">${s.prefix}</span>
-            <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
-            <span tal:condition="s.suffix">${s.suffix}</span>
-          </span>
-          <span data-full="${t.full}" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
-        </td>
-        <td tal:condition="not event.old"></td>
-        <td class="entry">${event.room}</td>
-        <td class="entry information">${event.info}</td>
-      </tr>
-    </table>
+            <!--! data-full ist der volle Name, hab mit onclick gemacht (FIXME) Funktioniert bis jetzt nur für Röschi
+          TODO mach das mal ganz, ich muss nen bisschen was reparieren-->
+          </div>
+          <div tal:condition="not event.new" class="table_cell"></div>
+          <div class="table_cell dropdown">&#8594;</div>
+          <div class="entry table_cell dropdown" tal:define="entry event.old" tal:condition="entry">
+            <span class="subject" tal:define="s entry.subject" tal:condition="s">
+              <span tal:condition="s.prefix">${s.prefix}</span>
+              <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
+              <span tal:condition="s.suffix">${s.suffix}</span>
+              <span data-full="${t.full}" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
+            </span>
+          </div>
+          <div tal:condition="not event.old" class="table_cell dropdown"></div>
+          <div class="entry table_cell dropdown">${event.room}</div>
+          <div class="entry information table_cell dropdown">${event.info}</div>
+        </div>
+      </div>
+    </main>
   </div>
 </div>
 </body>
