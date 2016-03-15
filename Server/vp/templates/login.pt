@@ -9,6 +9,12 @@
   <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
   <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/login.css')}" />
   <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
+  <style media="only screen and (min-width: 501px)">
+    .center{
+      width: 50%;
+      max-width: 360px;
+    }
+  </style>
   <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
   <script src="${request.static_path('vp:static/js/sha512.js')}"></script>
   <script src="${request.static_path('vp:static/js/login.js')}"></script>

@@ -154,7 +154,7 @@ onScroll = function(evt){
 }
 
 toggleMenu = function(){
-  if(toggleVisibility($("#menuContainer")[0])) $("#cover").show();
+  if(toggleVisibility($("#menuContainer")[0])) $("#cover").fadeIn(animationTime*1000*0.5);
   /*if(shown){
     $("#topbar").css("background-color", "#3a7ab6");
     $("#header").css("background-image", "linear-gradient(to bottom, #3a7ab6 0%, rgba(0,0,0,0) 70%)");
@@ -188,10 +188,10 @@ $(function(){
   });
 
   // Add menu Listener
-  $("#menuSpace, #menuButton").on('click', toggleMenu);
+  $("#menuSpace, .menuButton").on('click', toggleMenu);
   $("#cover").on('click', function(){
     toggleMenu();
-    $("#cover").hide();
+    $("#cover").fadeOut(animationTime*1000*0.5);
   });
 
   toggleMenu();
@@ -215,6 +215,15 @@ $(document).on('keypress', function(evt){
 
 // Catch Scrollevents, show/hide header if necessary
 $(document).on('scroll', onScroll);
+
+//Catch swipes
+$(function(){
+	$(document).tactile({
+		left: function(){toggleSlide("left")},
+		right: function(){toggleSlide("right")}
+	});
+});
+
 
 // Call setup() when DOM is ready
 $(setup);

@@ -22,12 +22,22 @@
 	padding-left: 1em;
 	padding-right: 1em;
 }
-#topbar>img#menuButton{
+#topbar>img.menuButton{
   position: absolute;
   background-color: #0e0e0e;
   right: 0;
 	height: 2em;
 	width: auto;
+}
+#fixedHeader>img.menuButton{
+	position: absolute;
+	top: .2em;
+  right: .2em;
+	height: 1.3em;
+	width: auto;
+}
+#header>img.menuButton{
+	display: none;
 }
 #wrapper{
 	padding: 0;
@@ -64,7 +74,7 @@
 	width: 100%;
 	font-size: 1.5em;
 	background-color: #1d3954;
-	padding-top: 10px;
+	padding-top: .2em;
 	text-align: center;
 	text-shadow: 1px 3px 10px black;
 }
@@ -183,6 +193,9 @@
 }
 body::-webkit-scrollbar {
   display: none;
+}
+body::-moz-scrollbar{
+	display: none;
 }
 #background{
   position: fixed;

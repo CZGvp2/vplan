@@ -8,16 +8,17 @@
   <title>Vertretungsplan</title>
   <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/global.css')}" />
   <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule/schedule.css')}" />
-  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule/schedule_screen.css')}" media="screen" />
-  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule/schedule_handheld.css')}" media="handheld" />
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule/schedule_screen.css')}" media="only screen and (min-width: 501px)" />
+  <link rel="stylesheet" type="text/css" href="${request.static_path('vp:static/css/schedule/schedule_handheld.css')}" media="only screen and (max-width: 500px)" />
   <link rel="shortcut icon" href="${request.static_path('vp:static/img/favicon.png')}" />
   <script src="${request.static_path('vp:static/js/jquery.min.js')}"></script>
+  <script src="${request.static_path('vp:static/js/swipe.js')}"></script>
   <script src="${request.static_path('vp:static/js/schedule.js')}"></script>
   <?python
   def color(subject):
     """Gibt die Farbe des Faches zurück"""
     colors = {
-    'Ma' : '#006496', 
+    'Ma' : '#006496',
     'Ph' : '#3296C8',
     'Inf' : '#64C8FA',
     'Ch' : '#009632',
@@ -47,8 +48,10 @@
 </head>
 <body>
 <div id="background"></div><div id="cover"></div>
-<div id="jsWarn">JavaScript ist nicht verfügbar.<br />Versuche, etwas zu warten oder die Seite neu zu laden.<br /></div>
-<div id="fixedHeader">Vertretungsplan</div>
+<div id="jsWarn"><p style="font-size: 1.1em; white-space: break-all;">Lädt Seite...</p><br />Wenn die Seite nicht geladen wird, überprüfe ob du JavaScript aktiviert hast.</div>
+<div id="fixedHeader">Vertretungsplan
+  <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" class="menuButton"></img>
+</div>
 <div id="menuContainer">
   <div id="menuSpace"></div>
   <nav id="menu">
@@ -69,10 +72,11 @@
 <div id="wrapper">
   <div id="topbar">
     <div class="space"></div>
-    <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" id="menuButton"></img>
+    <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" class="menuButton"></img>
   </div>
   <div id="header">
     Vertretungsplan
+    <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" class="menuButton"></img>
   </div>
   <div id="header_fill"></div>
   <div class="slidebutton">
@@ -113,7 +117,8 @@
             <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
             <span tal:condition="s.suffix">${s.suffix}</span>
           </span>
-          <!--! data-full ist der volle Name, hab mit onclick gemacht (FIXME) Funktioniert bis jetzt nur für Röschi-->
+          <!--! data-full ist der volle Name, hab mit onclick gemacht (FIXME) Funktioniert bis jetzt nur für Röschi
+        TODO mach das mal ganz, ich muss nen bisschen was reparieren-->
           <span data-full="${t.full}" onclick="$(this).text(this.dataset.full)" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
         </td>
         <td tal:condition="not event.new"></td>

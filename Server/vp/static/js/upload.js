@@ -79,6 +79,8 @@ function handleServerResponse(response) {
     var b = $("#uploadList").get(0);
     $("#uploadList").css("display", "flex");
 
+    $("#content").html("Drag & Drop <br /> zum Hochladen");
+
     for(var i = 0; i < response.results.length; i++){
         // hardcoded div-bastelschleife der Hölle
 
@@ -102,6 +104,9 @@ function handleServerResponse(response) {
 
 // AJAX Upload
 function upload(files) {
+
+    $("#content").html("Hochladen...");
+
     var formData = new FormData($('form')[0]); // besser?
     for (var i = 0; i < files.length; i++)
         formData.append('file', files[i]);

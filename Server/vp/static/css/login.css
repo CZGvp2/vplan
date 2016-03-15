@@ -13,8 +13,7 @@ body{
   justify-content: center;
   align-items: stretch;
 
-  width: 50%;
-  max-width: 360px;
+  width: 100%;
 
 	position: absolute;
 	top: 30%;
@@ -65,7 +64,7 @@ div#submit {
 	text-align: center;
 	color: #FF5555;
 }
-
+/*
 @media all and (max-width: 420px){
 	.center{
 		width: 90%;
@@ -83,3 +82,4 @@ div#submit {
 		height: 3em;
 	}
 }
+*/
