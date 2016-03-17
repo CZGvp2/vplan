@@ -137,7 +137,7 @@
           </div>
           <div tal:condition="not event.new" class="table_cell"></div>
           <div class="table_cell dropdown">&#8594;</div>
-          <div class="entry table_cell dropdown" tal:define="entry event.old" tal:condition="entry">
+          <div class="entry table_cell dropdown old" tal:define="entry event.old" tal:condition="entry">
             <span class="subject" tal:define="s entry.subject" tal:condition="s">
               <span tal:condition="s.prefix">${s.prefix}</span>
               <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
