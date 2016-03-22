@@ -89,6 +89,7 @@
 	transform: translateX(-50%);
 	transition: transform 1s;
 	min-width: 40%;
+	max-width: 86%;
 }
 .slide>.slide_title{
 	text-align: center;

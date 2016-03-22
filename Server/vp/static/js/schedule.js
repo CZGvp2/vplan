@@ -183,6 +183,10 @@ toggleFilterbutton = function(){
   }
 }
 
+toggleDropdown = function(evt){
+
+}
+
 $(function(){
   // Add listener to update filter and cookie when input is changed
   $("#input").on('keyup keypress paste', function(evt){
