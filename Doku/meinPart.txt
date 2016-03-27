@@ -1,0 +1,37 @@
+Serverseitige Bearbeitung
+
+Der Vertretungsplan wird von einem Programm auf dem Schulserver generiert. Dieses Programm
+ist in der Lage den Plan in verschiedenen Formaten auszugeben. Wir benutzen das XML-Format
+des Lehrerplans, da dieser die meisten Informationen enthält.
+Die Dateien werden täglich vom verantwortlichen Lehrer hochgeladen, wobei eine Datei den Plan
+für einen Tag enthält. Vom Server wird darauf hin jede Datei als einzelne Aktion behandelt, 
+verarbeitet, und in unsere Datenspeicherung übertragen.
+
+Schrittabfolge
+Das Verarbeiten einer hochgeladenen Datei fängt mit dem Auslesen der Datei an. Die Daten werden
+in eine temporäre Datei binär überschrieben, und mit entsprechendem UTF-8 Encoding ausgelesen.
+Somit sind die Daten zur weiteren Bearbeitung nur in Form eines String-Buffers in der Laufzeitumgebung
+von Python vorhanden. Zeigt die hochgeladene Datei ins Leere, indem zum Beispiel der POST keine
+Datei beinhält, wird ein \texttt{FileNotFoundError} geworfen. Konnten die Daten nicht in UTF-8
+dekodiert werden, kommt ein \texttt{UnicodeDecodeError}. Beide Fehler werden als Fehlerstufe 
+\texttt{ERROR} eingestuft (\textit{siehe Fehlerbetrachtungen}).
+Darauf hin werden die XML-Daten aus dem String mit Nutzung des \texttt{xml.etree}-Pakets der Python-
+Standardbibliothek in ein \texttt{ElementTree}-Objekt geparst. Dieses ermöglicht den direkten Zugriff
+auf die enthaltenen Daten. Hier kann ein Fehler der Stufe \texttt{ERROR} auftreten, falls der XML-Code
+z. B. auf Grund fehlerhafter Syntax nicht geparst werden konnte.
+Unter Nutzung des \texttt{ElementTree}-Objekts und zusätzlichen Modulen werden nun die Daten in unsere
+Datenstruktur übertragen. Dabei werden zunächst Dictionaries verwendet, eines von Pythons Grund-Datentypen.
+Dies erfordert jedoch eine einheitliche Struktur der gegebenen Daten, womit auch semantische Fehler auftreten
+können (Fehlerstufe \texttt{ERROR}) betrachtet werden.
+
+Fehlerbetrachtungen
+
+Der Verarbeitungsprozess besteht aus mehreren Schritten, die jeweils einzelne Fehlerbetrachtungen
+und ausführliche Logs haben. Jeder mögliche Fehler wird abgefangen, geloggt und ggf. automatisch 
+behandelt. Dabei werden die Fehler in drei Log-Level unterteilt: WARNING, das niedrigste Level,
+welches einen Fehler beschreibt, der unerwünscht ist, jedoch die Gesamtheit der Daten des Tages
+nicht gravierend beeinträchtigt, ERROR, ein Fehler, der das Abbrechen der Bearbeitung und somit
+den Fehlen des jew. Tages zur Folge hat, und CRITICAL, die höhste Fehlerstufe, welche nur komplett
+unerwartete Fehler die die gesamte Funktionalität der Applikation beeinträchtigen umfasst.
+Bei CRITICAL-Fehlern wird zudem automatisch eine Email an die System-Administratoren geschickt,
+und, wenn möglich, eine automatische Wiederherstellung des Systems eingeleitet.
