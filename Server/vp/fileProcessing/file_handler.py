@@ -20,7 +20,6 @@ class Schedule(object):
 		self.parse_date = parse_date
 		self.no_events = no_events
 
-
 	def __enter__(self):
 		"""Wird beim with-Statement aufgerufen"""
 		try:
@@ -65,7 +64,6 @@ class Schedule(object):
 		self.fobj = open(paths['schedule'], 'w', encoding='utf-8')
 		self.data = SCHEDULE_STARTUP
 		self.generated = True
-
 
 
 def read_via_tmp(input_file):
