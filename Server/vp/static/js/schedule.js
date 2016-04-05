@@ -13,6 +13,7 @@ var currentIndex = 0;
 var animationTime = 0.5;
 var t_out = -1;
 var show_f_h = false;
+var mobile = false;
 
 
 showEmptyMessage = function(slide){
@@ -64,10 +65,13 @@ removeCookie = function(attrib){
 
 // Setup function
 setup = function(){
+	mobile = window.innerWidth<501;
+	if(!mobile) $("#toggleShowAllButton").hide();
   filter(getCookie("class"));
   $("#fixedHeader").hide();
 	$(".empty_msg").hide();
 	$("#jsWarn").hide();
+	//if(getCookie("all")&&mobile) toggleShowAll();
   if(getCookie("class")) toggleFilterbutton();
   setSidebars(currentIndex, $(".slide"));
 	showEmptyMessage($(".slide").get(currentIndex));
@@ -185,6 +189,23 @@ toggleFilterbutton = function(){
 
 toggleDropdown = function(evt){
 
+}
+
+visible_all = false;
+toggleShowAll = function(){
+	if(!visible_all){
+		$(".slide").fadeIn(animationTime*1000*0.5);
+		$(".slidebutton").hide();
+		visible_all = true;
+		setCookie("all", "y", 100);
+	} else {
+		$(".slide").fadeOut(animationTime*1000*0.5);
+		$(".slidebutton").show();
+		window.setTimeout("$($('.slide').get(currentIndex)).show()", animationTime*1000*0.5)
+		visible_all = false;
+		removeCookie("all")
+	}
+	toggleMenu();
 }
 
 $(function(){

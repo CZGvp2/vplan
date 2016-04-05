@@ -35,9 +35,9 @@
 
           if (Math.abs(delta) >= 30) {
             if (delta > 0) {
-              swipe.left();
-            } else {
               swipe.right();
+            } else {
+              swipe.left();
             }
             endgesture();
           }

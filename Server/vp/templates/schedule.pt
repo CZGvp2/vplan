@@ -48,7 +48,7 @@
 </head>
 <body>
 <div id="background"></div><div id="cover"></div>
-<div id="jsWarn"><p style="font-size: 1.1em; white-space: break-all;">Lädt Seite...</p><br />Wenn die Seite nicht geladen wird, überprüfe ob du JavaScript aktiviert hast.</div>
+<div id="jsWarn" onload="document.getElementById('jsWarn').style.display='none'"><p style="font-size: 1.1em; white-space: break-all;">Lädt Seite...</p><br />Wenn die Seite nicht geladen wird, überprüfe ob du JavaScript aktiviert hast.</div>
 <div id="fixedHeader">Vertretungsplan
   <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" class="menuButton"></img>
 </div>
@@ -66,6 +66,12 @@
     </div>
     <div class="menu_item" id="filterBox" style="display: none;">
       Filter: <input type="text" id="input" value="" />
+    </div>
+    <div class="menu_item" id="toggleShowAllButton">
+      <a onClick="toggleShowAll();">Alle Tage anzeigen/ausblenden</a>
+    </div>
+    <div class="menu_item">
+      <a onClick="toggleMenu();">Menü schließen</a>
     </div>
   </nav>
 </div>
@@ -92,6 +98,9 @@
       ${day.date['weekday']}
     </div>
     <span style="font-size: .6em;" title="">(${day.date['date']})</span>
+    <div class="empty_msg">
+      --- Keine Vertretungen ---
+    </div>
     <main class="table">
       <div class="thead">
         <div class="table_row" style="text-align: center;">
@@ -103,9 +112,6 @@
           <div class="table_cell dropdown">Ersetzt</div>
           <div class="table_cell dropdown">Raum</div>
           <div class="table_cell dropdown">Information</div>
-        </div>
-        <div class="empty_msg table_row">
-          --- Keine Vertretungen ---
         </div>
       </div>
       <div class="tbody">
