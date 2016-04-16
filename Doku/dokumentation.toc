@@ -4,3 +4,15 @@
 \contentsline {chapter}{\numberline {3}L\IeC {\"o}sungsidee}{5}
 \contentsline {section}{\numberline {3.1}Wahl eines Webframeworks}{5}
 \contentsline {section}{\numberline {3.2}Struktur der Applikation}{5}
+\contentsline {section}{\numberline {3.3}Server}{5}
+\contentsline {subsection}{\numberline {3.3.1}Funktionen}{5}
+\contentsline {subsection}{\numberline {3.3.2}Struktur}{5}
+\contentsline {subsection}{\numberline {3.3.3}Web-Sicherheit}{5}
+\contentsline {subsection}{\numberline {3.3.4}Bearbeiten von Daten}{5}
+\contentsline {paragraph}{\nonumberline Ablaufprotokoll}{5}
+\contentsline {paragraph}{\nonumberline Konvertieren der Daten}{5}
+\contentsline {subsection}{\numberline {3.3.5}Abrufen von Daten}{6}
+\contentsline {subsection}{\numberline {3.3.6}Fehlerbehandlung}{6}
+\contentsline {section}{\numberline {3.4}Client}{6}
+\contentsline {subsection}{\numberline {3.4.1}\textbackslash maketimtowritedocumentation}{6}
+\contentsline {chapter}{\numberline {4}Benutzung}{7}

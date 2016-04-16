@@ -3,4 +3,21 @@
 % Hier ist was, das wahrscheinlich schon zu praktisch ist, aber wir benutzen keine phys. Formeln o.ä.
 % Dashalb regex, ajax, json
 
-Ein wichtiges Prinzip beim Generieren der Website ist das Umwandeln des \texttt{XML}-Codes in ein für Template-Dateien benutzbares \texttt{JSON}-Format. Wir haben uns dazu entschieden, für diesen Vorgang regExp zu benutzen: Ein Platzhalterstring wird auf eine Quelle gematcht, d.h. alle Strings mit dem entsprechenden Muster werden unter Schlüsseln zurückgegeben. So wird der reguläre Ausdruck \texttt{/^[ \t]*\$/} auf alle nur mit Leerzeichen und Tabs gefüllten Zeilen passen. Damit lassen sich verschachtelte Klassenangaben wie bsp. \texttt{10A/ 10ABCET1} auftrennen: die Ethikgruppe 1 der Klassen 10a, b und c ist hier gemeint. Um die Daten letztendlich in einen vom Client darstellbaren (X-)HTML-Code umzuwandeln benutzen wir den Template-Parser von Pyramid. Dabei werden in einem Html-Dokument Angaben gemacht, die vom Server mit entsprechenden Informationen ersetzt werden. Dabei wird das zuvor generierte JSON-Dokumentverwendet. Dieses ist ein weit verbreitetes Speicherformat, welches Daten in Schlüsseln und Werten dartellt, die durch Listen und Bereiche strukturiert sind. Die ursprüngliche Quelle für dieses Dokument liegt hier bei einem Stundenplanverwaltungs-programm der Schule. Die dort generierten XML-Dateien werden über die /upload seite hochgeladen. Dafür werden jQuery und AJaX verwendet. jQuery ist eine beliebte JavaScript Bibliothek, die dem Anwender viel Arbeit wie das manuelle Registrieren von Listenern erspart. AJaX steht für \glqq Asynchronous JavaScript and XML\grqq und bedeuted, dass über JS die Seite mit dem Server kommunizieren kann, ohne eine komplette HTML-Seite als Rahmen zu übertragen. Damit können sämtliche Dateien problemlos übertragen werden.
+Ein wichtiges Prinzip beim Generieren der Website ist das Umwandeln des \texttt{XML}-Codes in ein
+für Template-Dateien benutzbares \texttt{JSON}-Format. Wir haben uns dazu entschieden, für diesen
+Vorgang regExp zu benutzen: Ein Platzhalterstring wird auf eine Quelle gematcht, d.h. alle Strings
+mit dem entsprechenden Muster werden unter Schlüsseln zurückgegeben. So wird der reguläre Ausdruck
+\url{/^[ \t]*\$/} auf alle nur mit Leerzeichen und Tabs gefüllten Zeilen passen. Damit lassen sich
+verschachtelte Klassenangaben wie bsp. \texttt{10A/ 10ABCET1} auftrennen: die Ethikgruppe 1 der
+Klassen 10a, b und c ist hier gemeint. Um die Daten letztendlich in einen vom Client darstellbaren
+(X-)HTML-Code umzuwandeln benutzen wir den Template-Parser von Pyramid. Dabei werden in einem Html-
+Dokument Angaben gemacht, die vom Server mit entsprechenden Informationen ersetzt werden. Dabei wird
+das zuvor generierte JSON- Dokumentverwendet. Dieses ist ein weit verbreitetes Speicherformat,
+welches Daten in Schlüsseln und Werten dartellt, die durch Listen und Bereiche strukturiert sind.
+Die ursprüngliche Quelle für dieses Dokument liegt hier bei einem Stundenplanverwaltungs-programm
+der Schule. Die dort generierten XML- Dateien werden über die \url{/upload} seite hochgeladen. Dafür
+werden jQuery und AJaX verwendet. jQuery ist eine beliebte JavaScript Bibliothek, die dem Anwender
+viel Arbeit wie das manuelle Registrieren von Listenern erspart. AJaX steht für \glqq Asynchronous
+JavaScript and XML\grqq und bedeuted, dass über JS die Seite mit dem Server kommunizieren kann, ohne
+eine komplette HTML-Seite als Rahmen zu übertragen. Damit können sämtliche Dateien problemlos
+übertragen werden.
