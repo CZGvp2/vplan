@@ -1,4 +1,21 @@
-/*
+@keyframes fade_left{
+	from { display: block; opacity: 1.0;}
+	99% { display: block; }
+	to { display: none; opacity: 0.0}
+}
+@keyframes fade_right{
+	from { display: block; opacity: 1.0;}
+	99% { display: block; }
+	to { display: none; opacity: 0.0}
+}
+@keyframes from_left{
+	from { display: block; opacity: 0.0}
+	to { display: block; opacity: 1.0;}
+}
+@keyframes from_right{
+	from { display: block; opacity: 0.0}
+	to { display: block; opacity: 1.0;}
+}/*
   Is jetz noch nich viel hier, aber trotzdem eine Anleitung zum Anschaun in nem Firefox-Browser:
 
   1. [Shift+F2] Firefox-Konsole (nicht JS!) öffnen
@@ -125,4 +142,34 @@
 }
 .slide{
 	margin: 0 auto;
+	margin-bottom: 2em;
+}
+.slidebutton{
+	position: fixed;
+	bottom: 0;
+	background-color: #1d3954;
+	width: 100%;
+	z-index: 700;
+	opacity: 1;
+}
+.singleslidebutton{
+	padding: 10px;
+	position: fixed;
+	bottom: 0;
+	width: 25%;
+	display: block;
+	background-color: inherit;
+	text-align: center;
+}
+#leftslidebutton{
+	left: 0;
+}
+#rightslidebutton{
+	right: 0;
+}
+.day_title{
+}
+.slide_title{
+	text-align: center;
+	font-size: 1.2em;
 }
