@@ -1,5 +1,5 @@
 \chapter{Theoretische Grundlagen}
-
+Wir verwenden für den Aufbau einer funktonierenden Kommunikation viele verschiedene Arten von Code, Dateiformaten und Übertragungsprotokollen. Ein kleiner Teil des Datenaustauschs ist zur Veranschaulichung hier erklärt.\\\\
 % Hier ist was, das wahrscheinlich schon zu praktisch ist, aber wir benutzen keine phys. Formeln o.ä.
 % Dashalb regex, ajax, json
 
@@ -16,21 +16,15 @@
 
 % Aber wirklich, kann alles ganz kurz gefasst sein.
 
-Ein wichtiges Prinzip beim Generieren der Website ist das Umwandeln des \texttt{XML}-Codes in ein
-für Template-Dateien benutzbares \texttt{JSON}-Format. Wir haben uns dazu entschieden, für diesen
-Vorgang regExp zu benutzen: Ein Platzhalterstring wird auf eine Quelle gematcht, d.h. alle Strings
-mit dem entsprechenden Muster werden unter Schlüsseln zurückgegeben. So wird der reguläre Ausdruck
-\url{/^[ \t]*\$/} auf alle nur mit Leerzeichen und Tabs gefüllten Zeilen passen. Damit lassen sich
-verschachtelte Klassenangaben wie bsp. \texttt{10A/ 10ABCET1} auftrennen: die Ethikgruppe 1 der
-Klassen 10a, b und c ist hier gemeint. Um die Daten letztendlich in einen vom Client darstellbaren
-(X-)HTML-Code umzuwandeln benutzen wir den Template-Parser von Pyramid. Dabei werden in einem Html-
-Dokument Angaben gemacht, die vom Server mit entsprechenden Informationen ersetzt werden. Dabei wird
-das zuvor generierte JSON- Dokumentverwendet. Dieses ist ein weit verbreitetes Speicherformat,
-welches Daten in Schlüsseln und Werten dartellt, die durch Listen und Bereiche strukturiert sind.
-Die ursprüngliche Quelle für dieses Dokument liegt hier bei einem Stundenplanverwaltungs-programm
-der Schule. Die dort generierten XML- Dateien werden über die \url{/upload} seite hochgeladen. Dafür
-werden jQuery und AJaX verwendet. jQuery ist eine beliebte JavaScript Bibliothek, die dem Anwender
-viel Arbeit wie das manuelle Registrieren von Listenern erspart. AJaX steht für \glqq Asynchronous
-JavaScript and XML\grqq und bedeuted, dass über JS die Seite mit dem Server kommunizieren kann, ohne
-eine komplette HTML-Seite als Rahmen zu übertragen. Damit können sämtliche Dateien problemlos
-übertragen werden.
+% Das erklärt jetzt irgendwie den ganzen Datenaustausch, aber ich wollte die Begriffe nicht abstrakt erkären... Das versteht dann kein Mensch mehr // Falls das so überhaupt jemand versteht
+Zunächst liegen die Daten als XML-Code, also durch sogenannte Tags gegliederter Text vor. Ein wichtiges Prinzip beim Generieren der Website ist das Umwandeln dieser in ein für den Server benutzbares Format. Wir haben uns dazu entschieden, für diesen Vorgang \texttt{Regular Expressions}, kurz \texttt{regexp} zu benutzen: Ein Platzhalterstring wird auf eine Quelle \glqq gematcht\grqq , d.h. alle Strings, die auf ein entsprechendes Muster passen, werden mit einer Schlüsselbezeichnung zurückgegeben. So wird der reguläre Ausdruck \url{/^[ \t]*\$/} auf alle nur mit Leerzeichen und Tabs gefüllten Zeilen passen. Damit lassen sich verschachtelte Klassenangaben wie bsp. \texttt{10A/ 10ABCET1} auftrennen: die Ethikgruppe 1 der Klassen 10a, 10b und 10c ist hier gemeint.\\
+
+Der XML-Code wird so Schritt für Schritt in eine JSON-Datei (\texttt{JavaScript Object Notation}) umgewandelt. Dieses ist ein weit verbreitetes Speicherformat, welches Daten in Schlüsseln und Werten dartellt, die durch Listen und Gruppen strukturiert sind.\\
+
+Die ursprüngliche Quelle für das XML-Dokument liegt hier bei einem Stundenplanverwaltungsprogramm der Schule. Die dort generierten Dateien werden über die \url{/upload} Webseite hochgeladen. Dafür werden jQuery und AJaX verwendet. jQuery ist eine beliebte JavaScript Bibliothek, die dem Anwender viel Arbeit wie das manuelle Registrieren von EventListenern, die unter anderem für das Abfangen von Mausbewegungen oder Tastendrücken sorgen können, erspart. AJaX steht für \glqq Asynchronous JavaScript and XML\grqq und bedeuted, dass über JavaScriptr die Seite mit dem Server kommunizieren kann, ohne eine komplette HTML-Seite als Rahmen zu übermitteln. Damit können sämtliche Dateien problemlos auf den Server übertragen werden.\\
+
+Nach dem Hochladen und dem Konvertieren sind die Dateien bereit, vom Client abgerufen zu werden. Dafür müssen sie in einen von einem Browser interpretierbaren Code umgewandelt werden, was in fast allen Fällen HTML, also \texttt{Hypertext Markup Language} ist. Dafür benutzen wir den Template-Parser von Pyramid, einem Serverframework. Es werden in einem HTML-Dokument Angaben gemacht, die vom Server mit entsprechenden Informationen ersetzt werden. Dabei wird das zuvor generierte JSON-Dokument verwendet.\\
+
+Zusammen mit Stildateien und Scriptcode werden die Informationen an den Client übertragen. Dafür muss dieser zunächst ein Passwort angeben. Noch auf der Clientseite wird daraus eine Prüfsumme erstellt, aus der das ursprüngliche Passwort mit aktuellen technischen Möglichkeiten nicht ableitbar ist. Diese wird auch als \texttt{Hashsum} bezeichnet, was so viel wie \glqq zerhackter Wert \grqq\ bedeutet. Ein solcher wird mithilfe eines Requests an den Server übertragen, der die Prüfsumme mit einer Liste vergleicht und eine positive oder negative Rückmeldung an den Client sendet.\\
+
+Vor dem Auslesen des Passworts ist der Kommunikationsweg zwischen Server und Client sicher, doch ein weiteres Risiko bleibt bestehen: Wer den Hashwert abfängt, kann sich als Client ausgeben und diesen direkt übertragen. Die einzige Lösung dagegen ist, den kompletten Datenaustausch End-to-End zu verschlüsseln. Eine Lösung hierfür ist SSL, welches durch ein etwas  anderes Protokoll, \texttt{https} statt \texttt{http}, genau dies gewährleist.
