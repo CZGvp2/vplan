@@ -11,8 +11,34 @@ sichere Authenifizierung über eine Passworteingabe des Nutzers erforderlich.
 Diese erforderliche Web-Sicherheit beinhält Hashwerte und die Verwendung von
 \texttt{SSL}.
 
-
 \subsection{Struktur}
+Der Server baut auf den schon von Pyramid gegebenen Strukturen auf. In dem Webframework
+sind schon viele Teile eines Servers gekapselt, sodass wir uns nicht direkt damit
+außeinandersetzen mussten. Dies umfasst Authentifikation, also das Erkennen und Speichern
+von Nutzern, Autorisierung, die Einschränkung aller Nutzer auf ihre Erlaubnisbereiche.
+Weiterhin nimmt uns das Framework das gesamte Kommunikationsprotokolle \texttt{HTTP} ab.
+Somit läuft die gesamte Kommunikation mit dem Client über Pyramid ab. Dies umfasst das Senden
+von Daten via \texttt{GET}-Requests, das Empfangen von Daten durch \texttt{POST}-Requests
+und die Kommunikation via \texttt{AJaX}.\\
+Am Back End des Servers befinden sich die Python-Scripts. Diese haben Zugriff auf die auf dem
+Server gespeicherten Daten, und steuern das Framework. Die gesamte applikationsspezifische
+Programmlogik wird innerhalb dieser Scripts ausgeführt. Die Scripts bekommen Nutzerdaten von
+Pyramid in Form Requests (Anfragen) vom Nutzer.
+Diese verarbeiten diese je nach Art des Requests, bearbeiten gegebenenfalls die
+gespeicherten Daten auf dem Server, und geben dem Framework alle Informationen für eine Antwort
+an den Client. Meist bestehen diese Informationen aus einzelnen Variablen. \\Um dem Nutzer jedoch
+eine Antwort zu senden, müssen diese Daten noch in ein dem Nutzer verständlichen Format wie
+\texttt{HTML} gebracht werden. Diese Aufgabe wird von sogenannten Renderern erledigt. Renderer 
+setzen aus einer Template (Vorlage), und den speziefischen Daten eine vollständige Antwort
+zusammen. Für jeden Datensatz von den Python-Scripts, welcher an den Client gesendet werden
+soll, gibt es eine bestimmte Template. So können zum Beispiel mit Leichtigkeit große,
+komplexe HTML-Seiten generieren, indem man unveränderliche Bestandteile in Templates auslagert,
+und nur die veränderlichen Daten der Scripts vom Renderer einsetzen zu lassen. Handelt es
+sich nur um unveränderlichen Daten in einer Template, wenn es sich beispielsweise um ein reines
+\texttt{CSS}-Stylesheet handelt, so ist kein Renderer von nöten. Dies wird durch sogenannte
+Static Assets realisiert, welche ganze Dateien unbearbeitet dem Nutzer zur Verfügung stellen.
+
+% TODO Request
 
 \subsection{Web-Sicherheit}
 

@@ -1,18 +1,24 @@
 \select@language {ngerman}
 \contentsline {chapter}{\numberline {1}Einleitung}{3}
 \contentsline {chapter}{\numberline {2}Theoretische Grundlagen}{4}
-\contentsline {chapter}{\numberline {3}L\IeC {\"o}sungsidee}{5}
-\contentsline {section}{\numberline {3.1}Wahl eines Webframeworks}{5}
-\contentsline {section}{\numberline {3.2}Struktur der Applikation}{5}
-\contentsline {section}{\numberline {3.3}Server}{5}
-\contentsline {subsection}{\numberline {3.3.1}Funktionen}{5}
-\contentsline {subsection}{\numberline {3.3.2}Struktur}{5}
-\contentsline {subsection}{\numberline {3.3.3}Web-Sicherheit}{5}
-\contentsline {subsection}{\numberline {3.3.4}Bearbeiten von Daten}{5}
-\contentsline {paragraph}{\nonumberline Ablaufprotokoll}{5}
-\contentsline {paragraph}{\nonumberline Konvertieren der Daten}{5}
-\contentsline {subsection}{\numberline {3.3.5}Abrufen von Daten}{6}
-\contentsline {subsection}{\numberline {3.3.6}Fehlerbehandlung}{6}
-\contentsline {section}{\numberline {3.4}Client}{6}
-\contentsline {subsection}{\numberline {3.4.1}\textbackslash maketimtowritedocumentation}{6}
-\contentsline {chapter}{\numberline {4}Benutzung}{7}
+\contentsline {chapter}{\numberline {3}L\IeC {\"o}sungsidee}{6}
+\contentsline {section}{\numberline {3.1}Wahl eines Webframeworks}{6}
+\contentsline {section}{\numberline {3.2}Struktur der Applikation}{6}
+\contentsline {section}{\numberline {3.3}Server}{6}
+\contentsline {subsection}{\numberline {3.3.1}Funktionen}{6}
+\contentsline {subsection}{\numberline {3.3.2}Struktur}{7}
+\contentsline {subsection}{\numberline {3.3.3}Web-Sicherheit}{7}
+\contentsline {subsection}{\numberline {3.3.4}Bearbeiten von Daten}{7}
+\contentsline {paragraph}{Ablaufprotokoll}{7}
+\contentsline {paragraph}{Konvertieren der Daten}{7}
+\contentsline {subsection}{\numberline {3.3.5}Abrufen von Daten}{8}
+\contentsline {subsection}{\numberline {3.3.6}Fehlerbehandlung}{8}
+\contentsline {section}{\numberline {3.4}Client}{8}
+\contentsline {section}{\numberline {3.5}Design}{8}
+\contentsline {subsection}{\numberline {3.5.1}Tabellendarstellung}{8}
+\contentsline {subsection}{\numberline {3.5.2}Slides}{8}
+\contentsline {section}{\numberline {3.6}Interaktivit\IeC {\"a}t}{8}
+\contentsline {subsection}{\numberline {3.6.1}Filter}{8}
+\contentsline {subsection}{\numberline {3.6.2}Cookies}{8}
+\contentsline {subsection}{\numberline {3.6.3}Men\IeC {\"u}}{8}
+\contentsline {chapter}{\numberline {4}Benutzung}{9}
