@@ -36,18 +36,68 @@ komplexe HTML-Seiten generieren, indem man unveränderliche Bestandteile in Temp
 und nur die veränderlichen Daten der Scripts vom Renderer einsetzen zu lassen. Handelt es
 sich nur um unveränderlichen Daten in einer Template, wenn es sich beispielsweise um ein reines
 \texttt{CSS}-Stylesheet handelt, so ist kein Renderer von nöten. Dies wird durch sogenannte
-Static Assets realisiert, welche ganze Dateien unbearbeitet dem Nutzer zur Verfügung stellen.
-
-% TODO Request
+Static Assets realisiert, welche ganze Dateien unbearbeitet dem Nutzer zur Verfügung stellen.\\
+Die Applikation an sich läuft auf einem Unix-Server mit \texttt{nginx}, welches die Basis für
+die \texttt{HTTP}-Kommunikation für Pyramid bildet.
 
 \subsection{Web-Sicherheit}
+Die Sicherheit des Systems steht an erster Stelle. Daher haben wir mehrere Maßnahmen ergriffen,
+um unsere Applikation so sicher wie möglich zu gestalten. Die Kommunikation zwischen Server
+und Client geschieht eigentlich via \texttt{HTTPS}. Dabei handelt es sich um die schon erwähnte
+\texttt{HTTP}-Kommunikation, gekoppelt mit \texttt{SSL}, ein \texttt{RSA}-verschlüsseltes Protokoll,
+welches ein server-spezifisches Sicherheits-Zertifikat benötigt, und globaler Standart für
+Verschlüsslung im Internet ist. Dieses Protokoll ist in \texttt{nginx} implementiert, und versichert
+dem Nutzer, dass kein Dritter Zugriff empfindliche Daten hat.\\\\
+Die Passwörter für die verschiedenen Bereiche dürfen nur den jeweils Berechtigten bekannt sein. Dies
+schließt ein Speichern der Passwörter auf dem Server in Klartext aus, da selbst wir als Programmierer
+uns nicht erlauben dürfen, den Vertretungsplan zu bearbeiten. Weiterhin dürfen die Passwörter trotz
+\texttt{SSL}-Verschlüsslung auch nicht in Klartext gesendet werden, da dies impliziert, dass sie im
+Klartext als Wert irgenteiner Variable auf den Server-Scripten auszulesen sind. Daher werden die
+Passwörter schon auf der Client-Seite von JavaScript in sogenannte Hashwerte umgewandelt. 
 
 \subsection{Bearbeiten von Daten}
+Um den Vertretungsplan zu aktualisieren, werden vom verantwortlichen Lehrer ein oder mehrere
+XML-Dateien auf den Server hochgeladen. Dazu ist eine Anmeldung mit dem Bearbeitungs-Passwort
+erforderlich. Der Server liest daraufhin alle Dateien aus, wobei jede Datei die Informationen
+für einen Tag beinhält, und fügt die Daten dem Gespeicherten hinzu oder ersetzt diese. Dabei
+müssen die Daten in XML-Form in unsere Datenstruktur übertragen werden, und im JSON-Format
+gespeichert werden. Dieser Prozess ist der komplexeste in der Applikation und besitzt einen
+strikten Ablauf.\\
+Dieser ist in folgende Schritte gegliedert:
+\begin{enumerate}
+	\item Abrufen XML-Daten
+	\item Auslesen XML-Daten
+	\item Konvertieren
+	\item Auslesen der gespeicherten Daten
+	\item Hinzufügen
+	\item Speichern der Daten
+	\item Antwort formulieren
+\end{enumerate}
+Das Verarbeiten einer hochgeladenen Datei fängt mit dem Auslesen der Datei an. Die Daten werden
+in eine temporäre Datei binär überschrieben, und mit entsprechendem UTF-8 Encoding ausgelesen.
+Somit sind die Daten zur weiteren Bearbeitung nur in Form eines String-Buffers in der Laufzeitumgebung
+von Python vorhanden. Zeigt die hochgeladene Datei ins Leere, indem zum Beispiel der POST keine
+Datei beinhält, wird ein \texttt{FileNotFoundError} geworfen. Konnten die Daten nicht in UTF-8
+dekodiert werden, kommt ein \texttt{UnicodeDecodeError}. Beide Fehler werden als Fehlerstufe 
+\texttt{ERROR} eingestuft (\textit{siehe Fehlerbetrachtungen}).
+\\Darauf hin werden die in einem String gespeichterten XML-Daten geparst, und in ein \texttt{ElementTree}
+-Objekt umgewandelt. Dies übernimmt das \texttt{xml.etree} Modul der Python-Standardbibliothek.
+Auch hier kann ein als \texttt{ERROR} eingestufter Fehler auftreten, falls die XML-Daten z. B. auf
+Grund fehlerhafter Syntax nicht geparst werden konnten.
 
-\paragraph{Ablaufprotokoll}
-
-\paragraph{Konvertieren der Daten}
+\subsection{Konvertierung}
+Eines unserer Ziele ist, den Vertretungsplan übersichtlicher und intuitiver zu machen. Dazu müssen
+die Informationen von Grund auf Re
 
 \subsection{Abrufen von Daten}
 
 \subsection{Fehlerbehandlung}
+Der Verarbeitungsprozess besteht aus mehreren Schritten, die jeweils einzelne Fehlerbetrachtungen
+und ausführliche Logs haben. Jeder mögliche Fehler wird abgefangen, geloggt und ggf. automatisch 
+behandelt. Dabei werden die Fehler in drei Log-Level unterteilt: WARNING, das niedrigste Level,
+welches einen Fehler beschreibt, der unerwünscht ist, jedoch die Gesamtheit der Daten des Tages
+nicht gravierend beeinträchtigt, ERROR, ein Fehler, der das Abbrechen der Bearbeitung und somit
+den Fehlen des jew. Tages zur Folge hat, und CRITICAL, die höhste Fehlerstufe, welche nur komplett
+unerwartete Fehler die die gesamte Funktionalität der Applikation beeinträchtigen umfasst.
+Bei CRITICAL-Fehlern wird zudem automatisch eine Email an die System-Administratoren geschickt,
+und, wenn möglich, eine automatische Wiederherstellung des Systems eingeleitet.
