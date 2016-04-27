@@ -6,6 +6,7 @@
 - [x] teachers
 - [ ] status ints
 - [ ] in der schedule.js ganz nach unten scrollen
+- [ ] find das was kaputt is und mach das mal ganz. (Ein Info)
 #Tim
 @Infoproject
  - [ ] "hardcoded div-bastelschleife ~~der Hölle~~" ein Ende setzen (!)

@@ -97,30 +97,18 @@
     <div class="slide_title">
       ${day.date['weekday']}
     </div>
-    <span style="font-size: .6em;" title="">(${day.date['date']})</span>
+    <span style="width: 100%; text-align: center; display: block; font-size: 1.2em; margin-bottom: 1em;" title="">${day.date['date']}</span>
     <div class="empty_msg">
-      --- Keine Vertretungen ---
+      <b><i> Keine Vertretungen </i></b>
     </div>
     <main class="table">
       <div class="thead">
-        <div class="table_row" style="text-align: center;">
-          <div class="table_cell"></div>
-          <div class="table_cell">Klasse</div>
-          <div class="table_cell">Stunde</div>
-          <div class="table_cell">Fach</div>
-          <div class="table_cell"></div>
-          <div class="table_cell dropdown">Ersetzt</div>
-          <div class="table_cell dropdown">Raum</div>
-          <div class="table_cell dropdown">Information</div>
-        </div>
       </div>
       <div class="tbody">
         <div class="event table_row" tal:repeat="event day.events" data-targets="${event.targets}">
-          <div class="entry table_cell">
-            <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
-          </div>
-          <div class="table_cell" tal:define="selector event.selector; s selector.subject">
-            <span class="subject">
+
+          <div class="entry table_cell" tal:define="selector event.selector; s selector.subject">
+            <span class="subject" id="sub">
               <span tal:condition="selector.grade" class="selector">${selector.grade}${selector.subgrades}</span>
               <span class="subject" tal:condition="s"> <!--! diese Container sind notwendig für TAL -->
                 <span tal:condition="s.prefix">${s.prefix}</span>
@@ -129,6 +117,9 @@
               </span>
               <span tal:condition="selector.subclass">${selector.subclass}</span>
             </span>
+          </div>
+          <div class="entry table_cell">
+            <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
           </div>
           <div class="entry table_cell">${event.time}</div>
           <div class="entry table_cell" tal:define="entry event.new" tal:condition="entry">
@@ -153,7 +144,6 @@
           </div>
           <div tal:condition="not event.old" class="table_cell dropdown"></div>
           <div class="entry table_cell dropdown">${event.room}</div>
-          <div class="entry information table_cell dropdown">${event.info}</div>
         </div>
       </div>
     </main>

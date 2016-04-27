@@ -15,23 +15,28 @@ body{
 }
 .entry{
 	padding-right: .5em;
+	font-size: 1.3313708498984760390413509793678em;
 }
 .entry>.subject{
 	 display: flex;
 	 margin-left: .1em;
-	 min-width: 70px;
 
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: baseline;
 
 	padding: 0 .1em;
+}
+.entry>#sub{/* TODO denk dir mal nen namen aus*/
+	justify-content: flex-end;
+	flex-wrap: wrap-reverse;
 }
 .subject>.sub_subject{
 	display: inline-block;
 	min-width: 50px;
 	text-align: center;
+	margin: 0 .2em;
 }
 .subject>.sub_subject_2{
 	display: inline-block;
@@ -77,9 +82,13 @@ body{
 }
 .table{
 	display: table;
+
+  border-collapse: separate;
+  border-spacing: 0 .2em; /* this is the ultimate ultimate fix */
 }
 .table_row{
 	display: table-row;
+
 }
 .table_cell{
 	display: table-cell;
@@ -92,4 +101,7 @@ body{
 }
 .tbody{
 	display: table-row-group;
+}
+.information{
+	display: none; /* TODO remove dat*/
 }

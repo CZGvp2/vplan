@@ -169,7 +169,7 @@
   justify-content: space-around;
   align-items: stretch;
 }
-#menuSpace{/* necessary for mobile design*/
+#menuSpace{/* neccessary for mobile design*/
   z-index: 101;
   height: 2em;
   width: 100%;
