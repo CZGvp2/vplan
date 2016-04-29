@@ -81,34 +81,14 @@
 	text-align: center;
 	text-shadow: 1px 3px 10px black;
 }
-#header_fill{
-  display: none;
-}
-#fixedHeader{
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 51;
-	height: 1.5em;
-	width: 100%;
-	font-size: 1.5em;
-	background-color: #1d3954;
-	padding-top: .2em;
-	text-align: center;
-	text-shadow: 1px 3px 10px black;
-}
 .slide{
 	z-index: 3;
 	padding: 1em;
-	background-color: #232323;
-	border-radius: 10px;
 	position: absolute;
 	margin-top: 1em;
 	left: 50%;
 	transform: translateX(-50%);
 	transition: transform 1s;
-	min-width: 40%;
-	max-width: 86%;
 }
 .slide>.slide_title{
 	text-align: center;

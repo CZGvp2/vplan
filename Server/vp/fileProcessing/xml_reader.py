@@ -118,7 +118,7 @@ class Event:
 		data = self.__dict__.copy()
 		data['selector'] = self.selector.json()  # Selektor als dictionary
 		data['targets'] = ' '.join(self.selector.targets)  # Liste zu String mit Leerzeichen machen
-		data['time'] = ', '.join( map(str, self.time) )  # Liste zu String mit Kommas machen
+		data['time'] = '-'.join( map(str, self.time) )  # Liste zu String mit Kommas machen
 
 		return data
 

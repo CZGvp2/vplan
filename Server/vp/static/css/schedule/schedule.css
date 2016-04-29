@@ -13,6 +13,17 @@ body{
 	color: lightgray;
 	overflow-x: hidden;
 }
+
+div.slide-title {
+	width: 100%;
+	text-align: center;
+	display: block;
+	margin-bottom: 2em;
+}
+span.day{
+	font-size: 4em;
+}
+
 .entry{
 	padding-right: .5em;
 	font-size: 1.3313708498984760390413509793678em;
@@ -34,20 +45,13 @@ body{
 }
 .subject>.sub_subject{
 	display: inline-block;
-	min-width: 50px;
 	text-align: center;
 	margin: 0 .2em;
+	padding: 0 .2em;
 }
 .subject>.sub_subject_2{
 	display: inline-block;
-	min-width: 40px;
 	text-align: center;
-}
-.information{
-	max-width: 20em;
-	overflow: auto;
-	white-space: normal;
-	word-break: normal;
 }
 .old{
 	opacity: .5;
@@ -101,7 +105,4 @@ body{
 }
 .tbody{
 	display: table-row-group;
-}
-.information{
-	display: none; /* TODO remove dat*/
 }

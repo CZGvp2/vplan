@@ -77,27 +77,34 @@ Das Verarbeiten einer hochgeladenen Datei fängt mit dem Auslesen der Datei an. 
 in eine temporäre Datei binär überschrieben, und mit entsprechendem UTF-8 Encoding ausgelesen.
 Somit sind die Daten zur weiteren Bearbeitung nur in Form eines String-Buffers in der Laufzeitumgebung
 von Python vorhanden. Zeigt die hochgeladene Datei ins Leere, indem zum Beispiel der POST keine
-Datei beinhält, wird ein \texttt{FileNotFoundError} geworfen. Konnten die Daten nicht in UTF-8
-dekodiert werden, kommt ein \texttt{UnicodeDecodeError}. Beide Fehler werden als Fehlerstufe 
-\texttt{ERROR} eingestuft (\textit{siehe Fehlerbetrachtungen}).
-\\Darauf hin werden die in einem String gespeichterten XML-Daten geparst, und in ein \texttt{ElementTree}
+Datei beinhält, wird ein FileNotFoundError geworfen. Konnten die Daten nicht in UTF-8
+dekodiert werden, kommt ein UnicodeDecodeError. Beide Fehler werden als Fehlerstufe 
+\texttt{ERROR} eingestuft (\textit{siehe Fehlerbetrachtungen}<).
+\\Darauf hin werden die in einem String gespeichterten XML-Daten geparst, und in ein ElementTree
 -Objekt umgewandelt. Dies übernimmt das \texttt{xml.etree} Modul der Python-Standardbibliothek.
 Auch hier kann ein als \texttt{ERROR} eingestufter Fehler auftreten, falls die XML-Daten z. B. auf
-Grund fehlerhafter Syntax nicht geparst werden konnten.
+Grund fehlerhafter Syntax nicht geparst werden konnten.\\
+Die Daten für einen Tag werden daraufhin aus dem ElementTree-Objekt über den komplexen Konvertierungsprozess
+in ein Python-Dictionary umgewandelt, welches fast identisch mit dem Datenspeicherungsformat JSON ist.
+Diese Konvertierung baut auf der einheitlichen Struktur der XML-Daten auf, und kann somit bei semantischen
+Fehlern in den Daten einen Fehler der Stufe ERROR hervorrufen.\\
+Dieser Datensatz für einen Tag soll nun dem gespeicherten Daten hinzugefügt werden. Dazu müssen erst
+die alten Daten aus der gespeicherten Datei ausgelesen werden. Dabei können wieder ein FileNotFoundError
+, ein syntaktischer Fehler oder ein semantischer Fehler auftreten, welche alle \texttt{CRITICAL}-Fehler sind.
 
 \subsection{Konvertierung}
-Eines unserer Ziele ist, den Vertretungsplan übersichtlicher und intuitiver zu machen. Dazu müssen
-die Informationen von Grund auf Re
+Eines unserer Ziele ist, den Vertretungsplan übersichtlicher und intuitiver zu gestalten. Dazu müssen
+die Informationen von Grund auf restrukturiert werden. 
 
 \subsection{Abrufen von Daten}
 
 \subsection{Fehlerbehandlung}
 Der Verarbeitungsprozess besteht aus mehreren Schritten, die jeweils einzelne Fehlerbetrachtungen
 und ausführliche Logs haben. Jeder mögliche Fehler wird abgefangen, geloggt und ggf. automatisch 
-behandelt. Dabei werden die Fehler in drei Log-Level unterteilt: WARNING, das niedrigste Level,
+behandelt. Dabei werden die Fehler in drei Log-Level unterteilt: \texttt{WARNING}, das niedrigste Level,
 welches einen Fehler beschreibt, der unerwünscht ist, jedoch die Gesamtheit der Daten des Tages
-nicht gravierend beeinträchtigt, ERROR, ein Fehler, der das Abbrechen der Bearbeitung und somit
-den Fehlen des jew. Tages zur Folge hat, und CRITICAL, die höhste Fehlerstufe, welche nur komplett
+nicht gravierend beeinträchtigt, \texttt{ERROR}, ein Fehler, der das Abbrechen der Bearbeitung und somit
+den Fehlen des jew. Tages zur Folge hat, und \texttt{CRITICAL}, die höhste Fehlerstufe, welche nur komplett
 unerwartete Fehler die die gesamte Funktionalität der Applikation beeinträchtigen umfasst.
-Bei CRITICAL-Fehlern wird zudem automatisch eine Email an die System-Administratoren geschickt,
+Bei \texttt{CRITICAL}-Fehlern wird zudem automatisch eine Email an die System-Administratoren geschickt,
 und, wenn möglich, eine automatische Wiederherstellung des Systems eingeleitet.

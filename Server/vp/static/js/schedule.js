@@ -159,7 +159,7 @@ onScroll = function(evt){
   }
 }
 
-toggleMenu = function(time = animationTime*1000*0.5){
+toggleMenu = function(time){
   if(toggleVisibility($("#menuContainer")[0])) $("#cover").fadeIn(time);
   /*if(shown){
     $("#topbar").css("background-color", "#3a7ab6");
