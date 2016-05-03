@@ -2,20 +2,36 @@ body{
 	background-color: #0e0e0e;
 	color: white;
 }
-form {
-	width: 300px;
+.center {
+	padding: 1em;
+	padding-bottom: 2em;
+	border-radius: 10px;
+	display: flex;
+
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+
+  width: 100%;
+
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 #password {
-	width: 300px;
 	color: white;
 	background-color: #0e0e0e;
 	font-family: arial;
 	font-size: 3em;
 	text-align: center;
 	border: none;
-	border-bottom: solid 2px #316495;
 	outline: none;
+	border-bottom: solid 2px #316495;
+	margin: 20px;
+	margin-bottom: 5px;
 }
 
 .nofocus {
@@ -23,15 +39,23 @@ form {
 }
 
 a#submit {
-	width: 220px;
-	margin: auto;
 	text-decoration: none;
 	cursor: default;
 	font-size: 2.5em;
 	text-align: center;
+	margin-left: 70px;
+	margin-right: 70px;
 	border-style: none;
 	background-color: #232323;
 	color: white;
+}
+
+div#submit {
+	margin-top: 73px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
 }
 
 #incorrect {
@@ -40,3 +64,22 @@ a#submit {
 	text-align: center;
 	color: #FF5555;
 }
+/*
+@media all and (max-width: 420px){
+	.center{
+		width: 90%;
+	}
+	#password{
+		font-size: 1em;
+	}
+	a#submit{
+		font-size: 1em;
+		height: 100%;
+		line-height: 3em;
+		vertical-align: center;
+	}
+	div#submit{
+		height: 3em;
+	}
+}
+*/
