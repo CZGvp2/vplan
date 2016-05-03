@@ -53,7 +53,10 @@ schließt ein Speichern der Passwörter auf dem Server in Klartext aus, da selbs
 uns nicht erlauben dürfen, den Vertretungsplan zu bearbeiten. Weiterhin dürfen die Passwörter trotz
 \texttt{SSL}-Verschlüsslung auch nicht in Klartext gesendet werden, da dies impliziert, dass sie im
 Klartext als Wert irgenteiner Variable auf den Server-Scripten auszulesen sind. Daher werden die
-Passwörter schon auf der Client-Seite von JavaScript in sogenannte Hashwerte umgewandelt. 
+Passwörter schon auf der Client-Seite von JavaScript in sogenannte Hashwerte umgewandelt.
+
+\subsection{Datenstruktur}
+% TODO tim
 
 \subsection{Bearbeiten von Daten}
 Um den Vertretungsplan zu aktualisieren, werden vom verantwortlichen Lehrer ein oder mehrere
@@ -79,7 +82,7 @@ Somit sind die Daten zur weiteren Bearbeitung nur in Form eines String-Buffers i
 von Python vorhanden. Zeigt die hochgeladene Datei ins Leere, indem zum Beispiel der POST keine
 Datei beinhält, wird ein FileNotFoundError geworfen. Konnten die Daten nicht in UTF-8
 dekodiert werden, kommt ein UnicodeDecodeError. Beide Fehler werden als Fehlerstufe 
-\texttt{ERROR} eingestuft (\textit{siehe Fehlerbetrachtungen}<).
+\texttt{ERROR} eingestuft (\textit{siehe Fehlerbetrachtungen}).
 \\Darauf hin werden die in einem String gespeichterten XML-Daten geparst, und in ein ElementTree
 -Objekt umgewandelt. Dies übernimmt das \texttt{xml.etree} Modul der Python-Standardbibliothek.
 Auch hier kann ein als \texttt{ERROR} eingestufter Fehler auftreten, falls die XML-Daten z. B. auf
@@ -90,7 +93,14 @@ Diese Konvertierung baut auf der einheitlichen Struktur der XML-Daten auf, und k
 Fehlern in den Daten einen Fehler der Stufe ERROR hervorrufen.\\
 Dieser Datensatz für einen Tag soll nun dem gespeicherten Daten hinzugefügt werden. Dazu müssen erst
 die alten Daten aus der gespeicherten Datei ausgelesen werden. Dabei können wieder ein FileNotFoundError
-, ein syntaktischer Fehler oder ein semantischer Fehler auftreten, welche alle \texttt{CRITICAL}-Fehler sind.
+, ein syntaktischer Fehler oder ein semantischer Fehler auftreten, welche alle \texttt{CRITICAL}-Fehler sind. \\
+In diesen Datensatz, der wieder als Dictionary vorhanden ist, werden nun die neuen Daten hinzugefügt, ersetzt
+oder ggf. gelöscht. Dieser aktualisierte Datensatz wird daraufhin wieder in der JSON-Datei gespeichert und überschreibt
+die alten Daten in der Datei.\\
+Mögliche \texttt{CRITICAL}-Fehler werden nun automatisch behandelt und dem Systemadministrator weitergegeben.
+Schlussendlich muss eine Antwort für den Client formuliert werden, welche ihn über das erfolgreiche bzw. misslungene
+Bearbeiten der Daten informiert.
+
 
 \subsection{Konvertierung}
 Eines unserer Ziele ist, den Vertretungsplan übersichtlicher und intuitiver zu gestalten. Dazu müssen
