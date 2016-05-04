@@ -89,7 +89,8 @@ class Event:
 
 		# Löschen von unnützen Daten
 		if self.change == 'CANCELLED':
-			self.new = None
+			self.new = self.old
+			self.old = None
 			self.room = None
 
 		elif self.change == 'TEACHER':
