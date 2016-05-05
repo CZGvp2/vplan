@@ -74,7 +74,8 @@ class Event:
 		if not self.new['subject']:
 			self.change = 'CANCELLED'
 
-		if not self.change: self.change = 'ROOM'
+		if not self.change:
+			self.change = 'ROOM'
 		# not change besagt, dass change leer ist, also keine Änderung in Fach und Lehrer.
 		# daher kann es sich nur um eine Raumänderung handeln
 
@@ -89,8 +90,7 @@ class Event:
 
 		# Löschen von unnützen Daten
 		if self.change == 'CANCELLED':
-			self.new = self.old
-			self.old = None
+			self.new = None
 			self.room = None
 
 		elif self.change == 'TEACHER':
@@ -119,7 +119,7 @@ class Event:
 		data = self.__dict__.copy()
 		data['selector'] = self.selector.json()  # Selektor als dictionary
 		data['targets'] = ' '.join(self.selector.targets)  # Liste zu String mit Leerzeichen machen
-		data['time'] = '-'.join( map(str, self.time) )  # Liste zu String mit Kommas machen
+		data['time'] = '-'.join( map(str, self.time) )  # Liste zu String mit - machen
 
 		return data
 

@@ -1,5 +1,4 @@
-/* Auslagern von CSS für media::mobile */
-*{
+* {
 	z-index: 2;
 }
 a {
@@ -23,86 +22,50 @@ div.slide-title {
 span.day{
 	font-size: 4em;
 }
-
 .entry{
 	padding-right: .5em;
-	font-size: 1.3313708498984760390413509793678em;
+	font-size: 1.3em;
 }
-.entry>.subject{
-	 display: flex;
-	 margin-left: .1em;
-
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: baseline;
+.subject{
+	display: inline-block;
+	margin-left: .1em;
 
 	padding: 0 .1em;
 }
-.entry>#sub{/* TODO denk dir mal nen namen aus*/
-	justify-content: flex-end;
-	flex-wrap: wrap-reverse;
-}
+
 .subject>.sub_subject{
 	display: inline-block;
 	text-align: center;
 	margin: 0 .2em;
 	padding: 0 .2em;
 }
-.subject>.sub_subject_2{
-	display: inline-block;
-	text-align: center;
+
+.class-selector {
+	text-align: right;
 }
+
 .old{
 	opacity: .5;
 }
-.space{
-	flex-grow: 2;
-}
+
 .empty_msg{
 	text-align: center;
 }
-#jsWarn{
-	z-index: 500;
 
-	position: fixed;
-	display: block;
-
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-
-	padding: 0;
-	margin: 0;
-
-	color: rgb(250,240,240);
-	background-color: rgb(50,60,70);
-
-	font-family: Ubuntu, sans-serif;
-
-	text-align: center;
-	line-height: 5em;
-}
 .table{
 	display: table;
 
   border-collapse: separate;
-  border-spacing: 0 .2em; /* this is the ultimate ultimate fix */
+  border-spacing: 0 .5em; /* this is the ultimate ultimate fix */
 }
+
 .table_row{
 	display: table-row;
-
 }
+
 .table_cell{
 	display: table-cell;
 
 	padding-left: .2em;
 	padding-right: .2em;
-}
-.thead{
-	display: table-header-group;
-}
-.tbody{
-	display: table-row-group;
 }
