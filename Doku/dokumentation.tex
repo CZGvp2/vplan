@@ -5,15 +5,13 @@
 \usepackage[ngerman]{babel}
 \usepackage{lmodern}
 
-\usepackage{chngcntr}
-\counterwithout{figure}{chapter}
-
 \usepackage{url}
 \usepackage{pdfpages}
 \usepackage{float}
-\usepackage{tikz}
-\usetikzlibrary{positioning}
-
+\usepackage{listings}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{pdfpages}
 
 \newcommand{\Python}{\texttt{Python}}
 \newcommand{\Pyramid}{\texttt{Pyramid}}
@@ -38,9 +36,14 @@
 \input{texte/grundlagen.tex}
 \input{texte/loesungsidee.tex}
 \input{texte/server.tex}
+
+\begin{figure}[H]
+    \centering
+    \includepdf[pages=-]{mult.pdf}
+\end{figure}
+
 \input{texte/client.tex}
 
-\includepdf{figure} 
 \chapter{Benutzung}
 
 \end{document}

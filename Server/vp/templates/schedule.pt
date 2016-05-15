@@ -85,54 +85,49 @@
   </div>
   <div class="slide" tal:repeat="day days">
     <div class="slide-title">
-      <span class="day">${day.date['weekday']}</span><br/>
-      <span class="date">${day.date['date']}</span>
+      <span class="day-title">${day.date['weekday']}</span><br/>
+      <span>${day.date['date']}</span>
     </div>
-    <div class="empty_msg">
-      <b><i> Keine Vertretungen </i></b> <!--! TODO bild -->
-    </div>
-    <main class="table">
-      <div class="tbody">
-        <div class="event table_row" tal:repeat="event day.events" data-targets="${event.targets}">
-          <div class="entry table_cell class-selector" tal:define="selector event.selector; s selector.subject">
-            <span class="subject" id="sub">
-              <span tal:condition="selector.grade" class="selector">${selector.grade}${selector.subgrades}</span>
-              <span class="subject" tal:condition="s"> <!--! diese Container sind notwendig für TAL -->
-                <span tal:condition="s.prefix">${s.prefix}</span>
-                <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
-                <span tal:condition="s.suffix">${s.suffix}</span>
-              </span>
-              <span tal:condition="selector.subclass">${selector.subclass}</span>
-            </span>
-          </div>
-          <div class="entry table_cell">
-            <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
-          </div>
-          <div class="entry table_cell">${event.time}</div>
-          <div class="entry table_cell" tal:define="entry event.new" tal:condition="entry">
-            <span class="subject" tal:define="s entry.subject" tal:condition="s">
+    <table>
+      <tr tal:repeat="event day.events" data-targets="${event.targets}">
+        <td class="class-selector" tal:define="selector event.selector; s selector.subject">
+          <span>
+            <span tal:condition="selector.grade">${selector.grade}${selector.subgrades}</span>
+            <span tal:condition="s">
               <span tal:condition="s.prefix">${s.prefix}</span>
               <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
               <span tal:condition="s.suffix">${s.suffix}</span>
             </span>
-            <span data-full="${t.full}" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
-          </div>
-          <div tal:condition="not event.new" class="table_cell"></div>
-          <div class="entry table_cell dropdown" tal:condition="event.old">&#8594;</div>
-          <div tal:condition="not event.old" class="table_cell dropdown"></div>
-          <div class="entry table_cell dropdown old" tal:define="entry event.old" tal:condition="entry">
-            <span class="subject" tal:define="s entry.subject" tal:condition="s">
-              <span tal:condition="s.prefix">${s.prefix}</span>
-              <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
-              <span tal:condition="s.suffix">${s.suffix}</span>
-            </span>
-            <span data-full="${t.full}" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
-          </div>
-          <div tal:condition="not event.old" class="table_cell dropdown"></div>
-          <div class="entry table_cell dropdown">${event.room}</div>
-        </div>
-      </div>
-    </main>
+            <span tal:condition="selector.subclass">${selector.subclass}</span>
+          </span>
+        </td>
+        <td>
+          <img src="${request.static_path('vp:static/img/' + get_icon(event.change))}" width="20"></img>
+        </td>
+        <td>${event.time}</td>
+        <td tal:define="entry event.new" tal:condition="entry">
+          <span tal:define="s entry.subject" tal:condition="s">
+            <span tal:condition="s.prefix">${s.prefix}</span>
+            <span style="background-color: ${color(s.subject)}" class="sub_subject">${s.subject}</span>
+            <span tal:condition="s.suffix">${s.suffix}</span>
+          </span>
+          <span data-full="${t.full}" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
+        </td>
+        <td tal:condition="not event.new" />
+        <td class="entry table_cell dropdown" tal:condition="event.old">&#8594;</td>
+        <td tal:condition="not event.old" />
+        <td tal:define="entry event.old" tal:condition="entry">
+          <span tal:define="s entry.subject" tal:condition="s">
+            <span tal:condition="s.prefix">${s.prefix}</span>
+            <span style="background-color: ${color(s.subject)}" class="subject">${s.subject}</span>
+            <span tal:condition="s.suffix">${s.suffix}</span>
+          </span>
+          <span data-full="${t.full}" tal:define="t entry.teacher" tal:condition="t">${t.short}</span>
+        </td>
+        <td tal:condition="not event.old" />
+        <td>${event.room}</td>
+      </tr>
+    </table>
   </div>
 </div>
 </body>

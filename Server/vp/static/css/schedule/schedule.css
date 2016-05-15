@@ -13,15 +13,17 @@ body{
 	overflow-x: hidden;
 }
 
+table {
+	font-size: 1.3em;
+}
 div.slide-title {
 	width: 100%;
-	text-align: center;
+	text-align: center;e
 	display: block;
 	margin-bottom: 2em;
 }
-span.day{
-	font-size: 4em;
-}
+span.day-title { font-size: 4em; }
+
 .entry{
 	padding-right: .5em;
 	font-size: 1.3em;
@@ -29,43 +31,8 @@ span.day{
 .subject{
 	display: inline-block;
 	margin-left: .1em;
-
-	padding: 0 .1em;
 }
 
-.subject>.sub_subject{
-	display: inline-block;
-	text-align: center;
-	margin: 0 .2em;
-	padding: 0 .2em;
-}
+.class-selector { text-align: right; }
 
-.class-selector {
-	text-align: right;
-}
-
-.old{
-	opacity: .5;
-}
-
-.empty_msg{
-	text-align: center;
-}
-
-.table{
-	display: table;
-
-  border-collapse: separate;
-  border-spacing: 0 .5em; /* this is the ultimate ultimate fix */
-}
-
-.table_row{
-	display: table-row;
-}
-
-.table_cell{
-	display: table-cell;
-
-	padding-left: .2em;
-	padding-right: .2em;
-}
+.old { opacity: .5; }

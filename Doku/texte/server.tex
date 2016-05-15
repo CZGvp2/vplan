@@ -55,10 +55,7 @@ uns nicht erlauben dürfen, den Vertretungsplan zu bearbeiten. Weiterhin dürfen
 Klartext als Wert irgenteiner Variable auf den Server-Scripten auszulesen sind. Daher werden die
 Passwörter schon auf der Client-Seite von JavaScript in sogenannte Hashwerte umgewandelt.
 
-\subsection{Datenstruktur}
-% TODO tim
-
-\subsection{Bearbeiten von Daten}
+\subsection{Bearbeitungsprozess}
 Um den Vertretungsplan zu aktualisieren, werden vom verantwortlichen Lehrer ein oder mehrere
 XML-Dateien auf den Server hochgeladen. Dazu ist eine Anmeldung mit dem Bearbeitungs-Passwort
 erforderlich. Der Server liest daraufhin alle Dateien aus, wobei jede Datei die Informationen
@@ -67,7 +64,7 @@ müssen die Daten in XML-Form in unsere Datenstruktur übertragen werden, und im
 gespeichert werden. Dieser Prozess ist der komplexeste in der Applikation und besitzt einen
 strikten Ablauf.\\
 Dieser ist in folgende Schritte gegliedert:
-\begin{enumerate}
+\begin{enumerate}[itemsep=0pt]
 	\item Abrufen XML-Daten
 	\item Auslesen XML-Daten
 	\item Konvertieren
@@ -102,9 +99,100 @@ Schlussendlich muss eine Antwort für den Client formuliert werden, welche ihn �
 Bearbeiten der Daten informiert.
 
 
-\subsection{Konvertierung}
+\subsection{Gegebene Datenstruktur}
+
 Eines unserer Ziele ist, den Vertretungsplan übersichtlicher und intuitiver zu gestalten. Dazu müssen
-die Informationen von Grund auf restrukturiert werden. 
+die Informationen von Grund auf restrukturiert werden. Dazu setzten wir uns mit der Struktur der vorhandenen
+Daten auseinander und entwickelten einen Konvertierungsprozess, der eine für uns sinnvolle Datenstruktur
+erzeugt.\\
+\paragraph{Struktur der XML-Daten}\mbox{}\\ % Neue Zeile
+Die Daten können von dem Stundenplan-Verwaltungs-Programm unserer Schule in zwei verschiedenen Formen ausgegeben
+werden: den Schülerplan und den Lehrerplan. Aktuell wird der Schülerplan verwendet, jedoch entschieden wir
+uns für den Lehrerplan, da dieser mehr Informationen enthält und simpler strukturiert ist. Die Daten können
+uns in vielen verschiedenen Formaten ausgegeben werden. Wir entschieden uns für XML, da es gut mit Python 
+auszulesen ist und einfach strukturiert ist. Jeder Tag wird nach einem ganz bestimmten Schema in einer XML-Datei
+repräsentiert. Im Dateikopf stehen allgemeine Informationen, von denen wir nur das Datum des betreffenden Tages
+auslesen. Darauf folgen weniger relevante Daten, welche eine Auflistung aller betroffenen Lehrer und Klassen
+sowie den Hofaufsichtsänderungen beinhalten. Diese ignorieren wir, da wir die enthaltenen Informationen auch
+aus den restlichen Daten herleiten können, und unser Vertretungsplan primär auf Schüler ausgerichtet ist.
+Der Hauptteil der XML-Datei ist eine Auflistung aller Änderungen (Aktionen) des Tages. Jede Aktion ist folgendermaßen
+strukturiert:
+
+\lstdefinelanguage{XML}{
+	morestring=[s]{>}{<},
+	morecomment=[s]{!--}{--},
+	identifierstyle=\color[rgb]{0.0,0.0,0.6}
+}
+
+\lstset{
+	language=XML,
+	basicstyle=\ttfamily,
+	commentstyle=\color[rgb]{0.4,0.4,0.4},
+	columns=fullflexible,
+  	showstringspaces=false,
+	tabsize=4,
+}
+\begin{lstlisting}
+<aktion>
+	<stunde></stunde>   <!-- betreffende Stunde (Zeit) -->
+	<fach></fach>       <!-- normales Unterrichtsfach -->
+	<lehrer></lehrer>   <!-- normaler Lehrer -->
+	<klasse></klasse>   <!-- betroffene Klasse -->
+	<vfach></vfach>     <!-- Vertretungsfach -->
+	<vlehrer></vlehrer>	<!-- Vertretungslehrer -->
+	<vraum></vraum>     <!-- Vertretungsraum -->
+	<info></info>       <!-- Information als Text -->
+</aktion>
+\end{lstlisting}
+Ein Beispiel wäre folgendes:
+
+\begin{lstlisting}
+<aktion>
+	<stunde>2</stunde>
+	<fach>De</fach>
+	<lehrer>MI</lehrer>
+	<klasse>10C</klasse>
+	<vfach>Ma</vfach>
+	<vlehrer>MEL</vlehrer>
+	<vraum>D209</vraum>
+	<info>Aufgaben im, Unterrichtsraum</info>
+</aktion>
+\end{lstlisting}
+Diese Aktion besagt, dass in der 2. Stunde das Fach Deutsch der Klasse 10c mit Frau Mittelstädt ersetzt 
+wird durch Mathematik mit Herrn Mehlhos im Raum D209. Hat das Vertretungsfach, der Vertretungslehrer oder
+-raum den Wert \glqq\texttt{-{}-{}-}\grqq{} oder gar keinen Wert, dann fällt das betroffene Fach aus.
+
+\paragraph{Klassenbezeichner}\mbox{}\\
+Besonders Klassenbezeichner sind im Vertretungsplan schwer zu dechiffrieren. Daher nahmen wir die Syntax
+genau auseinander und bauten von Grund auf neue Klassenbezeichnner. Folgende Zeilen sind mögliche Bezeichner
+des Lehrer-Vertretungsplans:
+\begin{itemize}[itemsep=0pt]
+	\ttfamily
+	\item[] 10C
+	\item[] 06A
+	\item[] 08A,08B,08C/ 08FRZ2
+	\item[] 06A,06B/ 06ABET
+	\item[] 10C/ 10CIF2
+	\item[] 11/ ma2
+	\item[] 12/ ene
+\end{itemize}
+Wir unterscheiden zwischen drei Typen von Bezeichnern. Der erste Typ \glqq\texttt{SIMPLE}\grqq{} ist in den ersten zwei
+Beispielen zu sehen, und steht für eine normale Klasse unter Stufe 11. Dabei gibt es zwei Teile: Klassenstufe und
+Unterklasse.\\ %TODO grafik%
+Den zweiten Typ nennen wir \glqq\texttt{MULT}\grqq{} für \glqq multiple\grqq{}. Er bezeichnet alle Schülergruppen,
+welche nicht im Klassenverband an einer Stunde teilnehmen. Dies kann entweder Klassen-intern wie das geteilte Fach
+wie Informatik sein, oder Klassen-übergreifend wie Fremdprachenfächer einer Klassenstufe. Er beginnt mit einer
+Aufzählung aller betroffenen Klassen in der Form von \texttt{SIMPLE}, und endet mit einer allgemeinen Bezeichnung.
+Diese fängt immer mit der Klassenstufe an, kann danach gefolgt sein von den betrefflichen Unterklassen, hat danach
+immer das entsprechende Fach und endet ggf. mit einer Gruppennummer. \\
+Der dritte Typ \glqq\texttt{COURSE}\grqq{} beschreibt alle Kurse. Er besteht immer Klassenstufe 11 oder 12, einem
+Kurs und einem Fach und einer optionalen Kursnummer am Ende.\\
+Diese Unterteilung betrachtet jedoch keine AG's, WoU's, oder E- und Z-Kurse. Daher sind die Fächer an sich, wie sie
+als Element in jedem Bezeichner auftreten können, nochmals unterteilt. Ein Fach besteht dabei immer aus dem Namen
+als Abkürzung und einem optionalen Prefix und Suffix. So sind AG und WoU als Prefix und E- und Z-Kurse als Suffix
+implementiert. Dies ist allerdings noch erweiterbar.
+
+\subsection{Speicherformat}
 
 \subsection{Abrufen von Daten}
 
