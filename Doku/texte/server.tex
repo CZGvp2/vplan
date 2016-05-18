@@ -47,12 +47,12 @@ und Client geschieht eigentlich via \texttt{HTTPS}. Dabei handelt es sich um die
 \texttt{HTTP}-Kommunikation, gekoppelt mit \texttt{SSL}, ein \texttt{RSA}-verschlüsseltes Protokoll,
 welches ein server-spezifisches Sicherheits-Zertifikat benötigt, und globaler Standart für
 Verschlüsslung im Internet ist. Dieses Protokoll ist in \texttt{nginx} implementiert, und versichert
-dem Nutzer, dass kein Dritter Zugriff empfindliche Daten hat.\\\\
+dem Nutzer, dass kein Dritter Zugriff auf empfindliche Daten hat.\\\\
 Die Passwörter für die verschiedenen Bereiche dürfen nur den jeweils Berechtigten bekannt sein. Dies
 schließt ein Speichern der Passwörter auf dem Server in Klartext aus, da selbst wir als Programmierer
 uns nicht erlauben dürfen, den Vertretungsplan zu bearbeiten. Weiterhin dürfen die Passwörter trotz
 \texttt{SSL}-Verschlüsslung auch nicht in Klartext gesendet werden, da dies impliziert, dass sie im
-Klartext als Wert irgenteiner Variable auf den Server-Scripten auszulesen sind. Daher werden die
+Klartext als Wert irgendeiner Variable auf den Server-Scripten auszulesen sind. Daher werden die
 Passwörter schon auf der Client-Seite von JavaScript in sogenannte Hashwerte umgewandelt.
 
 \subsection{Datenstruktur}
