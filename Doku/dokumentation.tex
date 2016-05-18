@@ -5,20 +5,24 @@
 \usepackage[ngerman]{babel}
 \usepackage{lmodern}
 
-\usepackage{chngcntr}
-\counterwithout{figure}{chapter}
-
 \usepackage{url}
 \usepackage{pdfpages}
 \usepackage{float}
+\usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{pdfpages}
 
 \newcommand{\Python}{\texttt{Python}}
 \newcommand{\Pyramid}{\texttt{Pyramid}}
 \newcommand{\HTML}{\texttt{HTML}}
 \newcommand{\JavaScript}{\texttt{JavaScript}}
 \newcommand{\CSS}{\texttt{CSS}\ }
+
+% JSON-Strings in text
+\newcommand{\jsonstr}[1]{\texttt{\textcolor[rgb]{0.0,0.0,0.6}{"#1"}}}
 
 \setlength{\parindent}{0pt}
 
@@ -38,9 +42,9 @@
 \input{texte/grundlagen.tex}
 \input{texte/loesungsidee.tex}
 \input{texte/server.tex}
+
 \input{texte/client.tex}
 
-\includepdf{figure} 
 \chapter{Benutzung}
 
 \end{document}
