@@ -161,6 +161,7 @@ onScroll = function(evt){
 
 toggleMenu = function(time = animationTime*1000*0.5){
   if(toggleVisibility($("#menuContainer")[0])) $("#cover").fadeIn(time);
+	else $("#cover").fadeOut(time);
   /*if(shown){
     $("#topbar").css("background-color", "#3a7ab6");
     $("#header").css("background-image", "linear-gradient(to bottom, #3a7ab6 0%, rgba(0,0,0,0) 70%)");

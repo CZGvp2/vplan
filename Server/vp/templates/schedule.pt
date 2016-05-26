@@ -50,7 +50,7 @@
 <div id="background"></div><div id="cover"></div>
 <style type="text/css">#jsWarn{display: none;}</style>
 <noscript><style type="text/css">#jsWarn{display: block;}</style></noscript>
-<div id="jsWarn"><p style="font-size: 1.1em; white-space: break-all;">Lädt Seite...</p><br />Wenn die Seite nicht geladen wird, überprüfe ob du JavaScript aktiviert hast.</div>
+<div id="jsWarn"><p style="font-size: 1.1em; white-space: break-all;">JavaScript-Fehler</p><br />Wenn die Seite nicht geladen wird, überprüfe ob du JavaScript aktiviert hast.</div>
 <div id="fixedHeader">Vertretungsplan
   <img src="${request.static_path('vp:static/img/menue_icon.png')}" height="1em" width="1em" class="menuButton"></img>
 </div>
