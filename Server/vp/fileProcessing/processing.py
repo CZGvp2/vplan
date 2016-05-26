@@ -21,7 +21,7 @@ def process_file(input_file):
 		days = data['days']
 		new_date = new_day['date']
 
-		# Entfernen veralteter Dateien (erstmal nich) TODO einfügen
+		# Entfernen veralteter Dateien (erstmal nich)
 	#		today = datetime.today()
 	#		for day in days.copy():
 	#			date = to_datetime(day)
