@@ -28,3 +28,10 @@ Nach dem Hochladen und dem Konvertieren sind die Dateien bereit, vom Client abge
 Zusammen mit Stildateien und Scriptcode werden die Informationen an den Client übertragen. Dafür muss dieser zunächst ein Passwort angeben. Noch auf der Clientseite wird daraus eine Prüfsumme erstellt, aus der das ursprüngliche Passwort mit aktuellen technischen Möglichkeiten nicht ableitbar ist. Diese wird auch als \texttt{Hashsum} bezeichnet, was so viel wie \glqq zerhackter Wert \grqq\  bedeutet. Ein solcher wird mithilfe eines Requests an den Server übertragen, der die Prüfsumme mit einer Liste vergleicht und eine positive oder negative Rückmeldung an den Client sendet.\\
 
 Vor dem Auslesen des Passworts ist der Kommunikationsweg zwischen Server und Client sicher, doch ein weiteres Risiko bleibt bestehen: Wer den Hashwert abfängt, kann sich als Client ausgeben und diesen direkt übertragen. Die einzige Lösung dagegen ist, den kompletten Datenaustausch End-to-End zu verschlüsseln. Eine Lösung hierfür ist SSL, welches durch ein etwas  anderes Protokoll, \texttt{https} statt \texttt{http}, genau dies gewährleistet.
+
+\begin{figure}[ht]
+	\centering
+  \includegraphics[height=10cm]{mobile.png}
+	\caption{Screenshot der Seite}
+	\label{fig1}
+\end{figure}
